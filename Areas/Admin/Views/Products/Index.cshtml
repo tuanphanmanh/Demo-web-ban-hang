@@ -22,6 +22,8 @@
         </li>
     </ul>
 
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css" />
+
 }
 <!-- Content Header (Page header) -->
 <section class="content-header">
@@ -66,17 +68,17 @@
             </div>
             <table class="table table-hover">
                 <thead>
-                    <tr>
+                    <tr class="text-center">
                         <th><input type="checkbox" id="SelectAll" /></th>
-                        <th>STT</th>
+                        <th class="text-center">STT</th>
                         <th>Hình ảnh</th>
-                        <th>Tên sản phẩm</th>
+                        <th style="width: 150px">Tên sản phẩm</th>
                         <th>Danh mục</th>
                         <th>Số lượng</th>
-                        <th>Giá</th>
-                        <th style="text-align:center">Ngày tạo</th>
-                        <th style="text-align:center; width:150px">Hiển thị</th>
-                        <th style="width:180px">Chức năng</th>
+                        <th>Giá (VND)</th>
+                        <th>Ngày tạo</th>
+                        <th style="width:100px">Hiển thị</th>
+                        <th style="width:150px">Chức năng</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -86,21 +88,24 @@
                         foreach (var item in Model)
                         {
                             var strCheck = item.IsActive ? "<i class='fa fa-check text-success'></i>" : "<i class='fas fa-times text-danger'></i>";
-                            <tr id="trow_@item.Id">
+                            <tr class="text-center" id="trow_@item.Id">
                                 <td><input type="checkbox" class="cbkItem" value="@item.Id" /></td>
-                                <td>@i</td>
+                                <td class="text-center">@i</td>
+                                @*<td>
+            <img class="imgproduct" data-id="@item.Id" src="@item.ProductImage.FirstOrDefault(x=>x.IsDefault).Image"  />
+        </td>*@
                                 <td>
-                                    <img src="@item.Image" class="img-size-64" />
+                                    <img data-id="@item.Id" class="imgproduct" style="width: 50px; height: 50px;" src="@item.Image" />
                                 </td>
                                 <td>@item.Title</td>
                                 <td>@item.ProductCategory.Title</td>
                                 <td>@item.Quantity</td>
-                                <td>@item.Price</td>
+                                <td> @item.Price </td>
                                 <td>@item.CreatedDate.ToString("dd/MM/yyyy")</td>
-                                <td class="text-center">
+                                <td>
                                     <a href="#" data-id="@item.Id" class="btnActive">@Html.Raw(strCheck)</a>
                                 </td>
-                                <td class="text-center">
+                                <td>
                                     <a href="/admin/products/edit/@item.Id" class="btn btn-sm btn-primary">Sửa</a>
                                     <a href="#" data-id="@item.Id" class="btn btn-sm btn-danger btnDelete">Xóa</a>
                                 </td>
@@ -131,48 +136,72 @@
 
 </section>
 <!-- /.content -->
+<div id="dialog">
+    <iframe id="myIframe" style="border: 0; width: 100%; height: 100%;"> </iframe>
+</div>
 
 @section scripts{
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
     <script>
-        // xóa nhiều bản ghi
         $(document).ready(function () {
-            $('body').on('click', '#BtnDeleteAll', function (e) {
-                e.preventDefault();
-                var str = "";
-                var checkbox = $(this).parents('.card').find('tr td input:checkbox');
-                var i = 0;
-                checkbox.each(function () {
-                    if (this.checked) {
-                        checkbox.attr('selected', 'checked');
-                        var _id = $(this).val();
-                        if (i === 0) {
-                            str += _id;
-                        }
-                        else {
-                            str += "," + _id;
-                        }
-                        i++;
-                    }
-                    else {
-                        checkbox.attr('selected', '');
-                    }
-                });
-                if (str.length > 0) {
-                    var conf = confirm("Bạn có muốn xóa các Sản phẩm này không?");
-                    if (conf === true) {
-                        $.ajax({
-                            url: '/admin/news/deleteAll',
-                            type: 'POST',
-                            data: { ids: str },
-                            success: function (rs) {
-                                if (rs.success) {
-                                    location.reload();
-                                }
-                            }
-                        });
-                    }
+            // hiển thị form upload ảnh
+            $("#dialog").dialog({
+                autoOpen: false,
+                show: "fade",
+                hide: "fade",
+                modal: true,
+                height: '600',
+                width: '700',
+                resizable: true,
+                title: 'Quản lý ảnh sản phẩm',
+                close: function () {
+                    window.location.reload();
                 }
             });
+            $('body').on("click", ".imgproduct", function () {
+                var proid = $(this).attr("data-id");
+                $("#dialog #myIframe").attr("src", "/admin/ProductImage/Index?id=" + proid);
+                $('#dialog').dialog('open');
+                return false;
+            });
+
+            //$('body').on('click', '#BtnDeleteAll', function (e) {
+            //    e.preventDefault();
+            //    var str = "";
+            //    var checkbox = $(this).parents('.card').find('tr td input:checkbox');
+            //    var i = 0;
+            //    checkbox.each(function () {
+            //        if (this.checked) {
+            //            checkbox.attr('selected', 'checked');
+            //            var _id = $(this).val();
+            //            if (i === 0) {
+            //                str += _id;
+            //            }
+            //            else {
+            //                str += "," + _id;
+            //            }
+            //            i++;
+            //        }
+            //        else {
+            //            checkbox.attr('selected', '');
+            //        }
+            //    });
+            //    if (str.length > 0) {
+            //        var conf = confirm("Bạn có muốn xóa các sản phẩm này không?");
+            //        if (conf === true) {
+            //            $.ajax({
+            //                url: '/admin/products/deleteAll',
+            //                type: 'POST',
+            //                data: { ids: str },
+            //                success: function (rs) {
+            //                    if (rs.success) {
+            //                        location.reload();
+            //                    }
+            //                }
+            //            });
+            //        }
+            //    }
+            //});
 
             // xóa 1 bản ghi
             $('body').on('change', '#SelectAll', function () {
@@ -191,10 +220,10 @@
 
             $('body').on('click', '.btnDelete', function () {
                 var id = $(this).data("id");
-                var conf = confirm("Bạn có muốn xóa Sản phẩm này không?");
+                var conf = confirm("Bạn có muốn xóa sản phẩm này không?");
                 if (conf === true) {
                     $.ajax({
-                        url: '/admin/news/delete',
+                        url: '/admin/products/delete',
                         type: 'POST',
                         data: { id: id },
                         success: function (rs) {
@@ -211,7 +240,7 @@
                 var btn = $(this);
                 var id = btn.data("id");
                 $.ajax({
-                    url: '/admin/news/IsActive',
+                    url: '/admin/products/IsActive',
                     type: 'POST',
                     data: { id: id },
                     success: function (rs) {

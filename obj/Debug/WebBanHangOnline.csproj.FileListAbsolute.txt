@@ -114,3 +114,4 @@ D:\Đồ án\WebBanHangOnline\WebBanHangOnline\bin\PagedList.xml
 D:\Đồ án\WebBanHangOnline\WebBanHangOnline\bin\PagedList.Mvc.xml
 D:\Đồ án\WebBanHangOnline\WebBanHangOnline\bin\CKFinder.dll
 D:\Đồ án\WebBanHangOnline\WebBanHangOnline\bin\CKFinder.pdb
+D:\Đồ án\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.Update1206.resources

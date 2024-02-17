@@ -184,6 +184,7 @@
     <Compile Include="Areas\Admin\Controllers\NewsController.cs" />
     <Compile Include="Areas\Admin\Controllers\PostsController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductCategoryController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ProductImageController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductsController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -194,6 +195,10 @@
     <Compile Include="Migrations\202402061712012_CreatedDatabase.cs" />
     <Compile Include="Migrations\202402061712012_CreatedDatabase.designer.cs">
       <DependentUpon>202402061712012_CreatedDatabase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202402161113251_Update1206.cs" />
+    <Compile Include="Migrations\202402161113251_Update1206.designer.cs">
+      <DependentUpon>202402161113251_Update1206.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -3021,10 +3026,61 @@
     <Content Include="Content\clients\plugins\uplot\uPlot.iife.js" />
     <Content Include="Content\clients\plugins\uplot\uPlot.iife.min.js" />
     <Content Include="Content\clients\plugins\uplot\uPlot.min.css" />
+    <Content Include="Content\Image\11.jpg" />
+    <Content Include="Content\Image\1200px-R.jpg" />
+    <Content Include="Content\Image\2048nk-f.jpg" />
+    <Content Include="Content\Image\b11.jpg" />
+    <Content Include="Content\Image\b5.jpg" />
+    <Content Include="Content\Image\b6.jpg" />
+    <Content Include="Content\Image\flower %281%29.jpg" />
+    <Content Include="Content\Image\flower %2810%29.jpg" />
+    <Content Include="Content\Image\flower %2811%29.jpeg" />
+    <Content Include="Content\Image\flower %28137%29.jpg" />
+    <Content Include="Content\Image\flower %283%29.jpg" />
+    <Content Include="Content\Image\flower %285%29.jpg" />
+    <Content Include="Content\Image\flower %286%29.jpg" />
+    <Content Include="Content\Image\flower %287%29.jpg" />
+    <Content Include="Content\Image\flower %288%29.jpg" />
+    <Content Include="Content\Image\flower %289%29.jpg" />
+    <Content Include="Content\Image\flower %2895%29.jpg" />
+    <Content Include="Content\Image\gf.jpg" />
+    <Content Include="Content\Image\hoa %2810%29.jpg" />
+    <Content Include="Content\Image\hoa %2813%29.jpg" />
+    <Content Include="Content\Image\hoa %2814%29.jpg" />
+    <Content Include="Content\Image\hoa %2815%29.jpg" />
+    <Content Include="Content\Image\hoa %2816%29.jpg" />
+    <Content Include="Content\Image\hoa %2817%29.jpg" />
+    <Content Include="Content\Image\hoa %2818%29.jpg" />
+    <Content Include="Content\Image\hoa %2819%29.jpg" />
+    <Content Include="Content\Image\hoa %2820%29.jpg" />
+    <Content Include="Content\Image\hoa %283%29.jpg" />
+    <Content Include="Content\Image\hoa %2830%29.jpg" />
+    <Content Include="Content\Image\hoa %2832%29.jpg" />
+    <Content Include="Content\Image\hoa %2834%29.jpg" />
+    <Content Include="Content\Image\hoa %2836%29.jpg" />
+    <Content Include="Content\Image\hoa %2837%29.jpg" />
+    <Content Include="Content\Image\hoa %2839%29.jpg" />
+    <Content Include="Content\Image\p1.jpg" />
+    <Content Include="Content\Image\p2.jpg" />
+    <Content Include="Content\Image\p3.jpg" />
+    <Content Include="Content\Image\q45.jpg" />
+    <Content Include="Content\Image\q5.jpg" />
+    <Content Include="Content\Image\q6.jpg" />
+    <Content Include="Content\Image\q7.jpeg" />
+    <Content Include="Content\Image\r1.jpg" />
+    <Content Include="Content\Image\r2.jpeg" />
+    <Content Include="Content\Image\r3.jpg" />
+    <Content Include="Content\Image\red-flower.jpg" />
+    <Content Include="Content\Image\rosasmall.jpg" />
+    <Content Include="Content\Image\TulipR00.jpg" />
+    <Content Include="Content\Image\y1.jpg" />
+    <Content Include="Content\Image\y2.jpg" />
+    <Content Include="Content\Image\zinnia-042918.jpg" />
     <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\autoNumeric-1.9.45.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -3140,6 +3196,9 @@
     <Content Include="Areas\Admin\Views\Products\Add.cshtml" />
     <Content Include="Areas\Admin\Views\ProductCategory\Index.cshtml" />
     <Content Include="Areas\Admin\Views\ProductCategory\Add.cshtml" />
+    <Content Include="Areas\Admin\Views\Products\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_LayoutEmty.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductImage\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -3221,6 +3280,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202402061712012_CreatedDatabase.resx">
       <DependentUpon>202402061712012_CreatedDatabase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202402161113251_Update1206.resx">
+      <DependentUpon>202402161113251_Update1206.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
