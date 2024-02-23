@@ -115,3 +115,7 @@ D:\Đồ án\WebBanHangOnline\WebBanHangOnline\bin\PagedList.Mvc.xml
 D:\Đồ án\WebBanHangOnline\WebBanHangOnline\bin\CKFinder.dll
 D:\Đồ án\WebBanHangOnline\WebBanHangOnline\bin\CKFinder.pdb
 D:\Đồ án\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.Update1206.resources
+D:\Đồ án\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations._2002202.resources
+D:\Đồ án\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.ngay22thang2nam2024.resources
+D:\Đồ án\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.chieu22_2.resources
+D:\Đồ án\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.hnay2322024.resources

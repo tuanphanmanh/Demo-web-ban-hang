@@ -34,7 +34,11 @@ namespace WebBanHangOnline.Models.EF
         [StringLength(250)]
         public string SeoKeywords { get; set; }
         public int Position { get; set; }
+        //[Required]
+        //[StringLength(250)]
+        //public string Image { get; set; }
 
         public ICollection<Product> Products { get; set; }
+        public ICollection<Category> Categories { get; set; }
     }
 }

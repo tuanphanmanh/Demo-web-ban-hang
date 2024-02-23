@@ -61,48 +61,44 @@
                     @Html.ValidationSummary(true)
 
                     <!-- your steps content here -->
-                    <div id="logins-part" class="content active dstepper-block" role="tabpanel" aria-labelledby="logins-part-trigger">
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Tiêu đề DM xe</label>
-                            @Html.TextBoxFor(a => a.Title, new { @class = "form-control", @placeholder = "Tiêu đề DM xe" })
-                            @Html.ValidationMessageFor(a => a.Title, null, new { @class = "text-danger" })
-                        </div>
-                        @*<div class="form-group">
-                                <label for="exampleInputEmail1">Ngày tạo</label>
-                                <div class="col-md-3">
-                                    <div class="input-group date" id="reservationdate" data-target-input="nearest">
-                                        <input name="CreatedDate" type="text" class="form-control datetimepicker-input" data-target="#reservationdate">
-                                        <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
-                                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>*@
-                        <div class="form-group">
-                            <label for="exampleInputPassword1">Icon</label>
-                            @Html.TextBoxFor(a => a.Icon, new { @class = "form-control", @placeholder = "Icon" })
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputPassword1">Alias</label>
-                            @Html.TextBoxFor(a => a.Alias, new { @class = "form-control", @placeholder = "Alias" })
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputPassword1">SeoTitle</label>
-                            @Html.TextAreaFor(a => a.SeoTitle, new { @class = "form-control", @placeholder = "SeoTitle" })
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputPassword1">SeoKeywords</label>
-                            @Html.TextAreaFor(a => a.SeoKeywords, new { @class = "form-control", @placeholder = "SeoKeywords" })
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputPassword1">SeoDescription</label>
-                            @Html.TextAreaFor(a => a.SeoDescription, new { @class = "form-control", @placeholder = "SeoDescription" })
-                        </div>
-                        <div class="form-group">
-                            <a class="btn btn-warning" href="/admin/productcategory">Quay lại</a>
-                            <button type="submit" name="btnSave" id="btnSave" class="btn btn-primary">Lưu</button>
+                <div id="logins-part" class="content active dstepper-block" role="tabpanel" aria-labelledby="logins-part-trigger">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Tiêu đề DM xe</label>
+                        @Html.TextBoxFor(a => a.Title, new { @class = "form-control", @placeholder = "Tiêu đề DM xe" })
+                        @Html.ValidationMessageFor(a => a.Title, null, new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputFile">Icon</label>
+                        <div class="input-group">
+                            <div class="custom-file">
+                                @Html.TextBoxFor(a => a.Icon, new { @id = "txtImage", @class = "form-control" })
+                            </div>
+                            <div class="input-group-append">
+                                <input type="button" value="Tải ảnh" onclick="BrowseServer('txtImage');" />
+                            </div>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Alias</label>
+                        @Html.TextBoxFor(a => a.Alias, new { @class = "form-control", @placeholder = "Alias" })
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">SeoTitle</label>
+                        @Html.TextAreaFor(a => a.SeoTitle, new { @class = "form-control", @placeholder = "SeoTitle" })
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">SeoKeywords</label>
+                        @Html.TextAreaFor(a => a.SeoKeywords, new { @class = "form-control", @placeholder = "SeoKeywords" })
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">SeoDescription</label>
+                        @Html.TextAreaFor(a => a.SeoDescription, new { @class = "form-control", @placeholder = "SeoDescription" })
+                    </div>
+                    <div class="form-group">
+                        <a class="btn btn-warning" href="/admin/productcategory">Quay lại</a>
+                        <button type="submit" name="btnSave" id="btnSave" class="btn btn-primary">Lưu</button>
+                    </div>
+                </div>
 
                 }
             </div>

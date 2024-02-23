@@ -22,6 +22,9 @@ namespace WebBanHangOnline.Models.EF
         [StringLength(150)]
         public string Title { get; set; }
         public string Alias { get; set; }
+        //[StringLength(150)]
+        //public string TypeCode { get; set; }
+        //public string Link { get; set; }
         public string Description { get; set; }
         [StringLength(150)]
         public string SeoTitle { get; set; }
@@ -29,10 +32,14 @@ namespace WebBanHangOnline.Models.EF
         public string SeoDescription { get; set; }
         [StringLength(150)]
         public string SeoKeywords { get; set; }
+        [StringLength(150)]
+        public string TypeCode { get; set; }
+        public string Link { get; set; }
         public bool IsActive { get; set; }
         public int Position { get; set; }
 
         public ICollection<News> News { get; set; }
+        public virtual ProductCategory ProductCategory { get; set; }
         public ICollection<News> Posts { get; set; }
 
     }

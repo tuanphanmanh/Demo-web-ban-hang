@@ -16,6 +16,7 @@
         /*flex-direction:*/
         display: inline-block;
         position: relative;
+        margin-right: 10px;
     }
 
     .box-btn {
@@ -43,6 +44,7 @@
 
             </div>
         </div>
+
         <div class="card-body">
             <ul class="glImage">
                 @if (Model != null)
@@ -53,7 +55,6 @@
                             <img src="@item.Image" width="200" />
                             <div class="box-btn">
                                 <a href="#" data-id="@item.Id" class="btn btn-sm btn-danger btnDelete"> <i class="fa fa-trash"></i> </a>
-
                                 @if (item.IsDefault)
                                 {
                                     <a href="#" data-id="@item.Id" class="btn btn-sm btn-success btnDefault"> <i class="fa fa-check"></i></a>
@@ -66,12 +67,10 @@
                         </li>
                     }
                 }
-
             </ul>
         </div>
         <!-- /.card-body -->
         <div class="card-footer">
-
         </div>
         <!-- /.card-footer-->
     </div>
