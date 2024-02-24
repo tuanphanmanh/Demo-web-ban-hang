@@ -1,0 +1,153 @@
+﻿@model IEnumerable<WebBanHangOnline.Models.ShoppingCartItem>
+
+@{
+    ViewBag.Title = "Giỏ hàng";
+}
+
+<link rel="stylesheet" type="text/css" href="~/content/assets/styles/categories_styles.css">
+<link rel="stylesheet" type="text/css" href="~/content/assets/styles/categories_responsive.css">
+
+<div class="container product_section_container">
+    <div class="row">
+        <div class="col product_section clearfix">
+
+            <!-- Breadcrumbs -->
+
+            <div class="breadcrumbs d-flex flex-row align-items-center">
+                <ul>
+                    <li><a href="/">Trang chủ</a></li>
+                    <li class="active"><a href="/gio-hang"><i class="fa fa-angle-right" aria-hidden="true"></i>Giỏ hàng</a></li>
+                </ul>
+            </div>
+
+            <!-- Main Content -->
+
+            <div class="col-md-12">
+
+                <table class="table">
+                    <tr style="text-align: center">
+                        <th><input type="checkbox" id="SelectAll" /></th>
+                        <th>STT</th>
+                        <th>Ảnh sản phẩm</th>
+                        <th>Tên sản phẩm</th>
+                        <th>Danh mục</th>
+                        <th>Đơn giá</th>
+                        <th>Số lượng</th>
+                        <th>Giá tiền</th>
+                        <th></th>
+                    </tr>
+                    @if (Model != null && Model.Any() )
+                                {
+                                    var i = 0;
+                                    var tongtien = decimal.Zero;
+                                    var sl = decimal.Zero;
+                                    foreach (var item in Model)
+                                    {
+                            tongtien += item.TotalPrice;
+                            sl += item.Quantity;
+                            <tr style="text-align: center" id="trow_@item.ProductId">
+                                <td><input type="checkbox" class="cbkItem" value="@item.ProductId" /></td>
+                                <td>@(i+1)</td>
+                                <td>
+                                    <a style="color: black" href="/chi-tiet/@item.Alias-p@(item.ProductId)">
+                                        <img src="@item.ProductImg" class="img-thumbnail" style="max-height: 80px; max-width: 50px" />
+                                    </a>
+                                </td>
+                                <td> <a href="/chi-tiet/@item.Alias-p@(item.ProductId)">@item.ProductName</a> </td>
+                                <td>@item.CategoryName</td>
+                                <td>&#873; @WebBanHangOnline.Common.Common.FormatNumber(item.Price, 0)  </td>
+                                <td>@item.Quantity</td>
+                                <th> &#873; @WebBanHangOnline.Common.Common.FormatNumber(item.TotalPrice, 0) </th>
+                                <td>
+                                    <a href="#" data-id="@item.ProductId" class="btn btn-sm btn-danger btnDelete">Xóa</a>
+                                </td>
+                            </tr>
+                            i++;
+                        }
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th style="text-align: right">Tổng &#187;&#187;&#187;</th>
+                    <th style="text-align: center"> @WebBanHangOnline.Common.Common.FormatNumber(sl, 0)</th>
+                    <th style="text-align: center"> &#873; @WebBanHangOnline.Common.Common.FormatNumber(tongtien, 0) </th>
+                </tr>
+
+
+                    }
+                    
+else
+            {
+                        <tr>
+                            <th colspan="7">Không có sản phẩm trong giỏ hàng</th>
+                        </tr>
+            }
+                </table>
+
+            </div>
+        </div>
+    </div>
+    <button type="submit" value="Mua Hàng" style="background-color: forestgreen" />
+
+</div>
+
+<div>
+</div>
+
+@section scripts{
+    @*<script src="~/content/assets/js/categories_custom.js"></script>*@
+    <script src="~/Scripts/jsShopping.js"></script>
+
+    <script src="~/Content/assets/js/categories_end.js"></script>
+
+
+}
+
+<script>
+    $(document).ready(function () {
+        $('body').on('click', '#BtnDeleteAll', function (e) {
+            e.preventDefault();
+            var str = "";
+            var checkbox = $(this).parents('.card').find('tr td input:checkbox');
+            var i = 0;
+            checkbox.each(function () {
+                if (this.checked) {
+                    checkbox.attr('selected', 'checked');
+                    var _id = $(this).val();
+                    if (i === 0) {
+                        str += _id;
+                    }
+                    else {
+                        str += "," + _id;
+                    }
+                    i++;
+                }
+                else {
+                    checkbox.attr('selected', '');
+                }
+            });
+
+        });
+
+        $('body').on('change', '#SelectAll', function () {
+            var checkStatus = this.checked;
+            var checkbox = $(this).parents('.card-body').find('tr td input:checkbox');
+            checkbox.each(function () {
+                this.checked = checkStatus;
+                if (this.checked) {
+                    checkbox.attr('selected', 'checked');
+                }
+                else {
+                    checkbox.attr('selected', '');
+                }
+            });
+        });
+
+
+
+
+    });
+</script>
+

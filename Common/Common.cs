@@ -49,7 +49,7 @@ namespace WebBanHangOnline.Common
             }
             return rs;
         }
-        public static string FormatNumber(object value, int SoSauDauPhay = 2)
+        public static string FormatNumber(object value, int SoSauDauPhay = 0)
         {
             bool isNumber = IsNumeric(value);
             decimal GT = 0;

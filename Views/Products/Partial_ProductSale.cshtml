@@ -27,21 +27,25 @@
                                     <div class="product-item">
                                         <div class="product discount">
                                             <div class="product_image">
+                                                @*<a href="/chi-tiet/@item.Alias-p@(item.Id)">
+                    <img src="@strImage" alt="@item.Title">
+                </a>*@
                                                 <img src="@strImage" alt="@item.Title">
+
                                             </div>
                                             <div class="favorite favorite_left"></div>
                                             @*@if (item.IsHot == true)
-                                            {
-                                                <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span> NEW </span></div>
-                                            }*@
+            {
+                <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span> NEW </span></div>
+            }*@
                                             @if (item.PriceSale > 0)
                                             {
-                                                <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>sale</span></div>                                            
-                                                }
+                                                <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>sale</span></div>
+                                            }
 
 
                                             <div class="product_info">
-                                                <h6 class="product_name"><a href="single.html"> @item.Title </a></h6>
+                                                <h6 class="product_name"><a href="/chi-tiet/@item.Alias-p@(item.Id)"> @item.Title </a></h6>
                                                 @if (item.PriceSale > 0)
                                                 {
                                                     <div class="product_price">
@@ -56,23 +60,11 @@
                                                 }
                                             </div>
                                         </div>
+                                        <div class="red_button add_to_cart_button"><a href="#" class="btnAddToCart" data-id="@item.Id">Thêm vào giỏ hàng</a></div>
                                     </div>
                                 </div>
                             }
-                            <!-- Slide 1 -->
-                            <!-- Slide 2 -->
-                            <!-- Slide 3 -->
-                            <!-- Slide 4 -->
-                            <!-- Slide 5 -->
-                            <!-- Slide 6 -->
-                            <!-- Slide 7 -->
-                            <!-- Slide 8 -->
-                            <!-- Slide 9 -->
-                            <!-- Slide 10 -->
-
-
-
-                            <div class="owl-nav disabled"><div class="owl-prev">prev</div><div class="owl-next">next</div></div><div class="owl-dots disabled"></div>
+                        <div class="owl-nav disabled"><div class="owl-prev">prev</div><div class="owl-next">next</div></div><div class="owl-dots disabled"></div>
                         </div>
 
                         <!-- Slider Navigation -->
