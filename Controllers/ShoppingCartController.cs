@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -10,15 +11,97 @@ namespace WebBanHangOnline.Controllers
 {
     public class ShoppingCartController : Controller
     {
+        private ApplicationDbContext db = new ApplicationDbContext();
+        private DbEntityValidationException context = new DbEntityValidationException();
+        
         // GET: ShoppingCart
         public ActionResult Index()
         {
             ShoppingCart cart = (ShoppingCart)Session["Cart"];
-            if(cart != null)
+            if (cart != null)
             {
-                return View(cart.Items);
+                ViewBag.CheckCart = cart;
             }
             return View();
+        }
+        
+        public ActionResult CheckOutSuccess()
+        {
+            return View();
+        }
+        public ActionResult CheckOut()
+        {
+            ShoppingCart cart = (ShoppingCart)Session["Cart"];
+            if (cart != null)
+            {
+                ViewBag.CheckCart = cart;
+            }
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CheckOut(OrderViewModel req)
+        {
+            var code = new { Success = true, Code = -1 };
+            if (ModelState.IsValid)
+            {
+                ShoppingCart cart = (ShoppingCart)Session["Cart"];
+                if (cart != null)
+                {
+                    Order order = new Order();
+                    order.CustomerName = req.CustomerName;
+                    order.Phone = req.Phone;
+                    order.Address = req.Address;
+                    order.Email = req.Email;
+                    order.AddressType = req.AddressType;
+                    order.MessegesForBuyer = req.MessegesForBuyer;
+                    order.ShippingUnit = req.ShippingUnit;
+                    order.Voucher = req.Voucher;
+                    order.TypePayment = req.TypePayment;
+                    cart.Items.ForEach(a => order.OrderDetails.Add(new OrderDetail
+                    {
+                        ProductId = a.ProductId,
+                        Quantity = a.Quantity,
+                        Price = a.Price,
+                    }));
+                    order.TotalAmount = cart.Items.Sum(x => (x.Price * x.Quantity));
+                    order.CreatedDate = DateTime.Now;
+                    order.ModifiedDate = DateTime.Now;
+                    order.CreatedBy = req.Phone;
+                    Random rd = new Random();
+                    order.Code = "DH" + req.Phone;
+                    db.Orders.Add(order);
+                    db.SaveChanges();
+                    cart.ClearCart();
+                    return RedirectToAction("CheckOutSuccess");
+                }
+            }
+            return Json(code);
+        }
+
+
+        public ActionResult Partial_CheckOut()
+        {
+            return PartialView();
+        }
+        public ActionResult Partial_Item_Thanhtoan()
+        {
+            ShoppingCart cart = (ShoppingCart)Session["Cart"];
+            if (cart != null)
+            {
+                return PartialView(cart.Items);
+            }
+            return PartialView();
+        }
+        public ActionResult Partial_Item_Cart()
+        {
+            ShoppingCart cart = (ShoppingCart)Session["Cart"];
+            if (cart != null)
+            {
+                return PartialView(cart.Items);
+            }
+            return PartialView();
         }
         public ActionResult ShowCount()
         {
@@ -48,6 +131,28 @@ namespace WebBanHangOnline.Controllers
             return Json(code);
         }
 
+        [HttpPost]
+        public ActionResult DeleteAll()
+        {
+            ShoppingCart cart = (ShoppingCart)Session["Cart"];
+            if(cart != null)
+            {
+                cart.ClearCart();
+                return Json(new { Success = true });
+            }
+            return Json(new { Success = false });
+        }
+        [HttpPost]
+        public ActionResult Update(int id, int quantity)
+        {
+            ShoppingCart cart = (ShoppingCart)Session["Cart"];
+            if (cart != null)
+            {
+                cart.UpdateQuantity(id, quantity);
+                return Json(new { Success = true });
+            }
+            return Json(new { Success = false });
+        }
 
         [HttpPost]
         public ActionResult AddToCart(int id, int quantity)

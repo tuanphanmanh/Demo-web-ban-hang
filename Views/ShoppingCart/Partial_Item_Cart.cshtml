@@ -1,0 +1,62 @@
+﻿@model IEnumerable<WebBanHangOnline.Models.ShoppingCartItem>
+
+<table class="table">
+    <tr style="text-align: center">
+        <th><input type="checkbox" id="SelectAll" /></th>
+        <th>STT</th>
+        <th>Ảnh sản phẩm</th>
+        <th>Tên sản phẩm</th>
+        <th>Danh mục</th>
+        <th>Đơn giá</th>
+        <th>Số lượng</th>
+        <th>Thành tiền</th>
+        <th></th>
+    </tr>
+    @if (Model != null && Model.Any())
+    {
+        var i = 0;
+        var tongtien = decimal.Zero;
+        var sl = decimal.Zero;
+        foreach (var item in Model)
+        {
+            tongtien += item.TotalPrice;
+            sl += item.Quantity;
+            <tr style="text-align: center" id="trow_@item.ProductId">
+                <td><input type="checkbox" class="cbkItem" value="@item.ProductId" /></td>
+                <td>@(i+1)</td>
+                <td>
+                    <a style="color: black" href="/chi-tiet/@item.Alias-p@(item.ProductId)">
+                        <img src="@item.ProductImg" class="img-thumbnail" style="max-height: 80px; max-width: 50px" />
+                    </a>
+                </td>
+                <td> <a href="/chi-tiet/@item.Alias-p@(item.ProductId)">@item.ProductName</a> </td>
+                <td>@item.CategoryName</td>
+                <td style="min-width: 140px">&#873; @WebBanHangOnline.Common.Common.FormatNumber(item.Price, 0)  </td>
+                <td>
+                    <input style="max-width: 50px;" type="number" value="@item.Quantity" id="Quantity_@item.ProductId"  />
+
+                </td>
+                <th style="min-width: 140px"> &#873; @WebBanHangOnline.Common.Common.FormatNumber(item.TotalPrice, 0) </th>
+                <td>
+                    <a href="#" data-id="@item.ProductId" class="btn btn-sm btn-danger btnDelete">Xóa </a>
+                    <a href="#" data-id="@item.ProductId" class="btn btn-sm btn-primary btnUpdate">Cập nhật</a>
+                </td>
+            </tr>
+            i++;
+        }
+        <tr>
+            <th colspan="5"></th>
+            <th style="text-align: right">Tổng &#187;&#187;&#187;</th>
+            <th style="text-align: center"> @WebBanHangOnline.Common.Common.FormatNumber(sl, 0)</th>
+            <th style="text-align: center"> &#873; @WebBanHangOnline.Common.Common.FormatNumber(tongtien, 0) </th>
+        </tr>
+    }
+
+    else
+    {
+        <tr>
+            <th colspan="7">Không có sản phẩm trong giỏ hàng</th>
+        </tr>
+    }
+</table>
+

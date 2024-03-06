@@ -222,10 +222,51 @@
     <Compile Include="Migrations\202402230931238_hnay2322024.designer.cs">
       <DependentUpon>202402230931238_hnay2322024.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202403040931242_UpdatePaymentInOrder.cs" />
+    <Compile Include="Migrations\202403040931242_UpdatePaymentInOrder.Designer.cs">
+      <DependentUpon>202403040931242_UpdatePaymentInOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202403041740457_updateorder.cs" />
+    <Compile Include="Migrations\202403041740457_updateorder.Designer.cs">
+      <DependentUpon>202403041740457_updateorder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202403050802041_updateorderwithcommonabstract.cs" />
+    <Compile Include="Migrations\202403050802041_updateorderwithcommonabstract.Designer.cs">
+      <DependentUpon>202403050802041_updateorderwithcommonabstract.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202403050833229_deletetypepaymentinorder.cs" />
+    <Compile Include="Migrations\202403050833229_deletetypepaymentinorder.Designer.cs">
+      <DependentUpon>202403050833229_deletetypepaymentinorder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202403050859430_updateOrderWithMesseges.cs" />
+    <Compile Include="Migrations\202403050859430_updateOrderWithMesseges.Designer.cs">
+      <DependentUpon>202403050859430_updateOrderWithMesseges.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202403051111589_deleteorder.cs" />
+    <Compile Include="Migrations\202403051111589_deleteorder.Designer.cs">
+      <DependentUpon>202403051111589_deleteorder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202403051239513_linhtinh.cs" />
+    <Compile Include="Migrations\202403051239513_linhtinh.Designer.cs">
+      <DependentUpon>202403051239513_linhtinh.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202403060648519_updateorderdetails.cs" />
+    <Compile Include="Migrations\202403060648519_updateorderdetails.Designer.cs">
+      <DependentUpon>202403060648519_updateorderdetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202403060721172_again.cs" />
+    <Compile Include="Migrations\202403060721172_again.Designer.cs">
+      <DependentUpon>202403060721172_again.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202403060729506_thanhcong.cs" />
+    <Compile Include="Migrations\202403060729506_thanhcong.Designer.cs">
+      <DependentUpon>202403060729506_thanhcong.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CommonAbstract.cs" />
     <Compile Include="Models\Common\Filter.cs" />
+    <Compile Include="Models\CustomerViewModel.cs" />
     <Compile Include="Models\EF\Adv.cs" />
     <Compile Include="Models\EF\Category.cs" />
     <Compile Include="Models\EF\Contact.cs" />
@@ -240,6 +281,7 @@
     <Compile Include="Models\EF\SystemSetting.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\OrderViewModel.cs" />
     <Compile Include="Models\ShoppingCart.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -256,6 +298,7 @@
     <Content Include="Content\assets\images\desc_1.jpg" />
     <Content Include="Content\assets\images\desc_2.jpg" />
     <Content Include="Content\assets\images\desc_3.jpg" />
+    <Content Include="Content\assets\images\ko có gì trong giỏ hàng.png" />
     <Content Include="Content\assets\images\map_marker.png" />
     <Content Include="Content\assets\images\product_1.png" />
     <Content Include="Content\assets\images\product_10.png" />
@@ -307,6 +350,7 @@
     <Content Include="Content\assets\styles\main_styles.css" />
     <Content Include="Content\assets\styles\responsive.css" />
     <Content Include="Content\assets\styles\single_responsive.css" />
+    <Content Include="Content\assets\styles\abcde.css" />
     <Content Include="Content\assets\styles\single_styles.css" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
@@ -3379,6 +3423,11 @@
     <Content Include="Views\Menu\_MenuLeft.cshtml" />
     <Content Include="Views\Products\Detail.cshtml" />
     <Content Include="Views\ShoppingCart\Index.cshtml" />
+    <Content Include="Views\ShoppingCart\Partial_Item_Cart.cshtml" />
+    <Content Include="Views\ShoppingCart\CheckOut.cshtml" />
+    <Content Include="Views\ShoppingCart\Partial_Item_Thanhtoan.cshtml" />
+    <Content Include="Views\ShoppingCart\Partial_CheckOut.cshtml" />
+    <Content Include="Views\ShoppingCart\CheckOutSuccess.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -3430,6 +3479,36 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202402230931238_hnay2322024.resx">
       <DependentUpon>202402230931238_hnay2322024.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202403040931242_UpdatePaymentInOrder.resx">
+      <DependentUpon>202403040931242_UpdatePaymentInOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202403041740457_updateorder.resx">
+      <DependentUpon>202403041740457_updateorder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202403050802041_updateorderwithcommonabstract.resx">
+      <DependentUpon>202403050802041_updateorderwithcommonabstract.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202403050833229_deletetypepaymentinorder.resx">
+      <DependentUpon>202403050833229_deletetypepaymentinorder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202403050859430_updateOrderWithMesseges.resx">
+      <DependentUpon>202403050859430_updateOrderWithMesseges.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202403051111589_deleteorder.resx">
+      <DependentUpon>202403051111589_deleteorder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202403051239513_linhtinh.resx">
+      <DependentUpon>202403051239513_linhtinh.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202403060648519_updateorderdetails.resx">
+      <DependentUpon>202403060648519_updateorderdetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202403060721172_again.resx">
+      <DependentUpon>202403060721172_again.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202403060729506_thanhcong.resx">
+      <DependentUpon>202403060729506_thanhcong.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
