@@ -1,0 +1,174 @@
+﻿@model IEnumerable<WebBanHangOnline.Models.EF.Order>
+<link href="~/Content/assets/styles/donhang.css" rel="stylesheet" />
+
+
+@section naviheader{
+
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="/admin/home" class="nav-link">Trang chủ</a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="/admin/order" class="nav-link">Đơn hàng</a>
+        </li>
+    </ul>
+
+}
+
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header p-2">
+                    <ul class="nav nav-pills">
+                        <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Thông tin chung</a></li>
+                    </ul>
+                </div> <!-- /.card-header -->
+                <div class="card-body">
+                    <div class="tab-content">
+                        <div class="active tab-pane">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr class="text-center">
+                                        <th>Họ và tên</th>
+                                        <th>Địa chỉ</th>
+                                        <th>Số điện thoại</th>
+                                        <th>Email</th>
+                                        <th>Lời nhắn</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model != null && Model.Any())
+                                    {
+                                        foreach (var item in Model)
+                                        {
+                                            <tr class="text-center" id="thongtindonhang">
+                                                <td>@item.CustomerName</td>
+                                                <td>@item.Address (@item.AddressType) </td>
+                                                <td>@item.Phone</td>
+                                                <td>@item.Email </td>
+                                                <td>@item.MessegesForBuyer </td>
+                                            </tr>
+                                        }
+
+
+                                    }
+                                    else
+                                    {
+                                        <tr>
+                                            <td colspan="4">Ko có đơn hàng nào!!!</td>
+                                        </tr>
+
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="height: 2px; background-color: coral"></div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="tab-content">
+                        <div class="active tab-pane">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr class="text-center">
+                                        <th>Mã SP</th>
+                                        <th>Tên SP</th>
+                                        <th>Số lượng</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model != null && Model.Any())
+                                    {
+                                        foreach (var item in Model)
+                                        {
+                                            <tr class="text-center" id="thongtindonhang">
+                                                <td>@item.CustomerName</td>
+                                                <td>@item.Address </td>
+                                                <td>@item.Phone</td>
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="tab-content">
+                        <div class="active tab-pane">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr class="text-center">
+                                        <th>Đơn vị vận chuyển</th>
+                                        <th>Voucher</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model != null && Model.Any())
+                                    {
+                                        foreach (var item in Model)
+                                        {
+                                            <tr class="text-center" id="thongtindonhang">
+                                                <td>@item.CustomerName</td>
+                                                <td>@item.Address </td>
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+    <!-- /.card-body -->
+</section>
+
+<!-- /.content -->
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('body').on('click', '.btnDelete', function () {
+                var id = $(this).data("id");
+                var conf = confirm("Bạn có muốn xóa Danh mục này không?");
+                if (conf === true) {
+                    $.ajax({
+                        url: '/admin/category/delete',
+                        type: 'POST',
+                        data: { id: id },
+                        success: function (rs) {
+                            if (rs.success) {
+                                $('#trow_' + id).remove();
+                            }
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+}
+
+

@@ -43,8 +43,11 @@ COLOR PALETTE
 2. Body and some general stuff
 *********************************/
 
-*
-{
+#thongtindonhang:nth-child(2n+1){
+	background-color:powderblue;
+}
+
+* {
 	margin: 0;
 	padding: 0;
 }

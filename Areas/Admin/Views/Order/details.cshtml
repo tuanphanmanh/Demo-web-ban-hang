@@ -1,0 +1,36 @@
+﻿@model IEnumerable<WebBanHangOnline.Models.EF.Order>
+<link href="~/Content/assets/styles/abcde.css" rel="stylesheet" />
+<table class="table table-hover">
+    <thead>
+        <tr class="text-center">
+            <th>Họ và tên</th>
+            <th>Địa chỉ</th>
+            <th>Số điện thoại</th>
+            <th>Email</th>
+            <th>Lời nhắn</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            foreach (var item in Model)
+            {
+                <tr class="text-center" id="thongtindonhang">
+                    <td>@item.CustomerName</td>
+                    <td>@item.Address (@item.AddressType) </td>
+                    <td>@item.Phone</td>
+                    <td>@item.Email </td>
+                    <td>@item.MessegesForBuyer </td>
+                </tr>
+            }
+
+        }
+        else
+        {
+            <tr>
+                <td colspan="4">Ko có đơn hàng nào!!!</td>
+            </tr>
+        }
+    </tbody>
+</table>
+

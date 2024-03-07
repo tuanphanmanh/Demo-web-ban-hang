@@ -129,3 +129,10 @@ D:\Đồ án\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrat
 D:\Đồ án\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.updateorderdetails.resources
 D:\Đồ án\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.again.resources
 D:\Đồ án\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.thanhcong.resources
+D:\Đồ án\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.updateThongKeSoLuoTruyCap.resources
+D:\Đồ án\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.updatethongke.resources
+D:\Đồ án\WebBanHangOnline\WebBanHangOnline\bin\Dapper.dll
+D:\Đồ án\WebBanHangOnline\WebBanHangOnline\bin\Dapper.xml
+D:\Đồ án\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.deetethok.resources
+D:\Đồ án\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.addThongKeAgan.resources
+D:\Đồ án\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.updateorder1.resources

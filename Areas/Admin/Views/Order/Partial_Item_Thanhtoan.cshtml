@@ -1,0 +1,44 @@
+﻿@model IEnumerable<WebBanHangOnline.Models.ShoppingCartItem>
+<link rel="stylesheet" type="text/css" href="~/content/assets/styles/abcde.css">
+
+<table class="table">
+    <tr style="text-align: center">
+        <th></th>
+        <th></th>
+        <th>Đơn giá</th>
+        <th>Số lượng</th>
+        <th>Thành tiền</th>
+        <th></th>
+    </tr>
+    @if (Model != null && Model.Any())
+    {
+        var tongtien = decimal.Zero;
+        var sl = decimal.Zero;
+        foreach (var item in Model)
+        {
+            tongtien += item.TotalPrice;
+            sl += item.Quantity;
+            <tr class="hang_thanh_toan" style="text-align: center">
+                <td>
+                    <a style="color: black" href="/chi-tiet/@item.Alias-p@(item.ProductId)">
+                        <img src="@item.ProductImg" class="img-thumbnail" style="max-height: 80px; max-width: 50px" />
+                    </a>
+                </td>
+                <td style="min-width: 140px"> @item.ProductName (@item.CategoryName)</td>
+                <td style="min-width: 140px"> &#873; @WebBanHangOnline.Common.Common.FormatNumber(item.Price, 0)  </td>
+                <td>@item.Quantity</td>
+                <th style="min-width: 140px"> &#873; @WebBanHangOnline.Common.Common.FormatNumber(item.TotalPrice, 0) </th>
+            </tr>
+        }
+        <tr>
+            <th colspan="2"></th>
+            <th style="text-align: right; min-width: 300px">Tổng số tiền (@WebBanHangOnline.Common.Common.FormatNumber(sl, 0) sản phẩm)</th>
+            <th></th>
+            <th style="text-align: center"> &#873; @WebBanHangOnline.Common.Common.FormatNumber(tongtien, 0) </th>
+        </tr>
+    }
+
+</table>
+
+
+

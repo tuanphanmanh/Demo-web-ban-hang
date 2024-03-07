@@ -18,12 +18,14 @@ namespace WebBanHangOnline.Controllers
         }
         public ActionResult Detail(string alias, int id)
         {
-            var cate = db.ProductCategorys.Find(id);
-            if (cate != null)
-            {
-                ViewBag.CateName = cate.Title;
-            }
             var item = db.Products.Find(id);
+            if (item != null)
+            {
+                db.Products.Attach(item);
+                item.ViewCount = item.ViewCount + 1;
+                db.Entry(item).Property(a=>a.ViewCount).IsModified = true;
+                db.SaveChanges();
+            }
             return View(item);
         }
 

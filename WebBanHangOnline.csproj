@@ -50,6 +50,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\WebBanHangOnline\WebBanHangOnline\Content\ckfinder\bin\Release\CKFinder.dll</HintPath>
     </Reference>
+    <Reference Include="Dapper, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.2.1.28\lib\net461\Dapper.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
       <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
@@ -182,6 +185,7 @@
     <Compile Include="Areas\Admin\Controllers\CategoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\NewsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\OrderController.cs" />
     <Compile Include="Areas\Admin\Controllers\PostsController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductCategoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductImageController.cs" />
@@ -262,10 +266,31 @@
     <Compile Include="Migrations\202403060729506_thanhcong.Designer.cs">
       <DependentUpon>202403060729506_thanhcong.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202403060816177_updateThongKeSoLuoTruyCap.cs" />
+    <Compile Include="Migrations\202403060816177_updateThongKeSoLuoTruyCap.Designer.cs">
+      <DependentUpon>202403060816177_updateThongKeSoLuoTruyCap.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202403061023384_updatethongke.cs" />
+    <Compile Include="Migrations\202403061023384_updatethongke.Designer.cs">
+      <DependentUpon>202403061023384_updatethongke.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202403070823411_deetethok.cs" />
+    <Compile Include="Migrations\202403070823411_deetethok.Designer.cs">
+      <DependentUpon>202403070823411_deetethok.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202403070825212_addThongKeAgan.cs" />
+    <Compile Include="Migrations\202403070825212_addThongKeAgan.Designer.cs">
+      <DependentUpon>202403070825212_addThongKeAgan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202403071003058_updateorder1.cs" />
+    <Compile Include="Migrations\202403071003058_updateorder1.Designer.cs">
+      <DependentUpon>202403071003058_updateorder1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CommonAbstract.cs" />
     <Compile Include="Models\Common\Filter.cs" />
+    <Compile Include="Models\Common\ThongKeTruyCap.cs" />
     <Compile Include="Models\CustomerViewModel.cs" />
     <Compile Include="Models\EF\Adv.cs" />
     <Compile Include="Models\EF\Category.cs" />
@@ -279,10 +304,12 @@
     <Compile Include="Models\EF\ProductImage.cs" />
     <Compile Include="Models\EF\Subscribe.cs" />
     <Compile Include="Models\EF\SystemSetting.cs" />
+    <Compile Include="Models\EF\ThongKe.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\OrderViewModel.cs" />
     <Compile Include="Models\ShoppingCart.cs" />
+    <Compile Include="Models\ThongKeViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -347,6 +374,7 @@
     <Content Include="Content\assets\styles\categories_styles.css" />
     <Content Include="Content\assets\styles\contact_responsive.css" />
     <Content Include="Content\assets\styles\contact_styles.css" />
+    <Content Include="Content\assets\styles\donhang.css" />
     <Content Include="Content\assets\styles\main_styles.css" />
     <Content Include="Content\assets\styles\responsive.css" />
     <Content Include="Content\assets\styles\single_responsive.css" />
@@ -3207,6 +3235,8 @@
     <Content Include="Content\Image\y2.jpg" />
     <Content Include="Content\Image\zinnia-042918.jpg" />
     <Content Include="Content\PagedList.css" />
+    <Content Include="Content\template\send1.html" />
+    <Content Include="Content\template\send2.html" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -3365,6 +3395,9 @@
     <Content Include="Content\assets\plugins\themify-icons\fonts\themify.eot" />
     <Content Include="Content\assets\plugins\themify-icons\fonts\themify.ttf" />
     <Content Include="Content\assets\plugins\themify-icons\fonts\themify.woff" />
+    <Content Include="Areas\Admin\Views\Order\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Order\Partial_Item_Thanhtoan.cshtml" />
+    <Content Include="Areas\Admin\Views\Order\details.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -3428,6 +3461,7 @@
     <Content Include="Views\ShoppingCart\Partial_Item_Thanhtoan.cshtml" />
     <Content Include="Views\ShoppingCart\Partial_CheckOut.cshtml" />
     <Content Include="Views\ShoppingCart\CheckOutSuccess.cshtml" />
+    <Content Include="Views\Home\Refresh.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -3509,6 +3543,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202403060729506_thanhcong.resx">
       <DependentUpon>202403060729506_thanhcong.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202403060816177_updateThongKeSoLuoTruyCap.resx">
+      <DependentUpon>202403060816177_updateThongKeSoLuoTruyCap.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202403061023384_updatethongke.resx">
+      <DependentUpon>202403061023384_updatethongke.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202403070823411_deetethok.resx">
+      <DependentUpon>202403070823411_deetethok.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202403070825212_addThongKeAgan.resx">
+      <DependentUpon>202403070825212_addThongKeAgan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202403071003058_updateorder1.resx">
+      <DependentUpon>202403071003058_updateorder1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

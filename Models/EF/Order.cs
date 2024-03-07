@@ -31,6 +31,7 @@ namespace WebBanHangOnline.Models.EF
         public string AddressType { get; set; }
         public string MessegesForBuyer { get; set; }
         public string ShippingUnit { get; set; }
+        
         public string Voucher { get; set; }
         public string TypePayment { get; set; }  
         public int Quantity { get; set; }  
