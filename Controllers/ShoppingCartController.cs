@@ -53,6 +53,7 @@ namespace WebBanHangOnline.Controllers
                 {
                     Order order = new Order();
                     order.CustomerName = req.CustomerName;
+                    order.ShippingStatus = req.ShippingStatus;
                     order.Phone = req.Phone;
                     order.Address = req.Address;
                     order.Email = req.Email;
@@ -72,7 +73,7 @@ namespace WebBanHangOnline.Controllers
                     order.ModifiedDate = DateTime.Now;
                     order.CreatedBy = req.Phone;
                     Random rd = new Random();
-                    order.Code = "DH" + req.Phone;
+                    order.Code = "DH" + rd.Next(0,9) + rd.Next(0, 9) + rd.Next(0, 9)  ;
                     db.Orders.Add(order);
                     db.SaveChanges();
                     // gửi email cho khách hàng
@@ -81,10 +82,10 @@ namespace WebBanHangOnline.Controllers
                     var TongTien = decimal.Zero;
                     foreach (var sp in cart.Items)
                     {
-                        strSanPham += "<tr>";
-                        strSanPham += "<td>" + sp.ProductName + "</td>";
-                        strSanPham += "<td>" + sp.Quantity + "</td>";
-                        strSanPham += "<td>" + WebBanHangOnline.Common.Common.FormatNumber(sp.TotalPrice,0) + "</td>";
+                        strSanPham += "<tr>";       
+                        strSanPham += "<td width=\"200\" style=\"font-family:'SF Pro Text',Arial,sans-serif;text-align:center;border-collapse:collapse;word-break:break-word;font-size:14px;border-top:1px solid #c5c5c5;border-right:1px solid #c5c5c5;border-bottom:1px solid #c5c5c5;border-left:1px solid #c5c5c5;padding:5px 10px 5px 10px\">" + sp.ProductName + "</td>";
+                        strSanPham += "<td width=\"100\" style=\"font-family:'SF Pro Text',Arial,sans-serif;text-align:center;border-collapse:collapse;word-break:break-word;font-size:14px;border-top:1px solid #c5c5c5;border-right:1px solid #c5c5c5;border-bottom:1px solid #c5c5c5;border-left:1px solid #c5c5c5;padding:5px 10px 5px 10px\">" + sp.Quantity + "</td>";
+                        strSanPham += "<td width=\"200\" style=\"font-family:'SF Pro Text',Arial,sans-serif;text-align:center;border-collapse:collapse;word-break:break-word;font-size:14px;border-top:1px solid #c5c5c5;border-right:1px solid #c5c5c5;border-bottom:1px solid #c5c5c5;border-left:1px solid #c5c5c5;padding:5px 10px 5px 10px\">" + WebBanHangOnline.Common.Common.FormatNumber(sp.TotalPrice,0) + "</td>";
                         strSanPham += "</tr>";
                         thanhtien += sp.Price * sp.Quantity;
                     }
@@ -99,7 +100,7 @@ namespace WebBanHangOnline.Controllers
                     contentCustomer = contentCustomer.Replace("{{PhuongThucThanhToan}}", order.TypePayment);
                     contentCustomer = contentCustomer.Replace("{{HinhThucVanChuyen}}", order.ShippingUnit);
                     contentCustomer = contentCustomer.Replace("{{LoaiDiaChi}}", order.AddressType);
-                    contentCustomer = contentCustomer.Replace("{{NgayDat}}", order.CreatedDate.ToString());
+                    contentCustomer = contentCustomer.Replace("{{NgayDat}}", order.CreatedDate.ToString("dd/MM/yyyy"));
                     contentCustomer = contentCustomer.Replace("{{ThanhTien}}", WebBanHangOnline.Common.Common.FormatNumber(thanhtien, 0));
                     contentCustomer = contentCustomer.Replace("{{TongTien}}", WebBanHangOnline.Common.Common.FormatNumber(TongTien, 0));
 
@@ -117,7 +118,7 @@ namespace WebBanHangOnline.Controllers
                     contentAdmin = contentAdmin.Replace("{{PhuongThucThanhToan}}", order.TypePayment);
                     contentAdmin = contentAdmin.Replace("{{HinhThucVanChuyen}}", order.ShippingUnit);
                     contentAdmin = contentAdmin.Replace("{{LoaiDiaChi}}", order.AddressType);
-                    contentAdmin = contentAdmin.Replace("{{NgayDat}}", order.CreatedDate.ToString());
+                    contentAdmin = contentAdmin.Replace("{{NgayDat}}", order.CreatedDate.ToString("dd/MM/yyyy"));
                     contentAdmin = contentAdmin.Replace("{{ThanhTien}}", WebBanHangOnline.Common.Common.FormatNumber(thanhtien, 0));
                     contentAdmin = contentAdmin.Replace("{{LoiNhan}}", order.MessegesForBuyer);
 

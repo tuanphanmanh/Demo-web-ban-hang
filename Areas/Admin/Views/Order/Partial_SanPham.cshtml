@@ -1,0 +1,33 @@
+﻿@model IEnumerable<WebBanHangOnline.Models.EF.OrderDetail>
+
+@if (Model != null & Model.Any())
+{
+    int i = 1;
+    <table class="table table-bordered">
+        <thead>
+            <tr style="text-align: center">
+                <th>STT</th>
+                <th>Tên sản phẩm</th>
+                <th>Giá tiền</th>
+                <th>Số lượng</th>
+                <th>Thành tiền</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr style="text-align: center">
+                    <td>@i</td>
+                    <td>@item.Product.Title</td>
+                    <td>@item.Price</td>
+                    <td>@item.Quantity </td>
+                    <td>@WebBanHangOnline.Common.Common.FormatNumber(item.Price * item.Quantity, 0)</td>
+                </tr>
+                i++;
+            }
+        </tbody>
+
+    </table>
+
+
+}

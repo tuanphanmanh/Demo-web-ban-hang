@@ -1,6 +1,13 @@
-﻿@model IEnumerable<WebBanHangOnline.Models.EF.Order>
-<link href="~/Content/assets/styles/donhang.css" rel="stylesheet" />
+﻿@model PagedList.PagedList<WebBanHangOnline.Models.EF.Order>
 
+@using PagedList.Mvc
+@using PagedList;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@{
+    ViewBag.Title = "Danh sách đơn hàng";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
 
 @section naviheader{
 
@@ -9,166 +16,166 @@
             <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="/admin/home" class="nav-link">Trang chủ</a>
+            <a href="/admin" class="nav-link">Trang chủ</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="/admin/order" class="nav-link">Đơn hàng</a>
+            <a href="~/admin/order" class="nav-link">Danh sách đơn hàng</a>
         </li>
     </ul>
 
 }
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Danh sách đơn hàng</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">Danh sách đơn hàng</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<div id="PlaceHolderHere"></div>
 
 <!-- Main content -->
 <section class="content">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-header p-2">
-                    <ul class="nav nav-pills">
-                        <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Thông tin chung</a></li>
-                    </ul>
-                </div> <!-- /.card-header -->
-                <div class="card-body">
-                    <div class="tab-content">
-                        <div class="active tab-pane">
-                            <table class="table table-hover">
-                                <thead>
-                                    <tr class="text-center">
-                                        <th>Họ và tên</th>
-                                        <th>Địa chỉ</th>
-                                        <th>Số điện thoại</th>
-                                        <th>Email</th>
-                                        <th>Lời nhắn</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @if (Model != null && Model.Any())
-                                    {
-                                        foreach (var item in Model)
-                                        {
-                                            <tr class="text-center" id="thongtindonhang">
-                                                <td>@item.CustomerName</td>
-                                                <td>@item.Address (@item.AddressType) </td>
-                                                <td>@item.Phone</td>
-                                                <td>@item.Email </td>
-                                                <td>@item.MessegesForBuyer </td>
-                                            </tr>
-                                        }
+
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Danh sách đơn hàng</h3>
+        </div>
+        <div class="card-body">
+            <table class="table table-bordered">
+                <thead class="OrderForAdmin">
+                    <tr style="text-align: center">
+                        <th style="max-width:60px;">STT</th>
+                        <th>Mã đơn</th>
+                        <th>K/H</th>
+                        <th>SĐT</th>
+                        <th>Hình thức / Trạng thái</th>
+                        <th>Vận chuyển</th>
+                        <th>Tiền</th>
+                        <th>Ngày đặt</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.Any())
+                    {
+                        var i = 1;
+                        foreach (var item in Model)
+                        {
+                            <tr data-id="@item.Id" style="text-align: center">
+                                <td>@i</td>
+                                <td>
+                                    <a href="/admin/order/view/@item.Id" style="color:black;">
+                                        @item.Code
+                                    </a>
+                                </td>
+                                <td>@item.CustomerName</td>
+                                <td>@item.Phone</td>
+                                <td>@item.TypePayment - <b style="text-align: right">@(item.TypePayment=="Thanh toán khi nhận hàng"?"Chưa thanh toán":"Đã thanh toán") </b></td>
+                                <td>
+                                    <a href="#" style="color: blue" class="btnCapNhat">
+                                        @item.Status
+                                    </a>
+                                </td>
+                                <td>@WebBanHangOnline.Common.Common.FormatNumber(@item.TotalAmount, 0)</td>
+                                <td>@item.CreatedDate.ToString("dd/MM/yyyy")</td>
+                                <td>
+                                    <a href="/admin/order/view/@item.Id" class="btn btn-sm btn-success">Xem</a>
+
+                                </td>
+                            </tr>
+                            i++;
 
 
-                                    }
-                                    else
-                                    {
-                                        <tr>
-                                            <td colspan="4">Ko có đơn hàng nào!!!</td>
-                                        </tr>
+                        }
 
-                                    }
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="4">Ko có đơn hàng nào!!!</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div class="row">
+                <div class="col-6"></div>
+                <div class="col-6" style="text-align: right">
+                    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
                 </div>
             </div>
         </div>
     </div>
-    <div style="height: 2px; background-color: coral"></div>
-
-    <div class="row">
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-body">
-                    <div class="tab-content">
-                        <div class="active tab-pane">
-                            <table class="table table-hover">
-                                <thead>
-                                    <tr class="text-center">
-                                        <th>Mã SP</th>
-                                        <th>Tên SP</th>
-                                        <th>Số lượng</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @if (Model != null && Model.Any())
-                                    {
-                                        foreach (var item in Model)
-                                        {
-                                            <tr class="text-center" id="thongtindonhang">
-                                                <td>@item.CustomerName</td>
-                                                <td>@item.Address </td>
-                                                <td>@item.Phone</td>
-                                            </tr>
-                                        }
-                                    }
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-body">
-                    <div class="tab-content">
-                        <div class="active tab-pane">
-                            <table class="table table-hover">
-                                <thead>
-                                    <tr class="text-center">
-                                        <th>Đơn vị vận chuyển</th>
-                                        <th>Voucher</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @if (Model != null && Model.Any())
-                                    {
-                                        foreach (var item in Model)
-                                        {
-                                            <tr class="text-center" id="thongtindonhang">
-                                                <td>@item.CustomerName</td>
-                                                <td>@item.Address </td>
-                                            </tr>
-                                        }
-                                    }
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-
-
-
-    <!-- /.card-body -->
 </section>
 
-<!-- /.content -->
+
+<div class="modal fade" id="modal-default">
+    <div class="modal-dialog">
+        <div class="modal-content bg-info">
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    Trạng thái vận chuyển
+                </h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                    <input type="hidden" id="txtOrderId" />
+                    <div class="form-group">
+                        <label> Trạng thái: </label>
+                        <br />
+                        <select style="min-height: 40px;" id="ddTrangThai">
+                            <option selected value="0">Chờ xác nhận</option>
+                            <option value="1">Đang chuẩn bị hàng</option>
+                            <option value="2">Đã đồng kiểm</option>
+                            <option value="3">Đã giao cho đơn vị vận chuyển</option>
+                        </select>
+                    </div>
+             </div>
+
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-outline-light" data-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-outline-light" id="btnLuu">Cập nhật</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 @section scripts{
     <script>
         $(document).ready(function () {
-            $('body').on('click', '.btnDelete', function () {
-                var id = $(this).data("id");
-                var conf = confirm("Bạn có muốn xóa Danh mục này không?");
-                if (conf === true) {
-                    $.ajax({
-                        url: '/admin/category/delete',
-                        type: 'POST',
-                        data: { id: id },
-                        success: function (rs) {
-                            if (rs.success) {
-                                $('#trow_' + id).remove();
-                            }
+            $('body').on('click', '.btnCapNhat', function () {
+                var id = $(this).closest("tr").data("id");
+                $('#txtOrderId').val(id);
+                $('#modal-default').modal('show');
+            });
+
+            $('body').on('click', '#btnLuu', function () {
+                var sid = document.getElementById('txtOrderId').value;
+                var tt = $('#ddTrangThai').val();
+                $.ajax({
+                    url: '/Admin/Order/UpdateTT',
+                    type: 'POST',
+                    data: { fid: sid, trangthaivanchuyen: tt },
+                    success: function (res) {
+                        if (res.Success) {
+                            location.reload();
                         }
-                    });
-                }
+                    }
+                });
             });
         });
     </script>
 }
-
-

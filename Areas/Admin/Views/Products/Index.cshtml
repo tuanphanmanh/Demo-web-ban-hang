@@ -54,17 +54,7 @@
         </div>
         <div class="card-body">
             <div class="row">
-                @*<div class="col-6">
-                        @using (Html.BeginForm("Index", "product"))
-                        {
-                            <div class="input-group input-group-sm">
-                                <input style="max-width: 200px" type="text" name="SearchText" class="form-control swal2-input" placeholder="Tiêu đề tin " />
-                                <span class="input-group-append">
-                                    <button type="submit" class="btn btn-primary">Tìm kiếm</button>
-                                </span>
-                            </div>
-                        }
-                    </div>*@
+
             </div>
             <table class="table table-hover">
                 <thead>
@@ -95,9 +85,6 @@
                             <tr class="text-center" id="trow_@item.Id">
                                 <td><input type="checkbox" class="cbkItem" value="@item.Id" /></td>
                                 <td class="text-center">@i</td>
-                                @*<td>
-            <img class="imgproduct" data-id="@item.Id" src="@item.ProductImage.FirstOrDefault(x=>x.IsDefault).Image"  />
-        </td>*@
                                 <td>
                                     <img data-id="@item.Id" class="imgproduct" style="width: 50px; height: 50px;" src="@item.Image" />
                                 </td>
@@ -145,6 +132,9 @@
     <!-- /.card -->
 
 </section>
+
+
+
 <!-- /.content -->
 <div id="dialog">
     <iframe id="myIframe" style="border: 0; width: 100%; height: 100%;"> </iframe>
@@ -175,43 +165,7 @@
                 return false;
             });
 
-            //$('body').on('click', '#BtnDeleteAll', function (e) {
-            //    e.preventDefault();
-            //    var str = "";
-            //    var checkbox = $(this).parents('.card').find('tr td input:checkbox');
-            //    var i = 0;
-            //    checkbox.each(function () {
-            //        if (this.checked) {
-            //            checkbox.attr('selected', 'checked');
-            //            var _id = $(this).val();
-            //            if (i === 0) {
-            //                str += _id;
-            //            }
-            //            else {
-            //                str += "," + _id;
-            //            }
-            //            i++;
-            //        }
-            //        else {
-            //            checkbox.attr('selected', '');
-            //        }
-            //    });
-            //    if (str.length > 0) {
-            //        var conf = confirm("Bạn có muốn xóa các sản phẩm này không?");
-            //        if (conf === true) {
-            //            $.ajax({
-            //                url: '/admin/products/deleteAll',
-            //                type: 'POST',
-            //                data: { ids: str },
-            //                success: function (rs) {
-            //                    if (rs.success) {
-            //                        location.reload();
-            //                    }
-            //                }
-            //            });
-            //        }
-            //    }
-            //});
+
 
             // xóa 1 bản ghi
             $('body').on('change', '#SelectAll', function () {

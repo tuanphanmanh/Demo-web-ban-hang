@@ -1,0 +1,38 @@
+﻿@model WebBanHangOnline.Models.EF.Order
+    <div class="modal fade" id="editShippingStatus">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h4 class="modal-title" id="editShippingStatusLabel" 
+                        Cập nhật trạng thái
+                    </h4>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span>x</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <form action="Edit">
+                        <div class="form-group">
+                            <label asp-for="ShippingStatus">Trạng thái</label>
+                            <select name="ShippingStatus">
+                                <option value="Đã chuyển cho đơn vị giao hàng" selected></option>
+                                <option value="Được đồng kiểm"></option>
+                                <option value="Đã nhận đơn hàng"></option>
+                            </select>
+                        </div>
+                        
+                    </form>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Đóng</button>
+                    <button type="button" class="btn btn-success" data-save="modal">Lưu</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+

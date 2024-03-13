@@ -1,42 +1,60 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using PagedList;
+using System;
 using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using WebBanHangOnline.Models;
+using WebBanHangOnline.Models.EF;
 
 namespace WebBanHangOnline.Areas.Admin.Controllers
 {
     public class OrderController : Controller
     {
-        ApplicationDbContext db = new ApplicationDbContext();
-
+        private ApplicationDbContext db = new ApplicationDbContext();
         // GET: Admin/Order
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
-            var items = db.Orders;
-            return View(items);
+            var item = db.Orders.OrderByDescending(a=>a.CreatedDate).ToList();
+            if (page == null)
+            {
+                page = 1;
+            }
+            var pagenNumber = page ?? 1;
+            var pageSize = 10;
+            return View(item.ToPagedList(pagenNumber, pageSize));
         }
-        public ActionResult details()
+        public ActionResult View(int id)
         {
-            var items = db.Orders;
+            var items = db.Orders.Find(id);
+            return View(items);
+
+        }
+        public ActionResult Partial_SanPham(int id)
+        {
+            var items = db.OrderDetails.Where(a=>a.OrderId == id);
             return PartialView(items);
+
         }
 
-        //public ActionResult Partial_Item_Thanhtoan()
-        //{
-        //    ShoppingCart cart = (ShoppingCart)Session["Cart"];
-        //    if (cart != null)
-        //    {
-        //        return PartialView(cart.Items);
-        //    }
-        //    return PartialView();
-        //}
 
-        public ActionResult Partial_Item_Thanhtoan()
+        [HttpPost]
+        public ActionResult UpdateTT(int fid, int trangthaivanchuyen)
         {
-            var items = db.OrderDetails;
-            return View(items);
+            var item = db.Orders.Find(fid);
+            if (item != null)
+            {
+                db.Orders.Attach(item);
+                item.ShippingStatus = trangthaivanchuyen;
+                db.Entry(item).Property(a => a.ShippingStatus).IsModified = true;
+                db.SaveChanges();
+                return Json(new { message = "Success", Success = true });
+            }
+            return Json(new { message = "Unsuccess", Success = false });
         }
+
+
     }
 }

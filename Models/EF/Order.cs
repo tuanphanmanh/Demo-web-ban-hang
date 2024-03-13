@@ -31,11 +31,30 @@ namespace WebBanHangOnline.Models.EF
         public string AddressType { get; set; }
         public string MessegesForBuyer { get; set; }
         public string ShippingUnit { get; set; }
-        
         public string Voucher { get; set; }
-        public string TypePayment { get; set; }  
+        public string TypePayment { get; set; }
+        public int ShippingStatus { get; set; }
+        public string Status
+        {
+            get
+            {
+                if(ShippingStatus== 0)
+                {
+                    return "Chờ xác nhận";
+                }
+                if (ShippingStatus == 1)
+                {
+                    return "Đang chuẩn bị hàng";
+                }
+                if (ShippingStatus == 2)
+                {
+                    return "Đã đồng kiếm";
+                }
+                return "Đã chuyển cho đơn vị giao hàng";
+            }
+        }
         public int Quantity { get; set; }  
         public decimal TotalAmount { get; set; }
-        public ICollection<OrderDetail> OrderDetails { get; set; }
+        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
     }
 }

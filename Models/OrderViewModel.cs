@@ -23,6 +23,8 @@ namespace WebBanHangOnline.Models
         public string MessegesForBuyer { get; set; }
         public string ShippingUnit { get; set; }
         public string Voucher { get; set; }
-        
+        public int ShippingStatus { get; set; }
+
+
     }
 }
