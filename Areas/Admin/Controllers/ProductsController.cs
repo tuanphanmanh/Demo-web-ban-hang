@@ -10,6 +10,9 @@ using System.Data.Entity.Migrations;
 
 namespace WebBanHangOnline.Areas.Admin.Controllers
 {
+
+    [Authorize(Roles = "Admin,Employee")]
+
     public class ProductsController : Controller
     {
         // GET: Admin/Products

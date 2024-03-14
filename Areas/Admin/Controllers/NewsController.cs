@@ -12,6 +12,8 @@ using System.Web.UI.WebControls;
 
 namespace WebBanHangOnline.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin, Employee")]
+
     public class NewsController : Controller
     {
         ApplicationDbContext db = new ApplicationDbContext();
@@ -45,7 +47,7 @@ namespace WebBanHangOnline.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 model.CreatedDate = DateTime.Now;
-                model.CategoryId = 3;
+                model.CategoryId = 5;
                 model.ModifiedDate = DateTime.Now;
                 model.Alias = WebBanHangOnline.Models.Common.Filter.FilterChar(model.Title);
                 db.News.Add(model);

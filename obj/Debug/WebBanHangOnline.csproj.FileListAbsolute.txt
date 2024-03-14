@@ -160,4 +160,5 @@ D:\Đồ án\WebBanHangOnline\WebBanHangOnline\bin\System.Runtime.CompilerServic
 D:\Đồ án\WebBanHangOnline\WebBanHangOnline\bin\System.Text.Encodings.Web.xml
 D:\Đồ án\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.themorderlancuoi.resources
 D:\Đồ án\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.themorderlancuoinhetuan.resources
-D:\Đồ án\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.themorderlancuoinhetuan124333.resources
+D:\Đồ án\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.addaccount.resources
+D:\Đồ án\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.addaccountnẽt.resources

@@ -1,0 +1,138 @@
+﻿@model WebBanHangOnline.Models.LoginViewModel
+    @{ 
+        ViewBag.Title = "login";
+        Layout = "~/Areas/Admin/Views/Shared/_LoyoutLogin.cshtml";
+
+    }
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-...gS2BQo=" crossorigin="anonymous" />
+<div style="background-color:#FFFFF0" class="card-header">
+    <div  class="text-center mb-11">
+        <H3 style="font-weight:bold"> ADMIN</H3>
+    </div>
+</div>
+
+<div class="card-body">
+
+    @using (Html.BeginForm("login", "account", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary()
+        <div class="row">
+            <div class="col-md-6">
+                <label>Tên đăng nhập</label>
+            </div>
+        </div>
+        <div class="input-group mb-3">
+            @Html.TextBoxFor(a => a.UserName, new { @class = "form-control", @placeholder = "Tên đăng nhập" })
+
+            <div class="input-group-append">
+                <div class="input-group-text">
+                    <span class="fa fa-user" aria-hidden="true"></span>
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <label>Mật khẩu</label>
+            </div>
+            <div style="text-align:right" class="col-md-6">
+                <a href="#">Quên mật khẩu</a> <br>
+            </div>
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-append">
+                <div class="input-group-text">
+                    <span class="fas fa-lock"></span>
+                </div>
+            </div>
+            @Html.PasswordFor(a => a.Password, new { @class = "form-control", @id = "password", @placeholder = "Mật khẩu" })
+            <div class="password-wrapper">
+                <a id="toggleBtn" class="password-toggle">
+                    <i id="toggleIcon" class="fas fa-eye"></i>
+                </a>
+            </div>
+
+        </div>
+        <div class="row">
+
+            <!-- /.col -->
+            <div class="col-12">
+                <button type="submit" class="btn btn-success btn-block js-sign-in-button">
+                    Đăng nhập
+                    <i class="fas fa-sign-in-alt" aria-hidden="true"></i>
+                </button>
+            </div>
+            <!-- /.col -->
+        </div>
+    }
+
+</div>
+<div class="card-footer">
+    <div class="row">
+        <div style="text-align: center" class="col-md-12">
+            <p class="mb-1">
+                Bạn là người mới?
+                <a href="#" class="text-center">Đăng ký</a>
+            </p>
+        </div>
+
+    </div>
+</div>
+
+
+<script>
+    const toggleBtn = document.getElementById('toggleBtn');
+    const toggleIcon = document.getElementById('toggleIcon');
+    const passwordInput = document.getElementById('password');
+
+    toggleBtn.addEventListener('click', function () {
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            toggleIcon.classList.remove('fa-eye');
+            toggleIcon.classList.add('fa-eye-slash');
+        } else {
+            passwordInput.type = 'password';
+            toggleIcon.classList.remove('fa-eye-slash');
+            toggleIcon.classList.add('fa-eye');
+        }
+    });
+
+
+    document.getElementById('loginButton').addEventListener('click', function () {
+        var button = this;
+        button.disabled = true; // Disable button to prevent multiple clicks
+
+        // Add rotation animation class to the button
+        button.classList.add('rotate-animation');
+
+        // Simulate login process for 1 second (you can replace this with your actual login logic)
+        setTimeout(function () {
+            // Perform login
+            // ...
+
+            // Redirect to desired page or perform other actions after login
+            // ...
+
+            // Remove rotation animation class and enable button again
+            button.classList.remove('rotate-animation');
+            button.disabled = false;
+        }, 1000);
+    });
+</script>
+
+
+<style>
+  .rotate-animation {
+    animation: rotate 1s linear infinite;
+  }
+
+  keyframes rotate {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+</style>

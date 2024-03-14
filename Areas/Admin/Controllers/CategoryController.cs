@@ -8,6 +8,7 @@ using WebBanHangOnline.Models;
 
 namespace WebBanHangOnline.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin, Employee")]
     public class CategoryController : Controller
     {
         // GET: Admin/Category

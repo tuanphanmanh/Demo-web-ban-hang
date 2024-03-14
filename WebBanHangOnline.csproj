@@ -216,6 +216,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\AccountController.cs" />
     <Compile Include="Areas\Admin\Controllers\CategoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\NewsController.cs" />
@@ -224,13 +225,17 @@
     <Compile Include="Areas\Admin\Controllers\ProductCategoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductImageController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\RoleController.cs" />
+    <Compile Include="Areas\Admin\Controllers\SettingSystemController.cs" />
     <Compile Include="Common\Common.cs" />
+    <Compile Include="Common\SettingHelper.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
+    <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\ShoppingCartController.cs" />
     <Compile Include="Global.asax.cs">
@@ -328,9 +333,13 @@
     <Compile Include="Migrations\202403130301115_themorderlancuoinhetuan.Designer.cs">
       <DependentUpon>202403130301115_themorderlancuoinhetuan.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202403130421155_themorderlancuoinhetuan124333.cs" />
-    <Compile Include="Migrations\202403130421155_themorderlancuoinhetuan124333.Designer.cs">
-      <DependentUpon>202403130421155_themorderlancuoinhetuan124333.cs</DependentUpon>
+    <Compile Include="Migrations\202403130651538_addaccount.cs" />
+    <Compile Include="Migrations\202403130651538_addaccount.Designer.cs">
+      <DependentUpon>202403130651538_addaccount.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202403131014318_addaccountnẽt.cs" />
+    <Compile Include="Migrations\202403131014318_addaccountnẽt.Designer.cs">
+      <DependentUpon>202403131014318_addaccountnẽt.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -355,11 +364,65 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\OrderViewModel.cs" />
     <Compile Include="Models\ShoppingCart.cs" />
+    <Compile Include="Models\SystemSettingViewModel.cs" />
     <Compile Include="Models\ThongKeViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\assets\dist\css\adminlte.css" />
+    <Content Include="Content\assets\dist\css\adminlte.min.css" />
+    <Content Include="Content\assets\dist\css\alt\adminlte.components.css" />
+    <Content Include="Content\assets\dist\css\alt\adminlte.components.min.css" />
+    <Content Include="Content\assets\dist\css\alt\adminlte.core.css" />
+    <Content Include="Content\assets\dist\css\alt\adminlte.core.min.css" />
+    <Content Include="Content\assets\dist\css\alt\adminlte.extra-components.css" />
+    <Content Include="Content\assets\dist\css\alt\adminlte.extra-components.min.css" />
+    <Content Include="Content\assets\dist\css\alt\adminlte.light.css" />
+    <Content Include="Content\assets\dist\css\alt\adminlte.light.min.css" />
+    <Content Include="Content\assets\dist\css\alt\adminlte.pages.css" />
+    <Content Include="Content\assets\dist\css\alt\adminlte.pages.min.css" />
+    <Content Include="Content\assets\dist\css\alt\adminlte.plugins.css" />
+    <Content Include="Content\assets\dist\css\alt\adminlte.plugins.min.css" />
+    <Content Include="Content\assets\dist\img\AdminLTELogo.png" />
+    <Content Include="Content\assets\dist\img\avatar.png" />
+    <Content Include="Content\assets\dist\img\avatar2.png" />
+    <Content Include="Content\assets\dist\img\avatar3.png" />
+    <Content Include="Content\assets\dist\img\avatar4.png" />
+    <Content Include="Content\assets\dist\img\avatar5.png" />
+    <Content Include="Content\assets\dist\img\boxed-bg.jpg" />
+    <Content Include="Content\assets\dist\img\boxed-bg.png" />
+    <Content Include="Content\assets\dist\img\credit\american-express.png" />
+    <Content Include="Content\assets\dist\img\credit\cirrus.png" />
+    <Content Include="Content\assets\dist\img\credit\mastercard.png" />
+    <Content Include="Content\assets\dist\img\credit\paypal.png" />
+    <Content Include="Content\assets\dist\img\credit\paypal2.png" />
+    <Content Include="Content\assets\dist\img\credit\visa.png" />
+    <Content Include="Content\assets\dist\img\default-150x150.png" />
+    <Content Include="Content\assets\dist\img\icons.png" />
+    <Content Include="Content\assets\dist\img\photo1.png" />
+    <Content Include="Content\assets\dist\img\photo2.png" />
+    <Content Include="Content\assets\dist\img\photo3.jpg" />
+    <Content Include="Content\assets\dist\img\photo4.jpg" />
+    <Content Include="Content\assets\dist\img\prod-1.jpg" />
+    <Content Include="Content\assets\dist\img\prod-2.jpg" />
+    <Content Include="Content\assets\dist\img\prod-3.jpg" />
+    <Content Include="Content\assets\dist\img\prod-4.jpg" />
+    <Content Include="Content\assets\dist\img\prod-5.jpg" />
+    <Content Include="Content\assets\dist\img\user1-128x128.jpg" />
+    <Content Include="Content\assets\dist\img\user2-160x160.jpg" />
+    <Content Include="Content\assets\dist\img\user3-128x128.jpg" />
+    <Content Include="Content\assets\dist\img\user4-128x128.jpg" />
+    <Content Include="Content\assets\dist\img\user5-128x128.jpg" />
+    <Content Include="Content\assets\dist\img\user6-128x128.jpg" />
+    <Content Include="Content\assets\dist\img\user7-128x128.jpg" />
+    <Content Include="Content\assets\dist\img\user8-128x128.jpg" />
+    <Content Include="Content\assets\dist\js\adminlte.js" />
+    <Content Include="Content\assets\dist\js\adminlte.min.js" />
+    <Content Include="Content\assets\dist\js\demo.js" />
+    <Content Include="Content\assets\dist\js\pages\dashboard.js" />
+    <Content Include="Content\assets\dist\js\pages\dashboard2.js" />
+    <Content Include="Content\assets\dist\js\pages\dashboard3.js" />
     <Content Include="Content\assets\images\123.jpg" />
     <Content Include="Content\assets\images\banner_1.jpg" />
     <Content Include="Content\assets\images\banner_2.jpg" />
@@ -3266,6 +3329,7 @@
     <Content Include="Content\Image\hoa %2836%29.jpg" />
     <Content Include="Content\Image\hoa %2837%29.jpg" />
     <Content Include="Content\Image\hoa %2839%29.jpg" />
+    <Content Include="Content\Image\huong-dan-2-cach-quay-man-hinh-tren-macbook-khong-can-cai-phan-mem-7.jpg" />
     <Content Include="Content\Image\p1.jpg" />
     <Content Include="Content\Image\p2.jpg" />
     <Content Include="Content\Image\p3.jpg" />
@@ -3283,11 +3347,14 @@
     <Content Include="Content\Image\y2.jpg" />
     <Content Include="Content\Image\zinnia-042918.jpg" />
     <Content Include="Content\PagedList.css" />
+    <Content Include="Content\template\app.css" />
+    <Content Include="Content\template\reset.css" />
     <Content Include="Content\template\send1.html" />
     <Content Include="Content\template\send2.html" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\app1234.js" />
     <Content Include="Scripts\autoNumeric-1.9.45.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -3447,12 +3514,39 @@
     <Content Include="Areas\Admin\Views\Order\View.cshtml" />
     <Content Include="Areas\Admin\Views\Order\Partial_SanPham.cshtml" />
     <Content Include="Areas\Admin\Views\Order\EmployeeModalPartial.cshtml" />
+    <Content Include="Areas\Admin\Views\Role\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Role\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Account\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Account\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Account\Login.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_LoyoutLogin.cshtml" />
+    <Content Include="Content\assets\dist\css\adminlte.css.map" />
+    <Content Include="Content\assets\dist\css\adminlte.min.css.map" />
+    <Content Include="Content\assets\dist\css\alt\adminlte.components.css.map" />
+    <Content Include="Content\assets\dist\css\alt\adminlte.components.min.css.map" />
+    <Content Include="Content\assets\dist\css\alt\adminlte.core.css.map" />
+    <Content Include="Content\assets\dist\css\alt\adminlte.core.min.css.map" />
+    <Content Include="Content\assets\dist\css\alt\adminlte.extra-components.css.map" />
+    <Content Include="Content\assets\dist\css\alt\adminlte.extra-components.min.css.map" />
+    <Content Include="Content\assets\dist\css\alt\adminlte.light.css.map" />
+    <Content Include="Content\assets\dist\css\alt\adminlte.light.min.css.map" />
+    <Content Include="Content\assets\dist\css\alt\adminlte.pages.css.map" />
+    <Content Include="Content\assets\dist\css\alt\adminlte.pages.min.css.map" />
+    <Content Include="Content\assets\dist\css\alt\adminlte.plugins.css.map" />
+    <Content Include="Content\assets\dist\css\alt\adminlte.plugins.min.css.map" />
+    <Content Include="Content\assets\dist\js\.eslintrc.json" />
+    <Content Include="Content\assets\dist\js\adminlte.js.map" />
+    <Content Include="Content\assets\dist\js\adminlte.min.js.map" />
+    <Content Include="Areas\Admin\Views\SettingSystem\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\SettingSystem\Partial_Setting.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -3511,6 +3605,7 @@
     <Content Include="Views\ShoppingCart\Partial_CheckOut.cshtml" />
     <Content Include="Views\ShoppingCart\CheckOutSuccess.cshtml" />
     <Content Include="Views\Home\Refresh.cshtml" />
+    <Content Include="Views\News\Partial_News_Home.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -3614,8 +3709,11 @@
     <EmbeddedResource Include="Migrations\202403130301115_themorderlancuoinhetuan.resx">
       <DependentUpon>202403130301115_themorderlancuoinhetuan.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202403130421155_themorderlancuoinhetuan124333.resx">
-      <DependentUpon>202403130421155_themorderlancuoinhetuan124333.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202403130651538_addaccount.resx">
+      <DependentUpon>202403130651538_addaccount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202403131014318_addaccountnẽt.resx">
+      <DependentUpon>202403131014318_addaccountnẽt.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

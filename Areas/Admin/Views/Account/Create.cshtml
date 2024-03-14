@@ -1,0 +1,147 @@
+﻿@model WebBanHangOnline.Models.CreateAccountViewModel
+
+@{
+    ViewBag.Title = "Thêm mới tài khoản";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section naviheader{
+
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="/admin" class="nav-link">Trang chủ</a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="/admin/account" class="nav-link">Thêm mới tải khoản</a>
+        </li>
+    </ul>
+
+}
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+
+            <div class="col-sm-12">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+                    <li class="breadcrumb-item active">Thêm mới tải khoản</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+    <!-- Default box -->
+    <div class="card">
+
+        <div class="card-body">
+            @using (Html.BeginForm("Create", "account", FormMethod.Post))
+            {
+                @Html.ValidationSummary(false)
+                @Html.AntiForgeryToken()
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Tài khoản</label>
+                            @Html.TextBoxFor(a => a.UserName, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Họ tên</label>
+                            @Html.TextBoxFor(a => a.FullName, new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Email</label>
+                            @Html.TextBoxFor(a => a.Email, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>SĐT</label>
+                            @Html.TextBoxFor(a => a.UserName, new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Role</label>
+                    @Html.DropDownListFor(a => a.Role, ViewBag.Role as SelectList, "Chọn quyền", new { @class = "form-control" })
+
+
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+
+                            <label>Mật khẩu</label>
+                            <div class="input-group mb-3">
+                                @Html.PasswordFor(a => a.Password, new { @class = "form-control", @id = "password", @placeholder = "Mật khẩu" })
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Xác nhận mật khẩu</label>
+                            @Html.PasswordFor(a => a.ConfirmPassword, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-success btnnut">Thêm mới</button>
+                        </div>
+                    </div>
+                </div>
+
+            }
+        </div>
+
+        <!-- /.card-footer-->
+    </div>
+    <!-- /.card -->
+
+</section>
+<!-- /.content -->
+}
+<style>
+    .btnnut:hover {
+        transform: scale(1.5); /* Phóng to 1.5 lần */
+    }
+</style>
+
+<script>
+    const toggleBtn = document.getElementById('toggleBtn');
+    const toggleIcon = document.getElementById('toggleIcon');
+    const passwordInput = document.getElementById('password');
+
+    toggleBtn.addEventListener('click', function () {
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            toggleIcon.classList.remove('fa-eye');
+            toggleIcon.classList.add('fa-eye-slash');
+        } else {
+            passwordInput.type = 'password';
+            toggleIcon.classList.remove('fa-eye-slash');
+            toggleIcon.classList.add('fa-eye');
+        }
+    });
+
+</script>
+
+
+

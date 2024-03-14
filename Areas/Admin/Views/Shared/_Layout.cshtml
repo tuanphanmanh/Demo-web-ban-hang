@@ -158,6 +158,12 @@
                         <i class="fas fa-th-large"></i>
                     </a>
                 </li>
+
+                <li class="nav-item btnlogout">
+                    <a  class="nav-link" href="javascript:document.getElementById('logOffForm').submit()" role="button">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </a>
+                </li>
             </ul>
         </nav>
         <!-- /.navbar -->
@@ -220,6 +226,7 @@
     <!-- AdminLTE for demo purposes -->
     <script src="~/Content/clients/dist/js/demo.js"></script>
     <script src="~/Scripts/autoNumeric-1.9.45.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
     <!-- Page specific script -->
     <script>
         $(function () {
@@ -362,5 +369,21 @@
 
 </body>
 </html>
+
+@if (Request.IsAuthenticated)
+{
+    <div style="display:none">
+        @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { @id = "logOffForm" }))
+        {
+            @Html.AntiForgeryToken()
+        }
+    </div>
+}
+<style>
+    .btnlogout:hover i {
+        transform: scale(1.5); /* Phóng to 1.5 lần */
+        color: red; /* Thay đổi màu sang màu đỏ */
+    }
+</style>
 
 
