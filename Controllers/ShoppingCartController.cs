@@ -10,6 +10,7 @@ using WebBanHangOnline.Models.EF;
 
 namespace WebBanHangOnline.Controllers
 {
+    //[Authorize(Roles = "Customermer")]
     public class ShoppingCartController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

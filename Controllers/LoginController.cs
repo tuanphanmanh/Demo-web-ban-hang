@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace WebBanHangOnline.Controllers
 {
+    //[Authorize(Roles = "Customermer")]
     public class LoginController : Controller
     {
         // GET: Login

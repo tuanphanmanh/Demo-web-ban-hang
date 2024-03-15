@@ -33,11 +33,11 @@
 
             <!-- Top Navigation -->
 
-            <div class="top_nav">
+            <div class="top_nav" style="background-color: #98FB98" ">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-6">
-                            <div class="top_nav_left"> <span>hotline: @SettingHelper.GetValue("SettingHotline")</span> </div>
+                        <div class="col-md-6 ">
+                            <div class="top_nav_left "> <span class="btnhotline" style="font-size: 14px; color: #FF0033; font-weight:bold;">hotline: @SettingHelper.GetValue("SettingHotline")</span> </div>
                         </div>
                         <div class="col-md-6 text-right">
                             <div class="top_nav_right">
@@ -45,8 +45,8 @@
 
                                     <!-- Currency / Language / My Account -->
 
-                                    <li class="currency">
-                                        <a href="#">
+                                    <li class="currency " style="background-color: #98FB98">
+                                        <a href="#" style="background-color: #98FB98; color: #FF0033; font-weight:bold ">
                                             vnd
                                             <i class="fa fa-angle-down"></i>
                                         </a>
@@ -57,8 +57,8 @@
                                             <li><a href="#">gbp</a></li>
                                         </ul>
                                     </li>
-                                    <li class="language">
-                                        <a href="#">
+                                    <li class="language" style="background-color: #98FB98; color: #FF0033; font-weight: bold ">
+                                        <a href="#" style="background-color: #98FB98; color: #FF0033; font-weight: bold ">
                                             Tiếng Việt
                                             <i class="fa fa-angle-down"></i>
                                         </a>
@@ -70,15 +70,34 @@
                                             <li><a href="#">Spanish</a></li>
                                         </ul>
                                     </li>
-                                    <li class="account">
-                                        <a href="#">
-                                            Tài khoản
-                                            <i class="fa fa-angle-down"></i>
-                                        </a>
-                                        <ul style="min-width: 200px;" class="account_selection">
-                                            <li style="min-width: 200px;"><a href="/login/index/"><i class="fa fa-sign-in" aria-hidden="true"></i>Đăng nhập</a></li>
-                                            <li><a href="#"><i class="fa fa-user-plus" aria-hidden="true"></i>Đăng ký</a></li>
-                                        </ul>
+                                    <li class="account" style="background-color: #98FB98; color: #FF0033; font-weight: bold ">
+
+                                        @if (!Request.IsAuthenticated)
+                                        {
+                                            <a href="#" style="background-color: #98FB98; color: #FF0033; font-weight: bold ">
+                                                Tài khoản
+                                                <i class="fa fa-angle-down"></i>
+                                            </a>
+                                            <ul style="min-width: 200px;" class="account_selection">
+                                                <li style="min-width: 200px;"><a href="/account/login"><i class="fa fa-sign-in" aria-hidden="true"></i>Đăng nhập</a></li>
+                                                <li><a href="/account/register"><i class="fa fa-user-plus" aria-hidden="true"></i>Đăng ký</a></li>
+                                            </ul>
+                                        }
+                                        else
+                                        {
+                                            <a href="#" style="background-color: #98FB98; color: #FF0033; font-weight: bold ">
+                                                @User.Identity.Name
+                                                <i class="fa fa-angle-down"></i>
+                                            </a>
+                                            <ul style="min-width: 200px;" class="account_selection">
+                                                <li style="min-width: 200px;"><a href="/account/profile"><i class="fa fa-sign-in" aria-hidden="true"></i>Trang cá nhân</a></li>
+                                                <li>
+                                                    <a href="javascript:document.getElementById('logOffForm').submit()" role="button">
+                                                        <i class="fa fa-user-plus" aria-hidden="true"></i>Đăng xuất
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        }
                                     </li>
                                 </ul>
                             </div>
@@ -119,60 +138,9 @@
 
         </header>
 
-        <div class="fs_menu_overlay"></div>
-        <div class="hamburger_menu">
-            <div class="hamburger_close"><i class="fa fa-times" aria-hidden="true"></i></div>
-            <div class="hamburger_menu_content text-right">
-                <ul class="menu_top_nav">
-                    <li class="menu_item has-children">
-                        <a href="#">
-                            usd
-                            <i class="fa fa-angle-down"></i>
-                        </a>
-                        <ul class="menu_selection">
-                            <li><a href="#">cad</a></li>
-                            <li><a href="#">aud</a></li>
-                            <li><a href="#">eur</a></li>
-                            <li><a href="#">gbp</a></li>
-                        </ul>
-                    </li>
-                    <li class="menu_item has-children">
-                        <a href="#">
-                            English
-                            <i class="fa fa-angle-down"></i>
-                        </a>
-                        <ul class="menu_selection">
-                            <li><a href="#">French</a></li>
-                            <li><a href="#">Italian</a></li>
-                            <li><a href="#">German</a></li>
-                            <li><a href="#">Spanish</a></li>
-                        </ul>
-                    </li>
-                    <li class="menu_item has-children">
-                        <a href="#">
-                            My Account
-                            <i class="fa fa-angle-down"></i>
-                        </a>
-                        <ul class="menu_selection">
-                            <li><a href="#"><i class="fa fa-sign-in" aria-hidden="true"></i>Sign In</a></li>
-                            <li><a href="#"><i class="fa fa-user-plus" aria-hidden="true"></i>Register</a></li>
-                        </ul>
-                    </li>
-                    <li class="menu_item"><a href="#">home</a></li>
-                    <li class="menu_item"><a href="#">shop</a></li>
-                    <li class="menu_item"><a href="#">promotion</a></li>
-                    <li class="menu_item"><a href="#">pages</a></li>
-                    <li class="menu_item"><a href="#">blog</a></li>
-                    <li class="menu_item"><a href="#">contact</a></li>
-                </ul>
-            </div>
-        </div>
-
         <!-- Slider -->
         @RenderBody()
 
-        <!-- Banner -->
-        <!-- Benefit -->
 
         <div class="benefit">
             <div class="container">
@@ -222,26 +190,8 @@
         @Html.Action("Partial_News_Home", "news")
         <!-- Newsletter -->
 
-        <div class="newsletter">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="newsletter_text d-flex flex-column justify-content-center align-items-lg-start align-items-md-center text-center">
-                            <h4>Newsletter</h4>
-                            <p>Subscribe to our newsletter and get 20% off your first purchase</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <form action="post">
-                            <div class="newsletter_form d-flex flex-md-row flex-column flex-xs-column align-items-center justify-content-lg-end justify-content-center">
-                                <input id="newsletter_email" type="email" placeholder="Your email" required="required" data-error="Valid email is required.">
-                                <button id="newsletter_submit" type="submit" class="newsletter_submit_btn trans_300" value="Submit">subscribe</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
+        @Html.Action("Partial_Subcribe", "Home")
+
 
         <!-- Footer -->
 
@@ -294,7 +244,27 @@
     <script src="~/content/assets/js/custom.js"></script>
     <script src="~/Scripts/jsShopping.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
     <script src="~/Scripts/jquery.validate.min.js"></script>
     @RenderSection("scripts", required: false)
 </body>
 </html>
+
+
+@if (Request.IsAuthenticated)
+{
+    <div style="display:none">
+        @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { @id = "logOffForm" }))
+        {
+            @Html.AntiForgeryToken()
+        }
+    </div>
+}
+
+<style>
+    .btnhotline:hover i {
+        transform: scale(1.5); /* Phóng to 1.5 lần */
+        color: red; /* Thay đổi màu sang màu đỏ */
+    }
+</style>

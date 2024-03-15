@@ -1,7 +1,6 @@
 ﻿@{
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }﻿
-@model WebBanHangOnline.Models.EF.SystemSetting
 
 ﻿@using WebBanHangOnline.Common
 @using (Ajax.BeginForm("AddSetting", "SettingSystem", new AjaxOptions
@@ -41,16 +40,17 @@
                                 <input type="text" name="SettingTitle" class="form-control" value=" @SettingHelper.GetValue("SettingTitle") " />
                             </div>
                             <div class="form-group">
-                                <label>Logo</label>
+                                <label for="exampleInputFile">Logo</label>
                                 <div class="input-group">
                                     <div class="custom-file">
                                         <input type="text" value="@SettingHelper.GetValue("SettingLogo")" name="SettingLogo" id="txtSettingLogo" class="form-control" />
                                     </div>
                                     <div class="input-group-append">
-                                        <input type="button" value="Tải ảnh" onclick="BrowseServer('txtSettingLogo');" />
+                                        <input type="button" value="Tải ảnh" onclick="BrowseServer('txtImage');" />
                                     </div>
                                 </div>
                             </div>
+
                             <div class="form-group">
                                 <label>Hotline</label>
                                 <input type="text" value="@SettingHelper.GetValue("SettingHotline")" name="SettingHotline" class="form-control" />
@@ -81,7 +81,7 @@
         </div>
         <div class="col-12">
             <div>
-                <button type="submit" class="btn btn-success">Lưu</button>
+                <button type="submit" class="btn btn-success" >Lưu</button>
             </div>
         </div>
     </div>
@@ -92,7 +92,7 @@
     <script>
         $(document).ready(function () {
             CKEDITOR.replace('txtDetail', {
-                customConfig: '/content/ckeditor/config.js',
+                customConfig: '~/content/ckeditor/config.js',
                 extraAllowedContent: 'span',
             });
         });
@@ -115,3 +115,7 @@
         image.src = URL.createObjectURL(event.target.files[0]);
     };
 </script>
+
+@*<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/jquery.ajax.unobtrusive/3.2.6/jquery.unobtrusive-ajax.min.js"></script>
+<script src="~/Scripts/app1234.js"></script>*@

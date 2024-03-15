@@ -8,6 +8,8 @@ using WebBanHangOnline.Models.EF;
 
 namespace WebBanHangOnline.Controllers
 {
+    //[Authorize(Roles = "Customermer")]
+
     public class MenuController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

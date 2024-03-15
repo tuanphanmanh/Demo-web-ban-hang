@@ -21,7 +21,6 @@
             <a href="/admin/News" class="nav-link">Tin tức</a>
         </li>
     </ul>
-
 }
 <!-- Content Header (Page header) -->
 <section class="content-header">
@@ -95,7 +94,7 @@
                                 <td class="text-center">
                                     <a href="#" data-id="@item.Id" class="btnActive">@Html.Raw(strCheck)</a>
                                 </td>
-                                <td>@item.Detail</td>
+                                <td>@item.Description</td>
                                 <td class="text-center">
                                     <a href="/admin/news/edit/@item.Id" class="btn btn-sm btn-primary">Sửa</a>
                                     <a href="#" data-id="@item.Id" class="btn btn-sm btn-danger btnDelete">Xóa</a>

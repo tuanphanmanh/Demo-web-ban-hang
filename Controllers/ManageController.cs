@@ -10,7 +10,8 @@ using WebBanHangOnline.Models;
 
 namespace WebBanHangOnline.Controllers
 {
-    [Authorize]
+    //[Authorize(Roles = "Customermer")]
+
     public class ManageController : Controller
     {
         private ApplicationSignInManager _signInManager;

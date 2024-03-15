@@ -337,9 +337,9 @@
     <Compile Include="Migrations\202403130651538_addaccount.Designer.cs">
       <DependentUpon>202403130651538_addaccount.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202403131014318_addaccountnẽt.cs" />
-    <Compile Include="Migrations\202403131014318_addaccountnẽt.Designer.cs">
-      <DependentUpon>202403131014318_addaccountnẽt.cs</DependentUpon>
+    <Compile Include="Migrations\202403141624596_update_Subcribe.cs" />
+    <Compile Include="Migrations\202403141624596_update_Subcribe.Designer.cs">
+      <DependentUpon>202403141624596_update_Subcribe.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -454,6 +454,7 @@
     <Content Include="Content\assets\images\single_3_thumb.jpg" />
     <Content Include="Content\assets\images\slider_1.jpg" />
     <Content Include="Content\assets\images\thịt.png" />
+    <Content Include="Content\assets\images\ảnh nền login.png" />
     <Content Include="Content\assets\js\categories_end.js" />
     <Content Include="Content\assets\js\categories_price.js" />
     <Content Include="Content\assets\js\categories_custom.js" />
@@ -3606,6 +3607,9 @@
     <Content Include="Views\ShoppingCart\CheckOutSuccess.cshtml" />
     <Content Include="Views\Home\Refresh.cshtml" />
     <Content Include="Views\News\Partial_News_Home.cshtml" />
+    <Content Include="Views\Home\Partial_Subcribe.cshtml" />
+    <Content Include="Views\News\Index.cshtml" />
+    <Content Include="Views\News\Detail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -3712,8 +3716,8 @@
     <EmbeddedResource Include="Migrations\202403130651538_addaccount.resx">
       <DependentUpon>202403130651538_addaccount.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202403131014318_addaccountnẽt.resx">
-      <DependentUpon>202403131014318_addaccountnẽt.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202403141624596_update_Subcribe.resx">
+      <DependentUpon>202403141624596_update_Subcribe.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

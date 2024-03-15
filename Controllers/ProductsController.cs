@@ -7,6 +7,7 @@ using WebBanHangOnline.Models;
 
 namespace WebBanHangOnline.Controllers
 {
+    //[Authorize(Roles = "Customermer")]
     public class ProductsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

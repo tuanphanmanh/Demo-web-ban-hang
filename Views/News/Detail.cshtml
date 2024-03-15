@@ -1,0 +1,75 @@
+﻿@model WebBanHangOnline.Models.EF.News
+@{
+    ViewBag.Title = "Chi tiết tin tức";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" type="text/css" href="~/Content/assets/styles/main_styles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-...gS2BQo=" crossorigin="anonymous" />
+
+<style>
+    .chitiettintuc {
+        display: flex;
+        list-style-type: none;
+        padding: 0;
+        margin-top: 150px;
+        margin-left: 75px;
+        text-transform: uppercase;
+    }
+    .inline-li {
+        display: inline-block;
+        margin-right: 10px;
+        color: gray;
+    }
+</style>
+{
+<ul class="chitiettintuc">
+    <li class="inline-li">
+        <a style="color: gray; display: inline-block;" href="/tin-tuc">Tin tức</a>
+    </li>
+    <li class="inline-li">
+        <i class="fa-solid fa-chevron-right"></i>
+    </li>
+    <li class="inline-li">
+        <a style="color: gray; display: inline-block;" href="/"> Chi tiết tin tức</a>
+    </li>
+</ul>
+<div class="container news_section_container">
+    <div class="row">
+        <div class="col-md-12">
+            <div style="background-color: forestgreen; height: 2px;"></div>
+        </div>
+    </div>
+
+    <br />
+    @if (Model != null)
+    {
+        <div class="row">
+            <div class="col-md-12">
+                <div class="content-header">
+                    <h2>@Model.Title</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-1">
+                <img class="img-circle" style="max-height: 50px; max-width: 50px; " src="@Model.Image" />
+            </div>
+            <div class="col-md-2">
+                <b>@Model.CreatedBy </b>
+            </div>
+            <div class="col-md-3">
+                <span>@Model.CreatedDate.ToString("dd/MM/yyyy")</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8" style="font-family:'Times New Roman', Times, serif; color: black">
+                @Html.Raw(@Model.Detail)
+            </div>
+            <div class="col-md-4">
+                <img style="max-width: 340px" src="@Model.Image" />
+            </div>
+        </div>
+
+    }
+
+</div>
