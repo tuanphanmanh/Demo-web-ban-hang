@@ -55,7 +55,7 @@
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Tài khoản</th>
+                        <th>Username</th>
                         <th>Họ tên</th>
                         <th>Email</th>
                         <th>Ngày tạo</th>
@@ -76,7 +76,7 @@
                                 <td>@item.CreatedDate</td>
                                 <td>
                                     <a href="/admin/account/edit/@item.UserName" class="btn btn-sm btn-primary">Sửa</a>
-                                    <a href="#" class="btn btn-sm btn-danger btnDelete" data-user="@item.UserName">Xóa</a>
+                                    <a href="#" data-id="@item.Id" class="btn btn-sm btn-danger btnDelete" data-user="@item.UserName">Xóa</a>
                                 </td>
                             </tr>
                             i++;
@@ -147,6 +147,7 @@
                 $('#modal-default').modal('show');
             });
 
+            
             //$('body').on('click', '#btnLuu', function () {
             //    var sid = document.getElementById('txtOrderId').value;
             //    var tt = $('#ddTrangThai').val();

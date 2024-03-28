@@ -66,6 +66,7 @@
                         <th>Danh mục</th>
                         <th>Số lượng</th>
                         <th>Giá (VND)</th>
+                        <th>Gốc (VND)</th>
                         <th>Ngày tạo</th>
                         <th>Home</th>
                         <th>Khuyến mãi</th>
@@ -92,6 +93,7 @@
                                 <td>@item.ProductCategory.Title</td>
                                 <td>@item.Quantity</td>
                                 <td>@item.Price </td>
+                                <td>@item.OriginalPrice </td>
                                 <td>@item.CreatedDate.ToString("dd/MM/yyyy")</td>
                                 <td>
                                     <a href="#" data-id="@item.Id" class="btnHome">@Html.Raw(strCheckHome)</a>

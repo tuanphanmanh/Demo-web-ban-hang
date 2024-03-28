@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.Entity.Validation;
@@ -10,13 +12,51 @@ using WebBanHangOnline.Models.EF;
 
 namespace WebBanHangOnline.Controllers
 {
-    //[Authorize(Roles = "Customermer")]
+    [Authorize]
     public class ShoppingCartController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
         private DbEntityValidationException context = new DbEntityValidationException();
-        
+
+        private ApplicationSignInManager _signInManager;
+        private ApplicationUserManager _userManager;
+
+        public ShoppingCartController()
+        {
+        }
+
+        public ShoppingCartController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+        {
+            UserManager = userManager;
+            SignInManager = signInManager;
+        }
+
+        public ApplicationSignInManager SignInManager
+        {
+            get
+            {
+                return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
+            }
+            private set
+            {
+                _signInManager = value;
+            }
+        }
+
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
+
         // GET: ShoppingCart
+        [AllowAnonymous]
         public ActionResult Index()
         {
             ShoppingCart cart = (ShoppingCart)Session["Cart"];
@@ -26,12 +66,15 @@ namespace WebBanHangOnline.Controllers
             }
             return View();
         }
-        
-        public ActionResult CheckOutSuccess(Order o)
+        [AllowAnonymous]
+
+        public ActionResult CheckOutSuccess(Order o )
         {
-            var check = db.Orders.Where(a=>a.Id == o.Id).ToList();
+            var check = db.Orders.Where(a => a.Id == o.Id).ToList();
             return View(o);
         }
+        [AllowAnonymous]
+
         public ActionResult CheckOut()
         {
             ShoppingCart cart = (ShoppingCart)Session["Cart"];
@@ -44,9 +87,11 @@ namespace WebBanHangOnline.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AllowAnonymous]
+
         public ActionResult CheckOut(OrderViewModel req)
         {
-            var code = new { Success = true, Code = -1 };
+            var code = new { Success = false, Code = -1 };
             if (ModelState.IsValid)
             {
                 ShoppingCart cart = (ShoppingCart)Session["Cart"];
@@ -54,8 +99,8 @@ namespace WebBanHangOnline.Controllers
                 {
                     Order order = new Order();
                     order.CustomerName = req.CustomerName;
-                    order.ShippingStatus = req.ShippingStatus;
                     order.Phone = req.Phone;
+                    order.ShippingStatus = req.ShippingStatus;
                     order.Address = req.Address;
                     order.Email = req.Email;
                     order.AddressType = req.AddressType;
@@ -74,7 +119,7 @@ namespace WebBanHangOnline.Controllers
                     order.ModifiedDate = DateTime.Now;
                     order.CreatedBy = req.Phone;
                     Random rd = new Random();
-                    order.Code = "DH" + rd.Next(0,9) + rd.Next(0, 9) + rd.Next(0, 9)  ;
+                    order.Code = "DH" + req.Phone;
                     db.Orders.Add(order);
                     db.SaveChanges();
                     // gửi email cho khách hàng
@@ -83,10 +128,10 @@ namespace WebBanHangOnline.Controllers
                     var TongTien = decimal.Zero;
                     foreach (var sp in cart.Items)
                     {
-                        strSanPham += "<tr>";       
-                        strSanPham += "<td width=\"200\" style=\"font-family:'SF Pro Text',Arial,sans-serif;text-align:center;border-collapse:collapse;word-break:break-word;font-size:14px;border-top:1px solid #c5c5c5;border-right:1px solid #c5c5c5;border-bottom:1px solid #c5c5c5;border-left:1px solid #c5c5c5;padding:5px 10px 5px 10px\">" + sp.ProductName + "</td>";
-                        strSanPham += "<td width=\"100\" style=\"font-family:'SF Pro Text',Arial,sans-serif;text-align:center;border-collapse:collapse;word-break:break-word;font-size:14px;border-top:1px solid #c5c5c5;border-right:1px solid #c5c5c5;border-bottom:1px solid #c5c5c5;border-left:1px solid #c5c5c5;padding:5px 10px 5px 10px\">" + sp.Quantity + "</td>";
-                        strSanPham += "<td width=\"200\" style=\"font-family:'SF Pro Text',Arial,sans-serif;text-align:center;border-collapse:collapse;word-break:break-word;font-size:14px;border-top:1px solid #c5c5c5;border-right:1px solid #c5c5c5;border-bottom:1px solid #c5c5c5;border-left:1px solid #c5c5c5;padding:5px 10px 5px 10px\">" + WebBanHangOnline.Common.Common.FormatNumber(sp.TotalPrice,0) + "</td>";
+                        strSanPham += "<tr>";
+                        strSanPham += "<td>" + sp.ProductName + "</td>";
+                        strSanPham += "<td>" + sp.Quantity + "</td>";
+                        strSanPham += "<td>" + WebBanHangOnline.Common.Common.FormatNumber(sp.TotalPrice, 0) + "</td>";
                         strSanPham += "</tr>";
                         thanhtien += sp.Price * sp.Quantity;
                     }
@@ -101,11 +146,11 @@ namespace WebBanHangOnline.Controllers
                     contentCustomer = contentCustomer.Replace("{{PhuongThucThanhToan}}", order.TypePayment);
                     contentCustomer = contentCustomer.Replace("{{HinhThucVanChuyen}}", order.ShippingUnit);
                     contentCustomer = contentCustomer.Replace("{{LoaiDiaChi}}", order.AddressType);
-                    contentCustomer = contentCustomer.Replace("{{NgayDat}}", order.CreatedDate.ToString("dd/MM/yyyy"));
+                    contentCustomer = contentCustomer.Replace("{{NgayDat}}", order.CreatedDate.ToString());
                     contentCustomer = contentCustomer.Replace("{{ThanhTien}}", WebBanHangOnline.Common.Common.FormatNumber(thanhtien, 0));
                     contentCustomer = contentCustomer.Replace("{{TongTien}}", WebBanHangOnline.Common.Common.FormatNumber(TongTien, 0));
 
-                    WebBanHangOnline.Common.Common.SendMail("XEĐẸP", "Đơn hàng #"+order.Code, contentCustomer.ToString(), order.Email);
+                    WebBanHangOnline.Common.Common.SendMail("XEĐẸP", "Đơn hàng #" + order.Code, contentCustomer.ToString(), order.Email);
 
 
                     string contentAdmin = System.IO.File.ReadAllText(Server.MapPath("~/content/template/send1.html"));
@@ -119,7 +164,7 @@ namespace WebBanHangOnline.Controllers
                     contentAdmin = contentAdmin.Replace("{{PhuongThucThanhToan}}", order.TypePayment);
                     contentAdmin = contentAdmin.Replace("{{HinhThucVanChuyen}}", order.ShippingUnit);
                     contentAdmin = contentAdmin.Replace("{{LoaiDiaChi}}", order.AddressType);
-                    contentAdmin = contentAdmin.Replace("{{NgayDat}}", order.CreatedDate.ToString("dd/MM/yyyy"));
+                    contentAdmin = contentAdmin.Replace("{{NgayDat}}", order.CreatedDate.ToString());
                     contentAdmin = contentAdmin.Replace("{{ThanhTien}}", WebBanHangOnline.Common.Common.FormatNumber(thanhtien, 0));
                     contentAdmin = contentAdmin.Replace("{{LoiNhan}}", order.MessegesForBuyer);
 
@@ -132,11 +177,19 @@ namespace WebBanHangOnline.Controllers
             return Json(code);
         }
 
+        [AllowAnonymous]
 
         public ActionResult Partial_CheckOut()
         {
+            var user = UserManager.FindByNameAsync(User.Identity.Name).Result;
+            if(user != null)
+            {
+                ViewBag.User = user;
+            }
             return PartialView();
         }
+        [AllowAnonymous]
+
         public ActionResult Partial_Item_Thanhtoan()
         {
             ShoppingCart cart = (ShoppingCart)Session["Cart"];
@@ -146,6 +199,8 @@ namespace WebBanHangOnline.Controllers
             }
             return PartialView();
         }
+        [AllowAnonymous]
+
         public ActionResult Partial_Item_Cart()
         {
             ShoppingCart cart = (ShoppingCart)Session["Cart"];
@@ -155,6 +210,8 @@ namespace WebBanHangOnline.Controllers
             }
             return PartialView();
         }
+        [AllowAnonymous]
+
         public ActionResult ShowCount()
         {
             ShoppingCart cart = (ShoppingCart)Session["Cart"];
@@ -207,6 +264,8 @@ namespace WebBanHangOnline.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
+
         public ActionResult AddToCart(int id, int quantity)
         {
             var code = new { Success = false, msg = "", code = -1, Count = 0 };

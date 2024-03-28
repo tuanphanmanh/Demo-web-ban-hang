@@ -1,5 +1,11 @@
 ﻿@model WebBanHangOnline.Models.OrderViewModel
 
+@{
+    if (ViewBag.User != null)
+    {
+        var user = (WebBanHangOnline.Models.ApplicationUser)ViewBag.User;
+    }
+}
 
 <link rel="stylesheet" type="text/css" href="~/content/assets/styles/categories_styles.css">
 <link rel="stylesheet" type="text/css" href="~/content/assets/styles/categories_responsive.css">
@@ -7,48 +13,77 @@
 
 
 @using (Ajax.BeginForm("CheckOut", "ShoppingCart", new AjaxOptions
-    {
-        HttpMethod = "POST",
-        UpdateTargetId = "load_data",
-        OnComplete= "OnSucessCO",
-        OnFailure = "OnFailure",
-    }, new {@Id= "myForm"}))
+{
+    HttpMethod = "POST",
+    UpdateTargetId = "load_data",
+    OnComplete = "OnSucessCO",
+    OnFailure = "OnFailure",
+    OnBegin = "OnBeginCO"
+}, new { @Id = "myForm" }))
 {
     <div class="row">
         <div class="col-md-4">
             @Html.AntiForgeryToken()
             <h4>Thông tin khách hàng</h4>
-            <div class="form-group">
-                <input placeholder="Họ tên khách hàng" type="text" name="CustomerName" required class="form-control" autocomplete="off" />
-            </div>
-            <div class="form-group">
-                <input placeholder="Số điện thoại" type="text" name="Phone" class="form-control" autocomplete="off" />
-            </div>
-            <div class="form-group">
-                <input placeholder="Địa chỉ" type="text" name="Address" class="form-control" autocomplete="off" />
-            </div>
-            <div class="form-group">
-                <input placeholder="E mail" type="email" name="Email" class="form-control" autocomplete="off" />
-            </div>
-            <div class="form-group">
-                <label>Loại địa chỉ:</label>
-                <br />
-                <select name="AddressType" class="form-control">
-                    <option value="Nhà riêng" selected>Nhà riêng</option>
-                    <option value="Văn phòng">Văn phòng</option>
-                </select>
-            </div>
+            @if (!Request.IsAuthenticated)
+            {
+                <div class="form-group">
+                    <input placeholder="Họ tên khách hàng" type="text" name="CustomerName" required class="form-control" autocomplete="off" />
+                </div>
+                <div class="form-group">
+                    <input placeholder="Số điện thoại" type="text" name="Phone" class="form-control" autocomplete="off" />
+                </div>
+                <div class="form-group">
+                    <input placeholder="Địa chỉ" type="text" name="Address" class="form-control" autocomplete="off" />
+                </div>
+                <div class="form-group">
+                    <input placeholder="E mail" type="email" name="Email" class="form-control" autocomplete="off" />
+                </div>
+                <div class="form-group">
+                    <label>Loại địa chỉ:</label>
+                    <br />
+                    <select name="AddressType" class="form-control">
+                        <option value="Nhà riêng" selected>Nhà riêng</option>
+                        <option value="Văn phòng">Văn phòng</option>
+                    </select>
+                </div>
+            }
+            else
+            {
+                var user = (WebBanHangOnline.Models.ApplicationUser)ViewBag.User;
+                <div class="form-group">
+                    <input placeholder="Họ tên khách hàng" value="@user.FullName" type="text" name="CustomerName" required class="form-control" autocomplete="off" />
+                </div>
+                <div class="form-group">
+                    <input placeholder="Số điện thoại" value="@user.Phone" type="text" name="Phone" class="form-control" autocomplete="off" />
+                </div>
+                <div class="form-group">
+                    <input placeholder="Địa chỉ" type="text" name="Address" class="form-control" autocomplete="off" />
+                </div>
+                <div class="form-group">
+                    <input placeholder="Email" value="@user.Email" type="email" name="Email" class="form-control" autocomplete="off" />
+                </div>
+                <div class="form-group">
+                    <label>Loại địa chỉ:</label>
+                    <br />
+                    <select name="AddressType" class="form-control">
+                        <option value="Nhà riêng" selected>Nhà riêng</option>
+                        <option value="Văn phòng">Văn phòng</option>
+                    </select>
+                </div>
+            }
+
         </div>
 
         <div class="col-md-8">
             <h4>Sản phẩm</h4>
-            @Html.Action("Partial_Item_Thanhtoan", "ShoppingCart");
+            @Html.Action("Partial_Item_Thanhtoan", "ShoppingCart")
         </div>
     </div>
     <hr />
-<div class="row">
+    <div class="row">
         <table>
-            <tr >
+            <tr>
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>Lời nhắn:</label>
@@ -109,17 +144,38 @@
         </div>
     </div>
     <hr />
+    <div class="form-group" id="load_send">  </div>
+
     <div class="row">
-        <div class="col-md-9">
+        <div class="col-md-12">
             <div class="form-group">
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="form-group">
-                <input type="submit" style="color:  white;" class="form-control btn btn-success" value="Đặt hàng" />
+                <button class="btn btn-success" style="min-width: 100%" type="submit" id="btnCheckOut">
+                    Đặt hàng
+                </button>
             </div>
         </div>
     </div>
 
 }
+
+
+<script>
+            function OnBeginCO() {
+                $('#btnCheckOut').attr("disabled", "disabled");
+                $('#load_send').html('đang thực hiện .. . .');
+            }
+            function OnSuccessCO(res) {
+                if (res.Success) {
+                    if (res.Code == 1) {
+                        location.href = "/ShoppingCart/CheckOutSuccess";
+                    }
+                    else {
+                        location.href = res.Url;
+                    }
+                }
+            }
+                                                //function OnFailure() {
+
+                                                //}
+    </script>
 

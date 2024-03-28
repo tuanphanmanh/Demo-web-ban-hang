@@ -15,7 +15,7 @@ namespace WebBanHangOnline.Models.EF
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         [Required(ErrorMessage = "K để trống tiêu đề tin")]
-        [StringLength(50)]
+        [StringLength(100)]
         public string Title { get; set; }
         public string Alias { get; set; }
         public string Description { get; set; }

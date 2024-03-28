@@ -34,6 +34,7 @@ namespace WebBanHangOnline.Models.EF
         public string SeoKeywords { get; set; }
         [StringLength(150)]
         public string TypeCode { get; set; }
+        [StringLength(150)]
         public string Link { get; set; }
         public bool IsActive { get; set; }
         public int Position { get; set; }

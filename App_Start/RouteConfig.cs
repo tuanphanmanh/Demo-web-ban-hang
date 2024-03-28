@@ -26,6 +26,12 @@ namespace WebBanHangOnline
             );
            
             routes.MapRoute(
+                name: "BaiViet",
+                url: "post/{alias}",
+                defaults: new { controller = "Article", action = "Index", alias = UrlParameter.Optional },
+                namespaces: new[] { "WebBanHangOnline.Controllers" }
+            );
+            routes.MapRoute(
                 name: "Detailnew",
                 url: "{alias}-n{id}",
                 defaults: new { controller = "News", action = "Detail", id = UrlParameter.Optional },

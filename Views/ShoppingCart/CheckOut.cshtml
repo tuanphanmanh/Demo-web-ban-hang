@@ -24,30 +24,17 @@
             </div>
 
             <!-- Main Content -->
-
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-sm-12 text-danger text-center" >
                     <h3>Thanh toán</h3>
                 </div>
             </div>
             <div class="xBNaac"></div>
             <br />
-            @if (ViewBag.CheckCart != null)
-            {
+
                 <div style="display:none;" id="show_success"></div>
                 @Html.Action("partial_Checkout","ShoppingCart")
-            }
-            else
-            {
-                <div class="text-center">
-                    <div>
-                        <img style="width: 100px; height: 100px;" src="~/Content//assets/images/ko có gì trong giỏ hàng.png" />
-                    </div>
-                    <h5>Giỏ hàng của bạn còn trống</h5>
-                    <a href="/san-pham" style="background-color: mediumturquoise; color:white" class="btn btn-default">MUA NGAY</a>
 
-                </div>
-            }
 
         </div>
     </div>

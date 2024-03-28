@@ -22,7 +22,7 @@ namespace WebBanHangOnline.Controllers
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -34,9 +34,9 @@ namespace WebBanHangOnline.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -52,6 +52,32 @@ namespace WebBanHangOnline.Controllers
             }
         }
 
+
+        public async Task<ActionResult> Profile()
+        {
+            var user = await UserManager.FindByNameAsync(User.Identity.Name);
+            var item = new CreateAccountViewModel();
+            item.Email = user.Email;
+            item.FullName = user.FullName;
+            item.Phone = user.Phone;
+            item.UserName = user.UserName;
+            return PartialView(item);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> PostProfile(CreateAccountViewModel req)
+        {
+            var user = await UserManager.FindByEmailAsync(req.Email);
+            user.FullName = req.FullName;
+            user.Phone = req.Phone;
+            var rs = await UserManager.UpdateAsync(user);
+            if (rs.Succeeded)
+            {
+                return RedirectToAction("Profile");
+            }
+            return View(req);
+        }
         //
         // GET: /Account/Login
         [AllowAnonymous]
@@ -86,7 +112,7 @@ namespace WebBanHangOnline.Controllers
                     return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
                 case SignInStatus.Failure:
                 default:
-                    ModelState.AddModelError("", "Đăng nhập không thành công.");
+                    ModelState.AddModelError("", "Invalid login attempt.");
                     return View(model);
             }
         }
@@ -120,7 +146,7 @@ namespace WebBanHangOnline.Controllers
             // If a user enters incorrect codes for a specified amount of time then the user account 
             // will be locked out for a specified amount of time. 
             // You can configure the account lockout settings in IdentityConfig
-            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent:  model.RememberMe, rememberBrowser: model.RememberBrowser);
+            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent: model.RememberMe, rememberBrowser: model.RememberBrowser);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -133,6 +159,7 @@ namespace WebBanHangOnline.Controllers
                     return View(model);
             }
         }
+
 
         //
         // GET: /Account/Register
@@ -163,10 +190,11 @@ namespace WebBanHangOnline.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("login", "account");
                 }
                 AddErrors(result);
             }
+
             // If we got this far, something failed, redisplay form
             return View(model);
         }
@@ -202,7 +230,8 @@ namespace WebBanHangOnline.Controllers
             if (ModelState.IsValid)
             {
                 var user = await UserManager.FindByNameAsync(model.Email);
-                if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
+                var it = (await UserManager.IsEmailConfirmedAsync(user.Id));
+                if (user == null)
                 {
                     // Don't reveal that the user does not exist or is not confirmed
                     return View("ForgotPasswordConfirmation");
@@ -210,10 +239,11 @@ namespace WebBanHangOnline.Controllers
 
                 // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                 // Send an email with this link
-                // string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-                // var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
+                string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
+                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                WebBanHangOnline.Common.Common.SendMail("ShopOnline", "Quên mật khẩu", "Bạn click vào <a href='" + callbackUrl + "'>link này</a> để reset mật khẩu", model.Email);
                 // await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                // return RedirectToAction("ForgotPasswordConfirmation", "Account");
+                return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
 
             // If we got this far, something failed, redisplay form

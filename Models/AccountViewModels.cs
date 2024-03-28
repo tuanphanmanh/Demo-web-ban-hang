@@ -48,9 +48,7 @@ namespace WebBanHangOnline.Models
 
     public class LoginViewModel
     {
-        [Display(Name = "Email")]
-        [EmailAddress]
-        public string Email { get; set; }
+        [Required]
         [Display(Name = "UserName")]
         public string UserName { get; set; }
 
@@ -96,14 +94,14 @@ namespace WebBanHangOnline.Models
         public string Email { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.")]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Mật khẩu")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Display(Name = "Xác nhận mật khẩu")]
+        [Compare("Password", ErrorMessage = "Xác nhận mật khẩu không đúng.")]
         public string ConfirmPassword { get; set; }
     }
 

@@ -1,12 +1,14 @@
-﻿using PagedList;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using WebBanHangOnline.Models;
 using WebBanHangOnline.Models.EF;
+using System.Data.SqlTypes;
+using System.Data.Entity.Migrations;
+using PagedList;
+using System.Web.UI.WebControls;
 
 namespace WebBanHangOnline.Areas.Admin.Controllers
 {
@@ -16,19 +18,10 @@ namespace WebBanHangOnline.Areas.Admin.Controllers
     {
         // GET: Admin/news
         private ApplicationDbContext db = new ApplicationDbContext();
-        public ActionResult Index(int? page)
+        public ActionResult Index()
         {
-            var pageSize = 10;
-            //var pagenumber = (page ?? 1);
-
-            //var item = db.Posts.Select(x => x);
-            if (page == null)
-            {
-                page = 1;
-            }
-            var pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
-            var items = db.Posts.OrderByDescending(x => x.Id).ToPagedList(pageIndex, pageSize);
-            return View(items);
+            var ítems = db.Posts.ToList();  
+            return View(ítems);
         }
         public ActionResult Add()
         {
@@ -41,7 +34,7 @@ namespace WebBanHangOnline.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 model.CreatedDate = DateTime.Now;
-                model.CategoryId = 3;
+                model.CategoryId = 5;
                 model.ModifiedDate = DateTime.Now;
                 model.Alias = WebBanHangOnline.Models.Common.Filter.FilterChar(model.Title);
                 db.Posts.Add(model);

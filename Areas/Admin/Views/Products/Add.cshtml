@@ -103,19 +103,27 @@
 
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Chi tiết</label>
-                                            @Html.TextBoxFor(a => a.Detail, new { @class = "form-control",  @id = "txtDetail" })
+                                            @Html.TextBoxFor(a => a.Detail, new { @class = "form-control", @id = "txtDetail" })
                                             @Html.ValidationMessageFor(a => a.Detail, null, new { @class = "text-danger" })
                                         </div>
 
                                         <div class="row">
-                                            <div class="col-4">
+                                            <div class="col-3">
                                                 <div class="form-group">
                                                     <label for="exampleInputEmail1">Số lượng</label>
                                                     @Html.TextBoxFor(a => a.Quantity, new { @class = "form-control", @Value = "1" })
                                                     @Html.ValidationMessageFor(a => a.Quantity, null, new { @class = "text-danger" })
                                                 </div>
                                             </div>
-                                            <div class="col-4">
+                                            <div class="col-3">
+                                                <div class="form-group">
+                                                    <label for="exampleInputEmail1">Giá gốc</label>
+                                                    <input type="text" name="demoOriginalPrice" value="0" id="demoOriginalPrice" class="form-control auto" data-a-sign="VND " data-a-dec="," data-a-sep="." />
+                                                    @Html.HiddenFor(a => a.OriginalPrice, new { @class = "", @placeholder = "Giá" })
+                                                    @Html.ValidationMessageFor(a => a.OriginalPrice, null, new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <div class="col-3">
                                                 <div class="form-group">
                                                     <label for="exampleInputEmail1">Giá</label>
                                                     <input type="text" name="demoPrice" value="0" id="demoPrice" class="form-control auto" data-a-sign="VND " data-a-dec="," data-a-sep="." />
@@ -123,7 +131,7 @@
                                                     @Html.ValidationMessageFor(a => a.Price, null, new { @class = "text-danger" })
                                                 </div>
                                             </div>
-                                            <div class="col-4">
+                                            <div class="col-3">
                                                 <div class="form-group">
                                                     <label for="exampleInputEmail1">Khuyến mại</label>
                                                     <input type="text" name="demoPriceSale" value="0" id="demoPriceSale" class="form-control auto" data-a-sign="VND " data-a-dec="," data-a-sep="." />
@@ -173,7 +181,7 @@
                                     <div class="tab-pane" id="timeline">
                                         <div class="row">
                                             <div class="col-md-12 text-right">
-                                                <input type="button" class="btn btn-primary" id="iTaiAnh" onclick="BrowseServer();" value="Tải ảnh"/>
+                                                <input type="button" class="btn btn-primary" id="iTaiAnh" onclick="BrowseServer();" value="Tải ảnh" />
                                             </div>
                                             <div class="col-md-12">
                                                 <table class="table table-hover" id="tbAnhSanPham">
@@ -186,7 +194,6 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody id="tbHtml">
-                                                       
                                                     </tbody>
                                                 </table>
                                                 <input type="hidden" id="tCurrentId" value="0" />
@@ -226,12 +233,12 @@
                                 <input class="btn btn-success" type="submit" value="Thêm mới" />
                             </div>
                         </div>
-                     }
+                    }
                 </div>
             </div>
         </div>
     </div>
-        <!-- /.card-body -->
+    <!-- /.card-body -->
 </section>
 <!-- /.content -->
 
@@ -243,6 +250,11 @@
                 var demoGet = $('#demoPrice').autoNumeric('get');
                 $('#Price').val(demoGet);
                 $('#Price').autoNumeric('set', demoGet);
+            });
+            $('#demoOriginalPrice').bind('blur focusout keypress keyup', function () {
+                var demoGet = $('#demoOriginalPrice').autoNumeric('get');
+                $('#OriginalPrice').val(demoGet);
+                $('#OriginalPrice').autoNumeric('set', demoGet);
             });
             $('#demoPriceSale').bind('blur focusout keypress keyup', function () {
                 var demoGet = $('#demoPriceSale').autoNumeric('get');
@@ -268,7 +280,7 @@
             });
         });
 
-        function BrowseServer(field){
+        function BrowseServer(field) {
             var finder = new CKFinder();
             finder.selectActionFunction = function (fileUrl) {
                 //document.getElementById(field).value = fileUrl;
@@ -281,22 +293,22 @@
             var currentId = parseInt(temp) + 1;
             var str = "";
             if (currentId == 1) {
-                str += `<tr id="trow_${currentId}"> 
-                          <td class="text-center" > ${currentId}</td >    
-                          <td class="text-center" > <img style="width: 80px" src="${url}" /> <input type='hidden' value="${url}" name="Images"/> </td > 
-                          <td class="text-center"> <input type="radio" name="rDefault" value="${currentId}" checked="checked" name="rDefault" /></td>
-                          <td class="text-center"><a href="#" data-id="${currentId}" class="btn btn-sm btn-danger btnXoaAnh">Xóa</a></td> 
-                          </tr > `;
+                str += `<tr id="trow_${currentId}">
+                              <td class="text-center" > ${currentId}</td >
+                              <td class="text-center" > <img style="width: 80px" src="${url}" /> <input type='hidden' value="${url}" name="Images"/> </td >
+                              <td class="text-center"> <input type="radio" name="rDefault" value="${currentId}" checked="checked" name="rDefault" /></td>
+                              <td class="text-center"><a href="#" data-id="${currentId}" class="btn btn-sm btn-danger btnXoaAnh">Xóa</a></td>
+                              </tr > `;
             }
             else {
-                str += `<tr id="trow_${currentId}"> 
-                          <td class="text-center" > ${currentId}</td >    
-                          <td class="text-center" > <img style="width: 80px" src="${url}" /> <input type='hidden' value="${url}" name="Images"/> </td > 
-                          <td class="text-center"> <input type="radio" name="rDefault" value="${currentId}" name="rDefault" /></td>
-                          <td class="text-center"><a href="#" data-id="${currentId}" class="btn btn-sm btn-danger btnXoaAnh">Xóa</a></td> 
-                          </tr >`;
+                str += `<tr id="trow_${currentId}">
+                              <td class="text-center" > ${currentId}</td >
+                              <td class="text-center" > <img style="width: 80px" src="${url}" /> <input type='hidden' value="${url}" name="Images"/> </td >
+                              <td class="text-center"> <input type="radio" name="rDefault" value="${currentId}" name="rDefault" /></td>
+                              <td class="text-center"><a href="#" data-id="${currentId}" class="btn btn-sm btn-danger btnXoaAnh">Xóa</a></td>
+                              </tr >`;
             }
-            $('#tbHtml').append(str);    
+            $('#tbHtml').append(str);
             $('#tCurrentId').val(currentId);
         }
     </script>

@@ -31,7 +31,7 @@ namespace WebBanHangOnline.Controllers
                 ViewBag.CateId = id;
             }
             var items = db.Categories.OrderBy(a => a.Position).ToList();
-            return PartialView("_MenuLeft", items);
+            return PartialView("_MenuLeft");
         }
         public ActionResult MenuProductCategory()
         {

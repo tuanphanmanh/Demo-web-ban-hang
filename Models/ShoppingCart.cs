@@ -48,7 +48,7 @@ namespace WebBanHangOnline.Models
         public decimal GetTotalQuantity()
         {
             return Items.Sum(a => a.Quantity);
-        }
+        } 
         public void ClearCart()
         {
             Items.Clear();
@@ -56,7 +56,6 @@ namespace WebBanHangOnline.Models
 
 
     }
-
 
     public class ShoppingCartItem
     {

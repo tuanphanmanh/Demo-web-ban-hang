@@ -71,18 +71,19 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>SĐT</label>
-                            @Html.TextBoxFor(a => a.UserName, new { @class = "form-control" })
+                            @Html.TextBoxFor(a => a.Phone, new { @class = "form-control" })
                         </div>
                     </div>
                 </div>
-
-                <div class="form-group">
-                    <label>Role</label>
-                    @Html.DropDownListFor(a => a.Role, ViewBag.Role as SelectList, "Chọn quyền", new { @class = "form-control" })
-
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Role</label>
+                            @Html.DropDownListFor(a => a.Role, ViewBag.Role as SelectList, "Chọn quyền", new { @class = "form-control" })
+                        </div>
+                    </div>
 
                 </div>
-
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">

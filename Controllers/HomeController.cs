@@ -15,6 +15,8 @@ namespace WebBanHangOnline.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();   
         public ActionResult Index()
         {
+            ViewBag.Title = "Shop Xe Online";
+            ViewBag.SeoDescription = "Shop Xe Online";
             return View();
         }
         public ActionResult Partial_Subcribe()
