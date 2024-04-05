@@ -39,7 +39,7 @@ namespace WebBanHangOnline.Controllers
         {
             var item = new ThongKeModel();
 
-            ViewBag.visitors_online = HttpContext.Application["visitors_online"];
+            ViewBag.Visitors_online = HttpContext.Application["visitors_online"];
             var hn = HttpContext.Application["HomNay"];
             item.HomNay = HttpContext.Application["HomNay"].ToString();
             item.HomQua = HttpContext.Application["HomQua"].ToString();
@@ -48,7 +48,6 @@ namespace WebBanHangOnline.Controllers
             item.ThangNay = HttpContext.Application["ThangNay"].ToString();
             item.ThangTruoc = HttpContext.Application["ThangTruoc"].ToString();
             item.TatCa = HttpContext.Application["TatCa"].ToString();
-
             return PartialView(item);
         }
 

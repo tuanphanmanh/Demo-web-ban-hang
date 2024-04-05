@@ -1,0 +1,43 @@
+﻿@model WebBanHangOnline.Models.EF.Booking
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" type="text/css" href="~/Content/assets/styles/main_styles.css">
+<link rel="stylesheet" type="text/css" href="~/content/assets/styles/bootstrap4/bootstrap.min.css">
+<link href="~/content/assets/plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="~/content/assets/plugins/OwlCarousel2-2.2.1/owl.carousel.css">
+<link rel="stylesheet" type="text/css" href="~/content/assets/plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
+<link rel="stylesheet" type="text/css" href="~/content/assets/plugins/OwlCarousel2-2.2.1/animate.css">
+<link rel="stylesheet" href="~/content/assets/plugins/themify-icons/themify-icons.css">
+<link rel="stylesheet" type="text/css" href="~/content/assets/plugins/jquery-ui-1.12.1.custom/jquery-ui.css">
+<link rel="stylesheet" type="text/css" href="~/content/assets/styles/contact_styles.css">
+<link rel="stylesheet" type="text/css" href="~/content/assets/styles/contact_responsive.css">
+
+<div style="margin-top: 150px" class="container contact_container">
+    <div class="row">
+        <div class="col">
+            <div class="breadcrumbs d-flex flex-row align-items-center">
+                <ul>
+                    <li><a href="/">Trang chủ</a></li>
+                    <li><a href="/service/index"><i class="fa fa-angle-right" aria-hidden="true"></i>Dịch vụ</a></li>
+                    <li class="active"><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>Đặt lịch</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Map Container -->
+
+    <div class="row">
+        <div class="col-md-12" id="load_data">
+            <div class="pyro"><div class="before"></div><div class="after"></div></div>
+            <h1 style="margin-bottom: 50px; margin-top: 50px">
+                <marquee style="height: 100px "> Bạn đã đặt lịch hẹn thành công </marquee>
+            </h1>
+            <a href="/service/index" class="btn btn-success">Đặt lịch khác</a>
+        </div>
+
+    </div>
+
+</div>
+

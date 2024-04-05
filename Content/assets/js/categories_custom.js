@@ -164,19 +164,46 @@ jQuery(document).ready(function ($) {
 				}
 
 				fav.on('click', function () {
+					var id = $(this).data('id');
 					if (active) {
 						fav.removeClass('active');
 						active = false;
+						//DeleteWishlist(id);
 					}
 					else {
 						fav.addClass('active');
 						active = true;
+						//AddWishlist(id);
 					}
 				});
 			});
 		}
 	}
 
+	function DeleteWishlist(id) {
+		$.ajax({
+			url: '/wishlist/PostDeleteWishlist',
+			type: 'POST',
+			data: { ProductId: id },
+			success: function (res) {
+				if (res.Success == false) {
+					alert(res.Message);
+				}
+			}
+		});
+	}
+	function AddWishlist(id) {
+		$.ajax({
+			url: '/wishlist/postwishlist',
+			type: 'POST',
+			data: { ProductId: id },
+			success: function (res) {
+				if (res.Success == false) {
+					alert(res.Message);
+				}
+			}
+		});
+	}
 	/* 
 
 	5. Init Fix Product Border
@@ -306,7 +333,6 @@ jQuery(document).ready(function ($) {
 						var priceMin = parseFloat(priceRange.split('-')[0].replace('đ', ''));
 						var priceMax = parseFloat(priceRange.split('-')[1].replace('đ', ''));
 						var itemPrice = $(this).find('.in_product_price').clone().children().remove().end().text();
-						//var itemPrice = parseFloat($(this).find('.in_product_price').clone().children().remove().end().text());
 
 						return (itemPrice > priceMin) && (itemPrice < priceMax);
 					},
@@ -331,17 +357,16 @@ jQuery(document).ready(function ($) {
 			{
 				range: true,
 				min: 0,
-				max: 90000000,
-				values: [0, 90000000],
+				max: 1000000,
+				values: [0, 500000],
 				slide: function (event, ui) {
-					$("#amount").val(ui.values[0] + "đ" + " - " + ui.values[1] + "đ");
-					$("#amount").val(ui.values[0] + "đ" + " - " + ui.values[1] + "đ");
+					$("#amount").val("đ" + ui.values[0] + " - đ" + ui.values[1]);
 					$('#FromAmount').val(ui.values[0]);
 					$('#ToAmount').val(ui.values[1]);
 				}
 			});
 
-		$("#amount").val($("#slider-range").slider("values", 0) + "đ" + " - " + $("#slider-range").slider("values", 1) + "đ");
+		$("#amount").val("đ" + $("#slider-range").slider("values", 0) + " - đ" + $("#slider-range").slider("values", 1));
 	}
 
 	/* 

@@ -58,6 +58,12 @@ namespace WebBanHangOnline
                 defaults: new { controller = "Contact", action = "Index", alias = UrlParameter.Optional },
                 namespaces: new[] { "WebBanHangOnline.Controllers" }
             );
+            routes.MapRoute(
+                name: "Service",
+                url: "dich-vu",
+                defaults: new { controller = "Service", action = "Index", alias = UrlParameter.Optional },
+                namespaces: new[] { "WebBanHangOnline.Controllers" }
+            );
 
             routes.MapRoute(
                 name: "ShoppingCart",

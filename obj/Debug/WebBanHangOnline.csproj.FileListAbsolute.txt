@@ -166,3 +166,14 @@ D:\Đồ án\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrat
 D:\Đồ án\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.updateOriginalPrice.resources
 D:\Đồ án\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.updateCategoryLink.resources
 D:\Đồ án\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.updateodercustomer.resources
+D:\Đồ án\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.TableReviewProdocut.resources
+D:\Đồ án\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.TableYeuThichSP.resources
+D:\Đồ án\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.service.resources
+D:\Đồ án\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.sẻvice2.resources
+D:\Đồ án\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.service3.resources
+D:\Đồ án\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.servicess.resources
+D:\Đồ án\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.addBooking.resources
+D:\Đồ án\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.addBooking1.resources
+D:\Đồ án\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.addBooking2.resources
+D:\Đồ án\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.updateBooking.resources
+D:\Đồ án\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.upatever2.resources

@@ -171,5 +171,10 @@ namespace WebBanHangOnline.Areas.Admin.Controllers
                 return HttpContext.GetOwinContext().Authentication;
             }
         }
+
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
+        }
     }
 }

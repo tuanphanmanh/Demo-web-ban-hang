@@ -31,6 +31,10 @@ namespace WebBanHangOnline.Models
         }
 
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Wishlist> Wishlists { get; set; }
+        public DbSet<Service> Services { get; set; }
+        public DbSet<Booking> Bookings { get; set; }
+        public DbSet<ReviewProduct> ReviewProducts { get; set; }
         public DbSet<ThongKe> ThongKes { get; set; }
         public DbSet<Adv> Advs { get; set; }
         public DbSet<Posts> Posts { get; set; }

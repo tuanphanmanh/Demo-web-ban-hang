@@ -7,7 +7,7 @@
             <div class="row">
                 <div class="col text-center">
                     <div class="section_title">
-                        <h2>Latest Blogs</h2>
+                        <h2>Thông tin</h2>
                     </div>
                 </div>
             </div>
@@ -20,14 +20,12 @@
                             <div class="blog_background" style="background-image:url(@item.Image)"></div>
                             <div class="blog_content d-flex flex-column align-items-center justify-content-center text-center">
                                 <h4 class="blog_title">@item.Title</h4>
-                                <span class="blog_meta"> by @item.CreatedBy | @item.CreatedDate.ToString("dd/mm/yyyy")</span>
-                                <a class="blog_more" href="#">Read more</a>
+                                <span class="blog_meta"> tác giả: @item.CreatedBy | @item.CreatedDate.ToString("dd-MM-yyyy")</span>
+                                <a class="blog_more" href="#">Đọc thêm</a>
                             </div>
                         </div>
                     </div>
                 }
-
-
             </div>
         </div>
     </div>

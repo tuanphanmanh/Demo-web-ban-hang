@@ -67,7 +67,6 @@ namespace WebBanHangOnline.Controllers
             return View();
         }
         [AllowAnonymous]
-
         public ActionResult CheckOutSuccess(Order o )
         {
             var check = db.Orders.Where(a => a.Id == o.Id).ToList();
@@ -119,7 +118,7 @@ namespace WebBanHangOnline.Controllers
                     order.ModifiedDate = DateTime.Now;
                     order.CreatedBy = req.Phone;
                     Random rd = new Random();
-                    order.Code = "DH" + req.Phone;
+                    order.Code = "DH" + rd.Next(0, 999);
                     db.Orders.Add(order);
                     db.SaveChanges();
                     // gửi email cho khách hàng
@@ -211,6 +210,7 @@ namespace WebBanHangOnline.Controllers
             return PartialView();
         }
         [AllowAnonymous]
+        [HttpGet]
 
         public ActionResult ShowCount()
         {
@@ -225,7 +225,7 @@ namespace WebBanHangOnline.Controllers
         [HttpPost]
         public ActionResult Delete(int id)
         {
-            var code = new { Success = false, msg = "", code = -1, Count = 0 };
+                        var code = new { Success = false, msg = "", code = -1, Count = 0 };
 
             ShoppingCart cart = (ShoppingCart)Session["Cart"];
             if (cart != null)

@@ -217,6 +217,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AccountController.cs" />
+    <Compile Include="Areas\Admin\Controllers\AdvController.cs" />
     <Compile Include="Areas\Admin\Controllers\CategoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\NewsController.cs" />
@@ -226,12 +227,14 @@
     <Compile Include="Areas\Admin\Controllers\ProductImageController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductsController.cs" />
     <Compile Include="Areas\Admin\Controllers\RoleController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ServiceController.cs" />
     <Compile Include="Areas\Admin\Controllers\SettingSystemController.cs" />
     <Compile Include="Areas\Admin\Controllers\StaticticalController.cs" />
     <Compile Include="Common\Common.cs" />
     <Compile Include="Common\SettingHelper.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ArticleController.cs" />
+    <Compile Include="Controllers\BookingController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -240,7 +243,9 @@
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\ReviewController.cs" />
+    <Compile Include="Controllers\ServiceController.cs" />
     <Compile Include="Controllers\ShoppingCartController.cs" />
+    <Compile Include="Controllers\WishlistController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -360,14 +365,61 @@
     <Compile Include="Migrations\202403211119565_updateodercustomer.Designer.cs">
       <DependentUpon>202403211119565_updateodercustomer.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202404010726470_TableReviewProdocut.cs" />
+    <Compile Include="Migrations\202404010726470_TableReviewProdocut.Designer.cs">
+      <DependentUpon>202404010726470_TableReviewProdocut.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202404010933029_TableYeuThichSP.cs" />
+    <Compile Include="Migrations\202404010933029_TableYeuThichSP.Designer.cs">
+      <DependentUpon>202404010933029_TableYeuThichSP.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202404030226381_service.cs" />
+    <Compile Include="Migrations\202404030226381_service.Designer.cs">
+      <DependentUpon>202404030226381_service.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202404030234284_sẻvice2.cs" />
+    <Compile Include="Migrations\202404030234284_sẻvice2.Designer.cs">
+      <DependentUpon>202404030234284_sẻvice2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202404030256106_service3.cs" />
+    <Compile Include="Migrations\202404030256106_service3.Designer.cs">
+      <DependentUpon>202404030256106_service3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202404030626085_servicess.cs" />
+    <Compile Include="Migrations\202404030626085_servicess.Designer.cs">
+      <DependentUpon>202404030626085_servicess.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202404030707061_addBooking.cs" />
+    <Compile Include="Migrations\202404030707061_addBooking.Designer.cs">
+      <DependentUpon>202404030707061_addBooking.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202404030711389_addBooking1.cs" />
+    <Compile Include="Migrations\202404030711389_addBooking1.Designer.cs">
+      <DependentUpon>202404030711389_addBooking1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202404030727000_addBooking2.cs" />
+    <Compile Include="Migrations\202404030727000_addBooking2.Designer.cs">
+      <DependentUpon>202404030727000_addBooking2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202404040249541_updateBooking.cs" />
+    <Compile Include="Migrations\202404040249541_updateBooking.Designer.cs">
+      <DependentUpon>202404040249541_updateBooking.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202404041020039_upatever2.cs" />
+    <Compile Include="Migrations\202404041020039_upatever2.Designer.cs">
+      <DependentUpon>202404041020039_upatever2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\BookingViewModel.cs" />
     <Compile Include="Models\CommonAbstract.cs" />
     <Compile Include="Models\Common\Filter.cs" />
     <Compile Include="Models\Common\ThongKeTruyCap.cs" />
     <Compile Include="Models\CustomerViewModel.cs" />
     <Compile Include="Models\EF\Adv.cs" />
+    <Compile Include="Models\EF\Booking.cs" />
     <Compile Include="Models\EF\Category.cs" />
+    <Compile Include="Models\EF\ReviewProduct.cs" />
     <Compile Include="Models\EF\Contact.cs" />
     <Compile Include="Models\EF\New.cs" />
     <Compile Include="Models\EF\Order.cs" />
@@ -376,9 +428,11 @@
     <Compile Include="Models\EF\Product.cs" />
     <Compile Include="Models\EF\ProductCategory.cs" />
     <Compile Include="Models\EF\ProductImage.cs" />
+    <Compile Include="Models\EF\Service.cs" />
     <Compile Include="Models\EF\Subscribe.cs" />
     <Compile Include="Models\EF\SystemSetting.cs" />
     <Compile Include="Models\EF\ThongKe.cs" />
+    <Compile Include="Models\EF\Wishlist.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\OrderViewModel.cs" />
@@ -428,6 +482,9 @@
     <Content Include="Content\assets\dist\img\prod-3.jpg" />
     <Content Include="Content\assets\dist\img\prod-4.jpg" />
     <Content Include="Content\assets\dist\img\prod-5.jpg" />
+    <Content Include="Content\assets\dist\img\rửa xe.PNG" />
+    <Content Include="Content\assets\dist\img\sơn xe.PNG" />
+    <Content Include="Content\assets\dist\img\thay dầu.PNG" />
     <Content Include="Content\assets\dist\img\user1-128x128.jpg" />
     <Content Include="Content\assets\dist\img\user2-160x160.jpg" />
     <Content Include="Content\assets\dist\img\user3-128x128.jpg" />
@@ -3511,15 +3568,23 @@
     <Content Include="Content\Image\r3.jpg" />
     <Content Include="Content\Image\red-flower.jpg" />
     <Content Include="Content\Image\rosasmall.jpg" />
+    <Content Include="Content\Image\rửa xe.jpg" />
+    <Content Include="Content\Image\rửa xe.PNG" />
+    <Content Include="Content\Image\sơn xe.jpg" />
+    <Content Include="Content\Image\sơn xe.PNG" />
+    <Content Include="Content\Image\thay dầu.jpg" />
+    <Content Include="Content\Image\thay dầu.PNG" />
     <Content Include="Content\Image\TulipR00.jpg" />
     <Content Include="Content\Image\y1.jpg" />
     <Content Include="Content\Image\y2.jpg" />
     <Content Include="Content\Image\zinnia-042918.jpg" />
     <Content Include="Content\Image\ảnh logo tứ quý.png" />
+    <Content Include="Content\Image\ảnh nền chính.png" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\template\app.css" />
     <Content Include="Content\template\reset.css" />
     <Content Include="Content\template\send1.html" />
+    <Content Include="Content\template\send22.html" />
     <Content Include="Content\template\send2.html" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -3713,6 +3778,8 @@
     <Content Include="Content\assets\plugins\moment\moment.min.js.map" />
     <Content Include="Areas\Admin\Views\Statictical\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Posts\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Service\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Service\Add.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -3770,7 +3837,7 @@
     <Content Include="Views\Menu\MenuArrivals.cshtml" />
     <Content Include="Views\Contact\Index.cshtml" />
     <Content Include="Views\Products\ProductCategory.cshtml" />
-    <Content Include="Views\Menu\_MenuLeft.cshtml" />
+    <Content Include="Views\Menu\MenuLeft.cshtml" />
     <Content Include="Views\Products\Detail.cshtml" />
     <Content Include="Views\ShoppingCart\Index.cshtml" />
     <Content Include="Views\ShoppingCart\Partial_Item_Cart.cshtml" />
@@ -3786,10 +3853,17 @@
     <Content Include="Views\Article\Index.cshtml" />
     <Content Include="Views\Review\LichSuDonHang.cshtml" />
     <Content Include="Views\Account\Profile.cshtml" />
+    <Content Include="Views\Review\_Review.cshtml" />
+    <Content Include="Views\Review\_Load_Review.cshtml" />
+    <Content Include="Views\Wishlist\Index.cshtml" />
+    <Content Include="Views\Service\Index.cshtml" />
+    <Content Include="Views\Booking\Add.cshtml" />
+    <Content Include="Views\Booking\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Areas\Admin\Views\Adv\" />
     <Folder Include="Content\ckfinder\userfiles\" />
   </ItemGroup>
   <ItemGroup>
@@ -3906,6 +3980,39 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202403211119565_updateodercustomer.resx">
       <DependentUpon>202403211119565_updateodercustomer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202404010726470_TableReviewProdocut.resx">
+      <DependentUpon>202404010726470_TableReviewProdocut.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202404010933029_TableYeuThichSP.resx">
+      <DependentUpon>202404010933029_TableYeuThichSP.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202404030226381_service.resx">
+      <DependentUpon>202404030226381_service.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202404030234284_sẻvice2.resx">
+      <DependentUpon>202404030234284_sẻvice2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202404030256106_service3.resx">
+      <DependentUpon>202404030256106_service3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202404030626085_servicess.resx">
+      <DependentUpon>202404030626085_servicess.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202404030707061_addBooking.resx">
+      <DependentUpon>202404030707061_addBooking.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202404030711389_addBooking1.resx">
+      <DependentUpon>202404030711389_addBooking1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202404030727000_addBooking2.resx">
+      <DependentUpon>202404030727000_addBooking2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202404040249541_updateBooking.resx">
+      <DependentUpon>202404040249541_updateBooking.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202404041020039_upatever2.resx">
+      <DependentUpon>202404041020039_upatever2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

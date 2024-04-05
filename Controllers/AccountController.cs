@@ -102,8 +102,10 @@ namespace WebBanHangOnline.Controllers
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, shouldLockout: false);
+            ViewBag.tennguoidung = model.UserName;
             switch (result)
             {
+                
                 case SignInStatus.Success:
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
@@ -178,7 +180,15 @@ namespace WebBanHangOnline.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser
+                {
+                    UserName = model.Email,
+                    Email = model.Email,
+                    // Đảm bảo giá trị ngày tháng là hợp lệ ở đây
+                    // Ví dụ: DateOfBirth = DateTime.Now
+                    // Hoặc: DateOfBirth = new DateTime(2000, 1, 1)
+                };
+
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

@@ -8,7 +8,7 @@ using System.Web;
 namespace WebBanHangOnline.Models.EF
 {
     [Table("tb_Subscribe")]
-    public class Subscribe
+    public class Subscribe : CommonAbstract
     {
         [Key]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
@@ -16,6 +16,5 @@ namespace WebBanHangOnline.Models.EF
         [EmailAddress]
         [Required(ErrorMessage ="Không được để trống email")]
         public string Email { get; set; }
-        public DateTime CreatedDate { get; set; }
     }
 }

@@ -1,0 +1,114 @@
+﻿@model WebBanHangOnline.Models.EF.Service
+@{
+    ViewBag.Title = "Add";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+@section naviheader{
+
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="/admin" class="nav-link">Trang chủ</a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="/admin/service" class="nav-link">Dịch vụ</a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="#" class="nav-link">Thêm mới</a>
+        </li>
+    </ul>
+
+}
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Thêm mới Dịch vụ</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Dịch vụ</a></li>
+                    <li class="breadcrumb-item active">Thêm mới</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title" style="color: forestgreen">Thông tin thêm mới Dịch vụ</h3>
+
+        </div>
+        <div class="card-body">
+            <div class="bs-stepper-content">
+                @using (Html.BeginForm("Add", "service", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+
+                    <!-- your steps content here -->
+                <div id="logins-part" class="content active dstepper-block" role="tabpanel" aria-labelledby="logins-part-trigger">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Tên dịch vụ</label>
+                        @Html.TextBoxFor(a => a.Title, new { @class = "form-control", @placeholder = "Tên dịch vụ" })
+                        @Html.ValidationMessageFor(a => a.Title, null, new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Ảnh mô tả</label>
+                        <div class="col-md-10">
+                            <img id="output" class="img-rounded" alt="Ảnh" width="180" height="180" src="~/Content/Image/no-image-nes.png" />
+                            <p>
+                                <label for="ulfile" style="cursor: pointer;">Chọn ảnh</label>
+                            </p>
+                            <input name="ImageFile" id="ufile" type="file" style="display:none;" onchange="loadFile(event)" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Người thực hiện</label>
+                        @Html.TextAreaFor(a => a.ModifiedBy, new { @class = "form-control", @placeholder = "Người thực hiện" })
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Mô tả chi tiết</label>
+                        @Html.TextAreaFor(a => a.Description, new { @class = "form-control", @placeholder = "Người thực hiện" })
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Chi phí</label>
+                        @Html.TextAreaFor(a => a.PriceOfSerVice, new { @class = "form-control", @placeholder = "Chi phí" })
+                    </div>
+                    <div class="form-group">
+                        <a class="btn btn-warning" href="/admin/service">Quay lại</a>
+                        <button type="submit" name="btnSave" id="btnSave" class="btn btn-primary">Lưu</button>
+                    </div>
+                </div>
+
+                }
+            </div>
+        </div>
+        <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+
+</section>
+<!-- /.content -->
+
+<script>
+    var loadFile = function (event) {
+        var image = document.getElementById('output');
+        image.src = URL.createObjectURL(event.target.files[0]);
+    };
+</script>
+
+
+
+

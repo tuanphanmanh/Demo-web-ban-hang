@@ -24,8 +24,10 @@
                     <div class="sidebar_title">
                         <h5 class="btn btn-outline-info">Hãng xe</h5>
                     </div>
-                    @*@Html.Action("MenuLeft", "Menu")*@
-                    @if (Model != null && Model.Any())
+
+                    @Html.Action("MenuLeft", "Menu")
+                        
+                    @*@if (Model != null && Model.Any())
                     {
                         <ul class="sidebar_categories">
                             @foreach (var item in Model)
@@ -53,7 +55,7 @@
 
                             }
                         </ul>
-                    }
+                    }*@
 
                 </div>
 
@@ -93,7 +95,7 @@
                                         <span class="type_sorting_text">Sắp xếp theo</span>
                                         <i class="fa fa-angle-down"></i>
                                         <ul class="sorting_type">
-                                            <li class="type_sorting_btn" data-isotope-option='{ "sortBy": "original-order" }'><span>Default Sorting</span></li>
+                                            <li class="type_sorting_btn" data-isotope-option='{ "sortBy": "original-order" }'><span>Mặc định</span></li>
                                             <li class="type_sorting_btn" data-isotope-option='{ "sortBy": "price" }'><span>Giá tiền</span></li>
                                             <li class="type_sorting_btn" data-isotope-option='{ "sortBy": "name" }'><span>Tên xe</span></li>
                                         </ul>

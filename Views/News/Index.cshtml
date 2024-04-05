@@ -7,49 +7,67 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <link rel="stylesheet" type="text/css" href="~/Content/assets/styles/main_styles.css">
-<style>
-    .news_section_container {
-        margin-top: 200px;
-    }
-</style>
-<div class="container news_section_container">
-    <div class="row">
-        <div class="col-md-12" style="text-align: center">
-            <h2>TIN TỨC</h2>
-            <div style="background-color: forestgreen; height: 2px;"></div>
-        </div>
-    </div>
-    <br />
-    @if (Model != null && Model.Any())
-    {
-        var i = ((ViewBag.Page - 1) * ViewBag.PageSize) + 1;
-        foreach (var item in Model)
-        {
-            <div class="row">
-                <div class="col-md-3">
-                    <div class="img-box">
-                        <a href="/@item.Alias-@item.Id" title="@item.Title">
-                            <img style="max-height: 100px; min-width: 200px" class="rounded-circle" src="@item.Image" />
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-9">
-                    <div class="content-box">
-                        <h4> <a href="/@item.Alias-n@(item.Id)" title="@item.Title">@item.Title</a></h4>
-                        <div class="description-box">
-                            <i>@item.Description</i>
-                        </div>
-                    </div>
-                </div>
+<link rel="stylesheet" type="text/css" href="~/content/assets/styles/bootstrap4/bootstrap.min.css">
+<link href="~/content/assets/plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="~/content/assets/plugins/OwlCarousel2-2.2.1/owl.carousel.css">
+<link rel="stylesheet" type="text/css" href="~/content/assets/plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
+<link rel="stylesheet" type="text/css" href="~/content/assets/plugins/OwlCarousel2-2.2.1/animate.css">
+<link rel="stylesheet" href="~/content/assets/plugins/themify-icons/themify-icons.css">
+<link rel="stylesheet" type="text/css" href="~/content/assets/plugins/jquery-ui-1.12.1.custom/jquery-ui.css">
+<link rel="stylesheet" type="text/css" href="~/content/assets/styles/contact_styles.css">
+<link rel="stylesheet" type="text/css" href="~/content/assets/styles/contact_responsive.css">
+
+<div style="margin-top: 150px" class="container contact_container">
+    <div class="row" style="height:60px">
+        <div class="col">
+            <div class="breadcrumbs d-flex flex-row align-items-center">
+                <ul>
+                    <li><a href="/">Trang chủ</a></li>
+                    <li class="active"><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>Tin tức</a></li>
+                </ul>
             </div>
-            <hr />
-            i++;
-        }
-    }
-    <div class="row">
-        <div class="col-12" style="text-align: center">
-            @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
         </div>
     </div>
 
+    <div class="container news_section_container">
+        <div class="row">
+            <div class="col-md-12" style="text-align: center">
+                <h2>TIN TỨC</h2>
+                <div style="background-color: forestgreen; height: 2px;"></div>
+            </div>
+        </div>
+        <br />
+        @if (Model != null && Model.Any())
+        {
+            var i = ((ViewBag.Page - 1) * ViewBag.PageSize) + 1;
+            foreach (var item in Model)
+            {
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="img-box">
+                            <a href="/@item.Alias-n@(item.Id)" title="@item.Title">
+                                <img style="max-height: 100px; min-width: 200px" class="rounded-circle" src="@item.Image" />
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="content-box">
+                            <h4> <a href="/@item.Alias-n@(item.Id)" title="@item.Title">@item.Title</a></h4>
+                            <div class="description-box">
+                                <i>@item.Description</i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr />
+                i++;
+            }
+        }
+        <div class="row">
+            <div class="col-12">
+                @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+            </div>
+        </div>
+
+    </div>
 </div>

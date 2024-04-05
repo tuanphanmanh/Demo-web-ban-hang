@@ -1,9 +1,16 @@
 ﻿@model IEnumerable<WebBanHangOnline.Models.EF.OrderDetail>
 
+
+<style>
+    .DonDaDat tbody tr:nth-of-type(odd) {
+        background-color: aliceblue;
+    }
+</style>
+
 @if (Model != null & Model.Any())
 {
     int i = 1;
-    <table class="table table-bordered">
+    <table class="DonDaDat table table-bordered">
         <thead>
             <tr style="text-align: center">
                 <th>STT</th>
@@ -19,7 +26,7 @@
                 <tr style="text-align: center">
                     <td>@i</td>
                     <td>@item.Product.Title</td>
-                    <td>@item.Price</td>
+                    <td>@WebBanHangOnline.Common.Common.FormatNumber(item.Price , 0)</td>
                     <td>@item.Quantity </td>
                     <td>@WebBanHangOnline.Common.Common.FormatNumber(item.Price * item.Quantity, 0)</td>
                 </tr>

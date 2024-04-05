@@ -27,6 +27,8 @@ namespace WebBanHangOnline.Controllers
                 db.Entry(item).Property(a=>a.ViewCount).IsModified = true;
                 db.SaveChanges();
             }
+            var countReview = db.ReviewProducts.Where(a=>a.ProductId == id).Count();
+            ViewBag.CountReview = countReview;
             return View(item);
         }
 
