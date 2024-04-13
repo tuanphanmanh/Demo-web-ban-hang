@@ -1,6 +1,9 @@
-﻿using PagedList;
+﻿using iTextSharp.text;
+using iTextSharp.text.pdf;
+using PagedList;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -30,13 +33,39 @@ namespace WebBanHangOnline.Controllers
         }
         public ActionResult Detail(int id)
         {
-            var item = db.News.Find( id);
+            var item = db.News.Find(id);
             return View(item);
         }
         public ActionResult Partial_News_Home()
         {
             var items = db.News.Take(3).ToList();
             return PartialView(items);
+        }
+        public ActionResult ExportPdf()
+        {
+            var data = db.News.ToList();
+
+            Document document = new Document();
+
+            MemoryStream memoryStream = new MemoryStream();
+            PdfWriter writer = PdfWriter.GetInstance(document, memoryStream);
+
+            document.Open();
+
+            foreach (var item in data)
+            {
+                // Thêm các trường dữ liệu từ model vào tài liệu
+                document.Add(new Paragraph(item.Detail));
+            }
+
+            // Đóng tài liệu
+            document.Close();
+
+            // Lấy byte array từ MemoryStream
+            byte[] bytes = memoryStream.ToArray();
+
+            // Trả về file PDF
+            return File(bytes, "application/pdf", "example.pdf");
         }
     }
 }

@@ -12,34 +12,20 @@
             <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="/admin" class="nav-link">Trang chủ</a>
+            <a href="/admin/home" class="nav-link">Trang chủ</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
             <a href="/admin/service" class="nav-link">Dịch vụ</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="#" class="nav-link">Thêm mới</a>
+            <a href="#" class="nav-link active">Thêm mới</a>
         </li>
     </ul>
 
 }
 
-<!-- Content Header (Page header) -->
-<section class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h1>Thêm mới Dịch vụ</h1>
-            </div>
-            <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Dịch vụ</a></li>
-                    <li class="breadcrumb-item active">Thêm mới</li>
-                </ol>
-            </div>
-        </div>
-    </div><!-- /.container-fluid -->
-</section>
+<div style="height:2px; background-color: darkslategrey"></div>
+<br />
 
 <!-- Main content -->
 <section class="content">
@@ -47,8 +33,7 @@
     <!-- Default box -->
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title" style="color: forestgreen">Thông tin thêm mới Dịch vụ</h3>
-
+            <h3 class="card-title">Thông tin thêm mới dịch vụ</h3>
         </div>
         <div class="card-body">
             <div class="bs-stepper-content">
@@ -87,8 +72,14 @@
                         @Html.TextAreaFor(a => a.PriceOfSerVice, new { @class = "form-control", @placeholder = "Chi phí" })
                     </div>
                     <div class="form-group">
-                        <a class="btn btn-warning" href="/admin/service">Quay lại</a>
-                        <button type="submit" name="btnSave" id="btnSave" class="btn btn-primary">Lưu</button>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <a class="btn btn-outline-danger rounded-pill" href="/admin/service/" style="width:100%"><i class="fa fa-fast-backward" aria-hidden="true"> Quay lại</i></a>
+                            </div>
+                            <div class="col-md-8">
+                                <button type="submit" name="btnSave" id="btnSave" class="btn btn-success rounded-pill" style="width:100%"> Lưu <i class="fa fa-check-square" aria-hidden="true"></i> </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -102,12 +93,15 @@
 </section>
 <!-- /.content -->
 
-<script>
-    var loadFile = function (event) {
-        var image = document.getElementById('output');
-        image.src = URL.createObjectURL(event.target.files[0]);
-    };
-</script>
+@section scripts{
+
+    <script>
+        var loadFile = function (event) {
+            var image = document.getElementById('output');
+            image.src = URL.createObjectURL(event.target.files[0]);
+        };
+    </script>
+}
 
 
 

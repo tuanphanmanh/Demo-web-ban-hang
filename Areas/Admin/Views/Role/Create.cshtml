@@ -22,34 +22,15 @@
 
 }
 
-<!-- Content Header (Page header) -->
-<section class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h1>Blank Page</h1>
-            </div>
-            <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Danh sách quyền</li>
-                </ol>
-            </div>
-        </div>
-    </div><!-- /.container-fluid -->
-</section>
+<div style="height:2px; background-color: darkslategrey"></div>
+<br />
 
 <!-- Main content -->
 <section class="content">
-
     <!-- Default box -->
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Danh sách quyền</h3>
-
-            <div class="card-tools">
-                <a href="/admin/role/create" class="btn btn-success">Thêm mới</a>
-            </div>
+            <h3 class="card-title">Thông tin thêm mới quyền</h3>
         </div>
         <div class="card-body">
             @using (Html.BeginForm("Create", "Role", FormMethod.Post))
@@ -57,19 +38,21 @@
                 @Html.ValidationSummary(false)
                 @Html.AntiForgeryToken()
                 <div class="form-group">
-                    <label>Tên qyuền</label>
-                    @Html.TextBoxFor(a => a.Name, new { @class = "form-control" })
+                    <div class="row">
+                        <div class="col-md-10">
+                            <label>Tên quyền</label>
+                            @Html.TextBoxFor(a => a.Name, new { @class = "form-control" })
+                        </div>
+                        <div class="col-md-2">
+                            <a href="/admin/role" style="width:100%" class="btn btn-outline-danger">Quay lại</a>
+                            <button type="submit" class="btn btn-success" style="width:100%">Thêm mới <i class="fa fa-check-square" aria-hidden="true"></i></button>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-success">Thêm mới</button>
-                </div>
+
             }
         </div>
         <!-- /.card-body -->
-        <div class="card-footer">
-            Footer
-        </div>
-        <!-- /.card-footer-->
     </div>
     <!-- /.card -->
 

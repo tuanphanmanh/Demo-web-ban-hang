@@ -73,7 +73,7 @@
 
                                     <li class="language" style="background-color: darkred; color: white; font-weight: bold ">
                                         <a href="#" style="background-color: darkred; color: white; font-weight: bold ">
-                                             <img src="https://www.vietcombank.com.vn/-/media/Default-Website/Default-images/Icons/Language/VIE.png?db=web" alt="Việt Nam" />
+                                            <img src="https://www.vietcombank.com.vn/-/media/Default-Website/Default-images/Icons/Language/VIE.png?db=web" alt="Việt Nam" />
                                             <i class="fa fa-angle-down"></i>
                                         </a>
                                         <ul class="language_selection">
@@ -142,7 +142,7 @@
                         <div class="col-lg-12 text-right">
                             <div class="logo_container">
                                 <a href="/">
-                                    <img src="@SettingHelper.GetValue("SettingLogo")" title="logoAuto" style="height:100px;"/>
+                                    <img src="@SettingHelper.GetValue("SettingLogo")" title="logoAuto" style="height:100px;" />
                                 </a>
                             </div>
                             <nav class="navbar">
@@ -248,8 +248,8 @@
                     <div class="col-lg-12">
                         <div class="footer_nav_container">
                             <div class="cr">
-                               Chất lượng <i class="fa fa-heart"></i> niềm tin
-                                           <a href="https://www.facebook.com/profile.php?id=100026407069743">Tứ quý Auto</a> 
+                                Chất lượng <i class="fa fa-heart"></i> niềm tin
+                                <a href="https://www.facebook.com/profile.php?id=100026407069743">Tứ quý Auto</a>
                             </div>
                         </div>
                     </div>
@@ -257,55 +257,62 @@
             </div>
         </footer>
 
-        <button onclick="scrollToTop()" id="back-to-top"> > </button>
+        <button onclick="scrollToTop()" id="back-to-top">  <i class="fa fa-user" aria-hidden="true"></i> </button>
 
     </div>
 
-<script>
-    var toggleSwitch = document.getElementById("toggleSwitch");
-    toggleSwitch.addEventListener("change", function () {
-        if (this.checked) {
-            // Bật công tắt
-            console.log("Đã bật công tắt");
-        } else {
-            // Tắt công tắt
-            console.log("Đã tắt công tắt");
-        }
-    });
-    // Hiển thị hoặc ẩn nút quay lại đầu trang dựa trên vị trí cuộn
-    window.onscroll = function () { scrollFunction() };
-
-    function scrollFunction() {
-        var backButton = document.getElementById("back-to-top");
-        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-            backButton.classList.add("show");
-        } else {
-            backButton.classList.remove("show", "animate");
-        }
-    }
-    const toggleDarkModeButton = document.getElementById('toggleSwitch');
-    const appElement = document.getElementById('app');
-
-    toggleDarkModeButton.addEventListener('click', function () {
-        appElement.classList.toggle('dark-mode');
-    });
-    // Cuộn lên đầu trang khi nhấp vào nút quay lại đầu trang
-    function scrollToTop() {
-        var scrollDuration = 500; // Thời gian cuộn lên (ms)
-        var scrollStep = -window.scrollY / (scrollDuration / 15);
-        var scrollInterval = setInterval(function () {
-            if (window.scrollY !== 0) {
-                window.scrollBy(0, scrollStep);
+    <script>
+        var toggleSwitch = document.getElementById("toggleSwitch");
+        toggleSwitch.addEventListener("change", function () {
+            if (this.checked) {
+                // Bật công tắt
+                console.log("Đã bật công tắt");
             } else {
-                clearInterval(scrollInterval);
+                // Tắt công tắt
+                console.log("Đã tắt công tắt");
             }
-        }, 15);
+        });
+        // Hiển thị hoặc ẩn nút quay lại đầu trang dựa trên vị trí cuộn
+        window.onscroll = function () { scrollFunction() };
 
-        // Thêm hiệu ứng xoay tròn và từ từ chạy về đầu trang
-        var backButton = document.getElementById("back-to-top");
-        backButton.classList.add("animate");
-    }
-</script>
+        function scrollFunction() {
+            var backButton = document.getElementById("back-to-top");
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                backButton.classList.add("show");
+            } else {
+                backButton.classList.remove("show", "animate");
+            }
+        }
+        const toggleDarkModeButton = document.getElementById('toggleSwitch');
+        const appElement = document.getElementById('app');
+
+        toggleDarkModeButton.addEventListener('click', function () {
+            appElement.classList.toggle('dark-mode');
+        });
+        // Cuộn lên đầu trang khi nhấp vào nút quay lại đầu trang
+        function scrollToTop() {
+            var scrollDuration = 500; // Thời gian cuộn lên (ms)
+            var scrollStep = -window.scrollY / (scrollDuration / 15);
+            var scrollInterval = setInterval(function () {
+                if (window.scrollY !== 0) {
+                    window.scrollBy(0, scrollStep);
+                } else {
+                    clearInterval(scrollInterval);
+                }
+            }, 45);
+
+            // Thêm hiệu ứng xoay tròn và từ từ chạy về đầu trang
+            var backButton = document.getElementById("back-to-top");
+            backButton.classList.add("animate");
+        }
+    </script>
+    <script src="~/Scripts/ExportFileExcel/dataTables/jquery.dataTables.js"></script>
+    <script src="~/Scripts/ExportFileExcel/dataTables/dataTables.fixedHeader.min.js"></script>
+    <script src="~/Scripts/ExportFileExcel/dataTables/dataTables.fixedColumns.min.js"></script>
+    <script src="~/Scripts/ExportFileExcel/dataTables/html5-button/buttons.colVis.min.js"></script>
+    <script src="~/Scripts/ExportFileExcel/dataTables/html5-button/buttons.html5.min.js"></script>
+    <script src="~/Scripts/ExportFileExcel/dataTables/html5-button/buttons.print.min.js"></script>
+    <script src="~/Scripts/ExportFileExcel/dataTables/html5-button/dataTables.buttons.min.js"></script>
 
     <script src="~/content/assets/styles/bootstrap4/popper.js"></script>
     <script src="~/content/assets/styles/bootstrap4/bootstrap.min.js"></script>
@@ -316,7 +323,7 @@
     <script src="~/content/assets/js/custom.js"></script>
     <script src="~/Scripts/jsShopping.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
-    @*<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>  nếu có lỗi nào thì quay lại đây và xóa dòng comment này đi    *@   
+    @*<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>  nếu có lỗi nào thì quay lại đây và xóa dòng comment này đi    *@
     <script src="~/Scripts/jquery.validate.min.js"></script>
     @RenderSection("scripts", required: false)
 </body>

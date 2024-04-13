@@ -177,3 +177,15 @@ D:\Đồ án\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrat
 D:\Đồ án\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.addBooking2.resources
 D:\Đồ án\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.updateBooking.resources
 D:\Đồ án\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.upatever2.resources
+D:\Đồ án\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.updateModel.resources
+D:\Đồ án\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.updateBooking1.resources
+D:\Đồ án\WebBanHangOnline\WebBanHangOnline\bin\EPPlus.dll
+D:\Đồ án\WebBanHangOnline\WebBanHangOnline\bin\EPPlus.Interfaces.dll
+D:\Đồ án\WebBanHangOnline\WebBanHangOnline\bin\EPPlus.System.Drawing.dll
+D:\Đồ án\WebBanHangOnline\WebBanHangOnline\bin\Microsoft.IO.RecyclableMemoryStream.dll
+D:\Đồ án\WebBanHangOnline\WebBanHangOnline\bin\System.ComponentModel.Annotations.dll
+D:\Đồ án\WebBanHangOnline\WebBanHangOnline\bin\EPPlus.xml
+D:\Đồ án\WebBanHangOnline\WebBanHangOnline\bin\Microsoft.IO.RecyclableMemoryStream.xml
+D:\Đồ án\WebBanHangOnline\WebBanHangOnline\bin\BouncyCastle.Crypto.dll
+D:\Đồ án\WebBanHangOnline\WebBanHangOnline\bin\itextsharp.dll
+D:\Đồ án\WebBanHangOnline\WebBanHangOnline\bin\itextsharp.xml

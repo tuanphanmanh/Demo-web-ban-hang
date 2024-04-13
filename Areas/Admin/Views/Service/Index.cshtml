@@ -10,29 +10,15 @@
             <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="/admin" class="nav-link">Trang chủ</a>
+            <a href="/admin/home" class="nav-link">Trang chủ</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="/admin/posts" class="nav-link">Dịch vụ</a>
+            <a href="/admin/posts" class="nav-link active">Dịch vụ</a>
         </li>
     </ul>
 }
-<!-- Content Header (Page header) -->
-<section class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h1>Quản lý Dịch vụ</h1>
-            </div>
-            <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
-                    <li class="breadcrumb-item active">Dịch vụ</li>
-                </ol>
-            </div>
-        </div>
-    </div>
-</section>
+<div style="height:2px; background-color: darkslategrey"></div>
+<br />
 
 <section class="content">
     <div class="card">
@@ -40,8 +26,9 @@
             <h3 class="card-title">Danh sách dịch vụ</h3>
 
             <div class="card-tools">
-                <a href="/admin/service/add" class="btn btn-primary rounded-pill">Thêm mới</a>
-                <a href="#" class="btn btn-danger rounded-pill" id="BtnDeleteAll">Xoá</a>
+                <a href="/admin/service/add" class="btn btn-success"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>
+                <a href="#" class="btn btn-outline-danger " id="BtnDeleteAll"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                <a href="/admin/service/Export" class="btn btn-outline-dark"><i class="fa fa-file-excel" aria-hidden="true"></i></a>
             </div>
         </div>
         <div class="card-body">
@@ -55,7 +42,7 @@
                         <th>Ngày áp dụng DV</th>
                         <th>Người thực hiện</th>
                         <th style="text-align:center">Mức phí</th>
-                        <th style="width:180px">Chức năng</th>
+                        <th style="width:180px"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -64,23 +51,16 @@
                         var i = 1;
                         foreach (var item in Model)
                         {
-                            <tr style="text-align: center" id="trow_@item.Id">
-                                <td><input type="checkbox" class="cbkItem" value="@item.Id" /></td>
+                            <tr style="text-align: center">
+                                <td><input type="checkbox" class="cbkItem"  /></td>
                                 <td> @i</td>
                                 <td>@item.Title</td>
                                 <td>@item.CreatedDate.ToString("dd/MM/yyyy")</td>
                                 <td>@item.ModifiedBy</td>
                                 <td> @WebBanHangOnline.Common.Common.FormatNumber(@item.PriceOfSerVice, 0)</td>
-                                <td class="text-center">
-                                    <ul class="nav nav-pills nav-fill gap-2 p-1 small bg-success rounded-5 shadow-sm" id="pillNav2" role="tablist" style="--bs-nav-link-color: var(--bs-white); --bs-nav-pills-link-active-color: var(--bs-primary); --bs-nav-pills-link-active-bg: var(--bs-white);">
-                                        <li class="nav-item" role="presentation">
-
-                                            <a href="/admin/posts/edit/@item.Id" class="nav-link active rounded-5" role="tab">Sửa</a>
-                                        </li>
-                                        <li class="nav-item" role="presentation">
-                                            <a class="nav-link rounded-5 btnDelete text-white" id="delete-tab2" data-bs-toggle="tab" role="tab" aria-selected="false">Xóa</a>
-                                        </li>
-                                    </ul>
+                                <td>
+                                    <a href="#" class=" text-primary"><i class="fa fa-edit" aria-hidden="true"></i></a>
+                                    <a href="#" class="text-danger btnDelete"><i class="fa fa-trash" aria-hidden="true"></i></a>
                                 </td>
                             </tr>
                             i++;
@@ -103,104 +83,103 @@
 
 </section>
 <!-- /.content -->
-
 @*@section scripts{
-    <script>
-        // xóa nhiều bản ghi
-        $(document).ready(function () {
-            $('body').on('click', '#BtnDeleteAll', function (e) {
-                e.preventDefault();
-                var str = "";
-                var checkbox = $(this).parents('.card').find('tr td input:checkbox');
-                var i = 0;
-                checkbox.each(function () {
-                    if (this.checked) {
-                        checkbox.attr('selected', 'checked');
-                        var _id = $(this).val();
-                        if (i === 0) {
-                            str += _id;
+        <script>
+            // xóa nhiều bản ghi
+            $(document).ready(function () {
+                $('body').on('click', '#BtnDeleteAll', function (e) {
+                    e.preventDefault();
+                    var str = "";
+                    var checkbox = $(this).parents('.card').find('tr td input:checkbox');
+                    var i = 0;
+                    checkbox.each(function () {
+                        if (this.checked) {
+                            checkbox.attr('selected', 'checked');
+                            var _id = $(this).val();
+                            if (i === 0) {
+                                str += _id;
+                            }
+                            else {
+                                str += "," + _id;
+                            }
+                            i++;
                         }
                         else {
-                            str += "," + _id;
+                            checkbox.attr('selected', '');
                         }
-                        i++;
-                    }
-                    else {
-                        checkbox.attr('selected', '');
+                    });
+                    if (str.length > 0) {
+                        var conf = confirm("Bạn có muốn xóa các Bài viết này không?");
+                        if (conf === true) {
+                            $.ajax({
+                                url: '/admin/posts/deleteAll',
+                                type: 'POST',
+                                data: { ids: str },
+                                success: function (rs) {
+                                    if (rs.success) {
+                                        location.reload();
+                                    }
+                                }
+                            });
+                        }
                     }
                 });
-                if (str.length > 0) {
-                    var conf = confirm("Bạn có muốn xóa các Bài viết này không?");
+
+                // xóa 1 bản ghi
+                $('body').on('change', '#SelectAll', function () {
+                    var checkStatus = this.checked;
+                    var checkbox = $(this).parents('.card-body').find('tr td input:checkbox');
+                    checkbox.each(function () {
+                        this.checked = checkStatus;
+                        if (this.checked) {
+                            checkbox.attr('selected', 'checked');
+                        }
+                        else {
+                            checkbox.attr('selected', '');
+                        }
+                    });
+                });
+
+                $('body').on('click', '.btnDelete', function () {
+                    var id = $(this).data("id");
+                    var conf = confirm("Bạn có muốn xóa Bài viết này không?");
                     if (conf === true) {
                         $.ajax({
-                            url: '/admin/posts/deleteAll',
+                            url: '/admin/posts/delete',
                             type: 'POST',
-                            data: { ids: str },
+                            data: { id: id },
                             success: function (rs) {
                                 if (rs.success) {
-                                    location.reload();
+                                    $('#trow_' + id).remove();
                                 }
                             }
                         });
                     }
-                }
-            });
-
-            // xóa 1 bản ghi
-            $('body').on('change', '#SelectAll', function () {
-                var checkStatus = this.checked;
-                var checkbox = $(this).parents('.card-body').find('tr td input:checkbox');
-                checkbox.each(function () {
-                    this.checked = checkStatus;
-                    if (this.checked) {
-                        checkbox.attr('selected', 'checked');
-                    }
-                    else {
-                        checkbox.attr('selected', '');
-                    }
                 });
-            });
-
-            $('body').on('click', '.btnDelete', function () {
-                var id = $(this).data("id");
-                var conf = confirm("Bạn có muốn xóa Bài viết này không?");
-                if (conf === true) {
+                // hiển thị trạng thái
+                $('body').on('click', '.btnActive', function (e) {
+                    e.preventDefault();
+                    var btn = $(this);
+                    var id = btn.data("id");
                     $.ajax({
-                        url: '/admin/posts/delete',
+                        url: '/admin/posts/IsActive',
                         type: 'POST',
                         data: { id: id },
                         success: function (rs) {
+                            debugger;
                             if (rs.success) {
-                                $('#trow_' + id).remove();
+                                if (rs.isActive) {
+                                    btn.html("<i class='fa fa-check text-success'> </i>");
+                                }
+                                else {
+                                    btn.html("<i class='fas fa-times text-danger'> </i>");
+                                }
                             }
                         }
                     });
-                }
-            });
-            // hiển thị trạng thái
-            $('body').on('click', '.btnActive', function (e) {
-                e.preventDefault();
-                var btn = $(this);
-                var id = btn.data("id");
-                $.ajax({
-                    url: '/admin/posts/IsActive',
-                    type: 'POST',
-                    data: { id: id },
-                    success: function (rs) {
-                        debugger;
-                        if (rs.success) {
-                            if (rs.isActive) {
-                                btn.html("<i class='fa fa-check text-success'> </i>");
-                            }
-                            else {
-                                btn.html("<i class='fas fa-times text-danger'> </i>");
-                            }
-                        }
-                    }
                 });
             });
-        });
-    </script>
-}*@
+        </script>
+    }*@
 
 

@@ -22,6 +22,10 @@ namespace WebBanHangOnline.Models.EF
         public int Id { get; set; }
         public string Title { get; set; }
         public string Alias { get; set; }
+        public int NumberOfSeats { get; set; }
+        public string Design { get; set; }
+        public string Fuel { get; set; }
+        public string Origin { get; set; }
         public string ProductCode { get; set; }
         public string Description { get; set; }
         public string Detail { get; set; }

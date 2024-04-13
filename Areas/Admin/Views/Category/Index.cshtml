@@ -11,41 +11,28 @@
             <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="/admin" class="nav-link">Trang chủ</a>
+            <a href="/admin/home" class="nav-link">Trang chủ</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="/admin/category" class="nav-link">Danh mục</a>
+            <a href="/admin/category" class="nav-link active">Danh mục</a>
         </li>
     </ul>
 
 }
-<!-- Content Header (Page header) -->
-<section class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h1>Quản lý Danh mục</h1>
-            </div>
-            <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Danh mục</li>
-                </ol>
-            </div>
-        </div>
-    </div><!-- /.container-fluid -->
-</section>
 
+<div style="height:2px; background-color: darkslategrey"></div> <br />
 <!-- Main content -->
 <section class="content">
 
     <!-- Default box -->
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Danh sách Danh mục</h3>
+            <h3 class="card-title">Danh sách danh mục</h3>
 
             <div class="card-tools">
-                <a href="/admin/category/add" class="btn btn-primary">Thêm mới</a>
+                <a href="/admin/category/add" class="btn btn-success">
+                    <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                </a>
             </div>
         </div>
         <div class="card-body">
@@ -73,8 +60,12 @@
                                 <td>@item.SeoTitle</td>
                                 <td>@item.Position</td>
                                 <td>
-                                    <a href="/admin/category/edit/@item.Id" class="btn btn-sm btn-primary">Sửa</a>
-                                    <a href="#" data-id="@item.Id" class="btn btn-sm btn-danger btnDelete">Xóa</a>
+                                    <a href="/admin/category/edit/@item.Id" class="text-primary">
+                                        <i class="fa fa-edit" aria-hidden="true"></i>
+                                    </a>
+                                    <a href="#" data-id="@item.Id" class="text-danger btnDelete">
+                                        <i class="fa fa-trash" aria-hidden="true"></i>
+                                    </a>
                                 </td>
                             </tr>
                             i++;

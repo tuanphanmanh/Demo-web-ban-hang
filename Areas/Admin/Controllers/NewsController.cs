@@ -71,8 +71,7 @@ namespace WebBanHangOnline.Areas.Admin.Controllers
                 model.ModifiedDate = DateTime.Now;
                 model.CreatedDate = db.News.Find(model.Id).CreatedDate;
                 model.Alias = WebBanHangOnline.Models.Common.Filter.FilterChar(model.Title);
-                // db.news.Attach(model);
-                model.CategoryId = 3;
+                model.CategoryId = 5;
                 db.News.AddOrUpdate(model);
                 db.SaveChanges();
                 return RedirectToAction("Index");

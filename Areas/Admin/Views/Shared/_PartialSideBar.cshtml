@@ -1,16 +1,16 @@
 ﻿<div class="sidebar">
-    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="image">
-            <img src="~/Content/clients/dist/img/1111.jpg" class="img-circle elevation-2" alt="User Image">
-        </div>
-        <div class="info">
-            <a href="/admin/home" class="d-block" style="text-decoration:none">Tứ quý Auto</a>
+    <div class="user-panel  mt-3 pb-3 mb-3 d-flex">
+        <div class="image ">
+            <a href="/admin/home">
+                <img  src="~/Content/Image/ảnh logo tứ quý.png" class="img-thumbnail text-center" style="width:160px; height:100px;" alt="User Image">
+            </a>
+
         </div>
     </div>
 
     <!-- Sidebar Menu -->
     <nav class="mt-2 text-white">
-        <ul class="nav nav-pills nav-sidebar  flex-column" data-widget="treeview" role="menu" data-accordion="false" >
+        <ul class="nav nav-pills nav-sidebar  flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <li class="nav-item">
                 <a href="/admin/Category" class="nav-link">
                     <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -30,77 +30,75 @@
             </li>
             <li class="nav-item">
                 <a href="/admin/posts" class="nav-link">
-                    <i class=" nav-icon fa fa-book icon"></i>
+                    <i class=" nav-icon fa fa-book"></i>
                     <p>
                         Bài viết
                     </p>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="/admin/products" class="nav-link">
-                    <i class="nav-icon fas fa-th"></i>
-                    <p>
-                        Quảng cáo
-                    </p>
-                </a>
-            </li>
-
-            <li class="nav-item">
                 <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-tachometer-alt"></i>
                     <p>
-                        Quản lý sản phẩm
+                        Quản lý xe
                         <i class="right fas fa-angle-right"></i>
                     </p>
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
                         <a href="/admin/productcategory" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>Danh mục sản phẩm</p>
+                            <i class="nav-icon fa fa-outdent"></i>
+                            <p>Hãng xe</p>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="/admin/products" class="nav-link">
                             <i class="nav-icon fas fa-plus "></i>
-                            <p>Sản phẩm </p>
+                            <p>Xe </p>
                         </a>
                     </li>
-                    
+
+
                     <li class="nav-item">
-                        <a href="~/admin/Order" class="nav-link">
-                            <i class=" nav-icon fas fa-car "></i>
-                            <p>Đơn hàng</p>
+                        <a href="~/admin/service/" class="nav-link">
+                            <i class="nav-icon fas fa-car-side "></i>
+                            <p>Dịch vụ xe</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="~/admin/Category/" class="nav-link">
-                            <i class=" nav-icon fas fa-car-side "></i>
-                            <p>Lắp đặt phụ kiện xe</p>
+                        <a href="~/admin/booking/" class="nav-link">
+                            <i class="nav-icon fas fa-user-check "></i>
+                            <p>Lịch khách đặt</p>
                         </a>
                     </li>
                 </ul>
             </li>
 
-            <li class="nav-item">
+            @*<li class="nav-item">
                 <a href="/admin/news" class="nav-link">
                     <i class="nav-icon fas fa-folder-open"></i>
                     <p>
                         Hướng dẫn sử dụng
                     </p>
                 </a>
-            </li>
+            </li>*@
             <li class="nav-item">
-                <a href="/admin/news" class="nav-link">
-                    <i class="nav-icon fas fa-cart-plus"></i>
+                <a href="/admin/Statistical " class="nav-link">
+                    <i class="nav-icon fas fa-car-battery"></i>
                     <p>
-                        Mua xe
+                        Thống kê doanh thu
                     </p>
                 </a>
             </li>
             <li class="nav-item">
+                <a href="~/admin/Order" class="nav-link">
+                    <i class=" nav-icon fas fa-cart-plus "></i>
+                    <p>Đơn hàng</p>
+                </a>
+            </li>
+            <li class="nav-item">
                 <a href="/admin/role" class="nav-link">
-                    <i class="nav-icon fas fa-vcard"></i>
+                    <i class="nav-icon fas fa-user-circle"></i>
                     <p>
                         Role
                     </p>
@@ -109,7 +107,7 @@
 
             <li class="nav-item">
                 <a href="/admin/SettingSystem/Partial_Setting" class="nav-link">
-                    <i class="nav-icon fas fa-assistive-listening-systems "></i>
+                    <i class="nav-icon fas fa-cog "></i>
                     <p>
                         Cấu hình hệ thống
                     </p>

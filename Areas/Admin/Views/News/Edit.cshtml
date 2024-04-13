@@ -12,34 +12,20 @@
             <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="/admin" class="nav-link">Trang chủ</a>
+            <a href="/admin/home" class="nav-link">Trang chủ</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
             <a href="/admin/News" class="nav-link">Tin tức</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="#" class="nav-link">Cập nhật</a>
+            <a href="#" class="nav-link active">Cập nhật</a>
         </li>
     </ul>
 
 }
 
-<!-- Content Header (Page header) -->
-<section class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h1>Cập nhật tin tức</h1>
-            </div>
-            <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Tin tức</a></li>
-                    <li class="breadcrumb-item active">Cập nhật</li>
-                </ol>
-            </div>
-        </div>
-    </div><!-- /.container-fluid -->
-</section>
+<div style="height:2px; background-color: darkslategrey"></div>
+<br />
 
 <!-- Main content -->
 <section class="content">
@@ -59,55 +45,61 @@
                     @Html.ValidationSummary(true)
                     <!-- your steps content here -->
 
-                    <div id="logins-part" class="content active dstepper-block" role="tabpanel" aria-labelledby="logins-part-trigger">
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Tiêu đề tin</label>
-                            @Html.TextBoxFor(a => a.Title, new { @class = "form-control", @placeholder = "Tên Bài viết" })
-                            @Html.ValidationMessageFor(a => a.Title, null, new { @class = "text-danger" })
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputFile">Ảnh đại diện</label>
-                            <div class="input-group">
-                                <div class="custom-file">
-                                    @Html.TextBoxFor(a => a.Image, new { @id = "txtImage", @class = "form-control" })
-                                </div>
-                                <div class="input-group-append">
-                                    <input type="button" value="Tải ảnh" onclick="BrowseServer('txtImage');" />
-                                </div>
+                <div id="logins-part" class="content active dstepper-block" role="tabpanel" aria-labelledby="logins-part-trigger">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Tiêu đề tin</label>
+                        @Html.TextBoxFor(a => a.Title, new { @class = "form-control", @placeholder = "Tên Bài viết" })
+                        @Html.ValidationMessageFor(a => a.Title, null, new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputFile">Ảnh đại diện</label>
+                        <div class="input-group">
+                            <div class="custom-file">
+                                @Html.TextBoxFor(a => a.Image, new { @id = "txtImage", @class = "form-control" })
+                            </div>
+                            <div class="input-group-append">
+                                <input type="button" value="Tải ảnh" onclick="BrowseServer('txtImage');" />
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label for="exampleInputPassword1">Mô tả</label>
-                            @Html.TextAreaFor(a => a.Description, new { @class = "form-control", @placeholder = "Mô tả" })
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputPassword1">Chi tiết</label>
-                            @Html.TextAreaFor(a => a.Detail, new { @class = "form-control", @id = "txtDetail", @placeholder = "Chi tiết" })
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputPassword1">Hiển thị</label>
-                            @Html.CheckBoxFor(a => a.IsActive)
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputPassword1">SeoTitle</label>
-                            @Html.TextAreaFor(a => a.SeoTitle, new { @class = "form-control", @placeholder = "SeoTitle" })
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputPassword1">SeoKeywords</label>
-                            @Html.TextAreaFor(a => a.SeoKeywords, new { @class = "form-control", @placeholder = "SeoKeywords" })
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputPassword1">SeoDescription</label>
-                            @Html.TextAreaFor(a => a.SeoDescription, new { @class = "form-control", @placeholder = "SeoDescription" })
-                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Mô tả</label>
+                        @Html.TextAreaFor(a => a.Description, new { @class = "form-control", @placeholder = "Mô tả" })
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Chi tiết</label>
+                        @Html.TextAreaFor(a => a.Detail, new { @class = "form-control", @id = "txtDetail", @placeholder = "Chi tiết" })
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Hiển thị</label>
+                        @Html.CheckBoxFor(a => a.IsActive)
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">SeoTitle</label>
+                        @Html.TextAreaFor(a => a.SeoTitle, new { @class = "form-control", @placeholder = "SeoTitle" })
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">SeoKeywords</label>
+                        @Html.TextAreaFor(a => a.SeoKeywords, new { @class = "form-control", @placeholder = "SeoKeywords" })
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">SeoDescription</label>
+                        @Html.TextAreaFor(a => a.SeoDescription, new { @class = "form-control", @placeholder = "SeoDescription" })
+                    </div>
 
-                        @Html.LabelFor(a => a.Detail, htmlAttributes: new { @class = "control-label col-md-2" })
-
-                        <div class="form-group">
-                            <a class="btn btn-warning" href="/admin/news">Quay lại</a>
-                            <button type="submit" class="btn btn-primary">Cập nhật</button>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <a class="btn btn-outline-danger rounded-pill" href="/admin/news/" style="width:100%"><i class="fa fa-fast-backward" aria-hidden="true"> Quay lại</i></a>
+                            </div>
+                            <div class="col-md-8">
+                                <button type="submit" class="btn btn-primary rounded-pill text-bold" style="width:100%">
+                                    Cập nhật<i class="fa fa-spinner fa-pulse fa-fw"></i>
+                                </button>
+                            </div>
                         </div>
                     </div>
+                </div>
 
                 }
             </div>

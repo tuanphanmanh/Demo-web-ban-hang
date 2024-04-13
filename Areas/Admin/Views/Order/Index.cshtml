@@ -10,46 +10,32 @@
 }
 
 @section naviheader{
-
     <ul class="navbar-nav">
         <li class="nav-item">
             <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="/admin" class="nav-link">Trang chủ</a>
+            <a href="/admin/home" class="nav-link">Trang chủ</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="~/admin/order" class="nav-link">Danh sách đơn hàng</a>
+            <a href="~/admin/order" class="nav-link active">Đơn hàng</a>
         </li>
     </ul>
-
 }
-<!-- Content Header (Page header) -->
-<section class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h1>Danh sách đơn hàng</h1>
-            </div>
-            <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Danh sách đơn hàng</li>
-                </ol>
-            </div>
-        </div>
-    </div><!-- /.container-fluid -->
-</section>
+<div style="height:2px; background-color: darkslategrey"></div>
+<br />
 
 <div id="PlaceHolderHere"></div>
 
 <!-- Main content -->
 <section class="content">
-
     <!-- Default box -->
     <div class="card">
         <div class="card-header">
             <h3 class="card-title">Danh sách đơn hàng</h3>
+            <div class="card-tools">
+                <a href="/admin/order/Export" class="btn btn-outline-dark"><i class="fa fa-file-excel" aria-hidden="true"></i></a>
+            </div>
         </div>
         <div class="card-body">
             <table class="table table-bordered">
@@ -90,8 +76,7 @@
                                 <td>@WebBanHangOnline.Common.Common.FormatNumber(@item.TotalAmount, 0)</td>
                                 <td>@item.CreatedDate.ToString("dd/MM/yyyy")</td>
                                 <td>
-                                    <a href="/admin/order/view/@item.Id" class="btn btn-sm btn-success">Xem</a>
-
+                                    <a href="/admin/order/view/@item.Id" class="text-success"><i class="fa fa-eye" aria-hidden="true"></i></a>
                                 </td>
                             </tr>
                             i++;
@@ -108,12 +93,10 @@
                     }
                 </tbody>
             </table>
-            <div class="row">
-                <div class="col-6"></div>
-                <div class="col-6" style="text-align: right">
-                    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
-                </div>
-            </div>
+        </div>
+        <div class="card-footer text-center">
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+
         </div>
     </div>
 </section>
@@ -132,19 +115,19 @@
             </div>
 
             <div class="modal-body">
-                    <input type="hidden" id="txtOrderId" />
-                    <div class="form-group">
-                        <label> Trạng thái: </label>
-                        <br />
-                        <select style="min-height: 40px;" id="ddTrangThai">
-                            <option selected>- - - - Chọn - - - -</option>
-                            <option value="0">Chờ xác nhận</option>
-                            <option value="1">Đang chuẩn bị hàng</option>
-                            <option value="2">Đã đồng kiểm</option>
-                            <option value="3">Đã giao cho đơn vị vận chuyển</option>
-                        </select>
-                    </div>
-             </div>
+                <input type="hidden" id="txtOrderId" />
+                <div class="form-group">
+                    <label> Trạng thái: </label>
+                    <br />
+                    <select style="min-height: 40px;" id="ddTrangThai">
+                        <option selected>- - - - Chọn - - - -</option>
+                        <option value="0">Chờ xác nhận</option>
+                        <option value="1">Đang chuẩn bị hàng</option>
+                        <option value="2">Đã đồng kiểm</option>
+                        <option value="3">Đã giao cho đơn vị vận chuyển</option>
+                    </select>
+                </div>
+            </div>
 
             <div class="modal-footer justify-content-between">
                 <button type="button" class="btn btn-outline-light" data-dismiss="modal">Đóng</button>

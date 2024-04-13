@@ -15,56 +15,30 @@
             <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="/admin" class="nav-link">Trang chủ</a>
+            <a href="/admin/home" class="nav-link">Trang chủ</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="/admin/productcategory" class="nav-link">Danh mục xe</a>
+            <a href="/admin/productcategory" class="nav-link active">Hãng xe</a>
         </li>
     </ul>
 
 }
-<!-- Content Header (Page header) -->
-<section class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h1>Quản lý danh mục xe</h1>
-            </div>
-            <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
-                    <li class="breadcrumb-item active">Danh mục xe</li>
-                </ol>
-            </div>
-        </div>
-    </div>
-</section>
+<div style="height:2px; background-color: darkslategrey"></div>
+<br />
 
 <section class="content">
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Danh sách danh mục xe</h3>
+            <h3 class="card-title">Danh sách hãng xe</h3>
 
             <div class="card-tools">
-                <a href="/admin/productcategory/add" class="btn btn-primary">Thêm mới</a>
-                <a href="#" class="btn btn-danger" id="BtnDeleteAll">Xoá</a>
+                <a href="/admin/productcategory/add" class="btn btn-success"><i class="fa fa-plus-square" aria-hidden="true"></i></a>
+                <a href="#" class="btn btn-outline-danger" id="BtnDeleteAll"> <i class="fa fa-trash" aria-hidden="true"></i></a>
             </div>
         </div>
         <div class="card-body">
-            <div class="row">
-                <div class="col-6">
-                    @using (Html.BeginForm("Index", "productcategory"))
-                    {
-                        <div class="input-group input-group-sm">
-                            <input style="max-width: 200px" type="text" name="SearchText" class="form-control swal2-input" placeholder="Tiêu đề tin " />
-                            <span class="input-group-append">
-                                <button type="submit" class="btn btn-primary">Tìm kiếm</button>
-                            </span>
-                        </div>
-                    }
-                </div>
-            </div>
-            <table class="table table-hover">
+
+            <table class="table table-hover text-center">
                 <thead>
                     <tr>
                         <th><input type="checkbox" id="SelectAll" /></th>
@@ -72,8 +46,7 @@
                         <th>Tiêu đề</th>
                         <th>Icon</th>
                         <th>Ngày tạo</th>
-                        @*<th style="text-align:center; width:150px">Hiển thị</th>*@
-                        <th>Chức năng</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -87,13 +60,12 @@
                                 <td>@i</td>
                                 <td>@item.Title</td>
                                 <td>
-                                    <img src="@item.Icon" class="img-circle" style="max-height: 80px; max-width: 80px" />
-                                    @*<img src="@item.Image" class="img-size-50" />*@
+                                    <img src="@item.Icon" class="img-thumbnail" style="max-height: 80px; max-width: 80px" />
                                 </td>
                                 <td>@item.CreatedDate.ToString("dd/MM/yyyy")</td>
                                 <td>
-                                    <a href="/admin/productcategory/edit/@item.Id" class="btn btn-sm btn-primary">Sửa</a>
-                                    <a href="#" data-id="@item.Id" class="btn btn-sm btn-danger btnDelete">Xóa</a>
+                                    <a href="/admin/productcategory/edit/@item.Id" class="text-primary"><i class="fa fa-edit" aria-hidden="true"></i></a>
+                                    <a href="#" data-id="@item.Id" class="text-danger btnDelete"><i class="fa fa-trash" aria-hidden="true"></i></a>
                                 </td>
                             </tr>
                             i++;
@@ -112,7 +84,7 @@
 
         </div>
         <!-- /.card -->
-
+</div>
 </section>
 <!-- /.content -->
 
@@ -175,7 +147,7 @@
 
             $('body').on('click', '.btnDelete', function () {
                 var id = $(this).data("id");
-                var conf = confirm("Bạn có muốn xóa này không?");
+                var conf = confirm("Bạn có muốn xóa hãng xe này không?");
                 if (conf === true) {
                     $.ajax({
                         url: '/admin/ProductCategory/delete',

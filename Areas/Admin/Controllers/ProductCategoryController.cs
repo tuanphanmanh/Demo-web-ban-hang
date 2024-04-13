@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using WebBanHangOnline.Models.EF;
 using WebBanHangOnline.Models;
+using System.Data.Entity.Migrations;
 
 namespace WebBanHangOnline.Areas.Admin.Controllers
 {
@@ -37,6 +38,27 @@ namespace WebBanHangOnline.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
             return View();
+        }
+
+        public ActionResult Edit(int id)
+        {
+            var item = db.ProductCategorys.Find(id);
+            return View(item);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(ProductCategory model)
+        {
+            if (!ModelState.IsValid)
+            {
+                model.ModifiedDate = DateTime.Now;
+                model.CreatedDate = db.ProductCategorys.Find(model.Id).CreatedDate;
+                model.Alias = WebBanHangOnline.Models.Common.Filter.FilterChar(model.Title);
+                db.ProductCategorys.AddOrUpdate(model);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(model);
         }
 
         [HttpPost]

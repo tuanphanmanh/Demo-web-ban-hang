@@ -13,35 +13,34 @@
             <a href="/admin" class="nav-link">Trang chủ</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="~/admin/order" class="nav-link">Danh sách đơn hàng</a>
+            <a href="~/admin/order" class="nav-link">Đơn hàng</a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="#" class="nav-link active" >Chi tiết đơn hàng</a>
         </li>
     </ul>
 
 }
-<!-- Content Header (Page header) -->
-<section class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h4>Danh sách đơn hàng</h4>
-            </div>
-            <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Danh sách đơn hàng</li>
-                </ol>
-            </div>
-        </div>
-    </div><!-- /.container-fluid -->
-</section>
+<div style="height:2px; background-color: darkslategrey"></div>
+<br />
 
 <!-- Main content -->
 <section class="content">
-
     <!-- Default box -->
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Chi tiết đơn hàng</h3>
+            <div class="row">
+                <div class="col-md-6">
+                    <h3 class="card-title">Chi tiết đơn hàng</h3>
+
+                </div>
+                <div class="col-md-6 text-right">
+                    <a href="/admin/order/index" class="text-danger">
+                        <i class="fa fa-reply" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </div>
+
         </div>
         <div class="card-body">
             <div class="row">
@@ -84,14 +83,11 @@
             <div>
                 <label>Sản phẩm</label>
             </div>
-            @Html.Action("Partial_SanPham","order", new {id = Model.Id})
+            @Html.Action("Partial_SanPham", "order", new { id = Model.Id })
 
 
         </div>
-        <!-- /.card-body -->
-        <div style="text-align: right" class="card-footer">
-            <a  href="/admin/order/index" class="btn btn-danger">Quay lại</a>
-        </div>
+
 
     </div>
     <!-- /.card -->

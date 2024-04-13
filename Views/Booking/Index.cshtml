@@ -2,6 +2,7 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 <link rel="stylesheet" type="text/css" href="~/Content/assets/styles/main_styles.css">
 <link rel="stylesheet" type="text/css" href="~/content/assets/styles/bootstrap4/bootstrap.min.css">
 <link href="~/content/assets/plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -13,6 +14,12 @@
 <link rel="stylesheet" type="text/css" href="~/content/assets/styles/contact_styles.css">
 <link rel="stylesheet" type="text/css" href="~/content/assets/styles/contact_responsive.css">
 
+<style>
+    .DonDaDat tbody tr:nth-of-type(odd) {
+        background-color: aliceblue;
+    }
+</style>
+
 <div style="margin-top: 150px" class="container contact_container">
     <div class="row">
         <div class="col">
@@ -20,23 +27,59 @@
                 <ul>
                     <li><a href="/">Trang chủ</a></li>
                     <li><a href="/service/index"><i class="fa fa-angle-right" aria-hidden="true"></i>Dịch vụ</a></li>
-                    <li class="active"><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>Đặt lịch</a></li>
+                    <li><a href="/booking/add"><i class="fa fa-angle-right" aria-hidden="true"></i>Đặt lịch</a></li>
+                    <li class="active"><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>Đặt lịch thành công</a></li>
                 </ul>
             </div>
         </div>
     </div>
-
-    <!-- Map Container -->
+    <h4>Bạn đặt lịch thành công, vui lòng kiểm tra lại thông tin!</h4>
 
     <div class="row">
-        <div class="col-md-12" id="load_data">
-            <div class="pyro"><div class="before"></div><div class="after"></div></div>
-            <h1 style="margin-bottom: 50px; margin-top: 50px">
-                <marquee style="height: 100px "> Bạn đã đặt lịch hẹn thành công </marquee>
-            </h1>
+
+        <div class="col-md-4" id="load_data">
+            <table class=" DonDaDat table table-bordered">
+                <tbody>
+                    <tr>
+                        <th>Khách hàng</th>
+                        <td>
+                            @Html.DisplayFor(model => model.CreatedBy)
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>SĐT</th>
+                        <td>
+                            @Html.DisplayFor(model => model.PhoneNumber)
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Email</th>
+                        <td>
+                            @Html.DisplayFor(model => model.Email)
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Địa chỉ K/H</th>
+                        <td>
+                            @Html.DisplayFor(model => model.Address)
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Xe K/H:</th>
+                        <td>
+                            @Html.DisplayFor(model => model.CarName)
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Ngày / giờ:</th>
+                        <td>
+                            @Html.DisplayFor(model => model.ModifiedDate)
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
             <a href="/service/index" class="btn btn-success">Đặt lịch khác</a>
         </div>
-
     </div>
 
 </div>

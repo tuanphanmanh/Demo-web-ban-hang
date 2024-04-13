@@ -8,6 +8,8 @@ using System.Web.Mvc;
 using WebBanHangOnline.Models;
 using WebBanHangOnline.Models.EF;
 using System.Configuration;
+using Microsoft.AspNet.Identity.Owin;
+using System.Data.Entity.Validation;
 
 namespace WebBanHangOnline.Controllers
 {
@@ -15,9 +17,10 @@ namespace WebBanHangOnline.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
         // GET: Booking
-        public ActionResult Index()
+        [HttpPost]
+        public ActionResult Index(Booking a)
         {
-            return View();
+            return View(a);
         }
 
         public ActionResult Add()
@@ -29,6 +32,8 @@ namespace WebBanHangOnline.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Add(Booking model)
         {
+            model.Status = "Chờ xác nhận";
+            model.ModifiedBy = "Khách hàng";
             model.CreatedDate = DateTime.Now;
             db.Bookings.Add(model);
             db.SaveChanges();

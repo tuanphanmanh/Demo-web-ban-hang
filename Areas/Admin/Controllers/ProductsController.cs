@@ -7,6 +7,8 @@ using System.Web.Mvc;
 using WebBanHangOnline.Models.EF;
 using WebBanHangOnline.Models;
 using System.Data.Entity.Migrations;
+using OfficeOpenXml;
+using System.Drawing;
 
 namespace WebBanHangOnline.Areas.Admin.Controllers
 {
@@ -157,5 +159,6 @@ namespace WebBanHangOnline.Areas.Admin.Controllers
             }
             return Json(new { success = false });
         }
+
     }
 }

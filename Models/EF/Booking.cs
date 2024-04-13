@@ -17,6 +17,7 @@ namespace WebBanHangOnline.Models.EF
         public int ServiceId { get; set; }
         [Required(ErrorMessage ="Không được để trống SĐT")]
         public string PhoneNumber { get; set; }
+        public string Status { get; set; }
         public string Address { get; set; }
         public string Email { get; set; }
         public string CarName { get; set; }

@@ -14,29 +14,15 @@
             <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="/admin" class="nav-link">Trang chủ</a>
+            <a href="/admin/home" class="nav-link">Trang chủ</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="/admin/News" class="nav-link">Tin tức</a>
+            <a href="/admin/News" class="nav-link active">Tin tức</a>
         </li>
     </ul>
 }
-<!-- Content Header (Page header) -->
-<section class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h1>Quản lý tin tức</h1>
-            </div>
-            <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
-                    <li class="breadcrumb-item active">Tin tức</li>
-                </ol>
-            </div>
-        </div>
-    </div>
-</section>
+<div style="height:2px; background-color: darkslategrey"></div>
+<br />
 
 <section class="content">
     <div class="card">
@@ -44,19 +30,19 @@
             <h3 class="card-title">Danh sách tin tức</h3>
 
             <div class="card-tools">
-                <a href="/admin/news/add" class="btn btn-primary">Thêm mới</a>
-                <a href="#" class="btn btn-danger" id="BtnDeleteAll">Xoá</a>
+                <a href="/admin/news/add" class="btn btn-success"><i class="fa fa-plus-square" aria-hidden="true"></i></a>
+                <a href="#" class="btn btn-outline-danger" id="BtnDeleteAll"><i class="fa fa-trash" aria-hidden="true"></i></a>
             </div>
         </div>
         <div class="card-body">
             <div class="row">
-                <div class="col-6">
+                <div class="col-12">
                     @using (Html.BeginForm("Index", "News"))
                     {
                         <div class="input-group input-group-sm">
-                            <input style="max-width: 200px" type="text" name="SearchText" class="form-control swal2-input" placeholder="Tiêu đề tin " />
+                            <input type="text" name="SearchText" class="form-control swal2-input" placeholder="Tiêu đề tin " />
                             <span class="input-group-append">
-                                <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+                                <button type="submit" class="btn btn-info"><i class="fa fa-search" aria-hidden="true"></i></button>
                             </span>
                         </div>
                     }
@@ -93,10 +79,13 @@
                                 <td class="text-center">
                                     <a href="#" data-id="@item.Id" class="btnActive">@Html.Raw(strCheck)</a>
                                 </td>
+
+
+
                                 <td>@item.Description</td>
                                 <td class="text-center">
-                                    <a href="/admin/news/edit/@item.Id" class="btn btn-sm btn-primary">Sửa</a>
-                                    <a href="#" data-id="@item.Id" class="btn btn-sm btn-danger btnDelete">Xóa</a>
+                                    <a href="/admin/news/edit/@item.Id" class="text-primary"><i class="fa fa-edit" aria-hidden="true"></i></a>
+                                    <a href="#" data-id="@item.Id" class="text-danger btnDelete"><i class="fa fa-trash" aria-hidden="true"></i></a>
                                 </td>
                             </tr>
                             i++;
@@ -111,15 +100,12 @@
                     }
                 </tbody>
             </table>
-            <div class="row">
-                <div class="col-6"></div>
-                <div class="col-6" style="text-align: right">
-                    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
-                </div>
-            </div>
+            
         </div>
         <!-- /.card-body -->
-
+        <div class="card-footer text-center">
+                    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+        </div>
     </div>
     <!-- /.card -->
 

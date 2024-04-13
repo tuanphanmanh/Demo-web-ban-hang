@@ -11,103 +11,89 @@
             <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="/admin" class="nav-link">Trang chủ</a>
+            <a href="/admin/home" class="nav-link">Trang chủ</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="/admin/news" class="nav-link">Danh mục xe</a>
+            <a href="/admin/productcategory " class="nav-link">Hãng xe</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="#" class="nav-link">Thêm mới</a>
+            <a href="#" class="nav-link active">Thêm mới</a>
         </li>
     </ul>
-
 }
 
-<!-- Content Header (Page header) -->
-<section class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h1>Thêm mới danh mục xe</h1>
-            </div>
-            <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Danh mục xe</a></li>
-                    <li class="breadcrumb-item active">Thêm mới</li>
-                </ol>
-            </div>
-        </div>
-    </div><!-- /.container-fluid -->
-</section>
+<div style="height:2px; background-color: darkslategrey"></div>
+<br />
 
 <!-- Main content -->
 <section class="content">
-
-    <!-- Default box -->
     <div class="card">
-
-    </div>
-    <div class="card-body">
         <div class="card-header">
-            <h3 class="card-title" style="color: forestgreen">Thông tin thêm mới tin tức</h3>
-
+            <h3 class="card-title" style="color: forestgreen">Thông tin thêm mới hãng xe</h3>
         </div>
         <div class="card-body">
-            <div class="bs-stepper-content">
-                @using (Html.BeginForm("Add", "ProductCategory", FormMethod.Post, new { }))
-                {
+            <div class="card-body">
+                <div class="bs-stepper-content">
+                    @using (Html.BeginForm("Add", "ProductCategory", FormMethod.Post, new { }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
 
-                    @Html.AntiForgeryToken()
-                    @Html.ValidationSummary(true)
+                        <!-- your steps content here -->
+                        <div id="logins-part" class="content active dstepper-block" role="tabpanel" aria-labelledby="logins-part-trigger">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Tiêu đề DM xe</label>
+                                @Html.TextBoxFor(a => a.Title, new { @class = "form-control", @placeholder = "Tiêu đề DM xe" })
+                                @Html.ValidationMessageFor(a => a.Title, null, new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputFile">Icon</label>
+                                <div class="input-group">
+                                    <div class="custom-file">
+                                        @Html.TextBoxFor(a => a.Icon, new { @id = "txtImage", @class = "form-control" })
+                                    </div>
+                                    <div class="input-group-append">
+                                        <input type="button" value="Tải ảnh" onclick="BrowseServer('txtImage');" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Alias</label>
+                                @Html.TextBoxFor(a => a.Alias, new { @class = "form-control", @placeholder = "Alias" })
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">SeoTitle</label>
+                                @Html.TextAreaFor(a => a.SeoTitle, new { @class = "form-control", @placeholder = "SeoTitle" })
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">SeoKeywords</label>
+                                @Html.TextAreaFor(a => a.SeoKeywords, new { @class = "form-control", @placeholder = "SeoKeywords" })
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">SeoDescription</label>
+                                @Html.TextAreaFor(a => a.SeoDescription, new { @class = "form-control", @placeholder = "SeoDescription" })
+                            </div>
 
-                    <!-- your steps content here -->
-                <div id="logins-part" class="content active dstepper-block" role="tabpanel" aria-labelledby="logins-part-trigger">
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Tiêu đề DM xe</label>
-                        @Html.TextBoxFor(a => a.Title, new { @class = "form-control", @placeholder = "Tiêu đề DM xe" })
-                        @Html.ValidationMessageFor(a => a.Title, null, new { @class = "text-danger" })
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputFile">Icon</label>
-                        <div class="input-group">
-                            <div class="custom-file">
-                                @Html.TextBoxFor(a => a.Icon, new { @id = "txtImage", @class = "form-control" })
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <a class="btn btn-outline-danger rounded-pill" href="/admin/productcategory/" style="width:100%"><i class="fa fa-fast-backward" aria-hidden="true"> Quay lại</i></a>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <button type="submit" name="btnSave" id="btnSave" class="btn btn-success rounded-pill" style="width:100%"> Lưu <i class="fa fa-check-square" aria-hidden="true"></i> </button>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="input-group-append">
-                                <input type="button" value="Tải ảnh" onclick="BrowseServer('txtImage');" />
-                            </div>
+
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Alias</label>
-                        @Html.TextBoxFor(a => a.Alias, new { @class = "form-control", @placeholder = "Alias" })
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">SeoTitle</label>
-                        @Html.TextAreaFor(a => a.SeoTitle, new { @class = "form-control", @placeholder = "SeoTitle" })
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">SeoKeywords</label>
-                        @Html.TextAreaFor(a => a.SeoKeywords, new { @class = "form-control", @placeholder = "SeoKeywords" })
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">SeoDescription</label>
-                        @Html.TextAreaFor(a => a.SeoDescription, new { @class = "form-control", @placeholder = "SeoDescription" })
-                    </div>
-                    <div class="form-group">
-                        <a class="btn btn-warning" href="/admin/productcategory">Quay lại</a>
-                        <button type="submit" name="btnSave" id="btnSave" class="btn btn-primary">Lưu</button>
-                    </div>
-                </div>
 
-                }
+                    }
+                </div>
             </div>
+
         </div>
-        <!-- /.card-body -->
-        <div class="card-footer">
-        </div>
-        <!-- /.card-footer-->
     </div>
+
     <!-- /.card -->
 
 </section>

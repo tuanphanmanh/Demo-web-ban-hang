@@ -61,7 +61,7 @@ namespace WebBanHangOnline.Controllers
             item.FullName = user.FullName;
             item.Phone = user.Phone;
             item.UserName = user.UserName;
-            return PartialView(item);
+            return View(item);
         }
 
         [HttpPost]
@@ -102,10 +102,8 @@ namespace WebBanHangOnline.Controllers
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, shouldLockout: false);
-            ViewBag.tennguoidung = model.UserName;
             switch (result)
             {
-                
                 case SignInStatus.Success:
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
@@ -180,15 +178,7 @@ namespace WebBanHangOnline.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser
-                {
-                    UserName = model.Email,
-                    Email = model.Email,
-                    // Đảm bảo giá trị ngày tháng là hợp lệ ở đây
-                    // Ví dụ: DateOfBirth = DateTime.Now
-                    // Hoặc: DateOfBirth = new DateTime(2000, 1, 1)
-                };
-
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -200,7 +190,7 @@ namespace WebBanHangOnline.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("login", "account");
+                    return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
             }
