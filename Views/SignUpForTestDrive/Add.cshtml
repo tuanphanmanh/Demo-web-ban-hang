@@ -1,0 +1,203 @@
+﻿@model WebBanHangOnline.Models.EF.SignUpForTestDrive
+
+@{
+    ViewBag.Title = "Add";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" type="text/css" href="~/Content/assets/styles/main_styles.css">
+<link rel="stylesheet" type="text/css" href="~/content/assets/styles/bootstrap5/bootstrap.min.css">
+<link href="~/content/assets/plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="~/content/assets/plugins/OwlCarousel2-2.2.1/owl.carousel.css">
+<link rel="stylesheet" type="text/css" href="~/content/assets/plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
+<link rel="stylesheet" type="text/css" href="~/content/assets/plugins/OwlCarousel2-2.2.1/animate.css">
+<link rel="stylesheet" href="~/content/assets/plugins/themify-icons/themify-icons.css">
+<link rel="stylesheet" type="text/css" href="~/content/assets/plugins/jquery-ui-1.12.1.custom/jquery-ui.css">
+<link rel="stylesheet" type="text/css" href="~/content/assets/styles/contact_styles.css">
+
+<style>
+    .HOme {
+        justify-content: space-around;
+        background-color: gainsboro;
+        border-radius: 90px;
+        padding-top: 50px;
+        padding-bottom: 50px;
+    }
+</style>
+
+<div style="margin-top: 150px" class="container contact_container">
+    <div class="row">
+        <div class="col">
+            <div class="breadcrumbs d-flex flex-row align-items-center">
+                <ul>
+                    <li><a href="/">Trang chủ</a></li>
+                    <li class="active"><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>Đăng ký lái thử</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="row HOme">
+        <div class="col-md-8">
+            <p class="text-center">
+                <b>
+                    <h3>
+                        ĐẶT HẸN DỊCH VỤ
+                    </h3>
+                </b>
+                Xã hội ngày càng phát triển, thời gian cho mọi dự định trong cuộc sống càng lúc bị thu hẹp,
+                hiểu được nỗi băn khoăn đó, chúng tôi luôn khuyến khích khách hàng đặt lịch hẹn, đăng kí lái thử để tối ưu hóa
+                thời gian của mình đồng thời đảm bảo các loại phụ tùng vật tư và nhân sự sẵn sàng đón tiếp chu đáo.
+                Điều đó đồng nghĩa Tứ Quý Auto luôn trân trọng thời gian quý báu và cố gắng hết mình để đem lại nhiều
+                thời gian hơn cho cuộc sống của quý khách. Bất cứ khi nào quý khách có nhu cầu lái thử xe,
+                hãy đặt hẹn trước với chúng tôi để trải nghiệm sự chu toàn đến từ đội
+                ngũ nhân sự dịch vụ.
+                <br />
+                <b>
+                    <h3>
+                        ĐẶT HẸN TRỰC TUYẾN
+                    </h3>
+                </b>
+                Quý khách có thể đặt hẹn dịch vụ qua số Hotline Dịch vụ tại Đại lý mà quý khách thường xuyên đến để bảo dưỡng, sửa chữa. Ngoài ra, quý khách có thể liên hệ đến Tổng đài CSKH 1900 545 591, luôn có nhân viên chăm sóc khách hàng tiếp nhận các cuộc gọi của quý khách để hỗ trợ đặt hẹn dịch vụ tại bất kỳ Đại lý Mazda nào trên toàn quốc. Sau khi lịch hẹn được xác nhận, nhân viên chăm sóc khách hàng tại Đại lý sẽ liên hệ nhắc lại lịch hẹn để quý khách không bỏ lỡ thời gian đã hẹn làm dịch vụ.
+                <div class="btn btn-danger btnCapNhat">ĐẶT HẸN LÁI THỬ XE</div>
+            </p>
+
+
+            <div class="modal fade" id="modal-default">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header text-center bg-lightblue">
+                            <h4 class="modal-title ">
+                                Đăng ký lái thử
+                            </h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            @using (Html.BeginForm("add", "SignUpForTestDrive", FormMethod.Post, new { }))
+                            {
+                                @Html.AntiForgeryToken()
+                                @Html.ValidationSummary(true)
+
+                                <div id="logins-part" class="content active dstepper-block" role="tabpanel" aria-labelledby="logins-part-trigger">
+                                    <div class="form-group">
+                                        @Html.TextBoxFor(a => a.CustomerName, new { @class = "form-control", @placeholder = "Tên khách hàng" })
+                                        @Html.ValidationMessageFor(a => a.CustomerName, null, new { @class = "text-danger" })
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                @Html.TextBoxFor(a => a.Phone, new { @class = "form-control", @placeholder = "Số điện thoại" })
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                @Html.TextBoxFor(a => a.Email, new { @class = "form-control", @placeholder = "Email" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.TextBoxFor(a => a.DiaChiLienHe, new { @class = "form-control", @placeholder = "Địa chỉ liên hệ" })
+                                        @Html.ValidationMessageFor(a => a.DiaChiLienHe, null, new { @class = "text-danger" })
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">Địa điểm lái thử</label>
+                                                <select name="DiaDiemLaiThu" class="form-control">
+                                                    <option selected>-- Chọn địa điểm --</option>
+                                                    <option value="Tại đại lý">Tại đại lý</option>
+                                                    <option value="Địa điểm khác">Địa điểm khác</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Ngày dự kiến:</label>
+                                                <br />
+                                                <input type="date" name="ModifiedDate" required class="form-control" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Bạn có nhu cầu mua xe trong bao lâu?</label>
+                                        <br />
+                                        <select name="BuyCarTime" class="form-control">
+                                            <option value="1 - 6 tháng" selected>1 - 6 tháng</option>
+                                            <option value="6 - 12 tháng">6 - 12 tháng</option>
+                                            <option value="1 - 2 năm">1 - 2 năm</option>
+                                            <option value="Chưa có kế hoạch">Chưa có kế hoạch</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Bạn có muốn sở hữu xe?</label>
+                                        <br />
+                                        <input type="radio" value="Có"   name="SoHuuXe" /> Có
+                                        <input type="radio" value="Không" class="text-right" name="SoHuuXe" /> Không
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Bạn đã biết ưu đãi của Tứ Quý Auto cho khách hàng chưa?</label>
+                                        <br />
+                                        <input type="radio" value="Có" name="KhuVuc" /> Có
+                                        <input type="radio" value="Không" name="KhuVuc" /> Không
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="carDropdown">Chọn xe</label>
+                                        @Html.DropDownListFor(a => a.ProductId, ViewBag.product as SelectList, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(a => a.ProductId, null, new { @class = "text-danger" })
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <button type="reset" class="btn btn-outline-danger" style="width:100%">
+                                                    Đóng <i class="fa fa-trash"></i>
+                                                </button>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <button type="submit" class="btn btn-info" style="width:100%"> Đặt lịch  <i class="fa fa-angle-right" aria-hidden="true"></i> </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('body').on('click', '.btnCapNhat', function () {
+                var id = $(this).closest("tr").data("id");
+                $('#txtOrderId').val(id);
+                $('#modal-default').modal('show');
+            });
+
+            $('body').on('click', '#btnLuu', function () {
+                var sid = document.getElementById('txtOrderId').value;
+                var tt = $('#ddTrangThai').val();
+                $.ajax({
+                    url: '/Admin/Order/UpdateTT',
+                    type: 'POST',
+                    data: { fid: sid, trangthaivanchuyen: tt },
+                    success: function (res) {
+                        if (res.Success) {
+                            location.reload();
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+}
+
+

@@ -16,7 +16,22 @@
 <link rel="stylesheet" type="text/css" href="~/content/assets/plugins/jquery-ui-1.12.1.custom/jquery-ui.css">
 <link rel="stylesheet" type="text/css" href="~/content/assets/styles/contact_styles.css">
 <link rel="stylesheet" type="text/css" href="~/content/assets/styles/contact_responsive.css">
+<style>
+    #abcde {
+        padding: 10px;
+        border-radius: 40px;
+        background-image: linear-gradient(to right, #10b9e6, #b3d8b6);
+        /*background-image: linear-gradient(to right, #f2709c, #ff9472);*/
+        background-repeat: no-repeat;
+        background-position: -100px 200px;
+        transition: background-position 0.5s ease-in;
+    }
 
+        #abcde:hover {
+            color:white;
+            background-position: 0 0;
+        }
+</style>
 <div style="margin-top: 150px" class="container contact_container">
     <div class="row" style="height:60px">
         <div class="col">
@@ -42,17 +57,18 @@
             var i = ((ViewBag.Page - 1) * ViewBag.PageSize) + 1;
             foreach (var item in Model)
             {
-                <div class="row">
+                <div class="row" id="abcde">
                     <div class="col-md-3">
                         <div class="img-box">
                             <a href="/@item.Alias-n@(item.Id)" title="@item.Title">
-                                <img style="max-height: 100px; min-width: 200px" class="rounded-circle" src="@item.Image" />
+                                <img style="max-height: 100px; min-width: 200px" class="img-thumbnail" src="@item.Image" />
                             </a>
                         </div>
                     </div>
                     <div class="col-md-9">
                         <div class="content-box">
-                            <h4> <a href="/@item.Alias-n@(item.Id)" title="@item.Title">@item.Title</a></h4>
+                            <h4><a class="text-dark" href="/@item.Alias-n@(item.Id)" title="@item.Title">@item.Title</a></h4>
+                            <div style="height:1px; background-color: red"></div>
                             <div class="description-box">
                                 <i>@item.Description</i>
                             </div>

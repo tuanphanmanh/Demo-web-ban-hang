@@ -32,18 +32,8 @@ namespace WebBanHangOnline.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                model.Image = "";
-                var f = Request.Files["ImageFile"];
-                if(f != null && f.ContentLength > 0)
-                {
-                    string FileName = System.IO.Path.GetFileName(f.FileName);
-                    string UploadPath = Server.MapPath( "~/content/images/" + FileName);
-                    f.SaveAs(UploadPath);
-                    model.Image = FileName;
-                }
                 model.ModifiedDate = DateTime.Now;
                 model.CreatedDate = DateTime.Now;
-                model.ProductId = 41;
                 db.Services.Add(model);
                 db.SaveChanges();
                 return RedirectToAction("Index");

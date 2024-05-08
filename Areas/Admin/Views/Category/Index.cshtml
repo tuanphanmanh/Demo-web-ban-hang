@@ -4,6 +4,19 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
+<style>
+    .abcde {
+        background-image: linear-gradient(to right, #f2709c, #ff9472);
+        background-repeat: no-repeat;
+        background-position: -100px 200px;
+        transition: background-position 0.5s ease-in;
+    }
+
+        .abcde:hover {
+            background-position: 0 0;
+        }
+</style>
+
 @section naviheader{
 
     <ul class="navbar-nav">
@@ -53,7 +66,7 @@
                         var i = 1;
                         foreach (var item in Model)
                         {
-                            <tr id="trow_@item.Id" style="text-align: center">
+                            <tr class="abcde" id="trow_@item.Id" style="text-align: center">
                                 <td>@i</td>
                                 <td>@item.Title</td>
                                 <td>@item.Alias</td>

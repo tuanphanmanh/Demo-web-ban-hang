@@ -38,7 +38,7 @@ namespace WebBanHangOnline.Controllers
         }
         public ActionResult Partial_News_Home()
         {
-            var items = db.News.Take(3).ToList();
+            var items = db.Services.Take(5).ToList();
             return PartialView(items);
         }
         public ActionResult ExportPdf()

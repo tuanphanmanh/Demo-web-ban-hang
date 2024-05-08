@@ -60,6 +60,34 @@
         </div>
 
     }
-
 </div>
+
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('body').on('click', '.btnCapNhat', function () {
+                var id = $(this).closest("tr").data("id");
+                $('#txtOrderId').val(id);
+                $('#modal-default').modal('show');
+            });
+
+            $('body').on('click', '#btnLuu', function () {
+                var sid = document.getElementById('txtOrderId').value;
+                var tt = $('#ddTrangThai').val();
+                $.ajax({
+                    url: '/Admin/Order/UpdateTT',
+                    type: 'POST',
+                    data: { fid: sid, trangthaivanchuyen: tt },
+                    success: function (res) {
+                        if (res.Success) {
+                            location.reload();
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+}
+
 

@@ -42,6 +42,7 @@
                         <div class="col-md-9">
                             <ul class="nav nav-pills ">
                                 <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Thông tin chung</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">Hình ảnh</a></li>
                                 <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">SEO</a></li>
                             </ul>
                         </div>
@@ -56,33 +57,18 @@
                                 @Html.ValidationMessageFor(a => a.Title, null, new { @class = "text-danger" })
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Alias</label>
-                                @Html.TextBoxFor(a => a.Alias, new { @class = "form-control", @placeholder = "Alias" })
-                                @Html.ValidationMessageFor(a => a.Alias, null, new { @class = "text-danger" })
-                            </div>
-
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">SKU</label>
-                                @Html.TextBoxFor(a => a.ProductCode, new { @class = "form-control", @placeholder = "Mã xe" })
-                                @Html.ValidationMessageFor(a => a.ProductCode, null, new { @class = "text-danger" })
-                            </div>
-
-                            <div class="form-group">
                                 <label for="exampleInputEmail1">Danh mục</label>
                                 @Html.DropDownListFor(a => a.ProductCategoryId, ViewBag.ProductCategory as SelectList, "- -Chọn danh mục sản phẩm- -", new { @class = "form-control" })
                                 @Html.ValidationMessageFor(a => a.ProductCategoryId, null, new { @class = "text-danger" })
                             </div>
-
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Mô tả</label>
-                                @Html.TextBoxFor(a => a.Description, new { @class = "form-control", @placeholder = "Mô tả" })
-                                @Html.ValidationMessageFor(a => a.Description, null, new { @class = "text-danger" })
+                                <label for="exampleInputEmail1">Mô tả sơ bộ</label>
+                                @Html.TextAreaFor(a => a.Description, new { @class = "form-control", @placeholder = "Mô tả sơ bộ" })
+
                             </div>
-
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Chi tiết</label>
-                                @Html.TextBoxFor(a => a.Detail, new { @class = "form-control", @id = "txtDetail" })
-                                @Html.ValidationMessageFor(a => a.Detail, null, new { @class = "text-danger" })
+                                <label for="exampleInputEmail1">Chi tiết sản phẩm</label>
+                                @Html.TextAreaFor(a => a.Detail, new { @class = "form-control", @id = "txtDetail", @placeholder = "Chi tiết sản phẩm" })
                             </div>
 
                             <div class="row">
@@ -178,9 +164,56 @@
                                         @Html.ValidationMessageFor(a => a.SeoDescription, null, new { @class = "text-danger" })
                                     </div>
                                 </div>
+                                <div class="form-group row">
+                                    <label for="inputName2" class="col-sm-2 col-form-label">Số chỗ ngồi</label>
+                                    <div class="col-sm-4">
+                                        @Html.TextBoxFor(a => a.NumberOfSeats, new { @class = "form-control", @placeholder = "Số chỗ ngồi" })
+                                        @Html.ValidationMessageFor(a => a.NumberOfSeats, null, new { @class = "text-danger" })
+                                    </div>
+
+                                    <label for="inputName2" class="col-sm-2 col-form-label">Nhiên liệu</label>
+                                    <div class="col-sm-4">
+                                        @Html.TextBoxFor(a => a.Fuel, new { @class = "form-control", @placeholder = "Nhiên liệu" })
+                                        @Html.ValidationMessageFor(a => a.Fuel, null, new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="inputName2" class="col-sm-2 col-form-label">Kiểu dáng</label>
+                                    <div class="col-sm-4">
+                                        @Html.TextBoxFor(a => a.Design, new { @class = "form-control", @placeholder = "Kiểu dáng" })
+                                        @Html.ValidationMessageFor(a => a.Design, null, new { @class = "text-danger" })
+                                    </div>
+                                    <label for="inputName2" class="col-sm-2 col-form-label">Xuất xứ</label>
+                                    <div class="col-sm-4">
+                                        @Html.TextBoxFor(a => a.Origin, new { @class = "form-control", @placeholder = "Xuất xứ" })
+                                        @Html.ValidationMessageFor(a => a.Origin, null, new { @class = "text-danger" })
+                                    </div>
+                                </div>
                             </form>
                         </div>
-                        <!-- /.tab-pane -->
+                        @*/.tab-pane*@
+                        <div class="tab-pane" id="timeline">
+                            <div class="row">
+                                <div class="col-md-12 text-right">
+                                    <input type="button" class="btn btn-primary" id="iTaiAnh" onclick="BrowseServer();" value="Tải ảnh" />
+                                </div>
+                                <div class="col-md-12">
+                                    <table class="table table-hover" id="tbAnhSanPham">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-center">STT</th>
+                                                <th class="text-center">Ảnh</th>
+                                                <th class="text-center">Ảnh đại diện</th>
+                                                <th class="text-center">Thao tác</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tbHtml">
+                                        </tbody>
+                                    </table>
+                                    <input type="hidden" id="tCurrentId" value="0" />
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -226,8 +259,6 @@
                 customConfig: '/content/ckeditor/config.js',
                 extraAllowedContent: 'span',
             });
-
-
         });
 
 

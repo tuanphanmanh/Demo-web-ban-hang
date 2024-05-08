@@ -4,6 +4,7 @@
 @{
     ViewBag.Title = "Index";
 }
+<title>Quan tâm</title>
 <link rel="stylesheet" type="text/css" href="~/Content/assets/styles/main_styles.css">
 <!-- Slider -->
 <style>
@@ -26,33 +27,76 @@
         max-width: 100%;
         max-height: 100%;
     }
+    /* Ẩn modal ban đầu */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    /* Hiển thị modal khi hover vào đối tượng */
+    #hoverTarget:hover + .modal {
+        display: block;
+    }
+
+    #abcde {
+        padding: 10px;
+        border-radius: 40px;
+        background-image: linear-gradient(to right, #12c2e9, #c471ed, #f64f59);
+        background-repeat: no-repeat;
+        background-position: 200px -200px;
+        transition: background-position 0.3s ease-in-out;
+    }
+
+        #abcde:hover {
+            color:white;
+            background-position: 0 0;
+        }
 </style>
 <div class="container news_section_container">
     <div class="row">
-        <div class="col-md-12">
-            <h1 class="title-news"> Sản phẩm yêu thích</h1>
+        <div class="col-md-12 text-center">
+            <h1 class="title-news"> Sản phẩm quan tâm</h1>
         </div>
     </div>
     @if (Model != null && Model.Any())
     {
         foreach (var item in Model)
         {
-            <div class="row row-item-new">
-                <div class="col-md-3">
+            <div class="row row-item-new" id="abcde" style="display: flex; align-items: center;">
+                <div class="col-md-4">
                     <div class="img-box">
-                        <a href="" title="@item.Product.Title"><img src="@item.Product.Image" alt="@item.Product.Title" /></a>
+                        <a title="@item.Product.Title"><img id="hoverTarget" src="@item.Product.Image" style="min-width: 350px; max-height: 150px;" class="img-thumbnail" alt="@item.Product.Title" /></a>
                     </div>
                 </div>
-                <div class="col-md-8">
+                <div class="col-md-6 ">
                     <div class="content-box">
-                        <h3><a href="/@item.Product.Alias-n@(item.ProductId)" title="@item.Product.Title">@item.Product.Title</a></h3>
-                        <div class="description-box">
-                            @item.Product.Description
-                        </div>
+                        <h3><a href="/chi-tiet/@item.Product.Alias-p@(item.Product.Id)" title="@item.Product.Title" class="text-dark"> @item.Product.Title </a></h3>
+                        <table class="table table-borderless text-center">
+                            <tr>
+                                <div style="height:2px; background-color: lightgreen"></div>
+                                <th>  @item.Product.Fuel</th>
+                                <th>  @item.Product.NumberOfSeats chỗ</th>
+                                <th>  @item.Product.Design</th>
+                                <th>     @item.Product.Origin</th>
+                                <th>@WebBanHangOnline.Common.Common.FormatNumber(item.Product.PriceSale, 0) VND</th>
+                            </tr>
+                        </table>
                     </div>
                 </div>
-                <div class="col-md-1">
-                    <a href="#" data-id="@item.Id" class="btn btn-danger">Xóa</a>
+                <div class="col-md-2">
+                    <h4>
+                        <a href="#" data-id="@item.Id" class="text-success btnAddToCart" title="Thêm vào giỏ hàng"><i class="fa fa-cart-plus" aria-hidden="true"></i></a>
+                        <a href="/san-pham" class="text-primary" title="Xem thêm"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>
+
+                        <a href="#" data-id="@item.Id" class="text-danger text-lg " title="Xóa" id="btnDelete"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                    </h4>
                 </div>
             </div>
         }
@@ -63,5 +107,72 @@
             </div>
         </div>
     }
-
+    else
+    {
+        <div class="content-box">Chưa có sản phẩm nào đang quan tâm</div>
+    }
 </div>
+
+<div class="modal" id="myModal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <p>Đây là modal!</p>
+    </div>
+</div>
+
+
+
+@section scripts{
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="~/Content/assets/js/single_custom.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Content/assets/js/categories_end.js"></script>
+
+
+    <script>
+        // Lấy modal
+        var modal = document.getElementById("myModal");
+
+        // Lấy nút đóng
+        var closeButton = document.getElementsByClassName("close")[0];
+
+        // Khi người dùng nhấn vào nút đóng, đóng modal
+        closeButton.onclick = function () {
+            modal.style.display = "none";
+        }
+        // Khi người dùng nhấn vào bất kỳ đâu ngoài modal, đóng modal
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+
+        $(document).ready(function () {
+            $('body').on('click', '#btnDelete', function () {
+                var id = $(this).data("id");
+                var conf = confirm("Bạn có muốn xe này không?");
+                if (conf === true) {
+                    var elementToDelete = $(this).closest('.row-item-new'); // Tìm phần tử gần nhất chứa sản phẩm cần xóa
+                    // Áp dụng hiệu ứng lướt sang phải trước khi xóa
+                    elementToDelete.hide("slide", { direction: "right" }, 800, function () {
+                        $(this).remove();
+                    });
+
+                    $.ajax({
+                        url: '/Wishlist/delete',
+                        type: 'POST',
+                        data: { id: id },
+                        success: function (rs) {
+                            debugger;
+                            if (rs.success) {
+                                //elementToDelete.remove();
+                                /*alert("Xóa thành công");*/
+                            }
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+}

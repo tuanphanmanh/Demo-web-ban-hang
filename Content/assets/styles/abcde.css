@@ -58,7 +58,6 @@ body {
 	font-weight: 400;
 	background: #ffff;
 	color: #1e1e27;
-	/*background: #000;*/
 	margin: 0;
 }
 canvas {
@@ -175,7 +174,7 @@ h5{font-size: 16px;}
 h6{font-size: 14px;}
 h1, h2, h3, h4, h5, h6
 {
-	font-family: 'Poppins', sans-serif;
+	font-family: 'Times New Roman', sans-serif;
 	color: #282828;
 	-webkit-font-smoothing: antialiased;
 	-webkit-text-shadow: rgba(0,0,0,.01) 0 0 1px;

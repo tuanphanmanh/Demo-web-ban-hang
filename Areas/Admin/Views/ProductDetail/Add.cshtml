@@ -1,0 +1,286 @@
+﻿@model WebBanHangOnline.Models.EF.ProductDetail
+@{
+    ViewBag.Title = "Thêm mới sản phẩm";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .bodynew{
+        border-radius: 30px;
+        background-color: lightgray;
+        padding: 20px;
+        margin-bottom:10px;
+    }
+</style>
+
+@section naviheader
+{
+
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="/admin/home" class="nav-link">Trang chủ</a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="/admin/products" class="nav-link">Thông số kỹ thuật xe</a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="#" class="nav-link active">Thêm mới</a>
+        </li>
+    </ul>
+}
+
+<div style="height:2px; background-color: darkslategrey"></div>
+<br />
+
+<!-- Main content -->
+<section class="content">
+    <div class="card-body">
+        @using (Html.BeginForm("Add", "productdetail", FormMethod.Post, new { }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-md-3">
+                            Thông tin thêm mới TSKT xe
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="tab-content">
+                        <div class="active tab-pane" id="activity">
+                            <div class="row">
+                                <div class="col-md-12 text-center">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Danh mục</label>
+                                        @Html.DropDownListFor(a => a.ProductId, ViewBag.ProductCategory as SelectList, "- -Chọn loại xe- -", new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(a => a.ProductId, null, new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="bodynew">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">Phiên bản xe</label>
+
+                                                @Html.TextBoxFor(a => a.DoiXe, new { @class = "form-control", @placeholder = "Phiên bản" })
+                                                @Html.ValidationMessageFor(a => a.DoiXe, null, new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">Loại hộp số</label>
+                                                <select name="LoaiSo" class="form-control">
+                                                    <option value="Số tự động" selected>Số tự động</option>
+                                                    <option value="Số sàn">Số sàn</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">Kích thước DxRxC</label>
+                                                <input type="text" name="KichThuoc" class="form-control" placeholder="Kích thước DxRxC (mm)" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">Khoảng sáng gầm xe</label>
+                                                <input type="text" name="KhoangSangGamXe" class="form-control" placeholder="Khoảng sáng (mm)" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">Bán kính vòng quay</label>
+                                                <input type="text" name="BanKinhVongQuay" class="form-control" placeholder="Bán kính vòng quay (m)" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">Chiều rộng cơ sở</label>
+                                                <input type="text" name="ChieuRongCoSo" class="form-control" placeholder="Chiều rộng" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">Kích thước lốp xe</label>
+                                                <input type="text" name="KichThuocLopXe" class="form-control" placeholder="Kích thước lốp xe" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bodynew">
+                                    <div class=" row">
+                                        <div class="col-md-5">
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">TL Không tải</label>
+                                                <input type="text" name="WeightKhongTai" class="form-control" placeholder="TL không tải" />
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-5">
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">TL toàn tải</label>
+                                                <input type="text" name="WeightToanTai" class="form-control" placeholder="TL toàn tải" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bodynew">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">Mức tiêu thụ trong</label>
+                                                <input type="text" name="MucTieuThuTrong" class="form-control" placeholder="Mức tiêu thụ trọng" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">Mức tiêu thụ ngoài</label>
+                                                <input type="text" name="MucTieuThuNgoai" class="form-control" placeholder="Mức tiêu thụ ngoài" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">Mức TT hỗn hợp</label>
+                                                <input type="text" name="MucTieuThuHonHop" class="form-control" placeholder="Mức TT hỗn hợp" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bodynew">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">Phanh trước</label>
+                                                <input type="text" name="PhanhTruoc" class="form-control" placeholder="Phanh trước" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">Phanh sau</label>
+                                                <input type="text" name="PhanhSau" class="form-control" placeholder="Phanh sau" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="bodynew">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">Loại vành</label>
+                                                <input type="text" name="LoaiVanh" class="form-control" placeholder="Loại vành" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">Hệ thống nhiên liệu</label>
+                                                <input type="text" name="HeThongNhienLieu" class="form-control" placeholder="Hệ thống nhiên liệu" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">Loại động cơ</label>
+                                                <input type="text" name="LoaiDongCo" class="form-control" placeholder="Loại động cơ" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">Tiêu chuẩn khí thải</label>
+                                                <input type="text" name="TieuChuanKhiThai" class="form-control" placeholder="Tiêu chuẩn khí thải" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">Công suất tối đa</label>
+                                                <input type="text" name="CongSuatToiDa" class="form-control" placeholder="Công suất tối đa" />
+                                            </div>
+                                           
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">Số xy lanh</label>
+                                                <input type="text" name="SoXyLanh" class="form-control" placeholder="Số xy lanh" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">Dung tích xy lanh</label>
+                                                <input type="text" name="DungTichXyLanh" class="form-control" placeholder="Dung tích xy lanh" />
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">Hệ thống truyền động</label>
+                                                <input type="text" name="HeThongTruyenDong" class="form-control" placeholder="Hệ thống truyền động" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">Bố trí xy lanh</label>
+                                                <input type="text" name="BoTriXyLanh" class="form-control" placeholder="Bố trí xy lanh" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">Hộp số</label>
+                                                <input type="text" name="HopSo" class="form-control" placeholder="Hộp số" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <a class="btn btn-outline-danger rounded-pill" href="/admin/productdetail/" style="width:100%"><i class="fa fa-fast-backward" aria-hidden="true"> Quay lại</i></a>
+                            </div>
+                            <div class="col-md-8">
+                                <button type="submit" name="btnSave" id="btnSave" class="btn btn-success rounded-pill" style="width:100%"> Lưu <i class="fa fa-check-square" aria-hidden="true"></i> </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</section>
+<!-- /.content -->
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('.auto').autoNumeric('init');
+            $('#demoPrice').bind('blur focusout keypress keyup', function () {
+                var demoGet = $('#demoPrice').autoNumeric('get');
+                $('#Price').val(demoGet);
+                $('#Price').autoNumeric('set', demoGet);
+            });
+            $('#demoOriginalPrice').bind('blur focusout keypress keyup', function () {
+                var demoGet = $('#demoOriginalPrice').autoNumeric('get');
+                $('#OriginalPrice').val(demoGet);
+                $('#OriginalPrice').autoNumeric('set', demoGet);
+            });
+            $('#demoPriceSale').bind('blur focusout keypress keyup', function () {
+                var demoGet = $('#demoPriceSale').autoNumeric('get');
+                $('#PriceSale').val(demoGet);
+                $('#PriceSale').autoNumeric('set', demoGet);
+            });
+        });
+
+        function BrowseServer(field) {
+            var finder = new CKFinder();
+            finder.selectActionFunction = function (fileUrl) {
+                addImageProduct(fileUrl);
+            };
+            finder.popup();
+        }
+        
+    </script>
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+<script>
+    var loadFile = function (event) {
+        var image = document.getElementById('output');
+        image.src = URL.createObjectURL(event.target.files[0]);
+    };
+</script>

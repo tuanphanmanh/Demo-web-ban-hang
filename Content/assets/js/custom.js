@@ -222,6 +222,9 @@ jQuery(document).ready(function ($) {
                     else {
                         fav.addClass('active');
                         active = true;
+                        var id = $(this).data('id');
+                        //alert(id);
+                        //debugger;
                         AddWishlist(id);
                     }
                 });

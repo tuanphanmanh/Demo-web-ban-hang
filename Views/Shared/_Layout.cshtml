@@ -1,6 +1,7 @@
 ﻿@using WebBanHangOnline.Common
 
 <!DOCTYPE html>
+
 <html>
 <head>
     <title>Tứ quý Auto</title>
@@ -40,6 +41,7 @@
 
 </head>
 <body>
+    
     <div class="super_container" id="app">
         <!-- Header -->
         <header class="header trans_300" style="top: 0px;">
@@ -116,7 +118,7 @@
                                                 </li>
                                                 <li>
                                                     <a href="/wishlist/index">
-                                                        Yêu thích  <i class="fa fa-heart" aria-hidden="true"></i>
+                                                        Quan tâm  <i class="fa fa-star" aria-hidden="true"></i>
                                                     </a>
                                                 </li>
                                                 <li>
@@ -148,7 +150,7 @@
                             <nav class="navbar">
                                 @Html.Action("MenuTop", "Menu")
                                 <ul class="navbar_user">
-                                    <li><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></li>
+                                    <li><a href="/wishlist/index"><i class="fa fa-star" aria-hidden="true"></i></a></li>
                                     <li><a href="/account/profile"><i class="fa fa-user" aria-hidden="true"></i></a></li>
                                     <li class="checkout">
                                         <a href="/gio-hang">
@@ -165,12 +167,8 @@
                     </div>
                 </div>
             </div>
-
         </header>
-
-        <!-- Slider -->
         @RenderBody()
-
 
         <div class="benefit">
             <div class="container">
@@ -216,7 +214,7 @@
         </div>
 
 
-        @Html.Action("Partial_News_Home", "news")
+        @*@Html.Action("Partial_News_Home", "news")*@
 
         @Html.Action("Partial_Subcribe", "Home")
 
@@ -341,6 +339,7 @@
 }
 
 <style>
+
     .dark-mode {
         background-color: #1a1a1a;
         color: white;
@@ -421,4 +420,5 @@
             border-radius: 50%;
         }
 </style>
+
 

@@ -58,6 +58,13 @@ namespace WebBanHangOnline
                 defaults: new { controller = "Contact", action = "Index", alias = UrlParameter.Optional },
                 namespaces: new[] { "WebBanHangOnline.Controllers" }
             );
+
+            routes.MapRoute(
+                name: "SignUpForTestDrive",
+                url: "dang-ky-lai-thu",
+                defaults: new { controller = "SignUpForTestDrive", action = "Add", alias = UrlParameter.Optional },
+                namespaces: new[] { "WebBanHangOnline.Controllers" }
+            );
             routes.MapRoute(
                 name: "Service",
                 url: "dich-vu",

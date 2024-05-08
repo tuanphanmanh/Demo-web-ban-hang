@@ -1,4 +1,4 @@
-﻿@model PagedList.PagedList<WebBanHangOnline.Models.EF.News>
+﻿﻿@model PagedList.PagedList<WebBanHangOnline.Models.EF.News>
 @using PagedList.Mvc
 @using PagedList;
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
@@ -100,11 +100,11 @@
                     }
                 </tbody>
             </table>
-            
+
         </div>
         <!-- /.card-body -->
         <div class="card-footer text-center">
-                    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
         </div>
     </div>
     <!-- /.card -->
@@ -210,7 +210,3 @@
         });
     </script>
 }
-
-
-
-

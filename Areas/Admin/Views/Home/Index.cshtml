@@ -3,7 +3,7 @@
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
-
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" />
 @section naviheader{
 
     <ul class="navbar-nav">
@@ -15,34 +15,62 @@
         </li>
     </ul>
 }
-
+<style>
+    .homeTrangchu {
+        background-color: white;
+        padding: 50px;
+        border-radius: 35px;
+        transition: background-color 0.3s ease-in;
+        flex-basis: 20%;
+        /*max-width: 290px;*/
+    }
+        .homeTrangchu:hover {
+            background-color: lightblue;
+        }
+    .homechu{
+        justify-content: space-around;
+    }
+        
+</style>
+<div style="height:2px; background-color: darkslategrey;"></div>
+<br />
 <section class="content">
-    <div class="card">
-        <div class="card-header">
-            <h3 class="card-title">Dành cho đại lý Tứ Quý Auto</h3>
-            
+    <div class="card text-center">
+        <div class="card-header ">
+            <h3 class="card-title ">Tứ Quý Auto</h3>
         </div>
-        <div class="card-body">
-            <div class="row">
-                <div class="col-md-12 text-center text-danger">
-                    Chọn chức năng!
+        <div class="card-body" style="background-color: lightgray; padding:10px;">
+            <div class="row homechu">
+                <div class="homeTrangchu text-center">
+                    <a href="products/add" class="text-dark text-decoration-none"> <i class="fa fa-money" aria-hidden="true"></i> <br />Thêm sản phẩm mới</a>
                 </div>
-                <hr />
-                <div class="col-md-4 text-center">
-                    <a href="products/add" class="btn btn-info">Thêm sản phẩm mới</a>
+                <div class="homeTrangchu text-center">
+                    <a href="order" class="text-dark text-decoration-none"> <i class="fa fa-shopping-cart" aria-hidden="true"></i> <br />Đơn hàng</a>
                 </div>
-                <div class="col-md-4 text-center">
-                    <a href="order" class="btn btn-success">Đơn hàng</a>
+                <div class="homeTrangchu text-center">
+                    <a href="products" class="text-dark text-decoration-none"> <i class="fa fa-car" aria-hidden="true"></i> <br />Xe</a>
                 </div>
-                <div class="col-md-4 text-center">
-                    <a href="account" class="btn btn-danger">Tài khoản</a>
+                <div class="homeTrangchu text-center">
+                    <a href="account" class="text-dark text-decoration-none"><i class="fa fa-user" aria-hidden="true"></i> <br />Tài khoản</a>
                 </div>
+                @*<div class="homeTrangchu col-md-3 text-center">
+                    <a href="account" class="text-dark text-decoration-none"><i class="fa fa-user" aria-hidden="true"></i> <br />Tài khoản</a>
+                </div>
+                <div class="homeTrangchu col-md-3 text-center">
+                    <a href="account" class="text-dark text-decoration-none"><i class="fa fa-user" aria-hidden="true"></i> <br />Tài khoản</a>
+                </div>
+                <div class="homeTrangchu col-md-3 text-center">
+                    <a href="account" class="text-dark text-decoration-none"><i class="fa fa-user" aria-hidden="true"></i> <br />Tài khoản</a>
+                </div>
+                <div class="homeTrangchu col-md-3 text-center">
+                    <a href="account" class="text-dark text-decoration-none"><i class="fa fa-user" aria-hidden="true"></i> <br />Tài khoản</a>
+                </div>*@
             </div>
-           
+
         </div>
         <div class="card-footer">
             <h5 class="card-title">Cảm ơn!</h5>
-        </div> 
+        </div>
     </div>
 
 </section>

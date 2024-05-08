@@ -13,8 +13,6 @@
 7. Init Favorite
 8. Init Tabs
 
-
-
 ******************************/
 
 jQuery(document).ready(function ($) {
@@ -232,14 +230,68 @@ jQuery(document).ready(function ($) {
 
 	*/
 
-	function initFavorite() {
-		if ($('.product_favorite').length) {
-			var fav = $('.product_favorite');
+	//function initFavorite() {
+	//	if ($('.product_favorite').length) {
+	//		var fav = $('.product_favorite');
 
-			fav.on('click', function () {
-				fav.toggleClass('active');
+	//		fav.on('click', function () {
+	//			fav.toggleClass('active');
+	//		});
+	//	}
+	//}
+
+	function initFavorite() {
+		if ($('.favorite').length) {
+			var favs = $('.favorite');
+
+			favs.each(function () {
+				var fav = $(this);
+				var active = false;
+				if (fav.hasClass('active')) {
+					active = true;
+				}
+				fav.on('click', function () {
+					var id = $(this).data('id');
+					if (active) {
+						fav.removeClass('active');
+						active = false;
+						DeleteWishlist(id);
+					}
+					else {
+						fav.addClass('active');
+						active = true;
+						var id = $(this).data('id');
+						alert(id);
+						//debugger;
+						AddWishlist(id);
+					}
+				});
 			});
 		}
+	}
+	function DeleteWishlist(id) {
+		$.ajax({
+			url: '/wishlist/PostDeleteWishlist',
+			type: 'POST',
+			data: { ProductId: id },
+			success: function (res) {
+				if (res.Success == false) {
+					alert(res.Message);
+				}
+			}
+		});
+	}
+	function AddWishlist(id) {
+		$.ajax({
+			url: '/wishlist/postwishlist',
+			type: 'POST',
+			data: { ProductId: id },
+			success: function (res) {
+				if (res.Success == false) {
+					alert(res.Message);
+				}
+			}
+		});
 	}
 
 	/* 

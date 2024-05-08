@@ -77,15 +77,13 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Mô tả</label>
-                                @Html.TextAreaFor(a => a.Description, new { @class = "form-control", @id = "txtDetail", @placeholder = "Chi tiết" })
-
+                                <label for="exampleInputEmail1">Mô tả sơ bộ</label>
+                                @Html.TextAreaFor(a => a.Description, new { @class = "form-control", @placeholder = "Mô tả sơ bộ" })
                             </div>
 
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Chi tiết</label>
-                                @Html.TextBoxFor(a => a.Detail, new { @class = "form-control", @id = "txtDetail" })
-                                @Html.ValidationMessageFor(a => a.Detail, null, new { @class = "text-danger" })
+                                <label for="exampleInputEmail1">Chi tiết xe</label>
+                                @Html.TextAreaFor(a => a.Detail, new { @class = "form-control", @id = "txtDetail", @placeholder = "Chi tiết" })
                             </div>
 
                             <div class="row">
@@ -245,6 +243,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                <hr />
                             </form>
                         </div>
                         <!-- /.tab-pane -->
@@ -263,9 +262,8 @@
             </div>
         }
     </div>
-    <!-- /.card-body -->
 </section>
-<!-- /.content -->
+
 
 @section scripts{
     <script>
@@ -286,13 +284,14 @@
                 $('#PriceSale').val(demoGet);
                 $('#PriceSale').autoNumeric('set', demoGet);
             });
+
             CKEDITOR.replace('txtDetail', {
                 customConfig: '/content/ckeditor/config.js',
                 extraAllowedContent: 'span',
             });
 
             $('body').on('click', '.btnXoaAnh', function () {
-                var conf = confirm('Ban co muon xoa anh ko');
+                var conf = confirm('Bạn có muốn xóa ảnh không');
                 if (conf === true) {
                     var _id = $(this).data('id');
                     $('#trow_' + _id).fadeTo('fast', 0.5, function () {
@@ -336,13 +335,11 @@
             $('#tbHtml').append(str);
             $('#tCurrentId').val(currentId);
         }
+        var loadFile = function (event) {
+            var image = document.getElementById('output');
+            image.src = URL.createObjectURL(event.target.files[0]);
+        };
     </script>
     @Scripts.Render("~/bundles/jqueryval")
 }
 
-<script>
-    var loadFile = function (event) {
-        var image = document.getElementById('output');
-        image.src = URL.createObjectURL(event.target.files[0]);
-    };
-</script>

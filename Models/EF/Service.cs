@@ -10,15 +10,18 @@ namespace WebBanHangOnline.Models.EF
     [Table("tb_Service")]
     public class Service : CommonAbstract
     {
+        public Service()
+        {
+            this.Bookings = new HashSet<Booking>();
+        }
         [Key]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string Title { get; set; }
-        [ForeignKey("Product")]
-        public int ProductId { get; set; }
         public string Image { get; set; }     
         public string Description { get; set; }     
         public decimal PriceOfSerVice { get; set; }
-        public virtual Product Product { get; set; }
+        public virtual ICollection<Booking> Bookings { get; set; }
+
     }
 }

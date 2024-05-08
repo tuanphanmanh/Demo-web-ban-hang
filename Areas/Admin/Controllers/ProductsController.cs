@@ -41,7 +41,7 @@ namespace WebBanHangOnline.Areas.Admin.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Add(Product model, List<string> Images, List<int> rDefault)
+        public ActionResult Add(Product model, List<string> Images, List<int> rDefault, List<string> chuoi)
         {
             if (ModelState.IsValid)
             {

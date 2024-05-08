@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using WebBanHangOnline.Models;
+using WebBanHangOnline.Models.EF;
 
 namespace WebBanHangOnline.Controllers
 {
@@ -12,10 +14,14 @@ namespace WebBanHangOnline.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
         // GET: Products
-        public ActionResult Index()
+        public ActionResult Index(string SearchText)
         {
-            var items = db.Products.ToList();
-            return View(items);
+            IEnumerable<Product> items = db.Products.OrderByDescending(x => x.Id);
+            if (!string.IsNullOrEmpty(SearchText))
+            {
+                items = items.Where(a => a.Alias.Contains(SearchText) || a.Title.Contains(SearchText));
+            }
+            return View(items.ToList());
         }
         public ActionResult Detail(string alias, int id)
         {
@@ -31,7 +37,7 @@ namespace WebBanHangOnline.Controllers
             ViewBag.CountReview = countReview;
             return View(item);
         }
-
+       
         public ActionResult ProductCategory(string alias, int id)
         {
             var items = db.Products.ToList();
@@ -49,12 +55,12 @@ namespace WebBanHangOnline.Controllers
         }
         public ActionResult Partial_ItemByCateId()
         {
-            var items = db.Products.Where(a => a.IsHome && a.IsActive).Take(12).ToList();
+            var items = db.Products.ToList();
             return PartialView(items);
         }
         public ActionResult Partial_ProductSale()
         {
-            var items = db.Products.Where(a=>a.IsSale && a.IsActive).Take(12).ToList();
+            var items = db.News.ToList();
             return PartialView(items);
         }
     }

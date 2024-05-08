@@ -1,13 +1,11 @@
-﻿@model IEnumerable<WebBanHangOnline.Models.EF.Product>
-    @using WebBanHangOnline.Common
-@if (Model != null && Model.Any())
-{
+﻿@model IEnumerable<WebBanHangOnline.Models.EF.News>
+
     <div class="best_sellers">
         <div class="container">
             <div class="row">
                 <div class="col text-center">
                     <div class="section_title new_arrivals_title">
-                        <h2>GIẢM GIÁ</h2>
+                        <h2> <i class="fa fa-newspaper-o" aria-hidden="true"></i> TIN TỨC </h2>
                     </div>
                 </div>
             </div>
@@ -17,67 +15,36 @@
                         <div class="owl-carousel owl-theme product_slider owl-loaded owl-drag">
                             @foreach (var item in Model)
                             {
-                                var strImage = "";
-                                var img = item.ProductImage.FirstOrDefault(a => a.IsDefault);
-                                if (img != null)
-                                {
-                                    strImage = img.Image;
-                                }
                                 <div class="owl-item product_slider_item">
                                     <div class="product-item">
                                         <div class="product discount">
                                             <div class="product_image">
-                                                @*<a href="/chi-tiet/@item.Alias-p@(item.Id)">
-                    <img src="@strImage" alt="@item.Title">
-                </a>*@
-                                                <img src="@strImage" alt="@item.Title">
-
+                                                <img style="min-height: 200px;" src="@item.Image" alt="@item.Title">
                                             </div>
-                                            <div class="favorite favorite_left"></div>
-                                            @*@if (item.IsHot == true)
-            {
-                <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span> NEW </span></div>
-            }*@
-                                            @if (item.PriceSale > 0)
-                                            {
-                                                <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>sale</span></div>
-                                            }
-
-
                                             <div class="product_info">
-                                                <h6 class="product_name"><a href="/chi-tiet/@item.Alias-p@(item.Id)"> @item.Title </a></h6>
-                                                @if (item.PriceSale > 0)
-                                                {
-                                                    <div class="product_price">
-                                                        @WebBanHangOnline.Common.Common.FormatNumber(item.PriceSale, 0)<span>
-                                                            @WebBanHangOnline.Common.Common.FormatNumber(item.Price, 0)
-                                                        </span>
-                                                    </div>
-                                                }
-                                                else
-                                                {
-                                                    <div class="product_price">@WebBanHangOnline.Common.Common.FormatNumber(item.Price, 0) </div>
-                                                }
+                                                <h6 class="product_name">
+                                                    <a class="text-danger" href="/@item.Alias-n@(item.Id)">
+                                                        @item.Title <br />
+                                                    </a>
+                                                </h6>
+                                                <i>Ngày đăng: @item.ModifiedDate.ToString("dd/MM/yyyy")</i>
                                             </div>
                                         </div>
-                                        <div class="red_button add_to_cart_button"><a href="#" class="btnAddToCart" data-id="@item.Id">Thêm vào giỏ hàng</a></div>
                                     </div>
                                 </div>
                             }
-                        <div class="owl-nav disabled"><div class="owl-prev">prev</div><div class="owl-next">next</div></div><div class="owl-dots disabled"></div>
-                        </div>
-
-                        <!-- Slider Navigation -->
-
-                        <div class="product_slider_nav_left product_slider_nav d-flex align-items-center justify-content-center flex-column">
-                            <i class="fa fa-chevron-left" aria-hidden="true"></i>
-                        </div>
-                        <div class="product_slider_nav_right product_slider_nav d-flex align-items-center justify-content-center flex-column">
-                            <i class="fa fa-chevron-right" aria-hidden="true"></i>
                         </div>
                     </div>
+
+                    <!-- Slider Navigation -->
+
+                    <div class="product_slider_nav_left product_slider_nav d-flex align-items-center justify-content-center flex-column">
+                        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                    </div>
+                    <div class="product_slider_nav_right product_slider_nav d-flex align-items-center justify-content-center flex-column">
+                        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                    </div>
+                </div>
                 </div>
             </div>
         </div>
-    </div>
-}

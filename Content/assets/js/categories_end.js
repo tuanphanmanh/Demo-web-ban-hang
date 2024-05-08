@@ -162,7 +162,6 @@ jQuery(document).ready(function ($) {
 				if (fav.hasClass('active')) {
 					active = true;
 				}
-
 				fav.on('click', function () {
 					var id = $(this).data('id');
 					if (active) {
@@ -173,6 +172,7 @@ jQuery(document).ready(function ($) {
 					else {
 						fav.addClass('active');
 						active = true;
+						//var id = $(this).data('id');
 						//AddWishlist(id);
 					}
 				});

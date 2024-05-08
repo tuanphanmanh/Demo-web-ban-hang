@@ -11,7 +11,7 @@ namespace WebBanHangOnline.Models.EF
     public class Wishlist
     {
         [Key]
-        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
+        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)] 
         public int Id { get; set; }
         [ForeignKey("Product")]
         public int ProductId { get; set; }

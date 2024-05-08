@@ -43,45 +43,46 @@
                     @Html.ValidationSummary(true)
 
                     <!-- your steps content here -->
-                <div id="logins-part" class="content active dstepper-block" role="tabpanel" aria-labelledby="logins-part-trigger">
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Tên dịch vụ</label>
-                        @Html.TextBoxFor(a => a.Title, new { @class = "form-control", @placeholder = "Tên dịch vụ" })
-                        @Html.ValidationMessageFor(a => a.Title, null, new { @class = "text-danger" })
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Ảnh mô tả</label>
-                        <div class="col-md-10">
-                            <img id="output" class="img-rounded" alt="Ảnh" width="180" height="180" src="~/Content/Image/no-image-nes.png" />
-                            <p>
-                                <label for="ulfile" style="cursor: pointer;">Chọn ảnh</label>
-                            </p>
-                            <input name="ImageFile" id="ufile" type="file" style="display:none;" onchange="loadFile(event)" />
+                    <div id="logins-part" class="content active dstepper-block" role="tabpanel" aria-labelledby="logins-part-trigger">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Tên dịch vụ</label>
+                            @Html.TextBoxFor(a => a.Title, new { @class = "form-control", @placeholder = "Tên dịch vụ" })
+                            @Html.ValidationMessageFor(a => a.Title, null, new { @class = "text-danger" })
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Người thực hiện</label>
-                        @Html.TextAreaFor(a => a.ModifiedBy, new { @class = "form-control", @placeholder = "Người thực hiện" })
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Mô tả chi tiết</label>
-                        @Html.TextAreaFor(a => a.Description, new { @class = "form-control", @placeholder = "Người thực hiện" })
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Chi phí</label>
-                        @Html.TextAreaFor(a => a.PriceOfSerVice, new { @class = "form-control", @placeholder = "Chi phí" })
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <a class="btn btn-outline-danger rounded-pill" href="/admin/service/" style="width:100%"><i class="fa fa-fast-backward" aria-hidden="true"> Quay lại</i></a>
-                            </div>
-                            <div class="col-md-8">
-                                <button type="submit" name="btnSave" id="btnSave" class="btn btn-success rounded-pill" style="width:100%"> Lưu <i class="fa fa-check-square" aria-hidden="true"></i> </button>
+                        <div class="form-group">
+                            <label for="exampleInputFile">Ảnh đại diện</label>
+                            <div class="input-group">
+                                <div class="custom-file">
+                                    @Html.TextBoxFor(a => a.Image, new { @id = "txtImage", @class = "form-control" })
+                                </div>
+                                <div class="input-group-append">
+                                    <input type="button" value="Tải ảnh" onclick="BrowseServer('txtImage');" />
+                                </div>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Người thực hiện</label>
+                            @Html.TextAreaFor(a => a.ModifiedBy, new { @class = "form-control", @placeholder = "Người thực hiện" })
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Mô tả chi tiết</label>
+                            @Html.TextAreaFor(a => a.Description, new { @class = "form-control", @placeholder = "Người thực hiện" })
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Chi phí</label>
+                            @Html.TextAreaFor(a => a.PriceOfSerVice, new { @class = "form-control", @placeholder = "Chi phí" })
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <a class="btn btn-outline-danger rounded-pill" href="/admin/service/" style="width:100%"><i class="fa fa-fast-backward" aria-hidden="true"> Quay lại</i></a>
+                                </div>
+                                <div class="col-md-8">
+                                    <button type="submit" name="btnSave" id="btnSave" class="btn btn-success rounded-pill" style="width:100%"> Lưu <i class="fa fa-check-square" aria-hidden="true"></i> </button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
 
                 }
             </div>
@@ -92,16 +93,33 @@
 
 </section>
 <!-- /.content -->
-
 @section scripts{
-
     <script>
-        var loadFile = function (event) {
-            var image = document.getElementById('output');
-            image.src = URL.createObjectURL(event.target.files[0]);
-        };
+        $(document).ready(function () {
+            CKEDITOR.replace('txtDetail', {
+                customConfig: '/content/ckeditor/config.js',
+                extraAllowedContent: 'span',
+            });
+        });
+        function BrowseServer(field) {
+            var finder = new CKFinder();
+            finder.selectActionFunction = function (fileUrl) {
+                document.getElementById(field).value = fileUrl;
+            };
+            finder.popup();
+        }
+
     </script>
+
+    @Scripts.Render("~/bundles/jqueryval")
 }
+
+<script>
+    var loadFile = function (event) {
+        var image = document.getElementById('output');
+        image.src = URL.createObjectURL(event.target.files[0]);
+    };
+</script>
 
 
 

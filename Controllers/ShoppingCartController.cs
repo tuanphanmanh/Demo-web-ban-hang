@@ -124,7 +124,7 @@ namespace WebBanHangOnline.Controllers
                     // gửi email cho khách hàng
                     var strSanPham = "";
                     var thanhtien = decimal.Zero;
-                    var TongTien = decimal.Zero;
+                    var TongTien = decimal.Zero; 
                     foreach (var sp in cart.Items)
                     {
                         strSanPham += "<tr>";

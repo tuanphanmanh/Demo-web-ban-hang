@@ -16,7 +16,7 @@ namespace WebBanHangOnline.Controllers
         // GET: Wishlist
         public ActionResult Index(int? page)
         {
-            var pageSize = 10;
+            var pageSize = 5;
             if (page == null)
             {
                 page = 1;
@@ -39,7 +39,7 @@ namespace WebBanHangOnline.Controllers
             var checkItem = db.Wishlists.FirstOrDefault(x => x.ProductId == ProductId && x.UserName == User.Identity.Name);
             if (checkItem != null)
             {
-                return Json(new { Success = false, Message = "Sản phẩm đã được yêu thích rồi." });
+                return Json(new { Success = false, Message = "Đã thêm sản phẩm vào mục quan tâm." });
             }
             var item = new Wishlist();
             item.ProductId = ProductId;
@@ -60,9 +60,22 @@ namespace WebBanHangOnline.Controllers
                 var item = db.Wishlists.Find(checkItem.Id);
                 db.Set<Wishlist>().Remove(item);
                 var i = db.SaveChanges();
-                return Json(new { Success = true, Message = "Xóa thành công." });
+                return Json(new { Success = true, Message = "Ko xóa được khỏi danh sách quan tâm." });
             }
-            return Json(new { Success = false, Message = "Xóa thất bại." });
+            return Json(new { Success = false, Message = "Xóa khỏi danh sách quan tâm." });
+        }
+
+        [HttpPost]
+        public ActionResult Delete(int id)
+        {
+            var item = db.Wishlists.Find(id);
+            if (item != null)
+            {
+                db.Wishlists.Remove(item);
+                db.SaveChanges();
+                return Json(new { success = true });
+            }
+            return Json(new { success = false });
         }
 
         private ApplicationDbContext db = new ApplicationDbContext();
