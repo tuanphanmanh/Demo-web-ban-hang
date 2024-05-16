@@ -24,7 +24,14 @@ namespace WebBanHangOnline
                     defaults: new { controller = "News", action = "Index", alias = UrlParameter.Optional },
                     namespaces: new[] { "WebBanHangOnline.Controllers" }
             );
-           
+
+            routes.MapRoute(
+                    name: "Wishlist",
+                    url: "danh-sach-xe-quan-tam",
+                    defaults: new { controller = "Wishlist", action = "Index", alias = UrlParameter.Optional },
+                    namespaces: new[] { "WebBanHangOnline.Controllers" }
+            );
+
             routes.MapRoute(
                 name: "BaiViet",
                 url: "post/{alias}",
@@ -51,7 +58,6 @@ namespace WebBanHangOnline
                 defaults: new { controller = "Products", action = "ProductCategory", id = UrlParameter.Optional },
                 namespaces: new[] { "WebBanHangOnline.Controllers" }
             );
-
             routes.MapRoute(
                 name: "Contact",
                 url: "lien-lac",

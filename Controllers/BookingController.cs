@@ -37,6 +37,17 @@ namespace WebBanHangOnline.Controllers
             model.CreatedDate = DateTime.Now;
             db.Bookings.Add(model);
             db.SaveChanges();
+            string contentCustomer = System.IO.File.ReadAllText(Server.MapPath("~/content/template/send3.html"));
+            contentCustomer = contentCustomer.Replace("{{NgayDat}}", model.CreatedDate.ToString("dd/MM/yyyy"));
+            //contentCustomer = contentCustomer.Replace("{{DichVu}}", model.Service.Title);
+            contentCustomer = contentCustomer.Replace("{{ThoiGianToi}}", model.CustomerTime);
+            contentCustomer = contentCustomer.Replace("{{NgayToi}}", model.ModifiedDate.ToString("dd/MM/yyyy"));
+            contentCustomer = contentCustomer.Replace("{{TenKhachhang}}", model.CreatedBy);
+            contentCustomer = contentCustomer.Replace("{{DiaChiLienHe}}", model.Address);
+            contentCustomer = contentCustomer.Replace("{{Email}}", model.Email);
+            contentCustomer = contentCustomer.Replace("{{Phone}}", model.PhoneNumber);
+            contentCustomer = contentCustomer.Replace("{{Xe}}", model.CarName);
+            WebBanHangOnline.Common.Common.SendMail("noreply@tuyquyauto.com.vn", "Lịch hẹn dịch vụ", contentCustomer.ToString(), model.Email);
             return PartialView("index");
         }
 

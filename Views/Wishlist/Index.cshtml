@@ -1,4 +1,4 @@
-﻿@model PagedList.PagedList<WebBanHangOnline.Models.EF.Wishlist>
+﻿﻿@model PagedList.PagedList<WebBanHangOnline.Models.EF.Wishlist>
 @using PagedList.Mvc;
 @using PagedList;
 @{
@@ -45,17 +45,19 @@
         display: block;
     }
 
-    #abcde {
+    #abcde1 {
         padding: 10px;
-        border-radius: 40px;
-        background-image: linear-gradient(to right, #12c2e9, #c471ed, #f64f59);
+        padding-top: 20px;
+        padding-bottom: 20px;
+        border-radius: 20px;
+        background-image: linear-gradient(to right, #f64f59, #c471ed, #a5dde4);
         background-repeat: no-repeat;
         background-position: 200px -200px;
         transition: background-position 0.3s ease-in-out;
     }
 
-        #abcde:hover {
-            color:white;
+        #abcde1:hover {
+            color: white;
             background-position: 0 0;
         }
 </style>
@@ -69,10 +71,16 @@
     {
         foreach (var item in Model)
         {
-            <div class="row row-item-new" id="abcde" style="display: flex; align-items: center;">
+            var strImage = "";
+            var img = item.Product.ProductImage.FirstOrDefault(a => a.IsDefault);
+            if (img != null)
+            {
+                strImage = img.Image;
+            }
+            <div class="row row-item-new" id="abcde1" style="display: flex; align-items: center;">
                 <div class="col-md-4">
                     <div class="img-box">
-                        <a title="@item.Product.Title"><img id="hoverTarget" src="@item.Product.Image" style="min-width: 350px; max-height: 150px;" class="img-thumbnail" alt="@item.Product.Title" /></a>
+                        <a title="@item.Product.Title"><img id="hoverTarget" src="@strImage" style="min-width: 350px; max-height: 150px;" class="img-thumbnail" alt="@item.Product.Title" /></a>
                     </div>
                 </div>
                 <div class="col-md-6 ">
@@ -112,14 +120,6 @@
         <div class="content-box">Chưa có sản phẩm nào đang quan tâm</div>
     }
 </div>
-
-<div class="modal" id="myModal">
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        <p>Đây là modal!</p>
-    </div>
-</div>
-
 
 
 @section scripts{

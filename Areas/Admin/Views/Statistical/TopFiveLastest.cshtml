@@ -1,0 +1,76 @@
+﻿@model List<WebBanHangOnline.Models.EF.OrderDetail>
+
+<section class="content">
+    <div class="card card-primary">
+        <div class="card-header">
+            <h3 class="card-title">Top 5 xe tồn lâu nhất</h3>
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                    <i class="fas fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+        <div class="card-body" style=" padding: 10px;">
+            <div class="row homechu">
+                <table class="table table-bordered text-center">
+                    <tr>
+                        <th>Top</th>
+                        <th>Tên xe</th>
+                        <th>Nhập ngày</th>
+                        <th>Tồn</th>
+                    </tr>
+                    @if (Model != null)
+                    {
+                        var i = 1;
+                        foreach (var product in Model)
+                        {
+                            TimeSpan ngaytru = (DateTime.Now - (product.SelectedDate ?? DateTime.Now));
+                            int soNgay = ngaytru.Days;
+                                string formattedDate = product.SelectedDate?.ToString("dd/MM/yyyy");
+                            if (i == 1)
+                            {
+                                <tr>
+                                    <td class="bg-primary">@i</td>
+                                    <td class="bg-primary"> @product.Name </td>
+                                    <td class="bg-primary">@formattedDate</td>
+                                    <td class="bg-primary"> @soNgay ngày </td>
+                                </tr>
+                            }
+                            if (i == 2)
+                            {
+                                <tr>
+                                    <td style="background-color: #3a87e6; color: #Fff">@i</td>
+                                    <td style="background-color: #3a87e6; color: #Fff">@product.Name</td>
+                                    <td style="background-color: #3a87e6; color: #Fff">@formattedDate</td>
+                                    <td style="background-color: #3a87e6; color: #Fff"> @soNgay ngày</td>
+                                </tr>
+                            }
+                            if (i == 3)
+                            {
+                                <tr>
+                                    <td style="background-color: #79bada; color: #Fff"> @i</td>
+                                    <td style="background-color: #79bada; color: #Fff">@product.Name</td>
+                                    <td style="background-color: #79bada; color: #Fff">@formattedDate</td>
+                                    <td style="background-color: #79bada; color: #Fff"> @soNgay ngày</td>
+                                </tr>
+                            }
+                            if (i != 1 && i != 2 && i != 3)
+                            {
+                                <tr>
+                                    <td> @i</td>
+                                    <td>@product.Name</td>
+                                    <td>@formattedDate</td>
+                                    <td> @soNgay ngày</td>
+                                </tr>
+                            }
+                            i++;
+                        }
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,94 @@
+﻿@model IEnumerable<WebBanHangOnline.Models.EF.Product>
+@{
+    ViewBag.Title = "Danh sách sản phẩm";
+}
+
+<style>
+    .news_section_container {
+        margin-top: 180px;
+    }
+
+    .row-item-new {
+        margin-bottom: 20px;
+    }
+
+    .title-news {
+        font-size: 24px;
+        border-bottom: 1px solid;
+        padding: 15px 0;
+        margin-bottom: 25px;
+    }
+
+    .img-box img {
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+    #abcdefgh {
+        padding-top: 20px;
+        padding-bottom: 20px;
+        background-image: linear-gradient(to right, #f64f59, #c471ed, #a5dde4);
+        background-repeat: no-repeat;
+        background-position: 200px -200px;
+        transition: background-position 0.3s ease-in-out;
+    }
+
+        #abcdefgh:hover {
+            color: white;
+            background-position: 0 0;
+        }
+</style>
+
+<div class="container product_section_container">
+    <div class="row">
+        <div class="col-md-12">
+                        @if (Model != null && Model.Any())
+                        {
+                            foreach (var item in Model)
+                            {
+                                var strImage = "";
+                                var img = item.ProductImage.FirstOrDefault(a => a.IsDefault);
+                                if (img != null)
+                                {
+                                    strImage = img.Image;
+                                }
+                                <div class="row row-item-new" id="abcdefgh" style="display: flex; align-items: center;">
+                                    <div class="col-md-4">
+                                        <div class="img-box">
+                                            <a title="@item.Title"><img id="hoverTarget" src="@strImage" style="min-width: 350px; max-height: 150px;" class="img-thumbnail" alt="@item.Title" /></a>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 ">
+                                        <div class="content-box">
+                                            <h3><a href="/chi-tiet/@item.Alias-p@(item.Id)" title="@item.Title" class="text-dark"> @item.Title </a></h3>
+                                            <div style="height:2px; background-color: lightgreen"></div>
+                                            <table class="table table-borderless text-center">
+                                                <tr>
+                                                    <th>  @item.Fuel</th>
+                                                    <th>  @item.NumberOfSeats chỗ</th>
+                                                    <th>  @item.Design</th>
+                                                    <th>     @item.Origin</th>
+                                                    <th>@WebBanHangOnline.Common.Common.FormatNumber(item.PriceSale, 0) VND</th>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <h4>
+                                            <a href="#" data-id="@item.Id" class="text-success btnAddToCart" title="Thêm vào giỏ hàng"><i class="fa fa-cart-plus" aria-hidden="true"></i></a>
+                                            <a href="/san-pham" class="text-primary" title="Xem thêm"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>
+                                            <a data-id="@item.Id" class="text-danger   favorite favorite_left" title="Thêm vào quan tâm"><i class="fa fa-star" aria-hidden="true"></i></a>
+
+                                        </h4>
+                                    </div>
+                                </div>
+                            }
+                        }
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+    <script src="~/Content/assets/js/categories_end.js"></script>
+}

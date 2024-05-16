@@ -1,12 +1,12 @@
 ﻿@model WebBanHangOnline.Models.LoginViewModel
-    @{ 
-        ViewBag.Title = "login";
-        Layout = "~/Areas/Admin/Views/Shared/_LoyoutLogin.cshtml";
+@{
+    ViewBag.Title = "login";
+    Layout = "~/Areas/Admin/Views/Shared/_LoyoutLogin.cshtml";
 
-    }
+}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-...gS2BQo=" crossorigin="anonymous" />
 <div style="background-color:#FFFFF0" class="card-header">
-    <div  class="text-center mb-11">
+    <div class="text-center mb-11">
         <H3 style="font-weight:bold"> TỨ QUÝ AUTO</H3>
     </div>
 </div>
@@ -121,16 +121,19 @@
 
 
 <style>
-  .rotate-animation {
-    animation: rotate 1s linear infinite;
-  }
-   
-  keyframes rotate {
-    0% {
-      transform: rotate(0deg);
+    .rotate-animation {
+        animation: rotate 1s linear infinite;
     }
+
+    keyframes rotate {
+        0%
+
+    {
+        transform: rotate(0deg);
+    }
+
     100% {
-      transform: rotate(360deg);
+        transform: rotate(360deg);
     }
-  }
+    }
 </style>

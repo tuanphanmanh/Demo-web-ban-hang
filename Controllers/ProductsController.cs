@@ -37,7 +37,12 @@ namespace WebBanHangOnline.Controllers
             ViewBag.CountReview = countReview;
             return View(item);
         }
-       
+        
+        public ActionResult DetailProduct()
+        {
+            var items = db.Products.ToList();
+            return PartialView(items);
+        }
         public ActionResult ProductCategory(string alias, int id)
         {
             var items = db.Products.ToList();

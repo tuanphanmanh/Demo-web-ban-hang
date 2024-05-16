@@ -55,35 +55,36 @@ namespace WebBanHangOnline.Areas.Admin.Controllers
                 // Create a new worksheet
                 ExcelWorksheet worksheet = package.Workbook.Worksheets.Add("Sheet1");
                 // Add data to the worksheet
+                var a = data.Count();
                 worksheet.Cells["A1"].Value = "Ngày:";
                 worksheet.Cells["B1"].Value = DateTime.Now.ToString("dd/MM/yyyy");
-                worksheet.Cells["A2"].Value = "Báo cáo lịch hẹn của khách đến ngày " +DateTime.Now.ToString("dd/MM/yyyy");
+                worksheet.Cells["D1"].Value = "Báo cáo lịch hẹn của khách đến ngày " +DateTime.Now.ToString("dd/MM/yyyy");
 
-
-                worksheet.Cells["A4"].Value = "STT";
-                worksheet.Cells["B4"].Value = "Name";
-                worksheet.Cells["C4"].Value = "Phone";
-                worksheet.Cells["D4"].Value = "Email";
-                worksheet.Cells["E4"].Value = "Addres";
-                worksheet.Cells["F4"].Value = "Car Name";
-                worksheet.Cells["G4"].Value = "Time";
-                worksheet.Cells["H4"].Value = "Date";
-                worksheet.Cells["I4"].Value = "Status";
+                worksheet.Cells["A2"].Value = "STT";
+                worksheet.Cells["B2"].Value = "Name";
+                worksheet.Cells["C2"].Value = "Phone";
+                worksheet.Cells["D2"].Value = "Email";
+                worksheet.Cells["E2"].Value = "Addres";
+                worksheet.Cells["F2"].Value = "Car Name";
+                worksheet.Cells["G2"].Value = "Time";
+                worksheet.Cells["H2"].Value = "Date";
+                worksheet.Cells["I2"].Value = "Status";
 
                 for (int i = 0; i < data.Count; i++)
                 {
-                    worksheet.Cells["A" + (i + 5)].Value = i + 1;
-                    worksheet.Cells["B" + (i + 5)].Value = data[i].CreatedBy;
-                    worksheet.Cells["C" + (i + 5)].Value = data[i].PhoneNumber;
-                    worksheet.Cells["D" + (i + 5)].Value = data[i].Email;
-                    worksheet.Cells["E" + (i + 5)].Value = data[i].Address;
-                    worksheet.Cells["F" + (i + 5)].Value = data[i].CarName;
-                    worksheet.Cells["G" + (i + 5)].Value = data[i].CustomerTime;
-                    worksheet.Cells["H" + (i + 5)].Value = data[i].ModifiedDate.ToString("dd/MM/yyyy");
-                    worksheet.Cells["I" + (i + 5)].Value = data[i].Status;
+                    worksheet.Cells["A" + (i + 3)].Value = i + 1;
+                    worksheet.Cells["B" + (i + 3)].Value = data[i].CreatedBy;
+                    worksheet.Cells["C" + (i + 3)].Value = data[i].PhoneNumber;
+                    worksheet.Cells["D" + (i + 3)].Value = data[i].Email;
+                    worksheet.Cells["E" + (i + 3)].Value = data[i].Address;
+                    worksheet.Cells["F" + (i + 3)].Value = data[i].CarName;
+                    worksheet.Cells["G" + (i + 3)].Value = data[i].CustomerTime;
+                    worksheet.Cells["H" + (i + 3)].Value = data[i].ModifiedDate.ToString("dd/MM/yyyy");
+                    worksheet.Cells["I" + (i + 3)].Value = data[i].Status;
+                    worksheet.Column(i + 3).AutoFit();
                 }
 
-                var dataRange = worksheet.Cells[1, 1, data.Count, 9];
+                var dataRange = worksheet.Cells[1, 1, data.Count +2, data.Count +3];
                 var borderStyle = dataRange.Style.Border;
                 borderStyle.BorderAround(ExcelBorderStyle.Thin);
 

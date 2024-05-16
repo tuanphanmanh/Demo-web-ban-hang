@@ -1,121 +1,92 @@
 ﻿@model WebBanHangOnline.Models.EF.Booking
-<link rel="stylesheet" type="text/css" href="~/Content/assets/styles/main_styles.css">
-<link rel="stylesheet" type="text/css" href="~/content/assets/styles/bootstrap5/bootstrap.min.css">
-<link href="~/content/assets/plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-<link rel="stylesheet" type="text/css" href="~/content/assets/plugins/OwlCarousel2-2.2.1/owl.carousel.css">
-<link rel="stylesheet" type="text/css" href="~/content/assets/plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
-<link rel="stylesheet" type="text/css" href="~/content/assets/plugins/OwlCarousel2-2.2.1/animate.css">
-<link rel="stylesheet" href="~/content/assets/plugins/themify-icons/themify-icons.css">
-<link rel="stylesheet" type="text/css" href="~/content/assets/plugins/jquery-ui-1.12.1.custom/jquery-ui.css">
-<link rel="stylesheet" type="text/css" href="~/content/assets/styles/contact_styles.css">
-<div style="margin-top: 150px" class="container contact_container">
-    <div class="row">
-        <div class="col">
-            <div class="breadcrumbs d-flex flex-row align-items-center">
-                <ul>
-                    <li><a href="/">Trang chủ</a></li>
-                    <li><a href="/service/index"><i class="fa fa-angle-right" aria-hidden="true"></i>Dịch vụ</a></li>
-                    <li class="active"><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>Đặt lịch hẹn</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
 
-    <!-- Map Container -->
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <br />
+            <h4 class="modal-title text-center">
+                Đặt hẹn dịch vụ
+            </h4>
+            <div style="height: 2px; background-color: darkred"></div>
+            <div class="modal-body">
+                @using (Html.BeginForm("add", "Booking", FormMethod.Post, new { }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
 
-    <div class="row">
-        <div class="col-md-6">
-            @using (Html.BeginForm("add", "booking", FormMethod.Post, new { }))
-            {
-                @Html.AntiForgeryToken()
-                @Html.ValidationSummary(true)
-
-                <!-- your steps content here -->
-                <div id="logins-part" class="content active dstepper-block" role="tabpanel" aria-labelledby="logins-part-trigger">
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Tên khách hàng</label>
-                        @Html.TextBoxFor(a => a.CreatedBy, new { @class = "form-control", @placeholder = "Tên khách hàng" })
-                        @Html.ValidationMessageFor(a => a.CreatedBy, null, new { @class = "text-danger" })
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="exampleInputPassword1">Số điện thoại</label>
-                                @Html.TextBoxFor(a => a.PhoneNumber, new { @class = "form-control", @placeholder = "PhoneNumber" })
-                            </div>
+                    <div id="logins-part" class="content active dstepper-block" role="tabpanel" aria-labelledby="logins-part-trigger">
+                        <div class="form-group">
+                            @Html.TextBoxFor(a => a.CreatedBy, new { @class = "form-control", @placeholder = "Tên khách hàng" })
+                            @Html.ValidationMessageFor(a => a.CreatedBy, null, new { @class = "text-danger" })
                         </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="exampleInputPassword1">Email</label>
-                                @Html.TextBoxFor(a => a.Email, new { @class = "form-control", @placeholder = "Email" })
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Địa chỉ</label>
-                        @Html.TextBoxFor(a => a.Address, new { @class = "form-control", @id = "txtDetail", @placeholder = "Địa chỉ" })
-                    </div>
-
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Xe của bạn: </label>
-                        @Html.TextBoxFor(a => a.CarName, new { @class = "form-control", @placeholder = "Xe của bạn" })
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Dịch vụ</label>
-                        @Html.DropDownListFor(a => a.ServiceId, ViewBag.ProductCategory as SelectList, new { @class = "form-control" })                    @Html.ValidationMessageFor(a => a.ServiceId, null, new { @class = "text-danger" })
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Thời gian:</label>
-                                <br />
-                                <select name="CustomerTime" class="form-control">
-                                    <option value="7:00 - 8:00" selected>7:00 - 8:00</option>
-                                    <option value="8:00 - 9:00">9:00 -9:00</option>
-                                    <option value="9:00 - 10:00">9:00 - 10:00</option>
-                                    <option value="10:00 - 11:00">10:00 - 11:00</option>
-                                    <option value="11:00 - 12:00">11:00 - 12:00</option>
-                                    <option value="12:00 - 13:00">12:00 - 13:00</option>
-                                    <option value="13:00 - 14:00">13:00 - 14:00</option>
-                                    <option value="14:00 - 15:00">14:00 - 15:00</option>
-                                    <option value="15:00 - 16:00">15:00 - 16:00</option>
-                                    <option value="16:00 - 17:00">16:00 - 17:00</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Ngày:</label>
-                                <br />
-                                <input class="form-control" type="date" name="ModifiedDate" />
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
                         <div class="row">
-                            <div class="col-md-3">
-                                <button type="reset" class="btn btn-outline-danger" style="width:100%">
-                                    Xóa <i class="fa fa-trash"></i>
-                                </button>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.TextBoxFor(a => a.PhoneNumber, new { @class = "form-control", @placeholder = "Số điện thoại" })
+                                </div>
                             </div>
-                            <div class="col-md-9">
-                                <button type="submit" class="btn btn-info" style="width:100%"> Đặt lịch  <i class="fa fa-angle-right" aria-hidden="true"></i> </button>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.TextBoxFor(a => a.Email, new { @class = "form-control", @placeholder = "Email" })
+                                </div>
                             </div>
                         </div>
+                        <div class="form-group">
+                            @Html.TextBoxFor(a => a.Address, new { @class = "form-control", @id = "txtDetail", @placeholder = "Địa chỉ" })
+                        </div>
 
+                        <div class="form-group">
+                            @Html.TextBoxFor(a => a.CarName, new { @class = "form-control", @placeholder = "Xe của bạn" })
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Dịch vụ</label>
+                            @Html.DropDownListFor(a => a.ServiceId, ViewBag.ProductCategory as SelectList, new { @class = "form-control" })                    @Html.ValidationMessageFor(a => a.ServiceId, null, new { @class = "text-danger" })
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Thời gian:</label>
+                                    <br />
+                                    <select name="CustomerTime" class="form-control">
+                                        <option value="7:00 - 8:00" selected>7:00 - 8:00</option>
+                                        <option value="8:00 - 9:00">9:00 -9:00</option>
+                                        <option value="9:00 - 10:00">9:00 - 10:00</option>
+                                        <option value="10:00 - 11:00">10:00 - 11:00</option>
+                                        <option value="11:00 - 12:00">11:00 - 12:00</option>
+                                        <option value="12:00 - 13:00">12:00 - 13:00</option>
+                                        <option value="13:00 - 14:00">13:00 - 14:00</option>
+                                        <option value="14:00 - 15:00">14:00 - 15:00</option>
+                                        <option value="15:00 - 16:00">15:00 - 16:00</option>
+                                        <option value="16:00 - 17:00">16:00 - 17:00</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <form>
+                                        <label for="datepicker">Chọn ngày:</label>
+                                        <br />
+                                        <input class="form-control" type="date" name="ModifiedDate">
+                                    </form>
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <button type="reset" class="btn btn-outline-danger" data-dismiss="modal" style="width:100%">
+                                        Đóng
+                                    </button>
+
+                                </div>
+                                <div class="col-md-9">
+                                    <button type="submit" class="btn btn-success" id="abcdefg" style="width:100%"> Gửi đặt lịch  </button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-
-            }
-        </div>
-        <div class="col-md-6">
-            <div class="u-title">
-                Tứ Quý Auto<br />
-                Hot line: 1900679
+                }
             </div>
         </div>
-    </div>
-
-
 </div>

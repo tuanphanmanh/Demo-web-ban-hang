@@ -1,21 +1,69 @@
-﻿@model IEnumerable<WebBanHangOnline.Models.EF.ProductCategory>
+﻿<style>
+    .homeTrangchu {
+        padding: 40px;
+        flex-basis: 30%;
+    }
+    .homechu {
+        margin-top: 30px;
+        background-color: #e5e2e2;
+        justify-content: space-around;
+    }
+    #nstc{
+        font-size: 20px;
+    }
+</style>
 
-@if (Model != null && Model.Any())
-            {
-                <div class="banner">
-                    <div class="container">
-                        <div class="row">
-                            @foreach(var item in Model)
-                {
-                    <div class="col-md-4" style="margin-bottom: 10px;">
-                        <a href="/danh-muc-san-pham/@item.Alias-@(item.Id)">
-                            <div class="banner_item align-items-center" style="background-image: url(@item.Icon); border-right: 1px solid black">
-                            </div>
-
-                        </a>
+<div class="row homechu">
+        <div class="homeTrangchu text-center">
+            <div class="text-decoration-none" id="btnCapNhat">
+                <div class="row">
+                    <div class="col-md-4 text-right">
+                        <div class="img-box">
+                            <i class="fa fa-dollar text-danger" style="font-size: 70px;" aria-hidden="true"></i>
+                        </div>
                     </div>
-                }
+                    <div class="col-md-6 " style="display: flex; align-items: center;">
+                        <div id="nstc" class="content-box">
+                            <b>YÊU CẦU BÁO GIÁ</b>
                         </div>
                     </div>
                 </div>
-            }
+            </div>
+        </div>
+        <div class="homeTrangchu text-center">
+            <div class=" text-decoration-none">
+                <div class="row">
+                    <div class="col-md-4 text-right">
+                        <div class="img-box">
+                            <i class="fa fa-car text-danger" style="font-size: 70px;" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    <div class="col-md-6 " style="display: flex; align-items: center;">
+                        <div id="nstc" class="content-box">
+                            <a style="color: black;" href="/dang-ky-lai-thu">
+                                <b>ĐĂNG KÝ LÁI THỬ</b>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="homeTrangchu text-center">
+            <div class=" text-decoration-none">
+                <div class="row">
+                    <div class="col-md-4 text-right">
+                        <div class="img-box">
+                            <i class="fa fa-calendar text-danger"  style="font-size: 70px;" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    <div class="col-md-6 " style="display: flex; align-items: center;">
+                        <div id="nstc" class="content-box">
+                            <a style="color: black;" href="/dich-vu">
+                                <b>ĐẶT LỊCH DỊCH VỤ</b>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>

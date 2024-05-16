@@ -65,9 +65,10 @@ namespace WebBanHangOnline.Areas.Admin.Controllers
                     worksheet.Cells["D" + (i + 2)].Value = data[i].CreatedDate;
                     worksheet.Cells["E" + (i + 2)].Value = data[i].ModifiedBy;
                     worksheet.Cells["F" + (i + 2)].Value = data[i].Description;
+                    worksheet.Column(i + 2).AutoFit();
                 }
 
-                var dataRange = worksheet.Cells[1, 1, data.Count, data.Count+1];
+                var dataRange = worksheet.Cells[1,1, data.Count +1, data.Count+1];
                 var borderStyle = dataRange.Style.Border;
                 borderStyle.BorderAround(ExcelBorderStyle.Thin);
 
@@ -91,7 +92,7 @@ namespace WebBanHangOnline.Areas.Admin.Controllers
 
                 // Set the content type and file name for the response
                 Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-                Response.AddHeader("content-disposition", "attachment;  filename=excel-export.xlsx");
+                Response.AddHeader("content-disposition", "attachment;  filename=Service-Export-Excel.xlsx");
 
                 // Write the Excel package to the response stream
                 Response.BinaryWrite(package.GetAsByteArray());

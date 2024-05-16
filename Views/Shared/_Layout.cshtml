@@ -1,7 +1,5 @@
 ﻿@using WebBanHangOnline.Common
-
 <!DOCTYPE html>
-
 <html>
 <head>
     <title>Tứ quý Auto</title>
@@ -12,7 +10,7 @@
     <link rel="stylesheet" type="text/css" href="~/content/assets/styles/bootstrap4/bootstrap.min.css">
     <link href="~/content/assets/plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="~/content/assets/plugins/OwlCarousel2-2.2.1/owl.carousel.css">
-    <link rel="stylesheet" type="text/css" href="~/content/assets/plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
+    @*<link rel="stylesheet" type="text/css" href="~/content/assets/plugins/OwlCarousel2-2.2.1/owl.theme.default.css">*@
     <link rel="stylesheet" type="text/css" href="~/content/assets/plugins/OwlCarousel2-2.2.1/animate.css">
     <link rel="stylesheet" type="text/css" href="~/content/assets/styles/responsive.css">
     @*@RenderSection("css", required: false)*@
@@ -20,15 +18,12 @@
 
     <meta name="description" content="@ViewBag.SeoDescription" />
     <meta name="keywords" itemprop="keywords" content="@ViewBag.SeoKeyWord" />
-    @*<meta name="news_keywords" content="@ViewBag.SeoKeyWord" />*@
     <link rel="canonical" href="https://www.ten_mien_cua_cac_ban/" />
     <meta name="robots" content="index,follow,noodp" />
     <meta name="robots" content="noarchive">
     <meta property="og:site_name" content="Bán xe online" />
     <meta property="og:type" content="Website" />
     <meta property="og:locale" content="vi_VN" />
-    @*<meta property="fb:app_id" content="232505114857147" />*@
-    @*<meta property="fb:pages" content="1128104117285467" />*@
     <meta property="og:title" itemprop="name" content="@ViewBag.Title" />
     <meta property="og:url" itemprop="url" content="https://www.ten_mien_cua_cac_ban/" />
     <meta property="og:description" content="@ViewBag.SeoDescription" />
@@ -43,11 +38,7 @@
 <body>
     
     <div class="super_container" id="app">
-        <!-- Header -->
         <header class="header trans_300" style="top: 0px;">
-
-            <!-- Top Navigation -->
-
             <div class="top_nav" style="background-color: darkred">
                 <div class="container">
                     <div class="row">
@@ -63,34 +54,16 @@
                         <div class="col-md-4 text-right">
                             <div class="top_nav_right">
                                 <ul class="top_nav_menu">
-
                                     <!-- Currency / Language / My Account -->
 
-                                    <li class="currency" style="background-color: darkred">
+                                    <li class="currency" title="Chế độ tối" style="background-color: darkred">
                                         <label id="app" style="margin-top: 5px;" class="switch">
-                                            <input type="checkbox" id="toggleSwitch">
+                                            <input type="checkbox" id="toggleSwitchtop">
                                             <span class="slider round"></span>
                                         </label>
                                     </li>
 
-                                    <li class="language" style="background-color: darkred; color: white; font-weight: bold ">
-                                        <a href="#" style="background-color: darkred; color: white; font-weight: bold ">
-                                            <img src="https://www.vietcombank.com.vn/-/media/Default-Website/Default-images/Icons/Language/VIE.png?db=web" alt="Việt Nam" />
-                                            <i class="fa fa-angle-down"></i>
-                                        </a>
-                                        <ul class="language_selection">
-                                            <li>
-                                                <a href="#">
-                                                    <img src="https://www.vietcombank.com.vn/-/media/Default-Website/Default-images/Icons/Language/VIE.png?db=web" alt="Việt Nam" />  VN
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    <img src="https://www.vietcombank.com.vn/-/media/Default-Website/Default-images/Icons/Language/ENG.png?db=web" alt="English" />  EN
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>
+
                                     <li class="account" style="background-color: darkred; color: white; font-weight: bold ">
 
                                         @if (!Request.IsAuthenticated)
@@ -99,8 +72,8 @@
                                                 Tài khoản
                                                 <i class="fa fa-angle-down"></i>
                                             </a>
-                                            <ul style="min-width: 200px;" class="account_selection">
-                                                <li style="min-width: 200px;"><a href="/account/login"><i class="fa fa-sign-in" aria-hidden="true"></i>Đăng nhập</a></li>
+                                            <ul style="min-width: 180px;" class="account_selection">
+                                                <li><a href="/account/login"><i class="fa fa-sign-in" aria-hidden="true"></i>Đăng nhập</a></li>
                                                 <li><a href="/account/register"><i class="fa fa-user-plus" aria-hidden="true"></i>Đăng ký</a></li>
                                             </ul>
                                         }
@@ -110,18 +83,18 @@
                                                 @User.Identity.Name
                                                 <i class="fa fa-angle-down"></i>
                                             </a>
-                                            <ul style="min-width: 200px;" class="account_selection">
-                                                <li>
+                                            <ul style="min-width: 180px;" class="account_selection">
+                                                <li id="bbb">
                                                     <a href="/account/profile">
                                                         Trang cá nhân <i class="fa fa-user" aria-hidden="true"></i>
                                                     </a>
                                                 </li>
-                                                <li>
+                                                <li id="bbb">
                                                     <a href="/wishlist/index">
                                                         Quan tâm  <i class="fa fa-star" aria-hidden="true"></i>
                                                     </a>
                                                 </li>
-                                                <li>
+                                                <li id="bbb">
                                                     <a href="javascript:document.getElementById('logOffForm').submit()" role="button">
                                                         Đăng xuất <i class="fa fa-sign-in" aria-hidden="true"></i>
                                                     </a>
@@ -174,7 +147,7 @@
             <div class="container">
                 <div class="row benefit_row">
                     <div class="col-lg-3 benefit_col">
-                        <div class="benefit_item d-flex flex-row align-items-center">
+                        <div class="benefit_item d-flex flex-row align-items-center" id="abcde">
                             <div class="benefit_icon"><i class="fa fa-users" aria-hidden="true"></i></div>
                             <div class="benefit_content">
                                 <h6>thành viên vip</h6>
@@ -183,7 +156,7 @@
                         </div>
                     </div>
                     <div class="col-lg-3 benefit_col">
-                        <div class="benefit_item d-flex flex-row align-items-center">
+                        <div class="benefit_item d-flex flex-row align-items-center" id="abcde">
                             <div class="benefit_icon"><i class="fa fa-money" aria-hidden="true"></i></div>
                             <div class="benefit_content">
                                 <h6>giá cả hợp lý</h6>
@@ -192,7 +165,7 @@
                         </div>
                     </div>
                     <div class="col-lg-3 benefit_col">
-                        <div class="benefit_item d-flex flex-row align-items-center">
+                        <div class="benefit_item d-flex flex-row align-items-center" id="abcde">
                             <div class="benefit_icon"><i class="fa fa-undo" aria-hidden="true"></i></div>
                             <div class="benefit_content">
                                 <h6>đổi trả</h6>
@@ -201,7 +174,7 @@
                         </div>
                     </div>
                     <div class="col-lg-3 benefit_col">
-                        <div class="benefit_item d-flex flex-row align-items-center">
+                        <div class="benefit_item d-flex flex-row align-items-center" id="abcde">
                             <div class="benefit_icon"><i class="fa fa-clock-o" aria-hidden="true"></i></div>
                             <div class="benefit_content">
                                 <h6>mở cửa</h6>
@@ -255,23 +228,45 @@
             </div>
         </footer>
 
-        <button onclick="scrollToTop()" id="back-to-top">  <i class="fa fa-user" aria-hidden="true"></i> </button>
-
+        <button onclick="scrollToTop()" id="back-to-top">  <h3 style="color: white;"> <i class="fa fa-angle-double-up" aria-hidden="true"></i> </h3> </button>
     </div>
 
     <script>
-        var toggleSwitch = document.getElementById("toggleSwitch");
-        toggleSwitch.addEventListener("change", function () {
+        var toggleSwitchtop = document.getElementById("toggleSwitchtop");
+        toggleSwitchtop.addEventListener("change", function () {
             if (this.checked) {
                 // Bật công tắt
                 console.log("Đã bật công tắt");
+                toggleDarkMode();
             } else {
                 // Tắt công tắt
                 console.log("Đã tắt công tắt");
+                toggleDarkMode();
             }
         });
-        // Hiển thị hoặc ẩn nút quay lại đầu trang dựa trên vị trí cuộn
-        window.onscroll = function () { scrollFunction() };
+
+        var toggleDarkModeButton = document.getElementById('toggleSwitchtop');
+        var appElement = document.getElementById('app');
+
+        // Kiểm tra trạng thái chế độ tối từ localStorage khi trang web được tải
+        if (localStorage.getItem('darkModeEnabled') === 'true') {
+            appElement.classList.add('dark-mode');
+            toggleSwitchtop.checked = true;
+        }
+
+        // Xử lý sự kiện khi người dùng nhấp vào nút chuyển đổi chế độ tối
+        function toggleDarkMode() {
+            appElement.classList.toggle('dark-mode');
+
+            // Lưu trạng thái chế độ tối vào localStorage
+            if (appElement.classList.contains('dark-mode')) {
+                localStorage.setItem('darkModeEnabled', 'true');
+            } else {
+                localStorage.setItem('darkModeEnabled', 'false');
+            }
+        }
+
+        //đến đây
 
         function scrollFunction() {
             var backButton = document.getElementById("back-to-top");
@@ -281,15 +276,9 @@
                 backButton.classList.remove("show", "animate");
             }
         }
-        const toggleDarkModeButton = document.getElementById('toggleSwitch');
-        const appElement = document.getElementById('app');
-
-        toggleDarkModeButton.addEventListener('click', function () {
-            appElement.classList.toggle('dark-mode');
-        });
         // Cuộn lên đầu trang khi nhấp vào nút quay lại đầu trang
         function scrollToTop() {
-            var scrollDuration = 500; // Thời gian cuộn lên (ms)
+            var scrollDuration = 5; // Thời gian cuộn lên (ms)
             var scrollStep = -window.scrollY / (scrollDuration / 15);
             var scrollInterval = setInterval(function () {
                 if (window.scrollY !== 0) {
@@ -311,7 +300,6 @@
     <script src="~/Scripts/ExportFileExcel/dataTables/html5-button/buttons.html5.min.js"></script>
     <script src="~/Scripts/ExportFileExcel/dataTables/html5-button/buttons.print.min.js"></script>
     <script src="~/Scripts/ExportFileExcel/dataTables/html5-button/dataTables.buttons.min.js"></script>
-
     <script src="~/content/assets/styles/bootstrap4/popper.js"></script>
     <script src="~/content/assets/styles/bootstrap4/bootstrap.min.js"></script>
     <script src="~/content/assets/plugins/Isotope/isotope.pkgd.min.js"></script>
@@ -327,7 +315,6 @@
 </body>
 </html>
 
-
 @if (Request.IsAuthenticated)
 {
     <div style="display:none">
@@ -337,41 +324,73 @@
         }
     </div>
 }
-
 <style>
 
-    .dark-mode {
-        background-color: #1a1a1a;
-        color: white;
+    #abcdefg {
+        padding-left: 100px;
+        padding-right: 100px;
+        border-radius: 40px;
+        background-image: linear-gradient(to right, #09068f, #09068f);
+        background-repeat: no-repeat;
+        background-position: -300px -200px;
+        transition: background-position 0.3s ease-in-out;
     }
 
+        #abcdefg:hover {
+            background-position: 0 0;
+        }
+    #abcde {
+        padding: 10px;
+        background-image: linear-gradient(to right, #bdd9dd, #e2f0f1);
+        background-repeat: no-repeat;
+        background-position: -300px -400px;
+        transition: background-position 0.5s ease-in;
+    }
+
+        #abcde:hover {
+            color: darkred;
+            font-weight: bold;
+            background-position: 0 0;
+        }
+    .dark-mode {
+        background-color: black;
+        color: white;
+    }
+    /*moi then*/
+
     #back-to-top {
+        border: 1px solid red;
+        background-color: red;
         display: none;
         position: fixed;
         bottom: 20px;
-        right: 10px;
+        right: 20px;
         color: white;
-        padding: 5px;
+        padding: 10px;
+        padding-right: 20px;
+        padding-left: 20px;
         border-radius: 50%;
         cursor: pointer;
-        transition: opacity 2s, transform 2s;
+        transition: opacity 1s, transform 1s;
     }
-
     #back-to-top.show {
        display: block;
     }
+        #back-to-top.show.animate {
+            opacity: 0.5;
+            transform: rotate(100deg) scale(0);
+        }
+        #back-to-top:hover {
+            border: 1px solid darkblue;
+            background-color: darkblue;
+        }
 
-    #back-to-top.show.animate {
-        opacity: 1;
-        transform: rotate(360deg) scale(1.2);
-    }
-
-    .switch {
-        position: relative;
-        display: inline-block;
-        width: 60px;
-        height: 34px;
-    }
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
         .switch input {
             opacity: 0;
             width: 0;
@@ -385,8 +404,8 @@
         right: 0;
         bottom: 0;
         background-color: #ccc;
-        -webkit-transition: .4s;
-        transition: .9s;
+        -webkit-transition: 0.4s;
+        transition: 0.9s;
     }
         .slider:before {
             position: absolute;
@@ -396,8 +415,8 @@
             left: 4px;
             bottom: 4px;
             background-color: white;
-            -webkit-transition: 0.4s;
-            transition: 0.4s;
+            -webkit-transition: 0.2s;
+            transition: 0.2s;
         }
 
     input:checked + .slider {

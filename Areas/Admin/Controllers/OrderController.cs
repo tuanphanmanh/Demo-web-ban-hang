@@ -11,6 +11,7 @@ using System.Web.Mvc;
 using WebBanHangOnline.Models;
 using WebBanHangOnline.Models.EF;
 using System.Drawing;
+using System.Globalization;
 
 namespace WebBanHangOnline.Areas.Admin.Controllers
 {
@@ -19,28 +20,31 @@ namespace WebBanHangOnline.Areas.Admin.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
         // GET: Admin/Order
-        public ActionResult Index(int? page)
+        public ActionResult Index(int? page, DateTime? SearchText)
         {
-            var item = db.Orders.OrderByDescending(a=>a.CreatedDate).ToList();
+            IEnumerable<Order> item = db.Orders.OrderByDescending(x => x.CreatedDate);
             if (page == null)
             {
                 page = 1;
             }
             var pagenNumber = page ?? 1;
-            var pageSize = 10;
+            var pageSize = 13;
+            if (!string.IsNullOrEmpty(SearchText?.ToString("dd/MM/yyyy")))
+            {
+                item = item.Where(p => p.CreatedDate.ToString("dd/MM/yyyy").Equals(SearchText?.ToString("dd/MM/yyyy")));
+            }
+
             return View(item.ToPagedList(pagenNumber, pageSize));
         }
         public ActionResult View(int id)
         {
             var items = db.Orders.Find(id);
             return View(items);
-
         }
         public ActionResult Partial_SanPham(int id)
         {
             var items = db.OrderDetails.Where(a=>a.OrderId == id);
             return PartialView(items);
-
         }
 
 
@@ -91,13 +95,16 @@ namespace WebBanHangOnline.Areas.Admin.Controllers
                     worksheet.Cells["H" + (i + 2)].Value = data[i].Address;
                     worksheet.Cells["I" + (i + 2)].Value = data[i].ShippingStatus;
                     worksheet.Cells["J" + (i + 2)].Value = data[i].TypePayment;
+                    worksheet.Column(i+2).AutoFit();
                 }
 
-                var dataRange = worksheet.Cells[1, 1, data.Count, data.Count + 2];
+                
+
+                var dataRange = worksheet.Cells[1, 1, data.Count +1, data.Count +1 ];
                 var borderStyle = dataRange.Style.Border;
                 borderStyle.BorderAround(ExcelBorderStyle.Thin);
 
-                // Thiết lập viền cho các cạnh của ô dữ liệu
+                // Thiết lập viền cho các cạnh của ô dữ liệu    
                 borderStyle.Left.Style = ExcelBorderStyle.Thin;
                 borderStyle.Right.Style = ExcelBorderStyle.Thin;
                 borderStyle.Top.Style = ExcelBorderStyle.Thin;

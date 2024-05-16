@@ -16,7 +16,7 @@ namespace WebBanHangOnline.Controllers
         // GET: Wishlist
         public ActionResult Index(int? page)
         {
-            var pageSize = 5;
+            var pageSize = 8;
             if (page == null)
             {
                 page = 1;
@@ -39,7 +39,7 @@ namespace WebBanHangOnline.Controllers
             var checkItem = db.Wishlists.FirstOrDefault(x => x.ProductId == ProductId && x.UserName == User.Identity.Name);
             if (checkItem != null)
             {
-                return Json(new { Success = false, Message = "Đã thêm sản phẩm vào mục quan tâm." });
+                return Json(new { Success = false, Message = "Sản phẩm đã ở trong mục quan tâm" });
             }
             var item = new Wishlist();
             item.ProductId = ProductId;

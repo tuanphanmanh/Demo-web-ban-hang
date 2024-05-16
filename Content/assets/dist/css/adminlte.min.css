@@ -20,7 +20,6 @@ body {
 .password-wrapper {
     position: relative;
 }
-
 .password-toggle {
     position: absolute;
     top: 50%;
@@ -30,15 +29,12 @@ body {
     border: none;
     cursor: pointer;
 }
-
     .password-toggle:focus {
         outline: none;
     }
-
     .password-toggle i {
         color: #888;
     }
-
         .password-toggle i:hover {
             color: #333;
         }

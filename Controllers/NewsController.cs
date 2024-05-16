@@ -31,6 +31,12 @@ namespace WebBanHangOnline.Controllers
             ViewBag.Page = page;
             return View(items);
         }
+
+        public ActionResult DetailNewInHome()
+        {
+            var item = db.News.OrderByDescending(a => a.CreatedDate).Take(1).ToList();
+            return PartialView(item);
+        }
         public ActionResult Detail(int id)
         {
             var item = db.News.Find(id);

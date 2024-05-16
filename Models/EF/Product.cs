@@ -35,6 +35,16 @@ namespace WebBanHangOnline.Models.EF
         public decimal Price { get; set; }
         public decimal PriceSale { get; set; }
         public int Quantity { get; set; }
+        public int NhapThemVao { get; set; }
+        [NotMapped]
+        public int SoHangTon
+        {
+            get
+            {
+                int daBan = OrderDetails.Sum(od => od.Quantity); // Tính tổng số hàng đã bán từ bảng OrderDetail
+                return Quantity + NhapThemVao - daBan;
+            }
+        }
         public int ViewCount { get; set; }
         public bool IsHome { get; set; }
         public bool IsSale { get; set; }

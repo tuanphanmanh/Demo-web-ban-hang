@@ -145,32 +145,34 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group">
-                    <input class="btn btn-success rounded-pill" style="min-width: 100%" type="submit" id="btnCheckOut" value="Đặt hàng" />
+                    <input class="btn btn-danger" style="min-width: 100%" type="submit" id="abcdefg abcdefg"  value="Đặt hàng" />
                 </div>
             </div>
         </div>
 
     }
 
-
-
-
-
-<script>
+    <script >
     function OnBeginCO() {
-        $('#btnCheckOut').attr("disabled", "disabled");
+        $('#abcdefg').attr("disabled", "disabled");
         $('#load_send').html('đang thực hiện .. . .');
     }
+
     function OnSuccessCO(res) {
-        if (res.Success) {
-            if (res.Code == 1) {
-                location.href = "/ShoppingCart/CheckOutSuccess";
-            }
-            else {
-                location.href = res.Url;
-            }
-        }
+        if (res.Success)
+
+    {
+        if (res.Code == 1)
+
+    {
+        location .href = "/ShoppingCart/CheckOutSuccess";
     }
 
-</script>
+    else {
+        location .href = res.Url;
+    }
 
+    }
+    }
+
+    </script >

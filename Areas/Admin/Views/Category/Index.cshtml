@@ -49,15 +49,16 @@
             </div>
         </div>
         <div class="card-body">
-            <table class="table table-hover">
+            <table class="table table-hover table-bordered">
                 <thead>
                     <tr style="text-align: center">
-                        <th>STT</th>
-                        <th>Tên Danh mục</th>
-                        <th>Mô tả</th>
-                        <th>Seo Title</th>
-                        <th>Thứ tự</th>
-                        <th>Chức năng</th>
+                        <th class="bg-info">STT</th>
+                        <th class="bg-info">Tên Danh mục</th>
+                        <th class="bg-info">Mô tả</th>
+                        <th class="bg-info">Seo Title</th>
+                        <th class="bg-info">Thứ tự</th>
+                        <th class="bg-info">Sửa</th>
+                        <th class="bg-info">Xóa</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -76,6 +77,8 @@
                                     <a href="/admin/category/edit/@item.Id" class="text-primary">
                                         <i class="fa fa-edit" aria-hidden="true"></i>
                                     </a>
+                                </td>
+                                <td>
                                     <a href="#" data-id="@item.Id" class="text-danger btnDelete">
                                         <i class="fa fa-trash" aria-hidden="true"></i>
                                     </a>

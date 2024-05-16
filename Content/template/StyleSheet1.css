@@ -1,0 +1,27 @@
+﻿body {
+    overflow: hidden;
+}
+
+.star {
+    position: absolute;
+    top: -50px;
+    width: 5px;
+    height: 5px;
+    background-color: #41d75c;
+    border-radius: 50%;
+    animation: fall 5s linear infinite;
+}
+
+@keyframes fall {
+    0% {
+        transform: translate(0, -100vh);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(0, 200vh);
+        opacity: 0;
+    }
+}
+
+

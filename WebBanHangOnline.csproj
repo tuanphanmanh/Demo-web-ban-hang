@@ -500,6 +500,26 @@
     <Compile Include="Migrations\202405060234568_updatedklx1.Designer.cs">
       <DependentUpon>202405060234568_updatedklx1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202405110924318_updateChosseDate.cs" />
+    <Compile Include="Migrations\202405110924318_updateChosseDate.Designer.cs">
+      <DependentUpon>202405110924318_updateChosseDate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202405141038155_addNHApthemvaoproduct.cs" />
+    <Compile Include="Migrations\202405141038155_addNHApthemvaoproduct.Designer.cs">
+      <DependentUpon>202405141038155_addNHApthemvaoproduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202405141145187_hahahahaa.cs" />
+    <Compile Include="Migrations\202405141145187_hahahahaa.Designer.cs">
+      <DependentUpon>202405141145187_hahahahaa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202405141153245_hahahahaa12.cs" />
+    <Compile Include="Migrations\202405141153245_hahahahaa12.Designer.cs">
+      <DependentUpon>202405141153245_hahahahaa12.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202405150757237_addinorder.cs" />
+    <Compile Include="Migrations\202405150757237_addinorder.Designer.cs">
+      <DependentUpon>202405150757237_addinorder.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BookingViewModel.cs" />
@@ -592,6 +612,7 @@
     <Content Include="Content\assets\dist\js\pages\dashboard.js" />
     <Content Include="Content\assets\dist\js\pages\dashboard2.js" />
     <Content Include="Content\assets\dist\js\pages\dashboard3.js" />
+    <Content Include="Content\assets\images\1.png" />
     <Content Include="Content\assets\images\123.jpg" />
     <Content Include="Content\assets\images\banner_1.jpg" />
     <Content Include="Content\assets\images\banner_2.jpg" />
@@ -627,6 +648,7 @@
     <Content Include="Content\assets\images\slider_1.jpg" />
     <Content Include="Content\assets\images\thịt.png" />
     <Content Include="Content\assets\images\ảnh nền login.png" />
+    <Content Include="Content\assets\images\ảnh nền ấnncnasc.png" />
     <Content Include="Content\assets\images\ảnh đêm ngược.png" />
     <Content Include="Content\assets\js\categories_end.js" />
     <Content Include="Content\assets\js\categories_price.js" />
@@ -636,6 +658,7 @@
     <Content Include="Content\assets\js\jquery-3.2.1.min.js" />
     <Content Include="Content\assets\js\siku.js" />
     <Content Include="Content\assets\js\single_custom.js" />
+    <Content Include="Content\assets\js\slider.js" />
     <Content Include="Content\assets\plugins\easing\easing.js" />
     <Content Include="Content\assets\plugins\font-awesome-4.7.0\css\font-awesome.css" />
     <Content Include="Content\assets\plugins\font-awesome-4.7.0\css\font-awesome.min.css" />
@@ -3677,11 +3700,14 @@
     <Content Include="Content\Image\ảnh logo tứ quý.png" />
     <Content Include="Content\Image\ảnh nền chính.png" />
     <Content Include="Content\PagedList.css" />
+    <Content Include="Content\template\abc.js" />
     <Content Include="Content\template\app.css" />
     <Content Include="Content\template\reset.css" />
     <Content Include="Content\template\send1.html" />
+    <Content Include="Content\template\send3.html" />
     <Content Include="Content\template\send22.html" />
     <Content Include="Content\template\send2.html" />
+    <Content Include="Content\template\StyleSheet1.css" />
     <Content Include="Content\ảnh nền chính.png" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -3881,6 +3907,9 @@
     <Content Include="Areas\Admin\Views\ProductCategory\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\ProductDetail\Add.cshtml" />
     <Content Include="Areas\Admin\Views\ProductDetail\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Statistical\TopFive.cshtml" />
+    <Content Include="Areas\Admin\Views\Products\NhapThem.cshtml" />
+    <Content Include="Areas\Admin\Views\Statistical\TopFiveLastest.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\ExportFileExcel\dataTables\dataTables.bootstrap.js" />
     <Content Include="Scripts\ExportFileExcel\dataTables\dataTables.fixedColumns.min.js" />
@@ -3958,7 +3987,6 @@
     <Content Include="Views\ShoppingCart\Partial_CheckOut.cshtml" />
     <Content Include="Views\ShoppingCart\CheckOutSuccess.cshtml" />
     <Content Include="Views\Home\Refresh.cshtml" />
-    <Content Include="Views\News\Partial_News_Home.cshtml" />
     <Content Include="Views\Home\Partial_Subcribe.cshtml" />
     <Content Include="Views\News\Index.cshtml" />
     <Content Include="Views\News\Detail.cshtml" />
@@ -3973,6 +4001,10 @@
     <Content Include="Views\Booking\Index.cshtml" />
     <Content Include="Views\SignUpForTestDrive\Add.cshtml" />
     <Content Include="Views\SignUpForTestDrive\Index.cshtml" />
+    <Content Include="Views\Service\GetAllServiceCustomer.cshtml" />
+    <Content Include="Views\Products\DetailProduct.cshtml" />
+    <Content Include="Views\News\Partial_News_Home.cshtml" />
+    <Content Include="Views\News\DetailNewInHome.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -4176,6 +4208,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202405060234568_updatedklx1.resx">
       <DependentUpon>202405060234568_updatedklx1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202405110924318_updateChosseDate.resx">
+      <DependentUpon>202405110924318_updateChosseDate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202405141038155_addNHApthemvaoproduct.resx">
+      <DependentUpon>202405141038155_addNHApthemvaoproduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202405141145187_hahahahaa.resx">
+      <DependentUpon>202405141145187_hahahahaa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202405141153245_hahahahaa12.resx">
+      <DependentUpon>202405141153245_hahahahaa12.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202405150757237_addinorder.resx">
+      <DependentUpon>202405150757237_addinorder.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

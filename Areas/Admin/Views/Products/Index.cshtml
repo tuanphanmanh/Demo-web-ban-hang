@@ -5,8 +5,6 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-
-
 @section naviheader{
     <!-- Left navbar links -->
     <ul class="navbar-nav">
@@ -30,49 +28,64 @@
     <!-- Default box -->
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Danh sách xe </h3>
-
-            <div class="card-tools">
-                <a href="/admin/products/add" class="btn btn-success"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>
-                <a href="#" class="btn btn-danger" id="BtnDeleteAll"><i class="fa fa-trash" aria-hidden="true"></i></a>
+            <div class="row">
+                <div class="col-md-2">
+                    <h3 class="card-title">Danh sách xe </h3>
+                </div>
+                <div class="col-md-4">
+                    @using (Html.BeginForm())
+                    {
+                        <div class="input-group input-group-sm">
+                            <input name="searchString" class="form-control" placeholder="Tìm theo tên xe " aria-label="Search" /> 
+                            <span class="input-group-append">
+                                <button type="submit" class="btn btn-danger"><i class="fa fa-search" aria-hidden="true"></i></button>
+                            </span>
+                        </div>
+                    }
+                </div>
+                <div class="col-md-3">
+                    @using (Html.BeginForm())
+                    {
+                        <div class="input-group input-group-sm">
+                            @Html.DropDownList("searchStringCategory", ViewBag.ProductCategory as SelectList, "Tìm theo hãng xe", new { @class = "form-control" })
+                            <span class="input-group-append">
+                                <button type="submit" class="btn btn-success"><i class="fa fa-search" aria-hidden="true"></i></button>
+                            </span>
+                        </div>
+                    }
+                </div>
+                <div class="col-md-3 text-right">
+                    <div class="card-tools">
+                        <a href="/admin/products/add" class="btn btn-success"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>
+                        <a href="#" class="btn btn-danger" id="BtnDeleteAll"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="card-body">
-            @*<div class="row">
-                    <div class="col-6">
-                        @using (Html.BeginForm("index", "News", FormMethod.Get, new { }))
-                        {
-                            <div class="input-group input-group-sm">
-                                @Html.TextBox("Searchtext", new { @class = "form-control" })
-                                <span class="input-group-append">
-                                    <button type="submit" class="btn btn-info btn-flat">Tìm kiếm</button>
-                                </span>
-                            </div>
-                        }
-                    </div>
-                </div>*@
-            <table class="table table-hover">
+            <table class="table table-hover text-center">
                 <thead>
-                    <tr>
-                        <th><input type="checkbox" id="SelectAll" /></th>
-                        <th>STT</th>
-                        <th>Hình ảnh</th>
-                        <th>Tên sản phẩm</th>
-                        <th>Danh mục</th>
-                        <th>Số lượng</th>
-                        <th>Giá</th>
-                        <th>Ngày tạo</th>
-                        <th>Home</th>
-                        <th>Sale</th>
-                        <th>Hiển thị</th>
-
-                        <th style="width:150px;"></th>
+                    <tr class="bg-purple">
+                        <th class="bg-purple"><input type="checkbox" id="SelectAll" /></th>
+                        <th class="bg-purple">STT</th>
+                        <th class="bg-purple">Hình ảnh</th>
+                        <th class="bg-purple">Tên sản phẩm</th>
+                        <th class="bg-purple">Hãng xe</th>
+                        <th class="bg-purple">Tồn</th>
+                        <th class="bg-purple">Giá</th>
+                        <th class="bg-purple">Ngày nhập</th>
+                        <th class="bg-purple">Home</th>
+                        <th class="bg-purple">Hiển thị</th>
+                        <th class="bg-success">Nhập thêm</th>
+                        <th class="bg-primary">Điều chỉnh</th>
+                        <th class="bg-danger">Xóa</th>
                     </tr>
                 </thead>
                 <tbody>
                     @if (Model != null && Model.Any())
                     {
                         var i = ((ViewBag.Page - 1) * ViewBag.PageSize) + 1;
+
                         foreach (var item in Model)
                         {
                             var strCheck = item.IsActive ? "<i class='fa fa-check text-success'></i>" : "<i class='fas fa-times text-danger'></i>";
@@ -84,51 +97,83 @@
                             {
                                 strImg = CheckImage.Image;
                             }
-                    <tr id="trow_@item.Id">
-                        <td><input type="checkbox" class="cbkItem" value="@item.Id" /></td>
-                        <td>@i</td>
-                        <td><img class="imgproduct" data-id="@item.Id" src="@strImg" width="50" /></td>
-                        <td>@item.Title</td>
-                        <td>@item.ProductCategory.Title</td>
-                        <td>@item.Quantity</td>
-                        <td>@WebBanHangOnline.Common.Common.FormatNumber(item.Price, 0)</td>
-                        <td>@item.CreatedDate.ToString("dd/MM/yyyy")</td>
-                        <td class="text-center">
-                            <a href='#' data-id="@item.Id" class="btnHome">@Html.Raw(strCheckHome)</a>
-                        </td>
-                        <td class="text-center">
-                            <a href='#' data-id="@item.Id" class="btnSale">@Html.Raw(strCheckSale)</a>
-                        </td>
-                        <td class="text-center">
-                            <a href='#' data-id="@item.Id" class="btnActive">@Html.Raw(strCheck)</a>
-                        </td>
-                        <td style="min-width=80px;">
-                            <a href="/admin/products/edit/@item.Id" class=" text-primary"><i class="fa fa-edit" aria-hidden="true"></i></a>
-                            <a href="#" data-id="@item.Id" class="text-danger btnDelete"><i class="fa fa-trash" aria-hidden="true"></i></a>
-                        </td>
+                            <tr id="trow_@item.Id">
+                                <td><input type="checkbox" class="cbkItem" value="@item.Id" /></td>
+                                <td>@i</td>
+                                <td><img class="imgproduct" data-id="@item.Id" src="@strImg" width="50" /></td>
+                                <td>@item.Title</td>
+                                <td>@item.ProductCategory.Title</td>
 
-                    </tr>
+                                @if (item.SoHangTon == 0)
+                                {
+                                    <td style="background-color: #00ff90; color:red"> <i class="fa fa-check" aria-hidden="true"></i> </td>
+                                }
+                                @if (item.SoHangTon <= 5 && item.SoHangTon > 0)
+                                {
+                                    <td style="background-color: #00ff90"> @item.SoHangTon</td>
+                                }
+                                @if (item.SoHangTon < 10 && item.SoHangTon > 5)
+                                {
+                                    <td style="background-color: #ffd800"> @item.SoHangTon</td>
+                                }
+                                @if (item.SoHangTon > 15)
+                                {
+                                    <td style="background-color: #ff0000"> @item.SoHangTon</td>
+                                }
+                                @if (item.SoHangTon <= 15 && item.SoHangTon >= 10)
+                                {
+                                    <td style="background-color: #e94848"> @item.SoHangTon</td>
+                                }
+                                <td>@WebBanHangOnline.Common.Common.FormatNumber(item.Price, 0)</td>
+                                <td>@item.CreatedDate.ToString("dd/MM/yyyy")</td>
+                                <td class="text-center">
+                                    <a href='#' data-id="@item.Id" class="btnHome">@Html.Raw(strCheckHome)</a>
+                                </td>
+                                <td class="text-center">
+                                    <a href='#' data-id="@item.Id" class="btnActive">@Html.Raw(strCheck)</a>
+                                </td>
+                                <td>
+                                    <a href="/admin/products/nhapthem/@item.Id" class=" text-success"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>
+                                    
+                                </td>
+                                <td>
+                                    <a href="/admin/products/edit/@item.Id" class=" text-primary"><i class="fa fa-edit" aria-hidden="true"></i></a>
+                                </td>
+                                <td>
+                                    <a href="#" data-id="@item.Id" class="text-danger btnDelete"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                </td>
+                            </tr>
                             i++;
                         }
                     }
                     else
                     {
                         <tr>
-                            <td colspan="4">Không có bản ghi nào!!!</td>
+                            <td colspan="4">Không có kết quả</td>
                         </tr>
                     }
                 </tbody>
             </table>
         </div>
         <div class="card-footer">
-            <div class="row b-center">
-                <div class="col-sm-12 ">
-                    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+            @if (Model != null)
+            {
+                var tttt = 0;
+                foreach (var item in Model)
+                {
+                    tttt += item.SoHangTon;
+                }
+                <div class="row b-center">
+                    <div class="col-md-6 ">
+                        @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+                    </div>
+                    <div class="col-md-2 text-center">
+                        <div style="background-color: #00ff90; min-height: 50px; padding-top: 10px">Tổng hàng tồn: @tttt</div>
+                    </div>
                 </div>
-            </div>
+            }
         </div>
     </div>
-
 </section>
 <!-- /.content -->
 <div id="dialog">
@@ -136,8 +181,12 @@
 </div>
 @section scripts{
     <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
         $(document).ready(function () {
+
             //hiển thị form upload ảnh
             $("#dialog").dialog({
                 autoOpen: false,

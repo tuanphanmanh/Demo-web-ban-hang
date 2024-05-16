@@ -1,0 +1,171 @@
+﻿@model WebBanHangOnline.Models.EF.Product
+@{
+    ViewBag.Title = "Cập nhật sản phẩm";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section naviheader{
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="/admin/home" class="nav-link">Trang chủ</a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="/admin/products" class="nav-link">Xe</a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="#" class="nav-link active">Nhập thêm xe</a>
+        </li>
+    </ul>
+
+}
+<div style="height:2px; background-color: darkslategrey"></div>
+<br />
+
+<!-- Main content -->
+<section class="content">
+    <div class="card-body">
+        @using (Html.BeginForm("Edit", "products", FormMethod.Post, new { }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(x => x.Id)
+            @Html.HiddenFor(x => x.CreatedDate)
+            var strImg = "";
+            var CheckImage = Model.ProductImage.FirstOrDefault(x => x.IsDefault);
+            if (CheckImage != null)
+            {
+                strImg = CheckImage.Image;
+            }
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-md-4">
+                            Thông tin nhập xe
+                        </div>
+                        <div class="col-md-5 text-center">
+                            <ul class="nav nav-pills ">
+                            </ul>
+                        </div>
+
+                    </div>
+                </div> <!-- /.card-header -->
+                <div class="card-body">
+                    <div class="tab-content">
+                        <div class="active tab-pane" id="activity">
+                            <div class="row ">
+                                <div class="col-md-6 ">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Tên xe</label>
+                                        @Html.TextBoxFor(a => a.Title, new { @class = "form-control", @placeholder = "Tên xe" })
+                                        @Html.ValidationMessageFor(a => a.Title, null, new { @class = "text-danger" })
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Danh mục</label>
+                                        @Html.DropDownListFor(a => a.ProductCategoryId, ViewBag.ProductCategory as SelectList, "- -Chọn danh mục sản phẩm- -", new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(a => a.ProductCategoryId, null, new { @class = "text-danger" })
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">Trong kho còn</label>
+                                                @Html.TextBoxFor(a => a.Quantity, new { @class = "form-control", @Value = @Model.SoHangTon })
+                                                @Html.ValidationMessageFor(a => a.Quantity, null, new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">Nhập thêm</label>
+                                                @Html.TextBoxFor(a => a.NhapThemVao, new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(a => a.NhapThemVao, null, new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">Giá</label>
+                                                <input type="text" name="demoPrice" value="@Model.Price" id="demoPrice" class="form-control auto" data-a-sign="VND " data-a-dec="," data-a-sep="." />
+                                                @Html.HiddenFor(a => a.Price, new { @class = "", @placeholder = "Giá" })
+                                                @Html.ValidationMessageFor(a => a.Price, null, new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">Khuyến mại</label>
+                                                <input type="text" name="demoPriceSale" value="@Model.PriceSale" id="demoPriceSale" class="form-control auto" data-a-sign="VND " data-a-dec="," data-a-sep="." />
+                                                @Html.HiddenFor(a => a.PriceSale, new { @class = "", @placeholder = "" })
+                                                @Html.ValidationMessageFor(a => a.Price, null, new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <img src="@strImg" class="img-thumbnail" /> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <a class="btn btn-outline-danger rounded-pill" href="/admin/products/" style="width:100%"><i class="fa fa-fast-backward" aria-hidden="true"> Quay lại</i></a>
+                            </div>
+                            <div class="col-md-8">
+                                <button type="submit" class="btn btn-primary rounded-pill text-bold" style="width:100%">
+                                    Nhập hàng<i class="fa fa-align-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        }
+    </div>
+    <!-- /.card-body -->
+</section>
+
+
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('body').on('click', '#btnCapNhat', function () {
+                var id = $(this).closest("tr").data("id");
+                $('#modal-default').modal('show');
+            });
+            $('.auto').autoNumeric('init');
+            $('#demoPrice').bind('blur focusout keypress keyup', function () {
+                var demoGet = $('#demoPrice').autoNumeric('get');
+                $('#Price').val(demoGet);
+                $('#Price').autoNumeric('set', demoGet);
+            });
+            $('#demoOriginalPrice').bind('blur focusout keypress keyup', function () {
+                var demoGet = $('#demoOriginalPrice').autoNumeric('get');
+                $('#OriginalPrice').val(demoGet);
+                $('#OriginalPrice').autoNumeric('set', demoGet);
+            });
+            $('#demoPriceSale').bind('blur focusout keypress keyup', function () {
+                var demoGet = $('#demoPriceSale').autoNumeric('get');
+                $('#PriceSale').val(demoGet);
+                $('#PriceSale').autoNumeric('set', demoGet);
+            });
+            CKEDITOR.replace('txtDetail', {
+                customConfig: '/content/ckeditor/config.js',
+                extraAllowedContent: 'span',
+            });
+        });
+
+
+    </script>
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+

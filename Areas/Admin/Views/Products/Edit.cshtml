@@ -36,16 +36,17 @@
             <div class="card">
                 <div class="card-header">
                     <div class="row">
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             Thông tin cập nhật xe
                         </div>
-                        <div class="col-md-9">
+                        <div class="col-md-5 text-center">
                             <ul class="nav nav-pills ">
                                 <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Thông tin chung</a></li>
                                 <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">Hình ảnh</a></li>
                                 <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">SEO</a></li>
                             </ul>
                         </div>
+                       
                     </div>
                 </div> <!-- /.card-header -->
                 <div class="card-body">
@@ -74,8 +75,8 @@
                             <div class="row">
                                 <div class="col-3">
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Số lượng</label>
-                                        @Html.TextBoxFor(a => a.Quantity, new { @class = "form-control", @Value = "1" })
+                                        <label for="exampleInputEmail1">Trong kho còn</label>
+                                        @Html.TextBoxFor(a => a.Quantity, new { @class = "form-control", @Value = @Model.SoHangTon })
                                         @Html.ValidationMessageFor(a => a.Quantity, null, new { @class = "text-danger" })
                                     </div>
                                 </div>
@@ -139,8 +140,6 @@
                                 </div>
                             </div>
                         </div>
-
-
                         <div class="tab-pane" id="settings">
                             <form class="form-horizontal">
                                 <div class="form-group row">
@@ -234,11 +233,16 @@
     </div>
     <!-- /.card-body -->
 </section>
-<!-- /.content -->
+
+
 
 @section scripts{
     <script>
         $(document).ready(function () {
+            $('body').on('click', '#btnCapNhat', function () {
+                var id = $(this).closest("tr").data("id");
+                $('#modal-default').modal('show');
+            });
             $('.auto').autoNumeric('init');
             $('#demoPrice').bind('blur focusout keypress keyup', function () {
                 var demoGet = $('#demoPrice').autoNumeric('get');

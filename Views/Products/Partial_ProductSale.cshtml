@@ -1,4 +1,18 @@
 ﻿@model IEnumerable<WebBanHangOnline.Models.EF.News>
+    <style>
+        .abcde {
+            padding: 10px;
+            background-image: linear-gradient(to right, #a2e6f0, #aebefe, #dfacf8);
+            background-repeat: no-repeat;
+            background-position: 200px -200px;
+            transition: background-position 0.5s ease-in-out;
+        }
+
+            .abcde:hover {
+                color: white;
+                background-position: 0 0;
+            }
+    </style>
 
     <div class="best_sellers">
         <div class="container">
@@ -17,9 +31,9 @@
                             {
                                 <div class="owl-item product_slider_item">
                                     <div class="product-item">
-                                        <div class="product discount">
+                                        <div class="product discount abcde">
                                             <div class="product_image">
-                                                <img style="min-height: 200px;" src="@item.Image" alt="@item.Title">
+                                                <img style="min-height: 160px;" src="@item.Image" alt="@item.Title">
                                             </div>
                                             <div class="product_info">
                                                 <h6 class="product_name">
@@ -39,10 +53,10 @@
                     <!-- Slider Navigation -->
 
                     <div class="product_slider_nav_left product_slider_nav d-flex align-items-center justify-content-center flex-column">
-                        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                        <i class="fa fa-chevron-left" aria-hidden="true">a</i>
                     </div>
                     <div class="product_slider_nav_right product_slider_nav d-flex align-items-center justify-content-center flex-column">
-                        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                        <i class="fa fa-chevron-right" aria-hidden="true">a</i>
                     </div>
                 </div>
                 </div>

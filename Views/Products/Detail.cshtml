@@ -1,4 +1,4 @@
-﻿@model WebBanHangOnline.Models.EF.Product
+﻿﻿@model WebBanHangOnline.Models.EF.Product
 
 @{
     ViewBag.Title = "Detail";
@@ -87,7 +87,7 @@
                                 <span class="plus"><i class="fa fa-plus" aria-hidden="true"></i></span>
                             </div>
                             <div class="red_button add_to_cart_button"><a href="#" class="btnAddToCart" data-id="@Model.Id">Thêm vào giỏ hàng</a></div>
-                            <div class="product_favorite d-flex flex-column align-items-center justify-content-center" data-id="@Model.Id"></div>
+                            <div class="product_favorite d-flex flex-column align-items-center justify-content-center favorite favorite_left" data-id="@Model.Id"></div>
                         </div>
                         <br />
                         <div>
@@ -95,22 +95,22 @@
                         </div>
                     </div>
                 </div>
-             }
+            }
         </div>
     </div>
 }
 
 <div class="tabs_section_container">
     <div class="container">
-        <div class="row">
-            <div class="col">
-                <div class="tabs_container">
-                    <ul class="tabs d-flex flex-sm-row flex-column align-items-left align-items-md-center justify-content-center">
-                        <li class="tab active" data-active-tab="tab_1"><span>Chi tiết sản phẩm</span></li>
-                        <li class="tab" data-active-tab="tab_2"><span>Thông số kỹ thuật</span></li>
-                        <li class="tab" data-active-tab="tab_3"><span>Đánh giá sản phẩm</span></li>
-                        <li class="tab" data-active-tab="tab_4"><span>Dự toán chi phí</span></li>
-                        <li class="tab" data-active-tab="tab_5"><span>Cam kết khi mua xe</span></li>
+        <div class="row ">
+            <div class="col ">
+                <div class="tabs_container ">
+                    <ul class=" btn btn-light tabs d-flex flex-sm-row flex-column align-items-left align-items-md-center justify-content-center">
+                        <li class="tab active" data-active-tab="tab_1"> <span> <i class="fa fa-star-half-full" aria-hidden="true"></i> Chi tiết sản phẩm </span></li>
+                        <li class="tab" data-active-tab="tab_2"><span> <i class="fa fa-gear" aria-hidden="true"></i> Thông số kỹ thuật</span></li>
+                        <li class="tab" data-active-tab="tab_3"><span> <i class="fa fa-comment" aria-hidden="true"></i> Đánh giá sản phẩm</span></li>
+                        <li class="tab" id="btnCapNhat" data-active-tab="tab_4"><span> <i class="fa fa-dollar" aria-hidden="true"></i> Dự toán chi phí</span></li>
+                        <li class="tab" data-active-tab="tab_5"><span><i class="fa fa-balance-scale" aria-hidden="true"></i> Cam kết khi mua xe</span></li>
                     </ul>
                 </div>
             </div>
@@ -118,7 +118,7 @@
         <div class="row">
             <div class="col">
                 <div id="tab_1" class="tab_container active">
-                       @Html.Raw(@Model.Detail) 
+                    @Html.Raw(@Model.Detail)
                 </div>
                 <div id="tab_2" class="tab_container">
                     <div class="row">
@@ -404,27 +404,6 @@
                 </div>
 
                 <div id="tab_4" class="tab_container">
-                    <div id="modal" class="modal">
-                        <div class="modal-content">
-                            <!-- Nội dung của modal -->
-                            <span class="close text-danger text-right">&times;</span>
-                            <h3 class="text-center">
-                                DỰ TOÁN CHI PHÍ
-                            </h3>
-                            <div style="height:2px; background-color:red"></div>
-                            <table class="table ">
-                                <tr>
-                                    <td>Giá đàm phán: <br /> Phí trước bạ (12%): <br /> Phí sử dụng đường bộ (1 năm):<br />Bảo hiểm trách nhiệm dân sự (1 năm): <br />Phí đăng ký biển số: <br /> Phí đăng kiểm: <br />Tổng cộng </td>
-                                    <th class="text-right">
-                                        @WebBanHangOnline.Common.Common.FormatNumber(Model.PriceSale, 0) VND <br />@WebBanHangOnline.Common.Common.FormatNumber(Model.PriceSale * 12 / 100, 0) VND
-                                        <br /> 1,560,000 VND <br /> 437,000 VND <br />1,000,000 VND <br />340,000 VND <br /> <h5 style="color:red">  @WebBanHangOnline.Common.Common.FormatNumber(Model.PriceSale + Model.PriceSale * 12 / 100 + 1560000 + 437000 + 1000000 + 340000, 0) VND </h5>
-                                    </th>
-                                </tr>
-                            </table>
-                            <div class="btn btn-danger text-center" style="width: 100%"><a href="/signupfortestdrive/add" class="text-light">Đăng ký lái thử</a></div>
-
-                        </div>
-                    </div>
 
                 </div>
                 <div id="tab_5" class="tab_container">
@@ -445,84 +424,53 @@
         </div>
     </div>
 </div>
-            @section scripts{
-                <script src="~/Content/assets/js/single_custom.js"></script>
-                <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
-            }
-            <style>
-                .flex-container {
-                    display: flex;
-                    justify-content: space-between;
-                    flex-wrap: wrap;
-                }
 
-                .flex-item {
-                    flex-grow: 1;
-                    margin-right: 10px; /* Để tạo khoảng cách giữa các cột */
-                }
-                .modal {
-                    display: none; /* Ẩn modal mặc định */
-                    position: fixed; /* Vị trí cố định trên màn hình */
-                    z-index: 1; /* Đảm bảo modal hiển thị trên các phần tử khác */
-                    left: 0;
-                    top: 0;
-                    width: 100%;
-                    height: 100%;
-                    overflow: auto; /* Cho phép cuộn nếu nội dung dài */
-                    background-color: rgba(0, 0, 0, 0.5); /* Màu nền của modal */
-                }
 
-                .modal-content {
-                    background-color: white;
-                    margin: 15% auto; /* Căn giữa modal */
-                    padding: 20px;
-                    border: 1px solid;
-                    width: 50%;
-                }
+<div class="product-grid">
+    <h3 class="text-success text-center" >
+        <b>XE KHÁC</b>
+    </h3>
+    <br />
+    @Html.Action("DetailProduct","Products")
+</div>
+<div class="modal fade" id="modal-default" >
+    <div class="modal-dialog">
+        <div class="modal-content" style="width: 550px">
 
-                .close {
-                    color: #aaa;
-                    float: right;
-                    font-size: 28px;
-                    font-family: 'Times New Roman';
-                    font-weight: bold;
-                }
+            <div class="modal-body">
+                <h4 class="text-center text-success">
+                    DỰ TOÁN CHI PHÍ  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </h4>
+               
+                <table class="table">
+                    <tr>
+                        <td>Giá đàm phán: <br /> Phí trước bạ (12%): <br /> Phí sử dụng đường bộ (1 năm):<br />Bảo hiểm trách nhiệm dân sự (1 năm): <br />Phí đăng ký biển số: <br /> Phí đăng kiểm: <br /> <h5 style="color:darkred; ">Tổng cộng</h5> </td>
+                        <th class="text-right">
+                            @WebBanHangOnline.Common.Common.FormatNumber(Model.PriceSale, 0) VND <br />@WebBanHangOnline.Common.Common.FormatNumber(Model.PriceSale * 12 / 100, 0) VND
+                            <br /> 1,560,000 VND <br /> 437,000 VND <br />1,000,000 VND <br />340,000 VND <br /> <h5 style="color: darkred">  @WebBanHangOnline.Common.Common.FormatNumber(Model.PriceSale + Model.PriceSale * 12 / 100 + 1560000 + 437000 + 1000000 + 340000, 0) VND </h5>
+                        </th>
+                    </tr>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <div class="btn btn-danger text-center" style="width: 100%"><a href="/signupfortestdrive/add" class="text-light">Đăng ký lái thử</a></div>
+            </div>
+        </div>
+    </div>
+</div>
 
-                    .close:hover,
-                    .close:focus {
-                        color: black;
-                        text-decoration: none;
-                        cursor: pointer;
-                    }
-            </style>
-
-            <script>
-
-                // Lấy tham chiếu đến modal
-                var modal = document.getElementById("modal");
-                var closeBtn = document.getElementsByClassName("close")[0];
-                var openModalButton = document.getElementById("openModalButton");
-
-                // Hiển thị modal khi trang được tải
-                window.onload = function () {
-                    modal.style.display = "block";
-                };
-
-                // Ẩn modal khi người dùng nhấp vào nút đóng
-                closeBtn.onclick = function () {
-                    modal.style.display = "none";
-                };
-
-                // Ẩn modal khi người dùng nhấp chuột bên ngoài modal
-                window.onclick = function (event) {
-                    if (event.target == modal) {
-                        modal.style.display = "none";
-                    }
-                };
-
-                openModalButton.onclick = function () {
-                    modal.style.display = "block";
-                };
-
-            </script>
-
+@section scripts{
+    <script src="~/Content/assets/js/single_custom.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('body').on('click', '#btnCapNhat', function () {
+                var id = $(this).closest("tr").data("id");
+                $('#txtOrderId').val(id);
+                $('#modal-default').modal('show');
+            });
+        });
+    </script>
+}

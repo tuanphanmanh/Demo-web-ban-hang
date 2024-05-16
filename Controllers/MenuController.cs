@@ -30,8 +30,8 @@ namespace WebBanHangOnline.Controllers
             {
                 ViewBag.CateId = id;
             }
-            var items = db.Categories.OrderBy(a => a.Position).ToList();
-            return PartialView("MenuLeft");
+            var items = db.ProductCategorys.OrderBy(a => a.Position).ToList();
+            return PartialView(items);
         }
         public ActionResult MenuProductCategory()
         {

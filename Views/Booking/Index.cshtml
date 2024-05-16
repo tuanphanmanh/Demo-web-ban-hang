@@ -27,59 +27,18 @@
                 <ul>
                     <li><a href="/">Trang chủ</a></li>
                     <li><a href="/service/index"><i class="fa fa-angle-right" aria-hidden="true"></i>Dịch vụ</a></li>
-                    <li><a href="/booking/add"><i class="fa fa-angle-right" aria-hidden="true"></i>Đặt lịch</a></li>
                     <li class="active"><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>Đặt lịch thành công</a></li>
                 </ul>
             </div>
         </div>
     </div>
-    <h4>Bạn đặt lịch thành công, vui lòng kiểm tra lại thông tin!</h4>
-
-    <div class="row">
-
-        <div class="col-md-4" id="load_data">
-            <table class=" DonDaDat table table-bordered">
-                <tbody>
-                    <tr>
-                        <th>Khách hàng</th>
-                        <td>
-                            @Html.DisplayFor(model => model.CreatedBy)
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>SĐT</th>
-                        <td>
-                            @Html.DisplayFor(model => model.PhoneNumber)
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Email</th>
-                        <td>
-                            @Html.DisplayFor(model => model.Email)
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Địa chỉ K/H</th>
-                        <td>
-                            @Html.DisplayFor(model => model.Address)
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Xe K/H:</th>
-                        <td>
-                            @Html.DisplayFor(model => model.CarName)
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Ngày / giờ:</th>
-                        <td>
-                            @Html.DisplayFor(model => model.ModifiedDate)
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <a href="/service/index" class="btn btn-success">Đặt lịch khác</a>
-        </div>
+    <div class="detail-content">
+        <p style="font-size:150px;text-align:center;" class="text-success">
+            <i class="fa fa-check-circle"></i>
+        </p>
+        <p style="font-size:150%;text-align:center;margin-bottom:6px;">BẠN ĐÃ ĐẶT LỊCH HẸN DỊCH VỤ THÀNH CÔNG</p>
+        <p style="text-align:center;padding-bottom:10px; color: green; font-size: 25px;"> <i class="fa fa-phone" aria-hidden="true"></i> Chúng tôi sẽ liên hệ với bạn trong thời gian sớm nhất</p>
+        <p style="text-align:center;margin-bottom:30px;"><a href="/" class="btn btn-danger"><i class="fa fa-angle-double-left">&nbsp;</i>QUAY TRỞ LẠI TRANG CHỦ</a></p>
     </div>
 
 </div>

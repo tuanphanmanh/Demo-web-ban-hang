@@ -1,0 +1,68 @@
+﻿@model List<WebBanHangOnline.Models.EF.OrderDetail>
+
+<section class="content">
+    <div class="card card-success">
+        <div class="card-header">
+            <h3 class="card-title">Top xe bán chạy</h3>
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                    <i class="fas fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+        <div class="card-body" style=" padding: 10px;">
+            <div class="row homechu">
+                    <table class="table table-bordered text-center">
+                        <tr>
+                            <th>Top</th>
+                            <th>Tên xe</th>
+                            <th>Số lượng xe</th>
+                        </tr>
+                        @if (Model != null)
+                        {
+                            var i = 1;
+                            foreach (var product in Model)
+                            {
+                                if (i == 1)
+                                {
+                                    <tr>
+                                        <td class="bg-success">@i</td>
+                                        <td class="bg-success"> @product.Name </td>
+                                        <td class="bg-success">@product.Quantity</td>
+                                    </tr>
+                                }
+                                if (i == 2)
+                                {
+                                    <tr>
+                                        <td style="background-color: #43c63d; color: #Fff">@i</td>
+                                        <td style="background-color: #43c63d; color: #Fff">@product.Name</td>
+                                        <td style="background-color: #43c63d; color: #Fff">@product.Quantity</td>
+                                    </tr>
+                                }
+                                if (i == 3)
+                                {
+                                    <tr>
+                                        <td style="background-color: #97c68c; color: #Fff"> @i</td>
+                                        <td style="background-color: #97c68c; color: #Fff">@product.Name</td>
+                                        <td style="background-color: #97c68c; color: #Fff">@product.Quantity</td>
+                                    </tr>
+                                }
+        if( i != 1 && i != 2 && i!= 3)
+                    {
+                    <tr>
+                        <td> @i</td>
+                        <td>@product.Name</td>
+                        <td>@product.Quantity</td>
+                    </tr>
+                    }
+                                i++;
+                            }
+                        }
+                    </table>
+            </div>
+        </div>
+    </div>
+</section>

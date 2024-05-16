@@ -9,10 +9,11 @@
 @if (Model != null)
 {
     var i = 1;
-    <h4 class="text-center">Lịch sử đặt hàng</h4> <hr />
-    <table class="DonDaDat table table-bordered text-center">
-        <thead>
-            <tr >
+    <h4 class="text-center">Lịch sử đặt hàng</h4>
+    <hr />
+    <table class="DonDaDat table table-borderless text-center">
+        <thead class="bg-dark text-light">
+            <tr>
                 <th>STT</th>
                 <th>Mã đơn hàng</th>
                 <th>Địa chỉ</th>
@@ -20,15 +21,17 @@
             </tr>
         </thead>
         <tbody>
-            @foreach(var item in Model)
-                {
-                    <tr>
-                        <td>@i</td>
-                        <td>@item.Code</td>
-                        <td>@item.Address <b>( @(item.AddressType))</b></td>
-                        <td>@item.CreatedDate.ToString("dd/MM/yyyy")</td>
-                    </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@i</td>
+                    <td>@item.Code  </td>
+                    <td>@item.Address <b>( @(item.AddressType))</b></td>
+                    <td>@item.CreatedDate.ToString("dd/MM/yyyy")</td>
+                </tr>
                 i++;
+
+
             }
         </tbody>
     </table>

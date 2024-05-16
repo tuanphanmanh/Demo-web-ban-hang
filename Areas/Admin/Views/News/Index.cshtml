@@ -48,17 +48,19 @@
                     }
                 </div>
             </div>
-            <table class="table table-hover">
+            <br />
+            <table class="table table-hover table-bordered">
                 <thead>
                     <tr style="text-align: center">
-                        <th><input type="checkbox" id="SelectAll" /></th>
-                        <th>STT</th>
-                        <th>Hình ảnh</th>
-                        <th>Tiêu đề tin</th>
-                        <th>Ngày tạo</th>
-                        <th style="text-align:center; width:150px">Hiển thị</th>
-                        <th style="text-align:center">Chi tiết</th>
-                        <th style="width:180px">Chức năng</th>
+                        <th class="bg-cyan"><input type="checkbox" id="SelectAll" /></th>
+                        <th class="bg-cyan">STT</th>
+                        <th class="bg-cyan">Hình ảnh</th>
+                        <th class="bg-cyan">Tiêu đề tin</th>
+                        <th class="bg-cyan">Ngày tạo</th>
+                        <th class="bg-cyan" style="text-align:center; width:100px">Hiển thị</th>
+                        <th class="bg-cyan" style="text-align:center">Chi tiết</th>
+                        <th class="bg-cyan">Sửa</th>
+                        <th class="bg-cyan">Xóa</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -79,12 +81,11 @@
                                 <td class="text-center">
                                     <a href="#" data-id="@item.Id" class="btnActive">@Html.Raw(strCheck)</a>
                                 </td>
-
-
-
                                 <td>@item.Description</td>
                                 <td class="text-center">
                                     <a href="/admin/news/edit/@item.Id" class="text-primary"><i class="fa fa-edit" aria-hidden="true"></i></a>
+                                </td>
+                                <td class="text-center">
                                     <a href="#" data-id="@item.Id" class="text-danger btnDelete"><i class="fa fa-trash" aria-hidden="true"></i></a>
                                 </td>
                             </tr>

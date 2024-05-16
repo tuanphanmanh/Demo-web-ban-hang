@@ -57,5 +57,6 @@ namespace WebBanHangOnline.Models.EF
         public int Quantity { get; set; }  
         public decimal TotalAmount { get; set; }
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
+
     }
 }

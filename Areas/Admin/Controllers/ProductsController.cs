@@ -9,6 +9,7 @@ using WebBanHangOnline.Models;
 using System.Data.Entity.Migrations;
 using OfficeOpenXml;
 using System.Drawing;
+using System.Data.Entity;
 
 namespace WebBanHangOnline.Areas.Admin.Controllers
 {
@@ -19,13 +20,23 @@ namespace WebBanHangOnline.Areas.Admin.Controllers
     {
         // GET: Admin/Products
         ApplicationDbContext db = new ApplicationDbContext();
-        public ActionResult Index(int? page)
+        public ActionResult Index(int? page, string searchString, string searchStringCategory)
         {
-            IEnumerable<Product> items = db.Products.OrderByDescending(a => a.Id);
-            var pageSize = 7;
+            IEnumerable<Product> items = db.Products.OrderByDescending(a => a.Title);
+            var pageSize = 10;
             if (page == null)
             {
                 page = 1;
+            }
+            ViewBag.ProductCategory = new SelectList(db.ProductCategorys.ToList(), "Id", "Title");
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                items = items.Where(p=>p.Title.Contains(searchString) );
+            }
+            if (!string.IsNullOrEmpty(searchStringCategory))
+            {
+                items = items.Where(p => p.ProductCategoryId.ToString().Equals(searchStringCategory));
             }
             var pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
             items = items.ToPagedList(pageIndex, pageSize);
@@ -105,6 +116,28 @@ namespace WebBanHangOnline.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
             return View(model);
+        }
+
+        public ActionResult NhapThem(int id)
+        {
+            ViewBag.ProductCategory = new SelectList(db.ProductCategorys.ToList(), "Id", "Title");
+            var item = db.Products.Find(id);
+            return PartialView(item);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult NhapThem(Product model)
+        {
+            if (ModelState.IsValid)
+            {
+                model.ModifiedDate = DateTime.Now;
+                model.Alias = WebBanHangOnline.Models.Common.Filter.FilterChar(model.Title);
+                db.Products.Attach(model);
+                db.Entry(model).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Edit");
+            }
+            return PartialView(model);
         }
 
         [HttpPost]

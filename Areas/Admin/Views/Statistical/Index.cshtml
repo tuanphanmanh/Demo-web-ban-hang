@@ -1,10 +1,39 @@
-﻿
+﻿@model IEnumerable<WebBanHangOnline.Models.EF.OrderDetail>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 <!-- Font Awesome -->
 <link rel="stylesheet" href="~/content/clients/plugins/fontawesome-free/css/all.min.css">
 <!-- Theme style -->
 <link rel="stylesheet" href="~/content/clients/dist/css/adminlte.min.css">
+<style>
+    .homeTrangchu {
+        background-color: white;
+        padding: 20px;
+        padding-top: 40px;
+        padding-bottom: 40px;
+        border-radius: 195px;
+        transition: background-color 0.3s ease-in-out;
+        flex-basis: 18%;
+        color: #872a2a;
+        /*max-width: 290px;*/
+    }
+        .homeTrangchu:hover {
+            background-color: darkred;
+            color: white;
+        }
 
+    .homechu {
+        justify-content: space-around;
+    }
+    #hhhh {
+        background-color: white;
+        padding: 20px;
+        padding-top: 40px;
+        padding-bottom: 40px;
+        border-radius: 195px;
+        transition: background-color 0.3s ease-in-out;
+        flex-basis: 12%;
+    }
+</style>
 @section naviheader{
 
     <ul class="navbar-nav">
@@ -22,13 +51,10 @@
 <div style="height:2px; background-color: darkslategrey"></div>
 <br />
 
-
 <section class="content">
-    <!-- Default box -->
-    <div class="card card-success">
+    <div class="card card-danger">
         <div class="card-header">
-            <h3 class="card-title">Thống kê doanh thu</h3>
-
+            <h3 class="card-title">Thống kê xe 30 ngày qua</h3>
             <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
                     <i class="fas fa-minus"></i>
@@ -38,130 +64,334 @@
                 </button>
             </div>
         </div>
-        <div class="card-body">
-            <div class="row">
-                <div class="col-md-8">
-                    <div class="chart">
-                        <canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+        <div class="card-body" style="background-color: #ebdbc8; padding: 10px;" >
+            <div class="row homechu">
+                @if (Model != null)
+                {
+                    var i = 0;
+                    var ii = 0;
+                    var iii = 0;
+                    decimal doanhthu = 0;
+                    DateTime d = DateTime.Now;
+                    DateTime previousDate = d.AddDays(-30);
+                    foreach (var item in Model)
+                    {
+                        doanhthu = doanhthu + item.Quantity;
+                        if (item.Order.CreatedDate > previousDate && item.Order.CreatedDate <= d)
+                        {
+                            i++;
+                            doanhthu = doanhthu + item.Order.TotalAmount;
+                            ii = ii + item.Order.OrderDetails.Count();
+                            if (!item.Order.Status.Equals("Chờ xác nhận"))
+                            {
+                                iii++;
+                            }
+
+                        }
+                    }
+                    var dm = i - iii;
+                    <div class="homeTrangchu text-center">
+                        <div class="text-decoration-none"> <h3> <i class="fa fa-shopping-cart" aria-hidden="true"></i>  </h3>  ĐƠN HÀNG  <br /> <b>@i </b></div>
                     </div>
+                    <div class="homeTrangchu text-center">
+                        <div class="text-decoration-none" id="btnCapNhat">  <h3> <i class="fa fa-car" aria-hidden="true"></i>  </h3>  XE BÁN NHIỀU NHẤT  <br /> <b> @ViewBag.XeBanNhieuNhat <br />  @ViewBag.SoLuongLa XE </b></div>
+                    </div>
+                    <div class="homeTrangchu text-center">
+                        <div class=" text-decoration-none"> <h3> <i class="fa fa-dollar-sign" aria-hidden="true"></i> </h3>  THU ĐƯỢC <br /> <b> @WebBanHangOnline.Common.Common.FormatNumber(doanhthu, 0) VND</b></div>
+                    </div>
+                    <div class="homeTrangchu text-center">
+                        <div class=" text-decoration-none"> <h3>  <i class="fa fa-check-circle" aria-hidden="true"></i> </h3> <b>@ViewBag.soluongconlai </b>  <br />ĐÃ XÁC NHẬN </div>
+                    </div>
+
+                }
+            </div>
+        </div>
+    </div>
+</section>
+<section class="content">
+    <div class="card card-purple">
+        <div class="card-header">
+            <h3 class="card-title">Thống kê xe</h3>
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                    <i class="fas fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+        <div class="card-body" >
+            <div class="row homechu">
+                <div class="row">
+                    <div class="col-md-2">
+                        @using (Html.BeginForm())
+                        {
+                            <div class="input-group input-group-sm">
+                                @Html.DropDownList("theohangxe", ViewBag.hangxe as SelectList, "Tìm theo hãng xe", new { @class = "form-control" })
+                                <span class="input-group-append">
+                                    <button type="submit" class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i></button>
+                                </span>
+                            </div>
+                        }
+                    </div>
+                    <div class="col-md-1"></div>
+                    <div class="col-md-4">
+                        @using (Html.BeginForm())
+                        {
+                            <div class="input-group input-group-sm">
+                                @Html.DropDownList("theotenxe", ViewBag.tenxe as SelectList, "Tìm theo tên xe", new { @class = "form-control" })
+                                <span class="input-group-append">
+                                    <button type="submit" class="btn btn-danger"><i class="fa fa-search" aria-hidden="true"></i></button>
+                                </span>
+                            </div>
+                        }
+                    </div>
+                    <div class="col-md-2"></div>
+                    <div class="col-md-3">
+                        @using (Html.BeginForm())
+                        {
+                            <div class="input-group input-group-sm">
+                                <input class="form-control" name="theongay" type="date" />
+                                <span class="input-group-append">
+                                    <button type="submit" class="btn btn-success"><i class="fa fa-search" aria-hidden="true"></i></button>
+                                </span>
+                            </div>
+                        }
+                    </div> 
                 </div>
-                <div class="col-md-4">
-                    <table class="table table-bordered">
+
+                <div style="height: 2px; background-color: darkblue; margin-top: 10px;"></div>
+                @if (Model != null && Model.Count() > 0)
+                {
+                    var a = 0;
+                    var ton = 0;
+                    <table class="table table-bordered text-center">
                         <thead>
                             <tr>
-                                <th>#</th>
-                                <th>Ngày</th>
-                                <th>Doanh thu</th>
-                                <th>Lợi nhuận</th>
+                                <th class="bg-purple">Tên KH</th>
+                                <th class="bg-purple">Tên xe</th>
+                                <th class="bg-purple"></th>
+                                <th class="bg-purple">Giá</th>
+                                <th class="bg-purple">Số lượng</th>
+                                <th class="bg-purple">Ngày mua</th>
                             </tr>
                         </thead>
-                        <tbody id="load_data"></tbody>
+                        <tbody>
+                            @foreach (var orderDetail in Model)
+                            {
+                                var strImage = "";
+                                var img = orderDetail.Product.ProductImage.FirstOrDefault(aaa => aaa.IsDefault);
+                                if (img != null)
+                                {
+                                    strImage = img.Image;
+                                }
+                                a += orderDetail.Quantity;
+                                <tr>
+                                    <td>@orderDetail.Order.CustomerName</td>
+                                    <td>@orderDetail.Product.Title  </td>
+                                    <td><img style="max-width: 60px; max-height: 40px;" src="@strImage" /></td>
+                                    <td>@WebBanHangOnline.Common.Common.FormatNumber(orderDetail.Price, 0)</td>
+                                    <td>@orderDetail.Quantity</td>
+                                    <td>@orderDetail.Order.CreatedDate.ToString("dd/MM/yyyy")</td>
+                                </tr>
+                                ton = orderDetail.Product.Quantity - a;
+                            }
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            @if (ton <= 0)
+                            {
+                                <td></td>
+                            }
+                            else
+                            {
+                                <td class="bg-danger">  Tồn: @ton </td>
+                            }
+                            <td class="bg-success">Tổng bán: @a </td>
+
+                        </tr>
+                        </tbody>
                     </table>
+                }
+                else
+                {
+            <div class="text-center">
+                <h5>Không có dữ liệu</h5>
+            </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+<section class="content">
+    <div class="row">
+        <div class="col-md-6">
+            @Html.Action("topfive", "statistical")
+        </div>
+        <div class="col-md-6">
+            @Html.Action("topfivelastest", "statistical")
+        </div>
+    </div>
+
+
+
+
+    <section class="content">
+        <!-- Default box -->
+        <div class="card card-info">
+            <div class="card-header">
+                <h3 class="card-title">Thống kê doanh thu</h3>
+
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="chart">
+                            <canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Ngày</th>
+                                    <th>Doanh thu</th>
+                                    <th>Lợi nhuận</th>
+                                </tr>
+                            </thead>
+                            <tbody id="load_data"></tbody> 
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
-        <!-- /.card-body -->
-        <div class="card-footer">
-            Doanh thu theo tháng
-        </div>
-        <!-- /.card-footer-->
-    </div>
-    <!-- /.card -->
-
+    </section>
 </section>
-<!-- /.content -->
-@section scripts{
-    <script src="~/Content/clients/plugins/chart.js/Chart.min.js"></script>
-    <script src="~/Content/assets/plugins/moment/moment.min.js"></script>
-    <script>
-        $(function () {
-            /* ChartJS
-             * -------
-             * Here we will create a few charts using ChartJS
-             */
 
-            var arrDoanhThu = [];
-            var arrLoiNhuan = [];
-            var arrDate = [];
-            $.ajax({
-                url: '/Statistical/GetStatistical',
-                type: 'GET',
-                data: { fromDate: '', toDate: '' },
-                success: function (rs) {
-
-                    $.each(rs.Data, function (i, item) {
-                        var strDate = moment(item.Date).format('DD/MM/yyyy');
-                        arrDate.push(strDate);
-                        arrDoanhThu.push(item.DoanhThu);
-                        arrLoiNhuan.push(item.LoiNhuan);
-                    });
-                    var areaChartData = {
-                        labels: arrDate,
-                        datasets: [
-                            {
-                                label: 'Lợi nhuận',
-                                backgroundColor: 'rgba(60,141,188,0.9)',
-                                borderColor: 'rgba(60,141,188,0.8)',
-                                pointRadius: false,
-                                pointColor: '#3b8bba',
-                                pointStrokeColor: 'rgba(60,141,188,1)',
-                                pointHighlightFill: '#fff',
-                                pointHighlightStroke: 'rgba(60,141,188,1)',
-                                data: arrLoiNhuan
-                            },
-                            {
-                                label: 'Doanh thu',
-                                backgroundColor: 'rgba(210, 214, 222, 1)',
-                                borderColor: 'rgba(210, 214, 222, 1)',
-                                pointRadius: false,
-                                pointColor: 'rgba(210, 214, 222, 1)',
-                                pointStrokeColor: '#c1c7d1',
-                                pointHighlightFill: '#fff',
-                                pointHighlightStroke: 'rgba(220,220,220,1)',
-                                data: arrDoanhThu
-                            },
-                        ]
-                    }
-                    //-------------
-                    //- BAR CHART -
-                    //-------------
-                    var barChartCanvas = $('#barChart').get(0).getContext('2d')
-                    var barChartData = $.extend(true, {}, areaChartData)
-                    var temp0 = areaChartData.datasets[0]
-                    var temp1 = areaChartData.datasets[1]
-                    barChartData.datasets[0] = temp1
-                    barChartData.datasets[1] = temp0
-
-                    var barChartOptions = {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        datasetFill: false
-                    }
-
-                    new Chart(barChartCanvas, {
-                        type: 'bar',
-                        data: barChartData,
-                        options: barChartOptions
-                    });
-                    load_data(rs.Data);
-                }
+    <div class="modal fade" id="modal-default">
+        <div class="modal-dialog">
+            <div class="modal-content" style="min-width: 600px; margin-bottom: 30px;">
+                <br />
+                <h4 class="modal-title text-center">
+                    Ảnh xe
+                </h4>
+                <div style="height: 2px; background-color: darkred"></div>
+                <div class="modal-body text-center">
+                    <table class="table table-dark">
+                        <tr>
+                            <th>@ViewBag.XeBanNhieuNhat</th>
+                            <th>@WebBanHangOnline.Common.Common.FormatNumber(@ViewBag.tien, 0)</th>
+                            <th>@ViewBag.ngaynhap.ToString("dd/MM/yyyy")</th>
+                            <th>@ViewBag.xuatxu</th>
+                        </tr>
+                    </table>
+                    <img style="max-width: 500px; margin-right:20px" title="Xe bán chạy nhất" src="@ViewBag.Anh" class="img-thumbnail" />
+                </div>
+            </div>
+        </div>
+    </div>
+    @section scripts{
+        <script src="~/Content/clients/plugins/chart.js/Chart.min.js"></script>
+        <script src="~/Content/assets/plugins/moment/moment.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('body').on('click', '#btnCapNhat', function () {
+                    var id = $(this).closest("tr").data("id");
+                    $('#modal-default').modal('show');
+                });
             });
 
+            $(function () {
+                var arrDoanhThu = [];
+                var arrLoiNhuan = [];
+                var arrDate = [];
+                $.ajax({
+                    url: '/Statistical/GetStatistical',
+                    type: 'GET',
+                    data: { fromDate: '', toDate: '' },
+                    success: function (rs) {
 
-        })
+                        $.each(rs.Data, function (i, item) {
+                            var strDate = moment(item.Date).format('DD/MM/yyyy');
+                            arrDate.push(strDate);
+                            arrDoanhThu.push(item.DoanhThu);
+                            arrLoiNhuan.push(item.LoiNhuan);
+                        });
+                        var areaChartData = {
+                            labels: arrDate,
+                            datasets: [
+                                {
+                                    label: 'Lợi nhuận',
+                                    backgroundColor: 'rgba(60,141,188,0.9)',
+                                    borderColor: 'rgba(60,141,188,0.8)',
+                                    pointRadius: false,
+                                    pointColor: '#3b8bba',
+                                    pointStrokeColor: 'rgba(60,141,188,1)',
+                                    pointHighlightFill: '#fff',
+                                    pointHighlightStroke: 'rgba(60,141,188,1)',
+                                    data: arrLoiNhuan
+                                },
+                                {
+                                    label: 'Doanh thu',
+                                    backgroundColor: 'rgba(210, 214, 222, 1)',
+                                    borderColor: 'rgba(210, 214, 222, 1)',
+                                    pointRadius: false,
+                                    pointColor: 'rgba(210, 214, 222, 1)',
+                                    pointStrokeColor: '#c1c7d1',
+                                    pointHighlightFill: '#fff',
+                                    pointHighlightStroke: 'rgba(220,220,220,1)',
+                                    data: arrDoanhThu
+                                },
+                            ]
+                        }
+                        //-------------
+                        //- BAR CHART -
+                        //-------------
+                        var barChartCanvas = $('#barChart').get(0).getContext('2d')
+                        var barChartData = $.extend(true, {}, areaChartData)
+                        var temp0 = areaChartData.datasets[0]
+                        var temp1 = areaChartData.datasets[1]
+                        barChartData.datasets[0] = temp1
+                        barChartData.datasets[1] = temp0
 
-        function load_data(data) {
-            var strHtml = "";
-            $.each(data, function (i, item) {
-                var strDate = moment(item.Date).format('DD/MM/yyyy');
-                strHtml += "<tr>";
-                strHtml += "<td>" + (i + 1) + "</td>";
-                strHtml += "<td>" + strDate + "</td>";
-                strHtml += "<td>" + item.DoanhThu + "</td>";
-                strHtml += "<td>" + item.LoiNhuan + "</td>";
-                strHtml += "</tr>";
-            });
-            $('#load_data').html(strHtml);
-        }
-    </script>
-}
+                        var barChartOptions = {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            datasetFill: false
+                        }
+                        new Chart(barChartCanvas, {
+                            type: 'bar',
+                            data: barChartData,
+                            options: barChartOptions
+                        });
+                        load_data(rs.Data);
+                    }
+                });
+
+
+            })
+
+            function load_data(data) {
+                var strHtml = "";
+                $.each(data, function (i, item) {
+                    var strDate = moment(item.Date).format('DD/MM/yyyy');
+                    strHtml += "<tr>";
+                    strHtml += "<td>" + strDate + "</td>";
+                    strHtml += "<td>" +item.DoanhThu + "</td>";
+                    strHtml += "<td>" + item.LoiNhuan + "</td>";
+                    strHtml += "</tr>";
+                });
+                $('#load_data').html(strHtml);
+            }
+        </script>
+    }

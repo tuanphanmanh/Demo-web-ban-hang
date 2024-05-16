@@ -203,3 +203,8 @@ D:\Đồ án\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrat
 D:\Đồ án\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.AddSignUpVer2.resources
 D:\Đồ án\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.updatedklx.resources
 D:\Đồ án\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.updatedklx1.resources
+D:\Đồ án\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.updateChosseDate.resources
+D:\Đồ án\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.addNHApthemvaoproduct.resources
+D:\Đồ án\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.hahahahaa.resources
+D:\Đồ án\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.hahahahaa12.resources
+D:\Đồ án\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.addinorder.resources

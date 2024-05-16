@@ -261,8 +261,6 @@ jQuery(document).ready(function ($) {
 						fav.addClass('active');
 						active = true;
 						var id = $(this).data('id');
-						alert(id);
-						//debugger;
 						AddWishlist(id);
 					}
 				});

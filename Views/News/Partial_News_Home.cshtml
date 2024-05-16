@@ -9,13 +9,13 @@
                     <div class="section_title">
                         <h2> <i class="fa fa-edit" aria-hidden="true"></i> DỊCH VỤ SỬA CHỮA</h2>
                         <h6>
-                            Đội ngũ nhân viên bán hàng, kỹ thuật viên, cố vấn dịch vụ chất lượng, 
+                            Đội ngũ nhân viên bán hàng, kỹ thuật viên, cố vấn dịch vụ chất lượng,
                             chuyên nghiệp bởi được đào tạo bài bản và được cấp chứng chỉ của Hội lái xe Việt Nam
                         </h6>
                     </div>
                 </div>
             </div>
-           
+
             <div class="row blogs_container">
                 @foreach (var item in Model)
                 {
@@ -25,7 +25,8 @@
                             <div class="blog_content d-flex flex-column align-items-center justify-content-center text-center">
                                 <h4 class="blog_title">@item.Title</h4>
                                 <span class="blog_meta"> Kỹ thuật viên: @item.ModifiedBy </span>
-                                <a class="blog_more" href="/booking/add">Đặt lịch</a>
+                                <a title="Đặt lịch hẹn cho dịch vụ" id="abcdefg" style="min-width: 100%; color: white" href="/booking/add" class="btn btn-danger">Đặt lịch</a>
+
                             </div>
                         </div>
                     </div>

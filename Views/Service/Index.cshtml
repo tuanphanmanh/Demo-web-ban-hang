@@ -1,4 +1,4 @@
-﻿@model IEnumerable<WebBanHangOnline.Models.EF.Service>
+﻿@model WebBanHangOnline.Models.EF.Booking
 
 @{
     ViewBag.Title = "Index";
@@ -16,78 +16,118 @@
 <link rel="stylesheet" type="text/css" href="~/content/assets/styles/contact_styles.css">
 <link rel="stylesheet" type="text/css" href="~/content/assets/styles/contact_responsive.css">
 
-<div style="margin-top: 150px" class="container contact_container">
-    <div class="row">
-        <div class="col">
-            <div class="breadcrumbs d-flex flex-row align-items-center">
-                <ul>
-                    <li><a href="/">Trang chủ</a></li>
-                    <li class="active"><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>Dịch vụ</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col text-center">
-            <div class="section_title">
-                <h2>Dịch vụ</h2>
-            </div>
-        </div>
-    </div>
+@Html.Action("GetAllServiceCustomer", "Service");
 
-    @if (Model != null && Model.Any())
-    {
-        <div class="blogs">
-            <div class="container">
-                <div class="row blogs_container">
-                    @foreach (var item in Model)
-                    {
-                        <div class="col-lg-4 ">
-                            <div class="blog_item">
-                                <br />
-                                <div class="blog_background" style=" height: 90%;background-image:url(@item.Image)"></div> <br />
-                                <div class="blog_content d-flex flex-column align-items-center justify-content-center text-center">
-                                    <h4 class="blog_title">@item.Title</h4>
-                                    <h5>Kỹ thuật viên: @item.ModifiedBy</h5>
-                                    <span class="blog_meta"> @item.Description </span>
-                                    <a class="blog_more" href="/booking/add">Đặt lịch</a>
+<div class="modal fade" id="modal-default">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <br />
+            <h4 class="modal-title text-center">
+                Đặt hẹn dịch vụ
+            </h4>
+            <div style="height: 2px; background-color: darkred"></div>
+            <div class="modal-body">
+                @using (Html.BeginForm("add", "Booking", FormMethod.Post, new { }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+
+                    <div id="logins-part" class="content active dstepper-block" role="tabpanel" aria-labelledby="logins-part-trigger">
+                        <div class="form-group">
+                            @Html.TextBoxFor(a => a.CreatedBy, new { @class = "form-control", @placeholder = "Tên khách hàng" })
+                            @Html.ValidationMessageFor(a => a.CreatedBy, null, new { @class = "text-danger" })
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.TextBoxFor(a => a.PhoneNumber, new { @class = "form-control", @placeholder = "Số điện thoại" })
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.TextBoxFor(a => a.Email, new { @class = "form-control", @placeholder = "Email" })
                                 </div>
                             </div>
                         </div>
-                    }
-                </div>
+                        <div class="form-group">
+                            @Html.TextBoxFor(a => a.Address, new { @class = "form-control", @id = "txtDetail", @placeholder = "Địa chỉ" })
+                        </div>
+
+                        <div class="form-group">
+                            @Html.TextBoxFor(a => a.CarName, new { @class = "form-control", @placeholder = "Xe của bạn" })
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Dịch vụ</label>
+                            @Html.DropDownListFor(a => a.ServiceId, ViewBag.ProductCategory as SelectList, new { @class = "form-control" })                    @Html.ValidationMessageFor(a => a.ServiceId, null, new { @class = "text-danger" })
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Thời gian:</label>
+                                    <br />
+                                    <select name="CustomerTime" class="form-control">
+                                        <option value="7:00 - 8:00" selected>7:00 - 8:00</option>
+                                        <option value="8:00 - 9:00">9:00 -9:00</option>
+                                        <option value="9:00 - 10:00">9:00 - 10:00</option>
+                                        <option value="10:00 - 11:00">10:00 - 11:00</option>
+                                        <option value="11:00 - 12:00">11:00 - 12:00</option>
+                                        <option value="12:00 - 13:00">12:00 - 13:00</option>
+                                        <option value="13:00 - 14:00">13:00 - 14:00</option>
+                                        <option value="14:00 - 15:00">14:00 - 15:00</option>
+                                        <option value="15:00 - 16:00">15:00 - 16:00</option>
+                                        <option value="16:00 - 17:00">16:00 - 17:00</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <form>
+                                        <label for="datepicker">Chọn ngày:</label>
+                                        <br />
+                                        <input class="form-control" type="date" name="ModifiedDate">
+                                    </form>
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <button type="reset" class="btn btn-outline-danger" data-dismiss="modal" style="width:100%">
+                                        Đóng
+                                    </button>
+
+                                </div>
+                                <div class="col-md-9">
+                                    <button type="submit" class="btn btn-success" id="abcdefg" style="width:100%"> Gửi đặt lịch  </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
             </div>
         </div>
-
-    }
+    </div>
 </div>
 
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 @section scripts{
+
     <script>
+        $(function () {
+            $("#datepicker").datepicker({
+                dateFormat: 'dd/mm/yy' // Định dạng ngày tháng là dd/mm/yyyy
+            });
+        });
         $(document).ready(function () {
             $('body').on('click', '.btnCapNhat', function () {
                 var id = $(this).closest("tr").data("id");
-                $('#txtOrderId').val(id);
                 $('#modal-default').modal('show');
-            });
-
-            $('body').on('click', '#btnLuu', function () {
-                var sid = document.getElementById('txtOrderId').value;
-                var tt = $('#ddTrangThai').val();
-                $.ajax({
-                    url: '/Admin/Order/UpdateTT',
-                    type: 'POST',
-                    data: { fid: sid, trangthaivanchuyen: tt },
-                    success: function (res) {
-                        if (res.Success) {
-                            location.reload();
-                        }
-                    }
-                });
             });
         });
     </script>
 }
-
-

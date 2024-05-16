@@ -1,6 +1,8 @@
-﻿
+﻿@model IEnumerable<WebBanHangOnline.Models.EF.Order>
 @{
+
     ViewBag.Title = "Index";
+
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" />
@@ -18,62 +20,474 @@
 <style>
     .homeTrangchu {
         background-color: white;
-        padding: 50px;
-        border-radius: 35px;
-        transition: background-color 0.3s ease-in;
-        flex-basis: 20%;
-        /*max-width: 290px;*/
+        padding: 20px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        border-radius: 20px;
+        transition: background-color 0.3s ease-in-out;
+        flex-basis: 18%;
+        color: #872a2a;
     }
+
         .homeTrangchu:hover {
-            background-color: lightblue;
+            background-color: darkred;
+            color: white;
         }
-    .homechu{
+    .homechu {
         justify-content: space-around;
     }
-        
 </style>
 <div style="height:2px; background-color: darkslategrey;"></div>
 <br />
 <section class="content">
-    <div class="card text-center">
-        <div class="card-header ">
-            <h3 class="card-title ">Tứ Quý Auto</h3>
-        </div>
-        <div class="card-body" style="background-color: lightgray; padding:10px;">
-            <div class="row homechu">
-                <div class="homeTrangchu text-center">
-                    <a href="products/add" class="text-dark text-decoration-none"> <i class="fa fa-money" aria-hidden="true"></i> <br />Thêm sản phẩm mới</a>
-                </div>
-                <div class="homeTrangchu text-center">
-                    <a href="order" class="text-dark text-decoration-none"> <i class="fa fa-shopping-cart" aria-hidden="true"></i> <br />Đơn hàng</a>
-                </div>
-                <div class="homeTrangchu text-center">
-                    <a href="products" class="text-dark text-decoration-none"> <i class="fa fa-car" aria-hidden="true"></i> <br />Xe</a>
-                </div>
-                <div class="homeTrangchu text-center">
-                    <a href="account" class="text-dark text-decoration-none"><i class="fa fa-user" aria-hidden="true"></i> <br />Tài khoản</a>
-                </div>
-                @*<div class="homeTrangchu col-md-3 text-center">
-                    <a href="account" class="text-dark text-decoration-none"><i class="fa fa-user" aria-hidden="true"></i> <br />Tài khoản</a>
-                </div>
-                <div class="homeTrangchu col-md-3 text-center">
-                    <a href="account" class="text-dark text-decoration-none"><i class="fa fa-user" aria-hidden="true"></i> <br />Tài khoản</a>
-                </div>
-                <div class="homeTrangchu col-md-3 text-center">
-                    <a href="account" class="text-dark text-decoration-none"><i class="fa fa-user" aria-hidden="true"></i> <br />Tài khoản</a>
-                </div>
-                <div class="homeTrangchu col-md-3 text-center">
-                    <a href="account" class="text-dark text-decoration-none"><i class="fa fa-user" aria-hidden="true"></i> <br />Tài khoản</a>
-                </div>*@
+    <div class="card card-purple">
+        <div class="card-header">
+            <h3 class="card-title ">Thống kê hôm nay: @ViewBag.ngayhomnay</h3>
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                    <i class="fas fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                    <i class="fas fa-times"></i>
+                </button>
             </div>
-
         </div>
-        <div class="card-footer">
-            <h5 class="card-title">Cảm ơn!</h5>
+        <div class="card-body" style="background-color: #cdddda; padding:10px;">
+            <div class="row homechu">
+                @if (Model != null)
+                {
+                    var i = 0;
+                    var ii = 0;
+                    var iii = 0;
+                    decimal doanhthu = 0;
+                    foreach (var item in Model)
+                    {
+                        doanhthu = doanhthu + item.Quantity;
+                        if (item.CreatedDate.ToString("dd/MM/yyyy") == DateTime.Today.ToString("dd/MM/yyyy"))
+                        {
+                            i++;
+                            doanhthu = doanhthu + item.TotalAmount;
+                            ii = ii + item.OrderDetails.Count();
+                            if (!item.Status.Equals("Chờ xác nhận"))
+                            {
+                                iii++;
+                            }
+
+                        }
+                    }
+                    var dm = i - iii;
+
+                    <div class="homeTrangchu text-center">
+                        <div class=" text-decoration-none"> <h3> <i class="fa fa-car" aria-hidden="true"></i>  </h3>  BÁN  <br /> <b>@ii xe </b></div>
+                    </div>
+                    <div class="homeTrangchu text-center">
+                        <div class=" text-decoration-none"> <h3> <i class="fa fa-dollar-sign" aria-hidden="true"></i> </h3>  THU ĐƯỢC <br /> <b> @WebBanHangOnline.Common.Common.FormatNumber(doanhthu, 0) VND</b></div>
+                    </div>
+                    @*<div class="homeTrangchu text-center">
+                        <div class=" text-decoration-none" id="btnCapNhatnew"> <h3><i class="fa fa-cart-plus" aria-hidden="true"></i> </h3> <b> @dm  </b> <br /> ĐƠN HÀNG MỚI </div>
+                    </div>*@
+                    <div class="homeTrangchu text-center">
+                        <div class="text-decoration-none" id="btnCapNhat"> <h3> <i class="fa fa-cart-plus" aria-hidden="true"></i>  </h3>  ĐƠN HÀNG  <br /> <b>@i </b></div>
+                    </div>
+                    <div class="homeTrangchu text-center">
+                        <div class=" text-decoration-none" id="btnCapNhatconfirm"> <h3>  <i class="fa fa-check-circle" aria-hidden="true"></i> </h3> <b> @iii </b>  <br />ĐÃ XÁC NHẬN </div>
+                    </div>
+                }
+            </div>
         </div>
     </div>
-
 </section>
+
+<section class="content">
+    <div class="card card-danger">
+        <div class="card-header">
+            <h3 class="card-title">30 ngày qua</h3>
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                    <i class="fas fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+        <div class="card-body" style="background-color: #cdddda; padding: 10px;">
+            <div class="row homechu">
+                @if (Model != null)
+                {
+                    var i = 0;
+                    var ii = 0;
+                    var iii = 0;
+                    decimal doanhthu = 0;
+                    DateTime d = DateTime.Now;
+                    DateTime previousDate = d.AddDays(-30);
+                    foreach (var item in Model)
+                    {
+                        doanhthu = doanhthu + item.Quantity;
+                        if (item.CreatedDate > previousDate && item.CreatedDate <= d)
+                        {
+                            i++;
+                            doanhthu = doanhthu + item.TotalAmount;
+                            ii = ii + item.OrderDetails.Count();
+                            if (!item.Status.Equals("Chờ xác nhận"))
+                            {
+                                iii++;
+                            }
+
+                        }
+                    }
+                    var dm = i - iii;
+                    <div class="homeTrangchu text-center">
+                        <div class="text-decoration-none"> <h3> <i class="fa fa-shopping-cart" aria-hidden="true"></i>  </h3>  ĐƠN HÀNG  <br /> <b>@i </b></div>
+                    </div>
+                    <div class="homeTrangchu text-center">
+                        <div class=" text-decoration-none"> <h3> <i class="fa fa-car" aria-hidden="true"></i>  </h3>  BÁN  <br /> <b>@ii xe </b></div>
+                    </div>
+                    <div class="homeTrangchu text-center">
+                        <div class=" text-decoration-none"> <h3> <i class="fa fa-dollar-sign" aria-hidden="true"></i> </h3>  THU ĐƯỢC <br /> <b> @WebBanHangOnline.Common.Common.FormatNumber(doanhthu, 0) VND</b></div>
+                    </div>
+                    <div class="homeTrangchu text-center">
+                        <div class=" text-decoration-none"> <h3><i class="fa fa-cart-plus" aria-hidden="true"></i> </h3> <b> @dm  </b> <br /> ĐƠN HÀNG MỚI </div>
+                    </div>
+                    <div class="homeTrangchu text-center">
+                        <div class=" text-decoration-none"> <h3>  <i class="fa fa-check-circle" aria-hidden="true"></i> </h3> <b>@iii </b>  <br />ĐÃ XÁC NHẬN </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+    <div class="card card-success">
+        <div class="card-header">
+            <h3 class="card-title">Thống kê doanh thu</h3>
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                    <i class="fas fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="chart">
+                        <canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Ngày</th>
+                                <th>Doanh thu</th>
+                                <th>Lợi nhuận</th>
+                            </tr>
+                        </thead>
+                        <tbody id="load_data"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<div class="modal fade" id="modal-default">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <br />
+            <h4 class="modal-title text-center">
+                Đơn hàng hôm nay: 
+            </h4>
+            <div style="height: 2px; background-color: darkred"></div>
+            <div class="modal-body">
+                <table class="table table-bordered text-center">
+                    <thead>
+                        <tr>
+                            <th>Số</th>
+                            <th>Mã đơn hàng</th>
+                            <th>Giá trị</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null)
+                        {
+                            var i = 1;
+                            foreach (var item in Model)
+                            {
+                                if (item.CreatedDate.ToString("dd/MM/yyyy") == DateTime.Today.ToString("dd/MM/yyyy"))
+                                {
+                                    if (!item.Status.Equals("Chờ xác nhận"))
+                                    {
+                                        <tr>
+                                            <td style="background-color: darkred; color: white;">@i</td>
+                                            <td style="background-color: darkred; color: white"><a href="/admin/order/view/@item.Id" style="text-decoration:none;"> @item.Code</a> </td>
+                                            <td style="background-color: darkred; color: white">@WebBanHangOnline.Common.Common.FormatNumber(item.TotalAmount, 0) VND</td>
+                                        </tr>
+                                    }
+                                    if (item.Status.Equals("Chờ xác nhận"))
+                                    {
+                                        <tr>
+                                            <td>@i</td>
+                                            <td><a href="/admin/order/view/@item.Id" style="text-decoration:none;"> @item.Code</a> </td>
+                                            <td>@WebBanHangOnline.Common.Common.FormatNumber(item.TotalAmount, 0) VND</td>
+                                        </tr>
+                                    }
+                                    i++;
+                                }
+                            }
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal-default-confirm">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <br />
+            <h4 class="modal-title text-center">
+                Đã xác nhận:
+            </h4>
+            <div style="height: 2px; background-color: darkred"></div>
+            <div class="modal-body">
+                <table class="table table-bordered text-center">
+                    <thead>
+                        <tr>
+                            <th>Số</th>
+                            <th>Mã đơn hàng</th>
+                            <th>Giá trị</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null)
+                        {
+                            var i = 1;
+                            foreach (var item in Model)
+                            {
+                                if (item.CreatedDate.ToString("dd/MM/yyyy") == DateTime.Today.ToString("dd/MM/yyyy"))
+                                {
+                                    if (!item.Status.Equals("Chờ xác nhận"))
+                                    {
+                                        <tr>
+                                            <td>@i</td>
+                                            <td><a href="/admin/order/view/@item.Id" style="text-decoration:none;"> @item.Code</a> </td>
+                                            <td>@WebBanHangOnline.Common.Common.FormatNumber(item.TotalAmount, 0) VND</td>
+                                        </tr>
+                                        i++;
+                                    }
+                                }
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal-default-new">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <br />
+            <h4 class="modal-title text-center">
+                Đơn hàng mới:
+            </h4>
+            <div style="height: 2px; background-color: darkred"></div>
+            <div class="modal-body">
+                <table class="table table-bordered text-center">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Mã đơn hàng</th>
+                            <th>Giá trị</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null)
+                        {
+                            var i = 1;
+                            foreach (var item in Model)
+                            {
+                                if (item.CreatedDate.ToString("dd/MM/yyyy") == DateTime.Today.ToString("dd/MM/yyyy"))
+                                {
+                                    if (item.Status.Equals("Chờ xác nhận"))
+                                    {
+                                        <tr>
+                                            <td>@i</td>
+                                            <td><a href="/admin/order/view/@item.Id" style="text-decoration:none;"> @item.Code</a> </td>
+                                            <td>@WebBanHangOnline.Common.Common.FormatNumber(item.TotalAmount, 0) VND</td>
+                                        </tr>
+                                        i++;
+                                    }
+                                }
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="modal-default-new">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <br />
+            <h4 class="modal-title text-center">
+                Xe đã bán:
+            </h4>
+            <div style="height: 2px; background-color: darkred"></div>
+            <div class="modal-body">
+                <table class="table table-bordered text-center">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Mã đơn hàng</th>
+                            <th>Giá trị</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null)
+                        {
+                            var i = 1;
+                            foreach (var item in Model)
+                            {
+                                if (item.CreatedDate.ToString("dd/MM/yyyy") == DateTime.Today.ToString("dd/MM/yyyy"))
+                                {
+                                        <tr>
+                                            <td>@i</td>
+                                            <td> @item.OrderDetails </td>
+                                            <td>@WebBanHangOnline.Common.Common.FormatNumber(item.TotalAmount, 0) VND</td>
+                                        </tr>
+                                        i++;
+                                }
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section scripts{
+    <script src="~/Content/clients/plugins/chart.js/Chart.min.js"></script>
+    <script src="~/Content/assets/plugins/moment/moment.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('body').on('click', '#btnCapNhat', function () {
+                var id = $(this).closest("tr").data("id");
+                $('#modal-default').modal('show');
+            });
+            $('body').on('click', '#btnCapNhatnew', function () {
+                var id = $(this).closest("tr").data("id");
+                $('#modal-default-new').modal('show');
+            });
+            $('body').on('click', '#btnCapNhatconfirm', function () {
+                var id = $(this).closest("tr").data("id");
+                $('#modal-default-confirm').modal('show');
+            });
+        });
+        $(function () {
+            /* ChartJS
+             * -------
+             * Here we will create a few charts using ChartJS
+             */
+
+            var arrDoanhThu = [];
+            var arrLoiNhuan = [];
+            var arrDate = [];
+            $.ajax({
+                url: '/Statistical/GetStatistical',
+                type: 'GET',
+                data: { fromDate: '', toDate: '' },
+                success: function (rs) {
+
+                    $.each(rs.Data, function (i, item) {
+                        var strDate = moment(item.Date).format('DD/MM/yyyy');
+                        arrDate.push(strDate);
+                        arrDoanhThu.push(item.DoanhThu);
+                        arrLoiNhuan.push(item.LoiNhuan);
+                    });
+                    var areaChartData = {
+                        labels: arrDate,
+                        datasets: [
+                            {
+                                label: 'Lợi nhuận',
+                                backgroundColor: 'darkred',
+                                borderColor: 'darkred',
+                                pointRadius: false,
+                                pointColor: '#3b8bba',
+                                pointStrokeColor: 'darkred',
+                                pointHighlightFill: '#fff',
+                                pointHighlightStroke: 'darkred',
+                                data: arrLoiNhuan
+                            },
+                            {
+                                label: 'Doanh thu',
+                                backgroundColor: 'lightblue',
+                                borderColor: 'lightblue',
+                                pointRadius: false,
+                                pointColor: 'lightblue',
+                                pointStrokeColor: '#c1c7d1',
+                                pointHighlightFill: '#fff',
+                                pointHighlightStroke: 'lightblue',
+                                data: arrDoanhThu
+                            },
+                        ]
+                    }
+                    var barChartCanvas = $('#barChart').get(0).getContext('2d')
+                    var barChartData = $.extend(true, {}, areaChartData)
+                    var temp0 = areaChartData.datasets[0]
+                    var temp1 = areaChartData.datasets[1]
+                    barChartData.datasets[0] = temp1
+                    barChartData.datasets[1] = temp0
+
+                    var barChartOptions = {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        datasetFill: false
+                    }
+
+                    new Chart(barChartCanvas, {
+                        type: 'bar',
+                        data: barChartData,
+                        options: barChartOptions
+                    });
+                    load_data(rs.Data);
+                }
+            });
+
+
+        })
+
+        function load_data(data) {
+            var strHtml = "";
+            $.each(data, function (i, item) {
+                var strDate = moment(item.Date).format('DD/MM/yyyy');
+                strHtml += "<tr>";
+                strHtml += "<td>" + (i + 1) + "</td>";
+                strHtml += "<td>" + strDate + "</td>";
+                strHtml += "<td>" + item.DoanhThu + "</td>";
+                strHtml += "<td>" + item.LoiNhuan + "</td>";
+                strHtml += "</tr>";
+            });
+            $('#load_data').html(strHtml);
+        }
+    </script>
+}
 
 
 

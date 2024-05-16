@@ -17,17 +17,17 @@
 <link rel="stylesheet" type="text/css" href="~/content/assets/styles/contact_styles.css">
 <link rel="stylesheet" type="text/css" href="~/content/assets/styles/contact_responsive.css">
 <style>
-    #abcde {
+    #abcdec {
         padding: 10px;
         border-radius: 40px;
         background-image: linear-gradient(to right, #10b9e6, #b3d8b6);
         /*background-image: linear-gradient(to right, #f2709c, #ff9472);*/
         background-repeat: no-repeat;
-        background-position: -100px 200px;
+        background-position: -300px 200px;
         transition: background-position 0.5s ease-in;
     }
 
-        #abcde:hover {
+        #abcdec:hover {
             color:white;
             background-position: 0 0;
         }
@@ -57,7 +57,7 @@
             var i = ((ViewBag.Page - 1) * ViewBag.PageSize) + 1;
             foreach (var item in Model)
             {
-                <div class="row" id="abcde">
+                <div class="row" id="abcdec">
                     <div class="col-md-3">
                         <div class="img-box">
                             <a href="/@item.Alias-n@(item.Id)" title="@item.Title">
@@ -79,8 +79,8 @@
                 i++;
             }
         }
-        <div class="row">
-            <div class="col-12">
+        <div class="row text-center">
+            <div class="col-md-12 ">
                 @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
             </div>
         </div>

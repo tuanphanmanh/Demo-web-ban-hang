@@ -9,6 +9,10 @@ using System.Web;
 using System.Web.Mvc;
 using WebBanHangOnline.Models;
 using WebBanHangOnline.Models.EF;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using System.IO;
+using Org.BouncyCastle.Ocsp;
 
 namespace WebBanHangOnline.Controllers
 {
@@ -67,10 +71,9 @@ namespace WebBanHangOnline.Controllers
             return View();
         }
         [AllowAnonymous]
-        public ActionResult CheckOutSuccess(Order o )
+        public ActionResult CheckOutSuccess( )
         {
-            var check = db.Orders.Where(a => a.Id == o.Id).ToList();
-            return View(o);
+            return View();
         }
         [AllowAnonymous]
 
@@ -151,7 +154,6 @@ namespace WebBanHangOnline.Controllers
 
                     WebBanHangOnline.Common.Common.SendMail("XEĐẸP", "Đơn hàng #" + order.Code, contentCustomer.ToString(), order.Email);
 
-
                     string contentAdmin = System.IO.File.ReadAllText(Server.MapPath("~/content/template/send1.html"));
                     contentAdmin = contentAdmin.Replace("{{MaDon}}", order.Code);
                     contentCustomer = contentCustomer.Replace("{{TenKhachhang}}", order.CustomerName);
@@ -167,13 +169,65 @@ namespace WebBanHangOnline.Controllers
                     contentAdmin = contentAdmin.Replace("{{ThanhTien}}", WebBanHangOnline.Common.Common.FormatNumber(thanhtien, 0));
                     contentAdmin = contentAdmin.Replace("{{LoiNhan}}", order.MessegesForBuyer);
 
-                    WebBanHangOnline.Common.Common.SendMail("XEĐẸP", "Đơn hàng mới#" + order.Code, contentAdmin.ToString(), ConfigurationManager.AppSettings["EmailAdmin"]);
+                    WebBanHangOnline.Common.Common.SendMail("noreply@tuyquyauto.com.vn", "Đơn hàng mới#" + order.Code, contentAdmin.ToString(), ConfigurationManager.AppSettings["EmailAdmin"]);
 
                     cart.ClearCart();
                     return RedirectToAction("CheckOutSuccess");
                 }
             }
             return Json(code);
+        }
+        public ActionResult Export(OrderViewModel req)
+        {
+                // Tạo một document mới với kích thước A4
+            var document = new Document(PageSize.A4);
+
+            // Tạo một MemoryStream để lưu trữ file PDF
+            var stream = new MemoryStream();
+            var writer = PdfWriter.GetInstance(document, stream);
+
+            // Mở document để bắt đầu viết vào nó
+            document.Open();
+
+            var title = new Paragraph("Thông tin đơn hàng", new Font(Font.FontFamily.TIMES_ROMAN, 16, Font.BOLD));
+            title.Alignment = Element.ALIGN_CENTER;
+
+                ShoppingCart cart = (ShoppingCart)Session["Cart"];
+                    Order order = new Order();
+                    order.CustomerName = req.CustomerName;
+                    order.Phone = req.Phone;
+                    order.ShippingStatus = req.ShippingStatus;
+                    order.Address = req.Address;
+                    order.Email = req.Email;
+                    order.AddressType = req.AddressType;
+                    order.MessegesForBuyer = req.MessegesForBuyer;
+                    order.ShippingUnit = req.ShippingUnit;
+                    order.Voucher = req.Voucher;
+                    order.TypePayment = req.TypePayment;
+                    cart.Items.ForEach(a => order.OrderDetails.Add(new OrderDetail
+                    {
+                        ProductId = a.ProductId,
+                        Quantity = a.Quantity,
+                        Price = a.Price,
+                    }));
+                    order.TotalAmount = cart.Items.Sum(x => (x.Price * x.Quantity));
+                    order.CreatedDate = DateTime.Now;
+                    order.ModifiedDate = DateTime.Now;
+                    order.CreatedBy = req.Phone;
+                    var orderInfo = new Paragraph($"Mã đơn hàng: {order.Phone}\nNgày mua hàng: {order.CreatedDate}\nTên khách hàng: {order.CustomerName}\nSố lượng: {order.Quantity}\nTổng tiền: {order.TotalAmount}", new Font(Font.FontFamily.TIMES_ROMAN, 14));
+                    // Thêm các đối tượng vào document
+                    document.Add(title);
+                    document.Add(orderInfo);
+
+            // Đóng document
+            document.Close();
+
+            // Thiết lập các thông số cho response
+            Response.ContentType = "application/pdf";
+            Response.AddHeader("Content-Disposition", "attachment; filename=export1.pdf");
+            Response.BinaryWrite(stream.ToArray());
+
+            return null;
         }
 
         [AllowAnonymous]

@@ -21,18 +21,17 @@
 
             <div class="sidebar">
                 <div class="sidebar_section">
-                    <div class="sidebar_title">
-                        <h5 class="btn btn-outline-info">Hãng xe</h5>
+                    <div class="sidebar_title text-center">
+                        <a href="/san-pham"> <h4 class="text-info">Hãng xe <i class="fa fa-car" aria-hidden="true"></i></h4> </a>
                     </div>
-
                     @Html.Action("MenuLeft", "Menu")
                 </div>
                 <div class="sidebar_section">
                     <div class="sidebar_title text-center ">
-                        <a href="/san-pham"> <h4 class="text-success">Giá tiền</h4> </a>
+                        <a href="/san-pham"> <h4 class="text-success">Giá tiền <i class="fa fa-dollar" aria-hidden="true"></i></h4> </a>
                     </div>
                     <p>
-                        <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;" />
+                        <input type="text" id="amount" readonly style="border:0; font-weight:bold;" />
                         <input type="hidden" id="FromAmount" />
                         <input type="hidden" id="ToAmount" />
                     </p>
@@ -43,7 +42,6 @@
             </div>
 
             <div class="main_content">
-
                 <div class="products_iso">
                     <div class="row">
                         <div class="col">
@@ -70,15 +68,15 @@
                                     </li>
                                 </ul>
                                 <div class="pages d-flex flex-row align-items-center">
-                                    <div >
-                                        @using (Html.BeginForm("Index", "Products")) { 
-                                        <input id="newsletter_email" name="SearchText" type="text" placeholder="Tên xe" >
-                                        <button id="newsletter_submit" type="submit" class="newsletter_submit_btn trans_200" value="Submit">Tìm</button>
-                                    }
+                                    <div>
+                                        @using (Html.BeginForm("Index", "Products"))
+                                        {
+                                            <input id="newsletter_email" name="SearchText" type="text" placeholder="Tên xe">
+                                            <button id="newsletter_submit" type="submit" class="newsletter_submit_btn trans_200" value="Submit">Tìm <i class="fa fa-search" aria-hidden="true"></i></button>
+                                        }
                                     </div>
                                 </div>
                             </div>
-                            <!-- Product Grid -->
                             <div class="product-grid">
                                 @if (Model != null && Model.Any())
                                 {
@@ -90,42 +88,50 @@
                                         {
                                             strImage = img.Image;
                                         }
-                                        <div class="product-item men" style="max-height: 350px;">
-                                            <div class="product discount" style="max-height: 290px; margin-top: 20px;">
-                                                <div class="product_image" style="margin-top:20px">
-                                                    <img style="min-height:180px " src="@strImage" alt="@item.Title">
-                                                </div>
+        if (item.SoHangTon != 0)
+                    {
+<div class="product-item men" style="max-height: 350px;">
+    <div class="product discount" id="abcde" style="max-height: 310px;">
+        <div class="product_image" style="margin-top:20px">
+            <img style="min-height:180px " src="@strImage" alt="@item.Title">
+        </div>
 
-                                                <div data-id="@item.Id" class="favorite favorite_left"></div>
-                                                @if (item.PriceSale > 0)
-                                                {
-                                                    <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>sale</span></div>
-                                                }
+        <div data-id="@item.Id" class="favorite favorite_left"></div>
+        @if (item.Price - item.PriceSale > 10000000)
+        {
+            <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>SALE</span></div>
+        }
+        else
+        {
+            <div class="product_bubble product_bubble_green d-flex flex-column align-items-center"><span>NEW</span></div>
+        }
 
-                                                <div class="product_info">
-                                                    <h6 class="product_name"><a href="/chi-tiet/@item.Alias-p@(item.Id)"> @item.Title </a> </h6>
-                                                    @if (item.PriceSale > 0)
-                                                    {
-                                                        <div class="product_price">
-                                                            @WebBanHangOnline.Common.Common.FormatNumber(item.PriceSale, 0)<span>
-                                                                @WebBanHangOnline.Common.Common.FormatNumber(item.Price, 0)
-                                                            </span>
-                                                        </div>
-                                                        <div style="display:none;" class="in_product_price">
-                                                            @item.PriceSale
-                                                        </div>
-                                                    }
-                                                    else
-                                                    {
-                                                        <div class="product_price">@WebBanHangOnline.Common.Common.FormatNumber(item.Price, 0) </div>
-                                                        <div style="display: none;" class="in_product_price">
-                                                            @item.Price
-                                                        </div>
-                                                    }
-                                                </div>
-                                            </div>
-                                            <div class="red_button add_to_cart_button"><a href="#" class="btnAddToCart" data-id="@item.Id">Thêm vào giỏ hàng</a></div>
-                                        </div>
+        <div class="product_info">
+            <h6 class="product_name"><a href="/chi-tiet/@item.Alias-p@(item.Id)"> @item.Title </a> </h6>
+            @if (item.PriceSale > 0)
+            {
+                <div class="product_price">
+                    @WebBanHangOnline.Common.Common.FormatNumber(item.PriceSale, 0)<span>
+                        @WebBanHangOnline.Common.Common.FormatNumber(item.Price, 0)
+                    </span>
+                </div>
+                <div style="display:none;" class="in_product_price">
+                    @item.PriceSale
+                </div>
+            }
+            else
+            {
+                <div class="product_price">@WebBanHangOnline.Common.Common.FormatNumber(item.Price, 0) </div>
+                <div style="display: none;" class="in_product_price">
+                    @item.Price
+                </div>
+            }
+        </div>
+    </div>
+    <div class="red_button add_to_cart_button"><a href="#" class="btnAddToCart" data-id="@item.Id">Thêm vào giỏ hàng</a></div>
+</div>
+                    }
+                                        
                                     }
                                 }
                             </div>
