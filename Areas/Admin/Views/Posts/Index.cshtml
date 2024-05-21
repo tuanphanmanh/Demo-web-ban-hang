@@ -22,178 +22,61 @@
 <br />
 
 
-<section class="content">
-    <div class="card">
-        <div class="card-header">
-            <h3 class="card-title">Danh sách bài viết</h3>
+<div class="row">
+    <select class="form-select form-select-sm mb-3 col-md-4" id="city" aria-label=".form-select-sm">
+        <option value="" selected>Chọn tỉnh thành</option>
+    </select>
 
-            <div class="card-tools">
-                <a href="/admin/posts/add" class="btn btn-success "> <i class="fa fa-plus-circle" aria-hidden="true"></i> </a>
-                <a href="#" class="btn btn-outline-danger" id="BtnDeleteAll"><i class="fa fa-trash" aria-hidden="true"></i></a>
-            </div>
-        </div>
-        <div class="card-body">
+    <select class="form-select form-select-sm mb-3 col-md-4" id="district" aria-label=".form-select-sm">
+        <option value="" selected>Chọn quận huyện</option>
+    </select>
 
-            <table class="table table-hover">
-                <thead>
-                    <tr style="text-align: center">
-                        <th><input type="checkbox" id="SelectAll" /></th>
-                        <th>STT</th>
-                        <th>Hình ảnh</th>
-                        <th>Tiêu đề tin</th>
-                        <th>Ngày tạo</th>
-                        <th style="text-align:center; width:150px">Hiển thị</th>
-                        <th style="text-align:center">Chi tiết</th>
-                        <th style="width:180px">Chức năng</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @if (Model != null && Model.Any())
-                    {
-                        var i = 1;
-                        foreach (var item in Model)
-                        {
-                            var strCheck = item.IsActive ? "<i class='fa fa-check text-success'></i>" : "<i class='fas fa-times text-danger'></i>";
-                            <tr style="text-align: center" id="trow_@item.Id">
-                                <td><input type="checkbox" class="cbkItem" value="@item.Id" /></td>
-                                <td> @i</td>
-                                <td>
-                                    <img src="@item.Image" class="img-size-64" />
-                                </td>
-                                <td>@item.Title</td>
-                                <td>@item.CreatedDate.ToString("dd/MM/yyyy")</td>
-                                <td class="text-center">
-                                    <a href="#" data-id="@item.Id" class="btnActive">@Html.Raw(strCheck)</a>
-                                </td>
-                                <td>@item.Description</td>
-                                <td class="text-center">
-                                    <a href="/admin/posts/edit/@item.Id" class="text-primary">
-                                        <i class="fa fa-edit" aria-hidden="true"></i>
-                                    </a>
-                                    <a href="#" class="text-danger">
-                                        <i class="fa fa-trash btnDelete" aria-hidden="true"></i>
-                                    </a>
+    <select class="form-select form-select-sm col-md-4" id="ward" aria-label=".form-select-sm">
+        <option value="" selected>Chọn phường xã</option>
+    </select>
+</div>
 
-                                </td>
-                            </tr>
-                            i++;
-                        }
 
-                    }
-                    else
-                    {
-                        <tr>
-                            <td colspan="4">Ko có bản ghi nào!!!</td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
-        <!-- /.card-body -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+<script>
+    var citis = document.getElementById("city");
+    var districts = document.getElementById("district");
+    var wards = document.getElementById("ward");
+    var Parameter = {
+        url: "https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json",
+        method: "GET",
+        responseType: "application/json",
+    };
+    var promise = axios(Parameter);
+    promise.then(function (result) {
+        renderCity(result.data);
+    });
 
-    </div>
-    <!-- /.card -->
+    function renderCity(data) {
+        for (const x of data) {
+            citis.options[citis.options.length] = new Option(x.Name, x.Id);
+        }
+        citis.onchange = function () {
+            district.length = 1;
+            ward.length = 1;
+            if (this.value != "") {
+                const result = data.filter(n => n.Id === this.value);
 
-</section>
-<!-- /.content -->
-
-@section scripts{
-    <script>
-        // xóa nhiều bản ghi
-        $(document).ready(function () {
-            $('body').on('click', '#BtnDeleteAll', function (e) {
-                e.preventDefault();
-                var str = "";
-                var checkbox = $(this).parents('.card').find('tr td input:checkbox');
-                var i = 0;
-                checkbox.each(function () {
-                    if (this.checked) {
-                        checkbox.attr('selected', 'checked');
-                        var _id = $(this).val();
-                        if (i === 0) {
-                            str += _id;
-                        }
-                        else {
-                            str += "," + _id;
-                        }
-                        i++;
-                    }
-                    else {
-                        checkbox.attr('selected', '');
-                    }
-                });
-                if (str.length > 0) {
-                    var conf = confirm("Bạn có muốn xóa các Bài viết này không?");
-                    if (conf === true) {
-                        $.ajax({
-                            url: '/admin/posts/deleteAll',
-                            type: 'POST',
-                            data: { ids: str },
-                            success: function (rs) {
-                                if (rs.success) {
-                                    location.reload();
-                                }
-                            }
-                        });
-                    }
+                for (const k of result[0].Districts) {
+                    district.options[district.options.length] = new Option(k.Name, k.Id);
                 }
-            });
+            }
+        };
+        district.onchange = function () {
+            ward.length = 1;
+            const dataCity = data.filter((n) => n.Id === citis.value);
+            if (this.value != "") {
+                const dataWards = dataCity[0].Districts.filter(n => n.Id === this.value)[0].Wards;
 
-            // xóa 1 bản ghi
-            $('body').on('change', '#SelectAll', function () {
-                var checkStatus = this.checked;
-                var checkbox = $(this).parents('.card-body').find('tr td input:checkbox');
-                checkbox.each(function () {
-                    this.checked = checkStatus;
-                    if (this.checked) {
-                        checkbox.attr('selected', 'checked');
-                    }
-                    else {
-                        checkbox.attr('selected', '');
-                    }
-                });
-            });
-
-            $('body').on('click', '.btnDelete', function () {
-                var id = $(this).data("id");
-                var conf = confirm("Bạn có muốn xóa Bài viết này không?");
-                if (conf === true) {
-                    $.ajax({
-                        url: '/admin/posts/delete',
-                        type: 'POST',
-                        data: { id: id },
-                        success: function (rs) {
-                            if (rs.success) {
-                                $('#trow_' + id).remove();
-                            }
-                        }
-                    });
+                for (const w of dataWards) {
+                    wards.options[wards.options.length] = new Option(w.Name, w.Id);
                 }
-            });
-            // hiển thị trạng thái
-            $('body').on('click', '.btnActive', function (e) {
-                e.preventDefault();
-                var btn = $(this);
-                var id = btn.data("id");
-                $.ajax({
-                    url: '/admin/posts/IsActive',
-                    type: 'POST',
-                    data: { id: id },
-                    success: function (rs) {
-                        debugger;
-                        if (rs.success) {
-                            if (rs.isActive) {
-                                btn.html("<i class='fa fa-check text-success'> </i>");
-                            }
-                            else {
-                                btn.html("<i class='fas fa-times text-danger'> </i>");
-                            }
-                        }
-                    }
-                });
-            });
-        });
-    </script>
-}
-
-
+            }
+        };
+    }
+</script>

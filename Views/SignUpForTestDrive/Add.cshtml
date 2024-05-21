@@ -89,7 +89,23 @@
                                             @Html.TextBoxFor(a => a.Email, new { @class = "form-control", @placeholder = "Email" })
                                         </div>
                                     </div>
+                                    <div class="form-group col-md-4">
+                                        <select name="Tinh" id="city" class="form-control" aria-label=".form-select-sm">
+                                            <option value="" selected>Tỉnh</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <select id="district" name="Huyen" class="form-control" aria-label=".form-select-sm">
+                                            <option value="" selected>Quận</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <select id="ward" name="Xa" class="form-control" aria-label=".form-select-sm">
+                                            <option value="" selected>Phường</option>
+                                        </select>
+                                    </div>
                                 </div>
+                                
                                 <div class="form-group">
                                     @Html.TextBoxFor(a => a.DiaChiLienHe, new { @class = "form-control", @placeholder = "Địa chỉ liên hệ" })
                                     @Html.ValidationMessageFor(a => a.DiaChiLienHe, null, new { @class = "text-danger" })
@@ -110,7 +126,7 @@
                                             <form>
                                                 <label>Ngày dự kiến:</label>
                                                 <br />
-                                                <input class="form-control" type="date" name="ModifiedDate"  />
+                                                <input class="form-control" type="date" name="ModifiedDate" />
                                             </form>
 
                                         </div>
@@ -127,30 +143,6 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label>Bạn có muốn sở hữu xe?</label>
-                                    <br />
-                                    <div class="row">
-                                        <div class="col-md-2">
-                                            <input type="radio" value="1" name="SoHuuXe" /> Có
-                                        </div>
-                                        <div class="col-md-6 text-right">
-                                            <input type="radio" value="0" class="text-right" name="SoHuuXe" /> Không
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label>Bạn đã biết ưu đãi của Tứ Quý Auto cho khách hàng chưa?</label>
-                                    <br />
-                                    <div class="row">
-                                        <div class="col-md-2">
-                                            <input type="checkbox" value="1" name="KhuVuc" /> Đã biết
-                                        </div>
-                                        <div class="col-md-6 text-right">
-                                            <input type="checkbox" value="0" name="KhuVuc" /> Chưa biết
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
                                     <label for="carDropdown">Chọn xe</label>
                                     @Html.DropDownListFor(a => a.ProductId, ViewBag.product as SelectList, new { @class = "form-control" })
                                     @Html.ValidationMessageFor(a => a.ProductId, null, new { @class = "text-danger" })
@@ -158,7 +150,7 @@
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-md-3">
-                                            <button type="reset" data-dismiss="modal" class="btn btn-outline-danger" style="width:100%">
+                                            <button type="reset" data-dismiss="modal" class="btn btn-outline-danger rounded-pill" style="width:100%">
                                                 Đóng
                                             </button>
                                         </div>
@@ -187,6 +179,49 @@
             });
         });
 
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+    <script>
+        var citis = document.getElementById("city");
+        var districts = document.getElementById("district");
+        var wards = document.getElementById("ward");
+        var Parameter = {
+            url: "https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json",
+            method: "GET",
+            responseType: "application/json",
+        };
+        var promise = axios(Parameter);
+        promise.then(function (result) {
+            renderCity(result.data);
+        });
+
+        function renderCity(data) {
+            for (const x of data) {
+                citis.options[citis.options.length] = new Option(x.Name, x.Id);
+            }
+            citis.onchange = function () {
+                district.length = 1;
+                ward.length = 1;
+                if (this.value != "") {
+                    const result = data.filter(n => n.Id === this.value);
+
+                    for (const k of result[0].Districts) {
+                        district.options[district.options.length] = new Option(k.Name, k.Id);
+                    }
+                }
+            };
+            district.onchange = function () {
+                ward.length = 1;
+                const dataCity = data.filter((n) => n.Id === citis.value);
+                if (this.value != "") {
+                    const dataWards = dataCity[0].Districts.filter(n => n.Id === this.value)[0].Wards;
+
+                    for (const w of dataWards) {
+                        wards.options[wards.options.length] = new Option(w.Name, w.Id);
+                    }
+                }
+            };
+        }
     </script>
 }
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">

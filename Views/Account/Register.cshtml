@@ -39,7 +39,7 @@
                                 </a>
                             </div>
                             <div class="col-md-7">
-                                <button type="submit" style="width: 100%" class="btn btn-info rounded-pill">
+                                <button id="btn-login"  type="submit" style="width: 100%" class="btn btn-info rounded-pill">
                                     Đăng ký
                                     <i class="fa fa-users" aria-hidden="true"></i>
                                 </button>
@@ -56,4 +56,37 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+<script>
+    // Lắng nghe sự kiện khi các trường nhập liệu thay đổi
+    document.addEventListener("DOMContentLoaded", function () {
+        var fields = document.querySelectorAll(".form-group input");
+        for (var i = 0; i < fields.length; i++) {
+            fields[i].addEventListener("input", checkFields);
+        }
+    });
+    document.addEventListener("DOMContentLoaded", function () {
+        var btnLogin = document.getElementById("btn-login");
+        btnLogin.setAttribute("disabled", "disabled");
+    });
+
+    // Kiểm tra điều kiện và cập nhật thuộc tính disabled của nút
+    function checkFields() {
+        var fields = document.querySelectorAll(".form-group input");
+        var btnLogin = document.getElementById("btn-login");
+        var allFieldsFilled = true;
+
+        for (var i = 0; i < fields.length; i++) {
+            if (fields[i].value.trim() === "") {
+                allFieldsFilled = false;
+                break;
+            }
+        }
+
+        if (allFieldsFilled) {
+            btnLogin.removeAttribute("disabled");
+        } else {
+            btnLogin.setAttribute("disabled", "disabled");
+        }
+    }
+</script>
 }

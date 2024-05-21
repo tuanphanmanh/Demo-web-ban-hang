@@ -36,7 +36,7 @@
 
 </head>
 <body>
-    
+
     <div class="super_container" id="app">
         <header class="header trans_300" style="top: 0px;">
             <div class="top_nav" style="background-color: darkred">
@@ -339,6 +339,7 @@
         #abcdefg:hover {
             background-position: 0 0;
         }
+
     #abcde {
         padding: 10px;
         background-image: linear-gradient(to right, #bdd9dd, #e2f0f1);
@@ -352,6 +353,7 @@
             font-weight: bold;
             background-position: 0 0;
         }
+
     .dark-mode {
         background-color: black;
         color: white;
@@ -373,29 +375,34 @@
         cursor: pointer;
         transition: opacity 1s, transform 1s;
     }
-    #back-to-top.show {
-       display: block;
-    }
-        #back-to-top.show.animate {
-            opacity: 0.5;
-            transform: rotate(100deg) scale(0);
+
+        #back-to-top.show {
+            display: block;
         }
+
+            #back-to-top.show.animate {
+                opacity: 0.5;
+                transform: rotate(100deg) scale(0);
+            }
+
         #back-to-top:hover {
             border: 1px solid darkblue;
             background-color: darkblue;
         }
 
-        .switch {
-            position: relative;
-            display: inline-block;
-            width: 60px;
-            height: 34px;
-        }
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
+    }
+
         .switch input {
             opacity: 0;
             width: 0;
             height: 0;
         }
+
     .slider {
         position: absolute;
         cursor: pointer;
@@ -407,6 +414,7 @@
         -webkit-transition: 0.4s;
         transition: 0.9s;
     }
+
         .slider:before {
             position: absolute;
             content: "";
@@ -418,13 +426,15 @@
             -webkit-transition: 0.2s;
             transition: 0.2s;
         }
-
+         
     input:checked + .slider {
         background-color: black;
     }
+
     input:focus + .slider {
         box-shadow: 0 0 1px black;
     }
+
     input:checked + .slider:before {
         -webkit-transform: translateX(26px);
         -ms-transform: translateX(26px);
@@ -435,9 +445,9 @@
     .slider.round {
         border-radius: 50px;
     }
+
         .slider.round:before {
             border-radius: 50%;
         }
 </style>
-
 

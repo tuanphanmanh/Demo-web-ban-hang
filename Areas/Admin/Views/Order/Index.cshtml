@@ -20,10 +20,12 @@
         flex-basis: 18%;
         color: #872a2a;
     }
-    .homeTrangchu:hover {
-        background-color: darkred;
-        color: white;
-    }
+
+        .homeTrangchu:hover {
+            background-color: darkred;
+            color: white;
+        }
+
     .homechu {
         justify-content: space-around;
     }
@@ -35,7 +37,7 @@
             <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="/admin/home" class="nav-link">Trang chủ</a>
+            <a href="/admin/home" class="nav-link"><i style="font-size: 20px; font-weight:bold; color:darkblue" class="fa fa-house-damage" aria-hidden="true"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
             <a href="~/admin/order" class="nav-link active">Đơn hàng</a>
@@ -121,14 +123,15 @@
                     @using (Html.BeginForm())
                     {
                         <div class="input-group input-group-sm">
-                            <input name="SearchText" class="form-control" type="date" />
+                            @*<input name="SearchText" class="form-control" type="date" />*@
+                            <input type="date" onchange="validateDate()" name="SearchText" class="form-control" placeholder="dd/mm/yyyy" title="Vui lòng nhập đúng định dạng dd/mm/yyyy" />
                             <span class="input-group-append">
                                 <button type="submit" class="btn btn-success"><i class="fa fa-search" aria-hidden="true"></i></button>
                             </span>
                         </div>
                     }
                 </div>
-                <div class="col-md-5"></div>
+                <div class="col-md-5 text-danger" > @ViewBag.ErrorMessage</div>
 
                 <div class="col-md-1 text-right">
                     <div class="card-tools">
@@ -269,6 +272,18 @@
 
 @section scripts{
     <script>
+        function validateDate() {
+            var searchText = document.getElementById('SearchText').value;
+            var inputDate = new Date(searchText);
+            var currentDate = new Date();
+
+            if (inputDate > currentDate) {
+                alert('Ngày nhập không hợp lệ');
+                return false;
+            }
+
+            return true;
+        }
         $(document).ready(function () {
             $('body').on('click', '.btnCapNhat', function () {
                 var id = $(this).closest("tr").data("id");

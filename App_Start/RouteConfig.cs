@@ -26,9 +26,27 @@ namespace WebBanHangOnline
             );
 
             routes.MapRoute(
-                    name: "Wishlist",
+                    name: "wishlist",
                     url: "danh-sach-xe-quan-tam",
-                    defaults: new { controller = "Wishlist", action = "Index", alias = UrlParameter.Optional },
+                    defaults: new { controller = "wishlist", action = "index", alias = UrlParameter.Optional },
+                    namespaces: new[] { "WebBanHangOnline.Controllers" }
+            );
+            routes.MapRoute(
+                    name: "Login",
+                    url: "dang-nhap",
+                    defaults: new { controller = "account", action = "login", alias = UrlParameter.Optional },
+                    namespaces: new[] { "WebBanHangOnline.Controllers" }
+            );
+            routes.MapRoute(
+                    name: "register",
+                    url: "dang-ky",
+                    defaults: new { controller = "account", action = "register", alias = UrlParameter.Optional },
+                    namespaces: new[] { "WebBanHangOnline.Controllers" }
+            );
+            routes.MapRoute(
+                    name: "profile",
+                    url: "profile",
+                    defaults: new { controller = "account", action = "profile", alias = UrlParameter.Optional },
                     namespaces: new[] { "WebBanHangOnline.Controllers" }
             );
 

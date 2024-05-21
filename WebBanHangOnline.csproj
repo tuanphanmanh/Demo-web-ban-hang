@@ -68,6 +68,12 @@
     <Reference Include="itextsharp, Version=5.5.13.3, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
       <HintPath>..\packages\iTextSharp.5.5.13.3\lib\itextsharp.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.4.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.4.3\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb, Version=2.4.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.4.3\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AspNetCore.Http.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNetCore.Http.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Http.Abstractions.dll</HintPath>
     </Reference>
@@ -520,6 +526,14 @@
     <Compile Include="Migrations\202405150757237_addinorder.Designer.cs">
       <DependentUpon>202405150757237_addinorder.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202405201019143_updatechat.cs" />
+    <Compile Include="Migrations\202405201019143_updatechat.Designer.cs">
+      <DependentUpon>202405201019143_updatechat.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202405201137505_updatéignupfordrie.cs" />
+    <Compile Include="Migrations\202405201137505_updatéignupfordrie.Designer.cs">
+      <DependentUpon>202405201137505_updatéignupfordrie.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BookingViewModel.cs" />
@@ -530,6 +544,7 @@
     <Compile Include="Models\EF\Adv.cs" />
     <Compile Include="Models\EF\Booking.cs" />
     <Compile Include="Models\EF\Category.cs" />
+    <Compile Include="Models\EF\Message.cs" />
     <Compile Include="Models\EF\ProductDetail.cs" />
     <Compile Include="Models\EF\ReviewProduct.cs" />
     <Compile Include="Models\EF\Contact.cs" />
@@ -556,6 +571,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Admin\Views\Posts\stylepost.css" />
     <Content Include="Content\assets\dist\css\adminlte.css" />
     <Content Include="Content\assets\dist\css\adminlte.min.css" />
     <Content Include="Content\assets\dist\css\alt\adminlte.components.css" />
@@ -3894,7 +3910,6 @@
     <Content Include="Content\assets\dist\js\.eslintrc.json" />
     <Content Include="Content\assets\dist\js\adminlte.js.map" />
     <Content Include="Content\assets\dist\js\adminlte.min.js.map" />
-    <Content Include="Areas\Admin\Views\SettingSystem\Index.cshtml" />
     <Content Include="Areas\Admin\Views\SettingSystem\Partial_Setting.cshtml" />
     <Content Include="Content\assets\plugins\moment\locales.min.js.map" />
     <Content Include="Content\assets\plugins\moment\moment-with-locales.min.js.map" />
@@ -3927,6 +3942,8 @@
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.signalR-2.4.3.js" />
+    <Content Include="Scripts\jquery.signalR-2.4.3.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
@@ -4011,6 +4028,7 @@
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\Admin\Views\Adv\" />
     <Folder Include="Content\ckfinder\userfiles\" />
+    <Folder Include="Views\Chat\" />
     <Folder Include="Views\Default\" />
   </ItemGroup>
   <ItemGroup>
@@ -4223,6 +4241,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202405150757237_addinorder.resx">
       <DependentUpon>202405150757237_addinorder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202405201019143_updatechat.resx">
+      <DependentUpon>202405201019143_updatechat.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202405201137505_updatéignupfordrie.resx">
+      <DependentUpon>202405201137505_updatéignupfordrie.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

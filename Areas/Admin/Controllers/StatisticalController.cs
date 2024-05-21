@@ -63,7 +63,16 @@ namespace WebBanHangOnline.Areas.Admin.Controllers
             }
             if (!string.IsNullOrEmpty(theongay?.ToString("dd/MM/yyyy")))
             {
-                items = items.Where(p => p.Order.CreatedDate.ToString("dd/MM/yyyy").Equals(theongay?.ToString("dd/MM/yyyy")));
+                TimeSpan ngaytru = (DateTime.Now - (theongay ?? DateTime.Now));
+                int soNgay = ngaytru.Days;
+                if (soNgay < 0)
+                {
+                    ViewBag.ErrorMessage = "Chọn ngày từ hôm nay trở về trước!";
+                }
+                else
+                {
+                    items = items.Where(p => p.Order.CreatedDate.ToString("dd/MM/yyyy").Equals(theongay?.ToString("dd/MM/yyyy")));
+                }
             }
 
             return View(items);

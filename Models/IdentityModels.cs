@@ -32,6 +32,7 @@ namespace WebBanHangOnline.Models
 
         public DbSet<Category> Categories { get; set; }
         public DbSet<SignUpForTestDrive> SignUpForTestDrives { get; set; }
+        public DbSet<Message> Messages { get; set; }
         public DbSet<Wishlist> Wishlists { get; set; }
         public DbSet<Service> Services { get; set; }
         public DbSet<Booking> Bookings { get; set; }

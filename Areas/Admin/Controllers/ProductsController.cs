@@ -32,7 +32,7 @@ namespace WebBanHangOnline.Areas.Admin.Controllers
 
             if (!string.IsNullOrEmpty(searchString))
             {
-                items = items.Where(p=>p.Title.Contains(searchString) );
+                items = items.Where(p => p.Title.ToLower().Contains(searchString.ToLower()) || p.ProductCategory.Title.ToLower().Contains(searchString.ToLower()));
             }
             if (!string.IsNullOrEmpty(searchStringCategory))
             {

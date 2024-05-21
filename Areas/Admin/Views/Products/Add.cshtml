@@ -12,7 +12,7 @@
             <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="/admin/home" class="nav-link">Trang chủ</a>
+            <a href="/admin/home" class="nav-link"><i style="font-size: 20px; font-weight:bold; color:darkblue" class="fa fa-house-damage" aria-hidden="true"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
             <a href="/admin/products" class="nav-link">Xe</a>
@@ -34,8 +34,8 @@
             @Html.AntiForgeryToken()
             @Html.ValidationSummary(true)
 
-            <div class="card">
-                <div class="card-header">
+            <div class="card" >
+                <div class="card-header bg-dark">
                     <div class="row">
                         <div class="col-md-3">
                             Thông tin thêm mới xe   
@@ -53,37 +53,35 @@
                 <div class="card-body">
                     <div class="tab-content">
                         <div class="active tab-pane" id="activity">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Tên xe</label>
-                                @Html.TextBoxFor(a => a.Title, new { @class = "form-control", @placeholder = "Tên xe" })
-                                @Html.ValidationMessageFor(a => a.Title, null, new { @class = "text-danger" })
+                            <div class="row">
+                                <div class="form-group col-md-2">
+                                    <label for="exampleInputEmail1">Hãng xe</label>
+                                    @Html.DropDownListFor(a => a.ProductCategoryId, ViewBag.ProductCategory as SelectList, "", new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(a => a.ProductCategoryId, null, new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="exampleInputEmail1">Tên xe</label>
+                                    @Html.TextBoxFor(a => a.Title, new { @class = "form-control", @placeholder = "Tên xe" })
+                                    @Html.ValidationMessageFor(a => a.Title, null, new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="exampleInputEmail1">SKU</label>
+                                    @Html.TextBoxFor(a => a.ProductCode, new { @class = "form-control", @placeholder = "Mã xe" })
+                                    @Html.ValidationMessageFor(a => a.ProductCode, null, new { @class = "text-danger" })
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Alias</label>
-                                @Html.TextBoxFor(a => a.Alias, new { @class = "form-control", @placeholder = "Alias" })
-                                @Html.ValidationMessageFor(a => a.Alias, null, new { @class = "text-danger" })
-                            </div>
+                            
 
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">SKU</label>
-                                @Html.TextBoxFor(a => a.ProductCode, new { @class = "form-control", @placeholder = "Mã xe" })
-                                @Html.ValidationMessageFor(a => a.ProductCode, null, new { @class = "text-danger" })
-                            </div>
-
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Danh mục</label>
-                                @Html.DropDownListFor(a => a.ProductCategoryId, ViewBag.ProductCategory as SelectList, "- -Chọn danh mục sản phẩm- -", new { @class = "form-control" })
-                                @Html.ValidationMessageFor(a => a.ProductCategoryId, null, new { @class = "text-danger" })
-                            </div>
+                            
 
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Mô tả sơ bộ</label>
-                                @Html.TextAreaFor(a => a.Description, new { @class = "form-control", @placeholder = "Mô tả sơ bộ" })
+                                @Html.TextBoxFor(a => a.Description, new { @class = "form-control", @placeholder = "Mô tả sơ bộ" })
                             </div>
 
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Chi tiết xe</label>
-                                @Html.TextAreaFor(a => a.Detail, new { @class = "form-control", @id = "txtDetail", @placeholder = "Chi tiết" })
+                                @Html.TextBoxFor(a => a.Detail, new { @class = "form-control", @id = "txtDetail", @placeholder = "Chi tiết" })
                             </div>
 
                             <div class="row">
@@ -226,15 +224,19 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-2">
                                         <label>Nhiên liệu</label>
-                                        <div>
-                                            <select name="Fuel" class="form-control">
-                                                <option value="Xăng" selected>Xăng</option>
-                                                <option value="Dầu">Dầu</option>
-                                            </select>
+                                        <div class="row">
+                                            <div class="col-md-4 " style="padding-top: 5px">
+                                                <input type="checkbox" name="Fuel" value="Xăng" /> Xăng
+                                            </div>
+                                            <div class="col-md-6 " style="padding-top: 5px">
+                                                <input type="checkbox" name="Fuel" value="Dầu" /> Dầu
+                                            </div>
+
                                         </div>
                                     </div>
+
                                     <div class="col-md-3">
                                         <label>Xuất xứ</label>
                                         <div class="col-sm-10">
@@ -248,6 +250,9 @@
                         </div>
                         <!-- /.tab-pane -->
                     </div>
+                    
+                </div>
+                <div class="card-footer">
                     <div class="form-group">
                         <div class="row">
                             <div class="col-md-4">

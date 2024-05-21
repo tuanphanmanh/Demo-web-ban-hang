@@ -12,10 +12,10 @@
             <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="/admin" class="nav-link">Trang chủ</a>
+            <a href="/admin/home" class="nav-link"><i style="font-size: 20px; font-weight:bold; color:darkblue" class="fa fa-house-damage" aria-hidden="true"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="/admin/category" class="nav-link active">Xe</a>
+            <a href="/admin/products" class="nav-link active">Xe</a>
         </li>
     </ul>
 }
@@ -29,28 +29,39 @@
     <div class="card">
         <div class="card-header">
             <div class="row">
-                <div class="col-md-2">
+                <div class="col-md-2" style="padding-top: 10px;">
                     <h3 class="card-title">Danh sách xe </h3>
                 </div>
                 <div class="col-md-4">
                     @using (Html.BeginForm())
                     {
                         <div class="input-group input-group-sm">
-                            <input name="searchString" class="form-control" placeholder="Tìm theo tên xe " aria-label="Search" /> 
-                            <span class="input-group-append">
-                                <button type="submit" class="btn btn-danger"><i class="fa fa-search" aria-hidden="true"></i></button>
-                            </span>
+                            <section class="filter-wrapper">
+                                <div class="keyword-wrapper">
+                                    <input name="searchString" type="text" id="keyword" class="form-control" autocomplete="off" placeholder="Nhập tên xe..." required />
+                                    <span class="input-group-append">
+                                        <button type="submit" class="btn btn-danger"><i class="fa fa-search" aria-hidden="true"></i></button>
+                                    </span>
+                                </div>
+                                <ul id="filter-select" class="filter-select no-value">
+                                </ul>
+                            </section>
                         </div>
+
                     }
                 </div>
                 <div class="col-md-3">
                     @using (Html.BeginForm())
                     {
                         <div class="input-group input-group-sm">
-                            @Html.DropDownList("searchStringCategory", ViewBag.ProductCategory as SelectList, "Tìm theo hãng xe", new { @class = "form-control" })
-                            <span class="input-group-append">
-                                <button type="submit" class="btn btn-success"><i class="fa fa-search" aria-hidden="true"></i></button>
-                            </span>
+                            <section class="filter-wrapper">
+                                <div class="keyword-wrapper">
+                                    @Html.DropDownList("searchStringCategory", ViewBag.ProductCategory as SelectList, "Tìm theo hãng xe", new { @class = "form-control cell-clickable text-tight" })
+                                    <span class="input-group-append">
+                                        <button type="submit" class="btn btn-success"><i class="fa fa-search" aria-hidden="true"></i></button>
+                                    </span>
+                                </div>
+                            </section>
                         </div>
                     }
                 </div>
@@ -66,11 +77,10 @@
             <table class="table table-hover text-center">
                 <thead>
                     <tr class="bg-purple">
-                        <th class="bg-purple"><input type="checkbox" id="SelectAll" /></th>
                         <th class="bg-purple">STT</th>
                         <th class="bg-purple">Hình ảnh</th>
                         <th class="bg-purple">Tên sản phẩm</th>
-                        <th class="bg-purple">Hãng xe</th>
+                        <th class="bg-purple" >Hãng xe </th>
                         <th class="bg-purple">Tồn</th>
                         <th class="bg-purple">Giá</th>
                         <th class="bg-purple">Ngày nhập</th>
@@ -98,15 +108,14 @@
                                 strImg = CheckImage.Image;
                             }
                             <tr id="trow_@item.Id">
-                                <td><input type="checkbox" class="cbkItem" value="@item.Id" /></td>
                                 <td>@i</td>
                                 <td><img class="imgproduct" data-id="@item.Id" src="@strImg" width="50" /></td>
                                 <td>@item.Title</td>
                                 <td>@item.ProductCategory.Title</td>
 
-                                @if (item.SoHangTon == 0)
+                                @if (item.SoHangTon <= 0)
                                 {
-                                    <td style="background-color: #00ff90; color:red"> <i class="fa fa-check" aria-hidden="true"></i> </td>
+                                    <td style="background-color: #00ff90; color:red"><i class="fa fa-check" aria-hidden="true"></i> </td>
                                 }
                                 @if (item.SoHangTon <= 5 && item.SoHangTon > 0)
                                 {
@@ -133,8 +142,8 @@
                                     <a href='#' data-id="@item.Id" class="btnActive">@Html.Raw(strCheck)</a>
                                 </td>
                                 <td>
-                                    <a href="/admin/products/nhapthem/@item.Id" class=" text-success"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>
-                                    
+                                    <a href="/admin/products/nhapthem/@item.Id" title="Thêm xe" class=" text-success"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>
+
                                 </td>
                                 <td>
                                     <a href="/admin/products/edit/@item.Id" class=" text-primary"><i class="fa fa-edit" aria-hidden="true"></i></a>
@@ -184,6 +193,8 @@
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
     <script>
         $(document).ready(function () {
 
@@ -339,4 +350,263 @@
             });
         });
     </script>
+        
+    <script type='text/javascript'>
+            //<![CDATA[
+            //global variables
+            var keyword = $("#keyword");
+            var filterSelect = $("#filter-select");
+            var keywordHref = $("#keyword-button").attr("href");
+            var keywordVal = "";
+
+        var filterArray = ["cx5", "Toyota ", "santafe ", "mazda", "audi", "Mercedes ", "Huyndai ", "lexus ", "vios ", "camry ", "mitsubishi ",  "66120 retirement mug", "61034 teacher mug", "66101 mother mug", "61044 mother plaque", "66105 grandmother mug", "72150 dog door stopper", "72151 bless this home door stopper", "72157 home door stopper", "72160 welcome door stopper", "72198 dog door stopper", "72196 shut the front door stopper", "66241 dad mug", "75117 girlfriends mug", "75113 friendships mug", "67220 wine frame", "79207 fox baby leggings", "79217 elephant baby leggings", "79246 camouflage baby leggings", "67089 white fishing hat", "81073 friends snowman with penguin", "81085 snowman holding birdhouse", "81125 family love", "81123 snowman and moose", "74056 joy bicycle mug", "74036 sister mug", "74027 grandma plaque", "61049 teachers plaque", "74053 survivor mug", "82344 teacher angel ornament", "74067 friend teapot", "02998 october bird figurine", "angels", "angels elements", "accents", "aunt", "aunt gift", "aunt mug", "adjustable hats", "amylee weeks", "angel figurines", "angel holding flowers", "angel ornaments", "angels mother", "angels grandmother", "angels friend", "angels in memory", "angels god", "angels simple spirits", "angels light your way", "angels country soul", "angels perfectly paisley", "angel praying", "angel holding cross", "angel holding heart", "angel holding dove", "angel holding butterfly", "angel holding book", "angel birthstone", "angel blonde hair", "angel brown hair", "angel black hair", "angel bible", "amylee weeks mugs", "baby", "baby leggings", "birchhearts christmas figurines", "birthday", "birthday gifts", "black lab", "baby girl", "baby boy", "baby unisex", "baby hats", "baby bibs", "baby blankets", "birthday angel", "birthday mug", "bloom by amylee weeks", "bloom by amylee weeks mugs", "birthstone", "birthstone angels", "birthstone necklace", "birthstone bracelet", "breast cancer awareness", "bird", "bird mug", "bird figurine", "bird plaque", "boxer", "beach", "baptism", "bunny", "butterfly", "butterfly figurine", "butterfly mug", "butterfly plaque", "butterfly angel", "baseball hats", "blue", "brown hair angel", "blonde hair angel", "bible", "blessed", "blanket baby", "beer", "beer glasses", "beer bottle magnets", "beer bottle lanterns", "comfort candles", "candle holders", "coffee mugs", "cat", "christmas", "christmas gift", "christmas decor", "christmas ornament", "christmas figurines", "christmas angels", "cross", "country soul", "country soul angels", "candles", "candle holders tealight", "candle holders glass", "candle holders terra cotta", "candle holders memorial", "candle holders stars", "candle holders round", "cat mugs", "cat magnets", "cat wall art", "cat mom", "communion", "cute", "cork", "cork holder", "cork bag", "canvas", "canvas tote", "ceramic mug", "coasters", "cookie jars", "cat orange", "cat black", "door stopper", "decorative", "dog", "dog mugs", "dad", "dad mugs", "daughter", "decorative figurines", "double angel", "december", "distressed wood", "dog door stoppers", "dog key chains", "dog coin banks", "dog vases", "dog salt pepper shakers", "dishwaser safe", "diamond", "elements", "elements angels", "earrings", "earrings swarovski", "earrings silver", "earrings gold", "eat share love", "easel back", "figurine", "figurine angel", "faith", "family", "family angel", "family mug", "family ornament", "friend", "friendship", "friend angel", "friend mug", "friend ornament", "frames", "funny", "funny mugs", "funny magnets", "father", "football", "flower", "flower angel", "flower figurine", "fox", "gift mother", "globe", "god bless", "golden retriever", "gift grandmother", "gift aunt", "gift friend", "gift teacher", "gift nurse", "gift dad", "gift sister", "gift box", "godmother", "grandmother", "grandmother angel", "grandma", "grandma mug", "global love", "global love mugs", "global love ornaments", "graduation", "german shepherd", "granddaughter", "god", "grandparents", "grandson", "glass", "gray", "home", "home decor", "hiccup", "hand painted", "heart", "heart angel", "heaven", "heavenly woods", "heavenly winter woods", "husband", "hats", "hats baseball", "hats fishing", "hats mom", "handbags", "home door stopper", "home plaque", "halloween", "high quality ceramic", "home sweet home", "hope", "in memory", "in memory angels", "in memory candle holders", "izzy & owie", "izzy & owie baby leggings", "izzy & owie blanket", "izzy & owie baby hats", "in memory grandmother", "jewelry", "jewelry swarovski", "jessie steele", "jesus", "kitchen", "keepsake", "keepsake box", "kindness angel", "key chains", "keyhole hanger", "knife", "leggings baby", "lit LED", "leather", "lake", "lake people", "lake tote", "lake picture frame", "love", "love angel", "light your way", "light your way angels", "light your way memorial", "light your way every day", "leather purse", "lantern", "mug", "mom gift", "musical water globes", "magnets", "mugs mom", "mugs grandma", "mugs dad", "mugs mark my words", "mugs we people", "mugs bloom by amylee weeks", "magnets dog", "magnets funny", "marquee", "mother", "mother angel", "mother mug", "mother memorial", "mother plaque", "music box", "mom mugs", "mom angels", "mom plaque", "my pedigree pals", "mark my words", "mark my words mugs", "mom love", "mom love mugs", "mom love shirts", "merry christmas", "memory", "memory grandmother", "modeles", "modeles angels", "merlot", "microwave safe", "men shirt", "nana", "nana gift", "nurse", "nurse gift", "nurse angel", "nurse mug", "nativity", "necklace", "necklace swarovski", "november birthstone", "notepads", "open door decor door stoppers", "ornaments", "owl", "ornaments angels", "ornaments birchhearts", "ornaments snowman", "october birthstone", "picture frames", "pet", "pet mug", "pug", "pedigree pals", "pedigree pals mugs", "pedigree pals plaques", "pilsner beer glass", "perfectly paisley", "paw palettes", "paw palettes mugs", "popular", "popular gifts", "pink ribbon", "pink mug", "pink angel", "polyresin", "polyresin figurine", "polyresin angel", "polyresin ornament", "purse", "purse leather", "pens", "pen sets", "purple", "peace", "plaques", "plaques friend", "plaques mother", "purple shirt", "photo frames", "plate", "plate glass", "planters", "retirement", "round candle holder", "rescue me now", "remove your shoes", "rememberance", "sister", "sister mug", "sister angel", "swarovski", "sockings", "sympathy", "snowman", "snowman figurine", "simple spirits", "simple spirits angels", "simple spirits figurines", "shot glasses", "shot glass girl", "survivor", "stars in the sky", "shut the front door", "star of wonder plaques", "stoneware", "stoneware mug", "stoneware bowl", "sawtooth hanger", "tea", "tea mugs", "the birchhearts", "teacher", "teacher mug", "teacher angel", "teacher plaque", "the sockings", "tray", "tea for one", "teapot", "tealights", "tealight candle holders", "tote bags", "travel mugs", "terra cotta", "vintage", "vase", "vase dog", "vase cat", "vintage by stephanie ryan", "vios", "bmw", "water globes", "water globes musical", "wine", "we people", "with god", "wreaths", "wine tumbler", "wine glasses", "wine hiccup", "we people hats", "we people mugs", "we people picture frames", "wine candle holders", "wedding", "wedding gifts", "waggy dogz", "waggy dogz door stoppers", "waggy dogz mugs", "wood", "wall art", "wall hanging", "wallet", "women shirt", "yellow", "yellow lab", "yellow shirt", "you are my world"];
+            var newFilter = [];
+            var tabIndex = -1;
+            keyword.on("focus", function (e) {
+                e.preventDefault();
+                if (keywordVal !== "" && keydownTarget !== 9 && keydownTarget !== 16 && keydownTarget !== 38 && keydownTarget !== 40 && newFilter.length > 1) {
+                    fillSelect();
+                }
+            });
+            keyword.on("keyup", function (e) {
+                keywordVal = $(this).val();
+                keydownTarget = e.which;
+                var ignoreKeys = e.which !== 9 && e.which !== 16 && e.which !== 38 && e.which !== 40;
+                if (keywordVal !== "" && ignoreKeys) {
+                    newFilter = filterArray.filter(isResult);
+                    if (newFilter.length === 0) {
+                        removeListBlur();
+                        return false;
+                    }
+                }
+
+                if (e.which !== 9 && ignoreKeys) {
+                    fillSelect();
+                    tabIndex = -1;
+                    if (newFilter.length === 0) {
+                        removeListBlur();
+                        return false;
+                    }
+                }
+            });
+            keyword.on("keydown", function (e) {
+                if (keywordVal !== "") {
+                    if (e.which === 9) {
+                        e.preventDefault();
+                        keydownTarget = e.which;
+                        if (!e.shiftKey) {
+                            cycleSelectList("next");
+                        }
+                        if (e.shiftKey) {
+                            cycleSelectList("previous");
+                        }
+                    }
+                    if (e.which === 38 || e.which === 40) {
+                        e.preventDefault();
+                        keydownTarget = e.which;
+                    }
+                    if (e.which === 38) {
+                        cycleSelectList("previous");
+                    }
+                    else if (e.which === 40) {
+                        cycleSelectList("next");
+                    }
+                }
+                if (e.which === 13) {
+                    $("#keyword-button").click()
+                }
+            });
+            $("#filter-select").on("mousedown", ".filter-select-list", function (e) {
+                e.preventDefault();
+                var $this = $(this);
+                var currentIndex = $this.index();
+                tabIndex = currentIndex;
+                keydownTarget = 9;
+                cycleSelectList("none");
+            });
+            keyword.on('blur', removeListBlur);
+            //helper functions
+            function isResult(val) {
+                return val.indexOf(keywordVal.toLowerCase()) === 0
+            }
+            function removeListBlur() {
+                if (filterSelect.has("li").length) {
+                    filterSelect.addClass("no-value").children("li").remove();
+                }
+            }
+            function cycleSelectList(direction) {
+                var newList = filterSelect.find("li");
+                if (direction === "previous") {
+                    if (tabIndex <= 0) {
+                        tabIndex = newList.length;
+                    }
+                    tabIndex--;
+                }
+                else if (direction === "next") {
+                    tabIndex++;
+                    if (tabIndex === newList.length) {
+
+                        tabIndex = 0;
+                    }
+                }
+                newList.eq(tabIndex).addClass("list-highlight");
+                keyword.val(newList.eq(tabIndex).attr("data-value"));
+                newList.not(newList.eq(tabIndex)).removeClass("list-highlight");
+                keyword.focus();
+            }
+            function fillSelect() {
+                filterSelect.children("li").remove();
+                //filterSelect.attr("size",newFilter.length)
+                if (keywordVal !== "") {
+                    filterSelect.removeClass("no-value");
+                    for (var i = 0; i < newFilter.length; i++) {
+                        filterSelect.append("<li class='filter-select-list' data-value='" + newFilter[i] + "'>" + newFilter[i] + "</li>");
+                        //filters[i].sprite;
+                    }
+                }
+                else {
+                    filterSelect.addClass("no-value");
+                }
+            }
+            //for demo purposes only
+            $("#keyword-button").on("click", fillHref)
+            function fillHref() {
+                var newHrefString = keywordHref + keyword.val().replace(/\s+/g, '+');
+                var newHref = $("#keyword-button").attr("href", newHrefString);
+            }
+            //]]>
+        </script>
 }
+
+<style>
+    /*autoprefixer used*/
+    *, *::after, *::before {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box
+    }
+    html, body {
+        height: calc(100% + 1px)
+    }
+
+
+
+    .filter-wrapper, .keyword-wrapper {
+        display: flex;
+    }
+
+    .filter-wrapper {
+        min-width: 100%;
+        flex-flow: column wrap;
+        align-items: center;
+        position: relative
+    }
+
+    .keyword-wrapper {
+        min-width: 130%;
+        position: relative;
+    }
+
+    #keyword {
+        border: 1px solid #ccc;
+        padding: 10px;
+        font:  'Arimo', sans-serif;
+        width: 50%;
+        outline: none;
+        transition: border 0.5s ease-in-out
+    }
+
+        #keyword:focus {
+            border-top-color: rgba(0,0,0,0);
+            border-left-color: rgba(0,0,0,0);
+            border-right-color: rgba(0,0,0,0);
+        }
+
+    #keyword-button {
+        position: absolute;
+        right: 26%;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 1.7em;
+        color: #8DB9ED
+    }
+
+        #keyword-button:hover {
+            color: #ccc
+        }
+    .filter-select {
+        border-bottom-left-radius: 40px;
+        border-top-left-radius: 20px;
+        width: 120%;
+        list-style: none;
+        color: rgb(105,105,105);
+        border: 1px solid #ccc;
+        border-top: none;
+        position: absolute;
+        top: calc(50% + 25px);
+        max-height: calc(50% + 150px);
+        overflow-y: auto;
+        background: #fff;
+        box-shadow: 0px 40px 40px #f3d1df
+    }
+
+    .filter-select-list {
+        cursor: pointer;
+        line-height: 30px;
+        padding-left: 20px;
+    }
+
+        .filter-select-list:hover {
+            color: black;
+            background-color: #c18aa3;
+            border-top-right-radius: 40px;
+            border-bottom-right-radius: 40px;
+        }
+
+    .no-value {
+        border: none
+    }
+
+    .list-highlight, .list-highlight:hover {
+        background: rgb(55,55,55);
+        color: #fff
+    }
+    /*some simple responsive designs*/
+    media only screen and (max-width: 768px) {
+        .filter-select, #keyword
+
+    {
+        width: 80%;
+    }
+
+    #keyword {
+        font-size: 1.3em
+    }
+
+    .filter-select {
+        font-size: 0.9em;
+        top: calc(50% + 23px);
+    }
+
+    #keyword-button {
+        right: 11%
+    }
+
+    }
+
+    media only screen and (max-width: 480px) {
+        .filter-select, #keyword
+
+    {
+        width: 95%;
+    }
+
+    .filter-select {
+        left: 2.5%;
+    }
+
+    #keyword-button {
+        right: 3.5%
+    }
+    }
+</style>

@@ -208,3 +208,11 @@ D:\Đồ án\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrat
 D:\Đồ án\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.hahahahaa.resources
 D:\Đồ án\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.hahahahaa12.resources
 D:\Đồ án\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.addinorder.resources
+D:\Đồ án\WebBanHangOnline\WebBanHangOnline\bin\Microsoft.AspNet.SignalR.Core.dll
+D:\Đồ án\WebBanHangOnline\WebBanHangOnline\bin\Microsoft.AspNet.SignalR.SystemWeb.dll
+D:\Đồ án\WebBanHangOnline\WebBanHangOnline\bin\Microsoft.AspNet.SignalR.Core.pdb
+D:\Đồ án\WebBanHangOnline\WebBanHangOnline\bin\Microsoft.AspNet.SignalR.Core.xml
+D:\Đồ án\WebBanHangOnline\WebBanHangOnline\bin\Microsoft.AspNet.SignalR.SystemWeb.pdb
+D:\Đồ án\WebBanHangOnline\WebBanHangOnline\bin\Microsoft.AspNet.SignalR.SystemWeb.xml
+D:\Đồ án\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.updatechat.resources
+D:\Đồ án\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.updatéignupfordrie.resources

@@ -19,7 +19,7 @@ namespace WebBanHangOnline.Controllers
             IEnumerable<Product> items = db.Products.OrderByDescending(x => x.Id);
             if (!string.IsNullOrEmpty(SearchText))
             {
-                items = items.Where(a => a.Alias.Contains(SearchText) || a.Title.Contains(SearchText));
+                items = items.Where(p => p.Alias.ToLower().Contains(SearchText.ToLower()) || p.Title.ToLower().Contains(SearchText.ToLower()));
             }
             return View(items.ToList());
         }

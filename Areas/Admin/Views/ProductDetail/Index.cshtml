@@ -1,4 +1,4 @@
-﻿@model IEnumerable<WebBanHangOnline.Models.EF.ProductDetail>
+﻿﻿@model IEnumerable<WebBanHangOnline.Models.EF.ProductDetail>
 
 <link href="~/Content/assets/styles/tablecustome.css" rel="stylesheet" />
 <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
@@ -10,7 +10,7 @@
             <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="/admin/home" class="nav-link">Trang chủ</a>
+            <a href="/admin/home" class="nav-link"><i style="font-size: 20px; font-weight:bold; color:darkblue" class="fa fa-house-damage" aria-hidden="true"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
             <a href="/admin/productdetail" class="nav-link active">Chi tiết TSKT</a>
@@ -30,7 +30,7 @@
                     <h3 class="card-title">Thông số kỹ thuật</h3>
                 </div>
                 <div class="col-md-6 text-right">
-                    <a href="productdetail/add" class="btn btn-success">Nhập thông số KT<i class="fa fa-plus-circle" aria-hidden="true"></i></a>
+                    <a href="productdetail/add" class="btn btn-success rounded-pill">Nhập thông số KT <i class="fa fa-plus-circle" aria-hidden="true"></i></a>
                 </div>
             </div>
         </div>
@@ -66,39 +66,38 @@
                     </tr>
                 </thead>
                 <tbody>
-                        @foreach (var item in Model)
-                        {
-                            <tr style="text-align: center">
-                                <th scope="col">@item.Product.Title</th>
-                                <td>@item.DoiXe</td>
-                                <td>@item.LoaiSo</td>
-                                <td>@item.KichThuoc</td>
-                                <td>@item.KhoangSangGamXe</td>
-                                <td>@item.BanKinhVongQUay</td>
-                                <td>@item.WeightKhongTai</td>
-                                <td>@item.WeightToanTai</td>
-                                <td>@item.ChieuRongCoSo</td>
-                                <td>@item.LoaiDongCo</td>
-                                <td>@item.KichThuocLopXe</td>
-                                <td>@item.CongSuatToiDa</td>
-                                <td>@item.HeThongNhienLieu</td>
-                                <td>@item.SoXyLanh</td>
-                                <td>@item.BoTriXyLanh</td>
-                                <td>@item.DungTichXyLanh</td>
-                                <td>@item.HeThongTruyenDong</td>
-                                <td>@item.HopSo</td>
-                                <td>@item.LoaiVanh</td>
-                                <td>@item.PhanhTruoc</td>
-                                <td>@item.PhanhSau</td>
-                                <td>@item.TieuChuanKhiThai</td>
-                                <td>@item.MucTieuThuTrong</td>
-                                <td>@item.MucTieuThuNgoai</td>
-                                <td>@item.MucTieuThuHonHop</td>
-                            </tr>
-                        }
+                    @foreach (var item in Model)
+                    {
+                        <tr style="text-align: center">
+                            <th scope="col">@item.Product.Title</th>
+                            <td>@item.DoiXe</td>
+                            <td>@item.LoaiSo</td>
+                            <td>@item.KichThuoc</td>
+                            <td>@item.KhoangSangGamXe</td>
+                            <td>@item.BanKinhVongQUay</td>
+                            <td>@item.WeightKhongTai</td>
+                            <td>@item.WeightToanTai</td>
+                            <td>@item.ChieuRongCoSo</td>
+                            <td>@item.LoaiDongCo</td>
+                            <td>@item.KichThuocLopXe</td>
+                            <td>@item.CongSuatToiDa</td>
+                            <td>@item.HeThongNhienLieu</td>
+                            <td>@item.SoXyLanh</td>
+                            <td>@item.BoTriXyLanh</td>
+                            <td>@item.DungTichXyLanh</td>
+                            <td>@item.HeThongTruyenDong</td>
+                            <td>@item.HopSo</td>
+                            <td>@item.LoaiVanh</td>
+                            <td>@item.PhanhTruoc</td>
+                            <td>@item.PhanhSau</td>
+                            <td>@item.TieuChuanKhiThai</td>
+                            <td>@item.MucTieuThuTrong</td>
+                            <td>@item.MucTieuThuNgoai</td>
+                            <td>@item.MucTieuThuHonHop</td>
+                        </tr>
+                    }
                 </tbody>
             </table>
         </div>
 
 </section>
-

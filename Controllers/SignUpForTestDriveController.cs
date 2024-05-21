@@ -30,7 +30,7 @@ namespace WebBanHangOnline.Controllers
             string contentCustomer = System.IO.File.ReadAllText(Server.MapPath("~/content/template/send22.html"));
             contentCustomer = contentCustomer.Replace("{{NgayDat}}", model.CreatedDate.ToString("dd/MM/yyyy"));
             contentCustomer = contentCustomer.Replace("{{DiaDiemLaiThu}}", model.DiaDiemLaiThu);
-            contentCustomer = contentCustomer.Replace("{{XeDangKy}}", model.Product.Title);
+            //contentCustomer = contentCustomer.Replace("{{XeDangKy}}", model.Product.Title);
             contentCustomer = contentCustomer.Replace("{{ThoiGianLaiThu}}", model.ModifiedDate.ToString("dd/MM/yyyy"));
             contentCustomer = contentCustomer.Replace("{{TenKhachhang}}", model.CustomerName);
             contentCustomer = contentCustomer.Replace("{{DiaChiLienHe}}", model.DiaChiLienHe);

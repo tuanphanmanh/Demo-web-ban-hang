@@ -16,11 +16,12 @@ namespace WebBanHangOnline.Models.EF
         public string CustomerName { get; set; }
         public string Email { get; set; }
         public string Phone { get; set; }
+        public string Xa { get; set; }
+        public string Huyen { get; set; }
+        public string Tinh { get; set; }
         public string DiaChiLienHe { get; set; }
         public string DiaDiemLaiThu { get; set; }
         public string HinhThucMuaXe { get; set; }
-        public string SoHuuXe { get; set; }
-        public string KhuVuc { get; set; }
         public string BuyCarTime { get; set; }
         [ForeignKey("Product")]
         public int ProductId { get; set; }
